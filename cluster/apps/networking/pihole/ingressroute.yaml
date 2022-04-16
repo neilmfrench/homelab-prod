@@ -1,0 +1,23 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pihole-dashboard-catchall
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`pihole.${SECRET_DOMAIN}`)
+      priority: 1
+      middlewares:
+        - name: pihole-redirectregex
+          namespace: networking
+      services:
+        - kind: Service
+          name: pihole-web
+          namespace: networking
+          port: 80
+  tls:
+    secretName: pihole-dashboard-tls

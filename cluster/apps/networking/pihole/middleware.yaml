@@ -1,0 +1,10 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: pihole-redirectregex
+  namespace: networking
+spec:
+  redirectRegex:
+    regex: ^https://pihole.${SECRET_DOMAIN}(.*)
+    replacement: https://pihole.${SECRET_DOMAIN}/admin/${1}

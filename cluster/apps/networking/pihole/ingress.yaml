@@ -1,0 +1,30 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pihole-dashboard
+  namespace: networking
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    hajimari.io/appName: "pihole"
+    hajimari.io/enable: "pihole"
+    hajimari.io/icon: "dns"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.priority: "2"
+spec:
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+        - "pihole.${SECRET_DOMAIN}"
+      secretName: "pihole-dashboard-tls"
+  rules:
+    - host: "pihole.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /admin/
+            pathType: Prefix
+            backend:
+              service:
+                name: pihole-web
+                port:
+                  number: 80
