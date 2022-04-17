@@ -34,7 +34,7 @@ spec:
       tlsSecret: "longhorn-dashboard-tls"
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
-        hajimari.io/appName: "pihole"
+        hajimari.io/appName: "longhorn"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hajimari.io/enable: "true"
         hajimari.io/icon: "content-save-outline"
