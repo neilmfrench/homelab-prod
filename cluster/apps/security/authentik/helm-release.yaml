@@ -36,6 +36,7 @@ spec:
       tls:
         - hosts:
             - "id.${SECRET_DOMAIN}"
+          secretName: "authentik-tls"
     authentik:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       # log_level: debug
