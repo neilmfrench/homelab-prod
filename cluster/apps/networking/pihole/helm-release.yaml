@@ -42,6 +42,7 @@ spec:
         - address=/traefik.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/pihole.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/longhorn.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+        - address=/id.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/k8s1/${SECRET_K8S1_IP}
         - address=/k8s2/${SECRET_K8S2_IP}
         - address=/k8s3/${SECRET_K8S3_IP}

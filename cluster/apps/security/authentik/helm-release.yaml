@@ -44,9 +44,9 @@ spec:
         name: authentik
         user: authentik
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
-      redis:
-        # host: '{{ .Release.Name }}-redis-master'
-        password: "${SECRET_AUTHENTIK_REDIS_PASSWORD}"
+      # redis:
+      #   # host: '{{ .Release.Name }}-redis-master'
+      #   password: "${SECRET_AUTHENTIK_REDIS_PASSWORD}"
       email:
         host: "${SECRET_AUTHENTIK_EMAIL_HOST}"
         port: 587
@@ -62,6 +62,6 @@ spec:
         storageClass: longhorn
     redis:
       enabled: true
-      auth:
-        enabled: true
-        password: "${SECRET_AUTHENTIK_REDIS_PASSWORD}"
+      # auth:
+      #   enabled: true
+      #   password: "${SECRET_AUTHENTIK_REDIS_PASSWORD}"
