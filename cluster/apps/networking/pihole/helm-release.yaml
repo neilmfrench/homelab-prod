@@ -39,9 +39,9 @@ spec:
     dnsmasq:
       # these won't actually show up in the PiHole gui, but they should be added to the dnsmasq config
       customDnsEntries:
-        - address=/traefik.neilfrench.me/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/pihole.neilfrench.me/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/longhorn.neilfrench.me/${SECRET_METALLB_LOADBALANCER_IP}
+        - address=/traefik.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+        - address=/pihole.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+        - address=/longhorn.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/k8s1/${SECRET_K8S1_IP}
         - address=/k8s2/${SECRET_K8S2_IP}
         - address=/k8s3/${SECRET_K8S3_IP}
