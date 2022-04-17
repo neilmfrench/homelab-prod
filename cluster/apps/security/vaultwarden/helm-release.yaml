@@ -1,0 +1,77 @@
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: vaultwarden
+#   namespace: security
+# spec:
+#   releaseName: vaultwarden
+#   interval: 5m
+#   chart:
+#     spec:
+#       # renovate: registryUrl=https://k8s-at-home.com/charts/
+#       chart: vaultwarden
+#       version: 4.1.0
+#       sourceRef:
+#         kind: HelmRepository
+#         name: k8s-at-home-charts
+#         namespace: flux-system
+#       interval: 5m
+#   values:
+#     nameOverride: vaultwarden
+#     fullnameOverride: vaultwarden
+#     image:
+#       repository: vaultwarden/server
+#       tag: 1.24.0
+#     env:
+#       SIGNUPS_ALLOWED: false
+#       INVITATIONS_ALLOWED: true
+#       WEBSOCKET_ENABLED: true
+#       WEBSOCKET_ADDRESS: 0.0.0.0
+#       WEBSOCKET_PORT: 3012
+#       DOMAIN: https://vault.${SECRET_DOMAIN}
+#       ADMIN_TOKEN: ${SECRET_VAULTWARDEN_ADMIN_TOKEN}
+#       SMTP_HOST: "${SECRET_VAULTWARDEN_EMAIL_HOST}"
+#       SMTP_FROM: "${SECRET_VAULTWARDEN_EMAIL_ADDR}"
+#       SMTP_FROM_NAME: "${SECRET_VAULTWARDEN_EMAIL_FROM}"
+#       SMTP_SSL: true
+#       SMTP_PORT: 587
+#       SMTP_USERNAME: "${SECRET_VAULTWARDEN_EMAIL_USER}"
+#       SMTP_PASSWORD: "${SECRET_VAULTWARDEN_EMAIL_KEY}"
+#     ingress:
+#       main:
+#         enabled: true
+#         ingressClassName: "traefik"
+#         annotations:
+#           cert-manager.io/cluster-issuer: "letsencrypt-production"
+#           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+#           hajimari.io/enable: "true"
+#           hajimari.io/icon: "shield-key"
+#           hajimari.io/appName: "vaultwarden"
+#           external-dns/is-public: "true"
+#           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+#         hosts:
+#           - host: "vault.${SECRET_DOMAIN}"
+#             paths:
+#               - path: /
+#                 pathType: Prefix
+#               - path: /notifications/hub
+#                 pathType: Prefix
+#                 service:
+#                   port: 3012
+#               - path: /notifications/hub/negotiate
+#                 pathType: Prefix
+#         tls:
+#           - hosts:
+#               - "vault.${SECRET_DOMAIN}"
+#             secretName: "vaultwarden-tls"
+#     persistence:
+#       config:
+#         enabled: true
+#         existingClaim: vaultwarden
+#     resources:
+#       requests:
+#         memory: 100Mi
+#         cpu: 100m
+#       limits:
+#         memory: 2000Mi
