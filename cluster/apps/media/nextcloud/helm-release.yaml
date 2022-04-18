@@ -72,7 +72,7 @@ spec:
         domain: ${SECRET_NEXTCLOUD_EMAIL_FROM}
         smtp:
           host: ${SECRET_NEXTCLOUD_EMAIL_HOST}
-          secure: STARTTLS
+          secure: ssl
           port: 465
           authtype: LOGIN
           name: ${SECRET_NEXTCLOUD_EMAIL_USER}
