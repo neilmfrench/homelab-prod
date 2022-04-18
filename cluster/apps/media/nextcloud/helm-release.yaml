@@ -82,7 +82,7 @@ spec:
       # password: ${SECRET_NEXTCLOUD_MARIADB_PASSWORD}
       # database: nextcloud
     mariadb:
-      enabled: false
+      enabled: true
       auth:
         database: nextcloud
         username: nextcloud
