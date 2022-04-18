@@ -63,8 +63,8 @@ spec:
           );
       mail:
         enabled: true
-        fromAddress: ${SECRET_NEXTCLOUD_EMAIL_FROM}
-        domain: domain.com
+        fromAddress: no-reply
+        domain: ${SECRET_NEXTCLOUD_EMAIL_FROM}
         smtp:
           host: ${SECRET_NEXTCLOUD_EMAIL_HOST}
           secure: ssl
