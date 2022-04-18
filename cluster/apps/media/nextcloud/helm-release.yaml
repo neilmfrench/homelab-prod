@@ -57,7 +57,10 @@ spec:
       password: "${SECRET_NEXTCLOUD_ADMIN_PASSWORD}"
       configs:
         email.config.php: |-
+          <?php
+          $CONFIG = array (
           'mail_smtpstreamoptions' => array ( 'ssl' => array ( 'security_level' => 1, ), ),
+          );
         protocol.config.php: |-
           <?php
           $CONFIG = array (
@@ -69,8 +72,8 @@ spec:
         domain: ${SECRET_NEXTCLOUD_EMAIL_FROM}
         smtp:
           host: ${SECRET_NEXTCLOUD_EMAIL_HOST}
-          secure: ssl
-          port: 587
+          secure: STARTTLS
+          port: 465
           authtype: LOGIN
           name: ${SECRET_NEXTCLOUD_EMAIL_USER}
           password: ${SECRET_NEXTCLOUD_EMAIL_KEY}
