@@ -56,8 +56,8 @@ spec:
       username: "${SECRET_NEXTCLOUD_ADMIN_USERNAME}"
       password: "${SECRET_NEXTCLOUD_ADMIN_PASSWORD}"
       configs:
-        config.php: |-
-          'mail_smtpstreamoptions' => array ( 'ssl' => array ( 'security_level' => 1, ), ),
+        # config.php: |-
+        #   'mail_smtpstreamoptions' => array ( 'ssl' => array ( 'security_level' => 1, ), ),
         protocol.config.php: |-
           <?php
           $CONFIG = array (
