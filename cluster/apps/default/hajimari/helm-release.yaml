@@ -33,6 +33,7 @@ spec:
           - default
           - networking
           - security
+          - monitoring
       name: "you"
       customApps:
         - name: Some External Cluster Service
