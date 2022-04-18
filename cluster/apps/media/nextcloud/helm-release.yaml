@@ -88,6 +88,8 @@ spec:
       auth:
         enabled: false
       master:
+        persistence:
+          storageClass: longhorn
         resources:
           requests:
             memory: 128Mi
@@ -95,6 +97,8 @@ spec:
             memory: 256Mi
       replica:
         replicaCount: 1
+        persistence:
+          storageClass: longhorn
         resources:
           requests:
             memory: 128Mi
