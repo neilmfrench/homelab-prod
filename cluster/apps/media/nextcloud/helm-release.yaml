@@ -20,8 +20,8 @@ spec:
     image:
       repository: nextcloud
       tag: 23.0.3-apache
-    # env:
-    #   PHP_MEMORY_LIMIT: 256M
+    env:
+      REDIS_HOST_PASSWORD: ""
     persistence:
       enabled: true
       existingClaim: nextcloud-data
