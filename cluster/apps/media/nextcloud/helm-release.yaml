@@ -75,12 +75,25 @@ spec:
     internalDatabase:
       enabled: false
     externalDatabase:
-      enabled: true
+      enabled: false
       type: mysql
-      host: mariadb
-      user: nextcloud
-      password: ${SECRET_NEXTCLOUD_MARIADB_PASSWORD}
-      database: nextcloud
+      # host: mariadb
+      # user: nextcloud
+      # password: ${SECRET_NEXTCLOUD_MARIADB_PASSWORD}
+      # database: nextcloud
+    mariadb:
+      enabled: false
+      auth:
+        database: nextcloud
+        username: nextcloud
+        password: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
+      architecture: standalone
+      primary:
+        persistence:
+          enabled: true
+          storageClass: "longhorn"
+          accessMode: ReadWriteOnce
+          size: 8Gi
     cronjob:
       enabled: true
     redis:
