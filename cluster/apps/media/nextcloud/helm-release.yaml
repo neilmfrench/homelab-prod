@@ -20,8 +20,8 @@ spec:
     image:
       repository: nextcloud
       tag: 23.0.3-apache
-    env:
-      REDIS_HOST_PASSWORD: ""
+    # env:
+    #   REDIS_HOST_PASSWORD: ""
     persistence:
       enabled: true
       existingClaim: nextcloud-data
@@ -85,8 +85,6 @@ spec:
       enabled: true
     redis:
       enabled: true
-      auth:
-        enabled: false
       master:
         persistence:
           storageClass: longhorn
