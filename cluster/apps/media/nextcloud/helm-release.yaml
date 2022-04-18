@@ -40,9 +40,9 @@ spec:
           hosts:
             - cloud.${SECRET_DOMAIN}
     livenessProbe:
-      enabled: true
+      enabled: false
     readinessProbe:
-      enabled: true
+      enabled: false
     startupProbe:
       enabled: false
     resources:
