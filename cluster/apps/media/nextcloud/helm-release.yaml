@@ -86,6 +86,7 @@ spec:
       auth:
         database: nextcloud
         username: nextcloud
+        rootPassword: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
         password: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
       architecture: standalone
       primary:
