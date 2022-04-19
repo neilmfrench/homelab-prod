@@ -28,3 +28,4 @@ resources:
   - longhorn-charts.yaml
   - pihole-charts.yaml
   - nextcloud-charts.yaml
+  - firefly-charts.yaml
