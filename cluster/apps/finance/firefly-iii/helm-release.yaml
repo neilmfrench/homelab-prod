@@ -1,0 +1,72 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: firefly-iii
+  namespace: finance
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: firefly-iii
+      version: 1.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: firefly-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: "fireflyiii/core"
+      tag: version-5.7.2
+    persistence:
+      enabled: true
+      class: longhorn
+      accessModes: ReadWriteOnce
+      storage: 4Gi
+    config:
+      env:
+        SITE_OWNER: "${SECRET_FIREFLY_SITE_OWNER}"
+        APP_KEY: "${SECRET_FIREFLY_APP_KEY}"
+        DB_HOST: mariadb
+        DB_PORT: "3306"
+        DB_CONNECTION: "mysql"
+        DB_DATABASE: "firefly"
+        DB_USERNAME: "firefly"
+        DB_PASSWORD: "${SECRET_FIRELY_MARIADB_PASSWORD}"
+        TRUSTED_PROXIES: "**"
+        MAIL_MAILER: "smtp"
+        MAIL_HOST: "smtp.gmail.com"
+        MAIL_PORT: "587"
+        MAIL_FROM: "${SECRET_FIREFLY_EMAIL_FROM}"
+        MAIL_USERNAME: "${SECRET_FIREFLY_EMAIL_USER}"
+        MAIL_PASSWORD: "${SECRET_FIREFLY_EMAIL_KEY}"
+        MAIL_ENCRYPTION: "tls"
+        APP_URL: "https://firefly.${SECRET_DOMAIN}"
+        TZ: "America/Los_Angeles"
+        # APP_DEBUG: true
+        # APP_LOG_LEVEL: "debug"
+    ingress:
+      enabled: true
+      className: "traefik"
+      annotations:
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "currency-usd"
+        hajimari.io/appName: "Firefly-III"
+      hosts:
+        - firefly.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - firefly.${SECRET_DOMAIN}
+          secretName: "firefly-tls"
