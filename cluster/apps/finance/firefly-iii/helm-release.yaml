@@ -36,7 +36,7 @@ spec:
         DB_HOST: mariadb
         DB_PORT: "3306"
         DB_CONNECTION: "mysql"
-        DB_DATABASE: "firefly"
+        DB_DATABASE: "fireflydb"
         DB_USERNAME: "firefly"
         DB_PASSWORD: "${SECRET_FIRELY_MARIADB_PASSWORD}"
         TRUSTED_PROXIES: "**"
