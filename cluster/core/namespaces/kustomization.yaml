@@ -9,3 +9,4 @@ resources:
   - security.yaml
   - monitoring.yaml
   - media.yaml
+  - finance.yaml
