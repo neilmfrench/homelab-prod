@@ -25,7 +25,7 @@ spec:
   values:
     auth:
       rootPassword: "${SECRET_FIRELY_MARIADB_PASSWORD}"
-      # database: fireflydb
+      database: fireflydb
       username: firefly
       password: "${SECRET_FIRELY_MARIADB_PASSWORD}"
       replicationPassword: "${SECRET_FIRELY_MARIADB_PASSWORD}"
