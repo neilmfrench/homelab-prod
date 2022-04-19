@@ -28,9 +28,7 @@ spec:
       tag: version-5.7.2
     persistence:
       enabled: true
-      class: longhorn
-      accessModes: ReadWriteOnce
-      storage: 4Gi
+      existingClaim: firefly-data
     config:
       env:
         SITE_OWNER: "${SECRET_FIREFLY_SITE_OWNER}"
