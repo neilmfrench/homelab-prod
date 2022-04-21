@@ -61,6 +61,7 @@ spec:
     additionalArguments:
       - "--providers.kubernetesingress.ingressendpoint.ip=${METALLB_TRAEFIK_ADDR}"
       - "--providers.kubernetesingress.allowexternalnameservices=true"
+      - "--providers.kubernetescrd.allowCrossNamespace=true"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
     ports:
       traefik:
