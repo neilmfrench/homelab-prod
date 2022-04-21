@@ -15,12 +15,8 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: firefly.${SECRET_DOMAIN}
+    - host: firefly.neilfren.ch
   tls:
     - hosts:
-        - firefly.${SECRET_DOMAIN}
+        - firefly.neilfren.ch
       secretName: firefly-tls
-status:
-  loadBalancer:
-    ingress:
-      - ip: ${SECRET_METALLB_LOADBALANCER_IP}
