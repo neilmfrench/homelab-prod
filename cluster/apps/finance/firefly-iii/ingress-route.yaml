@@ -10,7 +10,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`firefly.${SECRET_DOMAIN}`)
-      priority: 1
+      priority: 10
       middlewares:
         - name: authentik
           namespace: networking
@@ -21,7 +21,7 @@ spec:
           port: 80
     - kind: Rule
       match: "Host(`firefly.${SECRET_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)"
-      priority: 2
+      priority: 15
       services:
         - kind: Service
           name: ak-outpost-authentik-embedded-outpost
