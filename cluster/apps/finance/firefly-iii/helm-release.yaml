@@ -52,19 +52,19 @@ spec:
         # APP_DEBUG: true
         # APP_LOG_LEVEL: "debug"
     ingress:
-      enabled: true
-      className: "traefik"
-      annotations:
-        external-dns/is-public: "true"
-        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "currency-usd"
-        hajimari.io/appName: "Firefly-III"
-      hosts:
-        - firefly.${SECRET_DOMAIN}
-      tls:
-        - hosts:
-            - firefly.${SECRET_DOMAIN}
-          secretName: "firefly-tls"
+      enabled: false
+      # className: "traefik"
+      # annotations:
+      #   external-dns/is-public: "true"
+      #   external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      #   cert-manager.io/cluster-issuer: "letsencrypt-production"
+      #   traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      #   hajimari.io/enable: "true"
+      #   hajimari.io/icon: "currency-usd"
+      #   hajimari.io/appName: "Firefly-III"
+      # hosts:
+      #   - firefly.${SECRET_DOMAIN}
+      # tls:
+      #   - hosts:
+      #       - firefly.${SECRET_DOMAIN}
+      #     secretName: "firefly-tls"
