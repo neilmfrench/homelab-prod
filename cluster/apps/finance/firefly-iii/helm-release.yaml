@@ -54,8 +54,8 @@ spec:
         AUTHENTICATION_GUARD_EMAIL: "HTTP_X_AUTHENTIK_EMAIL"
         CUSTOM_LOGOUT_URL: "https://firefly.${SECRET_DOMAIN}/outpost.goauthentik.io/sign_out"
         DISABLE_CSP_HEADER: true # for cloudflare
-        APP_DEBUG: true
-        APP_LOG_LEVEL: "debug"
+        # APP_DEBUG: true
+        # APP_LOG_LEVEL: "debug"
     ingress:
       enabled: false
       # className: "traefik"
