@@ -49,6 +49,9 @@ spec:
         MAIL_ENCRYPTION: "tls"
         APP_URL: "https://firefly.${SECRET_DOMAIN}"
         TZ: "America/Los_Angeles"
+        AUTHENTICATION_GUARD: "remote_user_guard"
+        AUTHENTICATION_GUARD_HEADER: "X-authentik-uid"
+        AUTHENTICATION_GUARD_EMAIL: "X-authentik-email"
         # APP_DEBUG: true
         # APP_LOG_LEVEL: "debug"
     ingress:
