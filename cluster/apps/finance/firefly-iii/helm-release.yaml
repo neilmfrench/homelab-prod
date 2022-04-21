@@ -52,8 +52,8 @@ spec:
         AUTHENTICATION_GUARD: "remote_user_guard"
         AUTHENTICATION_GUARD_HEADER: "X-authentik-uid"
         AUTHENTICATION_GUARD_EMAIL: "X-authentik-email"
-        # APP_DEBUG: true
-        # APP_LOG_LEVEL: "debug"
+        APP_DEBUG: true
+        APP_LOG_LEVEL: "debug"
     ingress:
       enabled: false
       # className: "traefik"
