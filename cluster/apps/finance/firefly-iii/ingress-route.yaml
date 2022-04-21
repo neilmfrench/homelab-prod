@@ -2,8 +2,8 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: pihole-dashboard-catchall
-  namespace: networking
+  name: firefly-authentik-ingress-route
+  namespace: finance
 spec:
   entryPoints:
     - websecure
