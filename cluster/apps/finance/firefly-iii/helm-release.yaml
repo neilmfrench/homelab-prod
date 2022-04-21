@@ -50,8 +50,8 @@ spec:
         APP_URL: "https://firefly.${SECRET_DOMAIN}"
         TZ: "America/Los_Angeles"
         AUTHENTICATION_GUARD: "remote_user_guard"
-        AUTHENTICATION_GUARD_HEADER: "HTTP_X_authentik_email"
-        AUTHENTICATION_GUARD_EMAIL: "HTTP_X_authentik_email"
+        AUTHENTICATION_GUARD_HEADER: "HTTP_X_AUTHENTIK_EMAIL"
+        AUTHENTICATION_GUARD_EMAIL: "HTTP_X_AUTHENTIK_EMAIL"
         APP_DEBUG: true
         APP_LOG_LEVEL: "debug"
     ingress:
