@@ -10,3 +10,4 @@ resources:
   - monitoring.yaml
   - media.yaml
   - finance.yaml
+  - development.yaml

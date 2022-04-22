@@ -35,6 +35,7 @@ spec:
           - security
           - monitoring
           - finance
+          - development
       name: "you"
       customApps:
         - name: Some External Cluster Service
