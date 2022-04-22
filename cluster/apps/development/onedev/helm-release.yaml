@@ -44,4 +44,5 @@ spec:
         storageClassName: "longhorn"
         size: 5Gi
     secrets:
-      mysql: ${SECRET_ONEDEV_MYSQL_PASSWORD}
+      mysql:
+        password: ${SECRET_ONEDEV_MYSQL_PASSWORD}
