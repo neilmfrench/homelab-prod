@@ -30,7 +30,21 @@ update_ipv4=$(curl -s -X PUT \
     -H "Content-Type: application/json" \
     --data "{\"id\":\"${zone_id}\",\"type\":\"A\",\"proxied\":true,\"name\":\"${CLOUDFLARE_RECORD_NAME}\",\"content\":\"${current_ipv4}\"}" \
 )
-if [[ "$(echo "$update_ipv4" | jq --raw-output '.success')" == "true" ]]; then
+filter_id=$(curl -s -X GET \
+    "https://api.cloudflare.com/client/v4/zones/${zone_id}/firewall/rules" \
+    -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+    -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
+    -H "Content-Type: application/json" \
+        | jq --raw-output ".result[] | select(.description | contains("allow-inter-cluster-requests")) | .filter.id"
+)
+update_filter=$(curl -s -X PUT \
+    "https://api.cloudflare.com/client/v4/zones/${zone_id}/filters/${filter_id}" \
+    -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+    -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
+    -H "Content-Type: application/json" \
+    --data "{\"expression\": \"(ip.src eq ${current_ipv4})\"}" \
+)
+if [[ "$(echo "$update_ipv4" | jq --raw-output '.success')" == "true" && "$(echo "$update_filter" | jq --raw-output '.success')" == "true"]]; then
     printf "%s - Success - IP Address '%s' has been updated" "$(date -u)" "${current_ipv4}"
     exit 0
 else
