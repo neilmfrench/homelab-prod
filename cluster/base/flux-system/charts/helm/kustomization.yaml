@@ -30,3 +30,4 @@ resources:
   - nextcloud-charts.yaml
   - firefly-charts.yaml
   - onedev-charts.yaml
+  - harbor-charts.yaml
