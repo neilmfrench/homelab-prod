@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-hue-bridge
+  namespace: home
+spec:
+  selector:
+    app: pihole-hue-bridge
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080

@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole-hue-bridge
+  namespace: home
+  labels:
+    app: pihole-hue-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole-hue-bridge
+  template:
+    metadata:
+      labels:
+        app: pihole-hue-bridge
+    spec:
+      containers:
+        - name: pihole-hue-bridge
+          image: linuxserver/habridge:5.4.1
+          env:
+            - name: TZ
+              value: "${TIMEZONE}"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: pihole-hue-bridge-config

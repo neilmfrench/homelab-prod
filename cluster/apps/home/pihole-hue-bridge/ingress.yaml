@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pihole-hue-bridge
+  namespace: home
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.priority: "2"
+spec:
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+        - "pihole-hue-bridge.${SECRET_DOMAIN}"
+      secretName: "pihole-hue-bridge-tls"
+  rules:
+    - host: "pihole-hue-bridge.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pihole-hue-bridge
+                port:
+                  number: 8080
