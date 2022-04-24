@@ -16,6 +16,7 @@ spec:
       labels:
         app: pihole-hue-bridge
     spec:
+      hostNetwork: true
       containers:
         - name: pihole-hue-bridge
           image: linuxserver/habridge:5.4.1
@@ -24,6 +25,10 @@ spec:
               value: "${TIMEZONE}"
           ports:
             - containerPort: 8080
+            - containerPort: 32767
+              protocol: UDP
+            - containerPort: 1900
+              protocol: UDP
           volumeMounts:
             - mountPath: /config
               name: config

@@ -4,12 +4,21 @@ kind: Service
 metadata:
   name: pihole-hue-bridge
   namespace: home
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-hue-bridge
 spec:
   selector:
     app: pihole-hue-bridge
-  type: LoadBalancer
-  externalTrafficPolicy: Local
+  type: NodePort
   ports:
     - name: http
       protocol: TCP
       port: 8080
+    - name: '32767'
+      port: 32767
+      protocol: UDP
+      targetPort: 50000
+    - name: '31900'
+      port: 31900
+      protocol: UDP
+      targetPort: 1900
