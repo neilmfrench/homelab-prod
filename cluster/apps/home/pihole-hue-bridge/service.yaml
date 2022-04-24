@@ -16,9 +16,11 @@ spec:
       port: 8080
     - name: '32767'
       port: 32767
+      nodePort: 32767
       protocol: UDP
       targetPort: 50000
     - name: '31900'
       port: 31900
+      nodePort: 31900
       protocol: UDP
       targetPort: 1900
