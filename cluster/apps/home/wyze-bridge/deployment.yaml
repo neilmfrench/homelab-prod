@@ -21,15 +21,9 @@ spec:
           image: mrlt8/wyze-bridge:1.3.3
           env:
             - name: WYZE_EMAIL
-              valueFrom:
-                secretKeyRef:
-                  name: wyze
-                  key: WYZE_EMAIL
+              value: "${SECRET_WYZE_EMAIL}"
             - name: WYZE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: wyze
-                  key: WYZE_PASSWORD
+              value: "${SECRET_WYZE_PASSWORD}"
             - name: TZ
               value: "${TIMEZONE}"
           ports:
