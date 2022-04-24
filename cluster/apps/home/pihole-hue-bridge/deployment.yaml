@@ -17,6 +17,7 @@ spec:
         app: pihole-hue-bridge
     spec:
       hostNetwork: true
+      nodeName: k8s2
       containers:
         - name: pihole-hue-bridge
           image: linuxserver/habridge:5.4.1
@@ -25,7 +26,7 @@ spec:
               value: "${TIMEZONE}"
           ports:
             - containerPort: 8080
-            - containerPort: 32767
+            - containerPort: 5000
               protocol: UDP
             - containerPort: 1900
               protocol: UDP
