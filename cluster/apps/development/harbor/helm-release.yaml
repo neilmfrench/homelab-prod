@@ -1,0 +1,80 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: development
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: harbor
+      version: 1.9.0
+      sourceRef:
+        kind: HelmRepository
+        name: harbor-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    expose:
+      type: ingress
+      tls:
+        enabled: true
+        certSource: secret
+        secret:
+          secretName: "harbor-tls"
+          notarySecretName: "harbor-notary-tls"
+      ingress:
+        hosts:
+          core: harbor.${SECRET_DOMAIN}
+          notary: harbor-notary.${SECRET_DOMAIN}
+        className: "traefik"
+        annotations:
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        harbor:
+          annotations:
+            hajimari.io/enable: "true"
+            hajimari.io/icon: "lighthouse"
+            hajimari.io/appName: "Harbor"
+    externalURL: https://harbor.${SECRET_DOMAIN}
+    persistence:
+      enabled: true
+      resourcePolicy: "keep"
+      persistentVolumeClaim:
+        registry:
+          storageClass: "longhorn"
+          size: 15Gi
+        chartmuseum:
+          storageClass: "longhorn"
+          size: 5Gi
+        jobservice:
+          storageClass: "longhorn"
+          size: 1Gi
+        database:
+          storageClass: "longhorn"
+          size: 5Gi
+        redis:
+          storageClass: "longhorn"
+          size: 1Gi
+        trivy:
+          storageClass: "longhorn"
+          size: 5Gi
+      imageChartStorage:
+        type: filesystem
+        filesystem:
+          rootdirectory: /storage
+    logLevel: info
+    harborAdminPassword: "${SECRET_HARBOR_ADMIN_PASSWORD}"
+    database:
+      internal:
+        password: "${SECRET_HARBOR_DB_PASSWORD}"
