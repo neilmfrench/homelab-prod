@@ -11,3 +11,4 @@ resources:
   - media.yaml
   - finance.yaml
   - development.yaml
+  - home.yaml
