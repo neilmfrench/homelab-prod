@@ -25,7 +25,7 @@ spec:
             - name: TZ
               value: "${TIMEZONE}"
           ports:
-            - containerPort: 8080
+            - containerPort: 80
             - containerPort: 50000
               protocol: UDP
             - containerPort: 1900
