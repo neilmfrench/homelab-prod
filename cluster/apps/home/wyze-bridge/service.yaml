@@ -13,3 +13,6 @@ spec:
     - name: http
       protocol: TCP
       port: 8888
+    - name: rtsp
+      protocol: TCP
+      port: 8554
