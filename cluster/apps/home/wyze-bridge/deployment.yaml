@@ -30,3 +30,4 @@ spec:
               value: API
           ports:
             - containerPort: 8888
+            - containerPortt: 8554
