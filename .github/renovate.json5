@@ -6,7 +6,7 @@
   "suppressNotifications": ["prIgnoreNotification"],
   "rebaseWhen": "conflicted",
   "schedule": [
-    "every weekend"
+    "at any time"
   ],
   // set up ignored deps
   "ignoreDeps": [
