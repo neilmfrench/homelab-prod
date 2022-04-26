@@ -26,5 +26,7 @@ spec:
               value: "${SECRET_WYZE_PASSWORD}"
             - name: TZ
               value: "${TIMEZONE}"
+            - name: SNAPSHOT
+              value: API
           ports:
             - containerPort: 8888
