@@ -58,6 +58,7 @@ spec:
       MAIL_USERNAME: ${SECRET_BOOKSTACK_EMAIL_USER}
       MAIL_PASSWORD: ${SECRET_BOOKSTACK_EMAIL_KEY}
       MAIL_ENCRYPTION: tls
+      ALLOW_CONTENT_SCRIPTS: true # for cloudflare
       # AUTH_METHOD: saml2
       # SAML2_NAME: authentik
       # SAML2_EMAIL_ATTRIBUTE: email
