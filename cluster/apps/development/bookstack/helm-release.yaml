@@ -67,8 +67,9 @@ spec:
       SAML2_IDP_ENTITYID: ${SECRET_BOOKSTACK_SAML_METADATA_URL}
       SAML2_AUTOLOAD_METADATA: true
       SAML2_USER_TO_GROUPS: true
-      SAML2_GROUP_ATTRIBUTE: Groups
+      SAML2_GROUP_ATTRIBUTE: http://schemas.xmlsoap.org/claims/Group
       SAML2_REMOVE_FROM_GROUPS: true
+      SAML2_DUMP_USER_DETAILS: true
     persistence:
       config:
         enabled: true
