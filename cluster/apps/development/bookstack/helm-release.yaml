@@ -43,7 +43,7 @@ spec:
             secretName: "bookstack-tls"
     env:
       TZ: ${TIMEZONE}
-      APP_URL: docs.${SECRET_DOMAIN}
+      APP_URL: https://docs.${SECRET_DOMAIN}
       APP_KEY: ${SECRET_BOOKSTACK_KEY}
       APP_PROXIES: "*"
       DB_HOST: bookstack-mariadb
