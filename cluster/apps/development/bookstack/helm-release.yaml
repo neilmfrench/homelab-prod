@@ -69,7 +69,7 @@ spec:
       SAML2_USER_TO_GROUPS: true
       SAML2_GROUP_ATTRIBUTE: http://schemas.xmlsoap.org/claims/Group
       SAML2_REMOVE_FROM_GROUPS: true
-      SAML2_DUMP_USER_DETAILS: true
+      # SAML2_DUMP_USER_DETAILS: true
     persistence:
       config:
         enabled: true
