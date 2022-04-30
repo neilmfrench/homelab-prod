@@ -59,7 +59,7 @@ spec:
       MAIL_PASSWORD: ${SECRET_BOOKSTACK_EMAIL_KEY}
       MAIL_ENCRYPTION: tls
       ALLOW_CONTENT_SCRIPTS: true # for cloudflare
-      AUTH_METHOD: saml2
+      AUTH_METHOD: standard
       SAML2_NAME: authentik
       SAML2_EMAIL_ATTRIBUTE: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
       SAML2_DISPLAY_NAME_ATTRIBUTES: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
