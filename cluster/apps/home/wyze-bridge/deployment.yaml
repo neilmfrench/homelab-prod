@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: wyze-bridge
-          image: mrlt8/wyze-bridge:1.3.6
+          image: mrlt8/wyze-bridge:1.3.7
           env:
             - name: WYZE_EMAIL
               value: "${SECRET_WYZE_EMAIL}"
