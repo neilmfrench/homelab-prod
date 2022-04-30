@@ -61,9 +61,9 @@ spec:
       ALLOW_CONTENT_SCRIPTS: true # for cloudflare
       AUTH_METHOD: saml2
       SAML2_NAME: authentik
-      SAML2_EMAIL_ATTRIBUTE: email
-      SAML2_DISPLAY_NAME_ATTRIBUTES: Name
-      SAML2_EXTERNAL_ID_ATTRIBUTE: uid
+      SAML2_EMAIL_ATTRIBUTE: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+      SAML2_DISPLAY_NAME_ATTRIBUTES: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+      SAML2_EXTERNAL_ID_ATTRIBUTE: http://schemas.goauthentik.io/2021/02/saml/uid
       SAML2_IDP_ENTITYID: ${SECRET_BOOKSTACK_SAML_METADATA_URL}
       SAML2_AUTOLOAD_METADATA: true
       SAML2_USER_TO_GROUPS: true
