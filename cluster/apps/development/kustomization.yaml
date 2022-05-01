@@ -5,4 +5,4 @@ resources:
   - onedev
   - harbor
   - bookstack
-  - cloudflared-test
+  - cloudflared

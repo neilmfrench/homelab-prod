@@ -91,6 +91,8 @@ data:
     # E.g. `cloudflared tunnel route dns example-tunnel tunnel.example.com`.
     ingress:
     # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
+    - hostname: dev-ssh.neilfren.ch
+      service: ssh://onedev:22
     - hostname: testcf.neilfren.ch
       service: http://nginx-cf-test:80
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
