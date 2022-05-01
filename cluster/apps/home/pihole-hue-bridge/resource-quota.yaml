@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+ name: pod-object-count
+ namespace: home
+spec:
+ hard:
+  count/pods: 8

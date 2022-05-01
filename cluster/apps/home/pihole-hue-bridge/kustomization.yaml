@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - config-pvc.yaml
   - deployment.yaml
+  - resource-quota.yaml
   # - service.yaml
   # - ingress.yaml
