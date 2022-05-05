@@ -31,3 +31,10 @@ spec:
           ports:
             - containerPort: 8888
             - containerPort: 8554
+          volumeMounts:
+            - mountPath: /tokens
+              name: config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: wyze-bridge-config
