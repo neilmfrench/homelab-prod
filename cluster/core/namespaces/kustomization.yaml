@@ -12,3 +12,4 @@ resources:
   - finance.yaml
   - development.yaml
   - home.yaml
+  - crowdsec.yaml

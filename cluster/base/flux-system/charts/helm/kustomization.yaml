@@ -31,3 +31,4 @@ resources:
   - firefly-charts.yaml
   - onedev-charts.yaml
   - harbor-charts.yaml
+  - crowdsec-charts.yaml
