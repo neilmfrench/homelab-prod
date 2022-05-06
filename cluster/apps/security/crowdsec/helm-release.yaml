@@ -74,7 +74,7 @@ spec:
     agent:
       persistentVolume:
         config:
-          enabled: true
+          enabled: false
           accessModes:
             - ReadWriteOnce
           storageClassName: "longhorn"
