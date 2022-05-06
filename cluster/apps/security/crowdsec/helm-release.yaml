@@ -46,7 +46,7 @@ spec:
           host: "crowdsec-dash.${SECRET_DOMAIN}"
           tls:
             - hosts:
-                - crowdsec-dash.${SECRET_DOMAIN}
+                - "crowdsec-dash.${SECRET_DOMAIN}"
               secretName: "crowdsec-dash-tls"
       persistentVolume:
         data:
