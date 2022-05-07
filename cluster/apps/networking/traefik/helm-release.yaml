@@ -63,6 +63,8 @@ spec:
       - "--providers.kubernetesingress.allowexternalnameservices=true"
       - "--providers.kubernetescrd.allowCrossNamespace=true"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
+      - "--experimental.plugins.traefik-get-real-ip.modulename=https://github.com/Paxxs/traefik-get-real-ip"
+      - "--experimental.plugins.traefik-get-real-ip.version=v1.0.2"
     ports:
       traefik:
         expose: true
@@ -85,7 +87,7 @@ spec:
       enabled: false
     experimental:
       plugins:
-        enabled: false
+        enabled: true
     resources:
       requests:
         memory: 100Mi
