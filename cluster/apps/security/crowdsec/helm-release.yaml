@@ -76,10 +76,10 @@ spec:
     agent:
       persistentVolume:
         config:
-          enabled: false
+          enabled: true
           accessModes:
             - ReadWriteOnce
-          storageClassName: "longhorn"
+          storageClassName: "local-path"
           size: 400Mi
       env:
         # - name: DISABLE_ONLINE_API
