@@ -78,8 +78,8 @@ spec:
         config:
           enabled: true
           accessModes:
-            - ReadWriteOnce
-          storageClassName: "local-path"
+            - ReadWriteMany
+          storageClassName: "longhorn"
           size: 400Mi
       env:
         # - name: DISABLE_ONLINE_API
