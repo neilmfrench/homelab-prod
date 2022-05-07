@@ -27,27 +27,29 @@ spec:
       password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
     lapi:
       env:
-        - name: DISABLE_ONLINE_API
+        # - name: DISABLE_ONLINE_API
+        #   value: "true"
+        - name: USE_FORWARDED_FOR_HEADERS
           value: "true"
-      dashboard:
-        enabled: true
-        image:
-          repository: metabase/metabase
-          pullPolicy: IfNotPresent
-          tag: "v0.43.0"
-        assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
-        ingress:
-          enabled: true
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            hajimari.io/enable: "false"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          ingressClassName: "traefik"
-          host: "crowdsec-dash.${SECRET_DOMAIN}"
-          tls:
-            - hosts:
-                - "crowdsec-dash.${SECRET_DOMAIN}"
-              secretName: "crowdsec-dash-tls"
+      # dashboard:
+      #   enabled: true
+      #   image:
+      #     repository: metabase/metabase
+      #     pullPolicy: IfNotPresent
+      #     tag: "v0.43.0"
+      #   assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
+      #   ingress:
+      #     enabled: true
+      #     annotations:
+      #       cert-manager.io/cluster-issuer: "letsencrypt-production"
+      #       hajimari.io/enable: "false"
+      #       traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      #     ingressClassName: "traefik"
+      #     host: "crowdsec-dash.${SECRET_DOMAIN}"
+      #     tls:
+      #       - hosts:
+      #           - "crowdsec-dash.${SECRET_DOMAIN}"
+      #         secretName: "crowdsec-dash-tls"
       persistentVolume:
         data:
           enabled: true
@@ -80,7 +82,9 @@ spec:
           storageClassName: "longhorn"
           size: 400Mi
       env:
-        - name: DISABLE_ONLINE_API
+        # - name: DISABLE_ONLINE_API
+        #   value: "true"
+        - name: USE_FORWARDED_FOR_HEADERS
           value: "true"
         - name: COLLECTIONS
           value: "crowdsecurity/linux crowdsecurity/traefik"
