@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - authentik-forward-auth.yaml
   - get-real-ip.yaml
-  - crowdsec-traefik-bouncer.yaml
+  # - crowdsec-traefik-bouncer.yaml
