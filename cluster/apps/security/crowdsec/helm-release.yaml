@@ -29,8 +29,8 @@ spec:
       env:
         # - name: DISABLE_ONLINE_API
         #   value: "true"
-        - name: USE_FORWARDED_FOR_HEADERS
-          value: "true"
+        # - name: USE_FORWARDED_FOR_HEADERS
+        #   value: "true"
       # dashboard:
       #   enabled: true
       #   image:
@@ -84,10 +84,10 @@ spec:
       env:
         # - name: DISABLE_ONLINE_API
         #   value: "true"
-        - name: USE_FORWARDED_FOR_HEADERS
-          value: "true"
+        # - name: USE_FORWARDED_FOR_HEADERS
+        #   value: "true"
         - name: COLLECTIONS
-          value: "crowdsecurity/linux crowdsecurity/traefik"
+          value: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors"
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
       acquisition:
