@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -10,15 +11,15 @@ data:
     crowdsec_update_frequency: 10s
     cloudflare_config:
       accounts:
-          - id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ACCOUNT_ID}
-            zones:
-                - zone_id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ZONE_ID}
-                actions:
-                  - challenge
-            token: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_API_TOKEN}
-            ip_list_prefix: crowdsec
-            default_action: challenge
-            total_ip_list_capacity: 10000 # only this many latest IP decisions would be kept
+      - id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ACCOUNT_ID}
+        zones:
+        - zone_id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ZONE_ID}
+          actions:
+            - challenge
+        token: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_API_TOKEN}
+        ip_list_prefix: crowdsec
+        default_action: challenge
+        total_ip_list_capacity: 10000 # only this many latest IP decisions would be kept
       update_frequency: 10s
     daemon: false
     log_mode: stdout
