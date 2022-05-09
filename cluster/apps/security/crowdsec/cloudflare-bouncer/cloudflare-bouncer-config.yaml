@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflare-bouncer-config
+  namespace: security
+data:
+  cfg.yml: |
+    crowdsec_lapi_url: http://crowdsec-service:8080/
+    crowdsec_lapi_key: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_KEY}
+    crowdsec_update_frequency: 10s
+    cloudflare_config:
+      accounts:
+          - id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ACCOUNT_ID}
+            zones:
+                - zone_id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ZONE_ID}
+                actions:
+                  - challenge
+            token: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_API_TOKEN}
+            ip_list_prefix: crowdsec
+            default_action: challenge
+            total_ip_list_capacity: 10000 # only this many latest IP decisions would be kept
+      update_frequency: 10s
+    daemon: false
+    log_mode: stdout
+    log_dir: /var/log/
+    log_level: info
+    cache_path: /var/lib/crowdsec/crowdsec-cloudflare-bouncer/cache/cloudflare-cache.json
+    prometheus:
+      enabled: true
+      listen_addr: 127.0.0.1
+      listen_port: "2112"
