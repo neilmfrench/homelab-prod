@@ -5,3 +5,4 @@ resources:
   - authentik-forward-auth.yaml
   - get-real-ip.yaml
   - crowdsec-traefik-bouncer.yaml
+  - local-only-access.yaml
