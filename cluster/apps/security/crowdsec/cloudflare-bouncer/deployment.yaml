@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: crowdsec-cloudflare-bouncer
-          image: crowdsecurity/cloudflare-bouncer:v0.0.9
+          image: crowdsecurity/cloudflare-bouncer:v0.0.10
           ports:
             - containerPort: 2112
           volumeMounts:
