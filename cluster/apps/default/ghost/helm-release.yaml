@@ -21,7 +21,6 @@ spec:
       url: "https://blog.${SECRET_DOMAIN}"
       database__connection__host: blog-mariadb
       database__connection__password: ${SECRET_GHOST_MARIADB_PASSWORD}
-      database__connection__database: ${SECRET_GHOST_MARIADB_PASSWORD}
 
     ingress:
       main:
