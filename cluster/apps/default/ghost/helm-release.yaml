@@ -17,11 +17,13 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      repository: ghost
+      tag: 4.47.1
     env:
       url: "https://blog.${SECRET_DOMAIN}"
       database__connection__host: blog-mariadb
       database__connection__password: ${SECRET_GHOST_MARIADB_PASSWORD}
-
     ingress:
       main:
         enabled: true
@@ -42,13 +44,10 @@ spec:
           - hosts:
               - "blog.${SECRET_DOMAIN}"
             secretName: "ghost-tls"
-
-
     persistence:
       content:
         enabled: true
         existingClaim: ghost-config
-
     mariadb:
       enabled: true
       auth:
