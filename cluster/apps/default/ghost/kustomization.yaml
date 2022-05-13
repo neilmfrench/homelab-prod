@@ -4,4 +4,4 @@ resources:
   - config-pvc.yaml
   - mysql-data-pvc.yaml
   - mysql-helm-release.yaml
-  # - helm-release.yaml
+  - helm-release.yaml

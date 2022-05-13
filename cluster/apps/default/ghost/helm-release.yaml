@@ -1,59 +1,55 @@
-# ---
-# apiVersion: helm.toolkit.fluxcd.io/v2beta1
-# kind: HelmRelease
-# metadata:
-#   name: blog
-#   namespace: default
-# spec:
-#   interval: 5m
-#   chart:
-#     spec:
-#       # renovate: registryUrl=https://k8s-at-home.com/charts/
-#       chart: ghost
-#       version: 1.4.2
-#       sourceRef:
-#         kind: HelmRepository
-#         name: k8s-at-home-charts
-#         namespace: flux-system
-#       interval: 5m
-#   values:
-#     image:
-#       repository: ghost
-#       tag: 4.47.1
-#     env:
-#       url: "https://blog.${SECRET_DOMAIN}"
-#       database__connection__host: blog-mariadb
-#       database__connection__password: ${SECRET_GHOST_MARIADB_PASSWORD}
-#     ingress:
-#       main:
-#         enabled: true
-#         ingressClassName: "traefik"
-#         annotations:
-#           cert-manager.io/cluster-issuer: "letsencrypt-production"
-#           hajimari.io/enable: "true"
-#           hajimari.io/icon: "post"
-#           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-#           external-dns/is-public: "true"
-#           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-#         hosts:
-#           - host: "blog.${SECRET_DOMAIN}"
-#             paths:
-#               - path: /
-#                 pathType: Prefix
-#         tls:
-#           - hosts:
-#               - "blog.${SECRET_DOMAIN}"
-#             secretName: "ghost-tls"
-#     persistence:
-#       content:
-#         enabled: true
-#         existingClaim: ghost-config
-#     mariadb:
-#       enabled: true
-#       auth:
-#         password: ${SECRET_GHOST_MARIADB_PASSWORD}
-#         rootPassword: ${SECRET_GHOST_MARIADB_PASSWORD}
-#       primary:
-#         persistence:
-#           enabled: true
-#           storageClass: "longhorn"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: blog
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: ghost
+      version: 1.4.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghost
+      tag: 4.47.1
+    env:
+      url: "https://blog.${SECRET_DOMAIN}"
+      database__client: mysql
+      database__connection__host: ghost-mysql
+      database__connection__user: ghost
+      database__connection__password: ${SECRET_GHOST_MYSQL_PASSWORD}
+      database__connection__database: ghost
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "post"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        hosts:
+          - host: "blog.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "blog.${SECRET_DOMAIN}"
+            secretName: "ghost-tls"
+    persistence:
+      content:
+        enabled: true
+        existingClaim: ghost-config
+    mariadb:
+      enabled: false
