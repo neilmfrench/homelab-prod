@@ -2,13 +2,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
   name: tekton
   namespace: tekton-pipelines
 spec:
   ingressClassName: traefik
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
   rules:
     - host: tekton.${SECRET_DOMAIN}
       http:
