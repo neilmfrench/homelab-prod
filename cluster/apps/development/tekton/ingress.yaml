@@ -24,4 +24,4 @@ spec:
   tls:
     - hosts:
         - tekton.${SECRET_DOMAIN}
-    - secretName: tekton-tls
+      secretName: tekton-tls
