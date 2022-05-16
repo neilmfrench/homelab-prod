@@ -10,3 +10,4 @@ configMapGenerator:
     behavior: replace
 resources:
   - https://storage.googleapis.com/tekton-releases/operator/previous/0.58.0/release.yaml
+  - tasks
