@@ -6,3 +6,4 @@ resources:
   - harbor
   - bookstack
   - cloudflared
+  - tekton
