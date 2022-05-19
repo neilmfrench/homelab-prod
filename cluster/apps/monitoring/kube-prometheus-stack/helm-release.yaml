@@ -53,7 +53,7 @@ spec:
           repeat_interval: 6h
           receiver: 'null'
           routes:
-            - receiver: 'discord'
+            - receiver: 'null'
               match:
                 alertname: Watchdog
             - receiver: 'discord'
