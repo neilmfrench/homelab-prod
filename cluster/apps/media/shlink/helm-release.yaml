@@ -56,7 +56,7 @@ spec:
         existingClaim: shlink-param
         mountPath: /etc/shlink/config/params
       data:
-        enabled: true
+        enabled: false
         existingClaim: shlink-data
         mountPath: /etc/shlink/data
     mariadb:
