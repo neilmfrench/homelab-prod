@@ -221,10 +221,10 @@ spec:
           ; example of DB configuration for MySQL
           class = Database
           [model_options]
-          dsn = "mysql:host=privatebin-mariadb.privatebin.svc.cluster.local;dbname=privatebindb;charset=UTF8"
+          dsn = "mysql:host=privatebin-mariadb;dbname=privatebin;charset=UTF8"
           tbl = "privatebin_"    ; table prefix
           usr = "privatebin"
-          pwd = "privatebin"
+          pwd = "${SECRET_PRIVATEBIN_MARIADB_PASSWORD}"
           opt[12] = true      ; PDO::ATTR_PERSISTENT
 
           ;[model]
