@@ -32,3 +32,4 @@ resources:
   - onedev-charts.yaml
   - harbor-charts.yaml
   - crowdsec-charts.yaml
+  - privatebin-charts.yaml
