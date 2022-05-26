@@ -108,6 +108,11 @@ spec:
         flux-control-plane:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
           datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/14837
+        authentik:
+          gnetId: 14837
+          revision: 2
+          datasource: Prometheus
       # blocky:
       #   url: https://raw.githubusercontent.com/0xERR0R/blocky/master/docs/blocky-grafana.json
       #   datasource: Prometheus
