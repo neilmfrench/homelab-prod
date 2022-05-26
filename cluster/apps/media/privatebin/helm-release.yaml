@@ -106,7 +106,7 @@ spec:
           ; (optional) URL shortener address to offer after a new paste is created
           ; it is suggested to only use this with self-hosted shorteners as this will leak
           ; the pastes encryption key
-          urlshortener = "https://urls.neilfren.ch/api/v2/action/shorten?key=eaca9b1459fc7cbbed74fceb6e6639&is_secret=false&url="
+          urlshortener = "https://shlink.${SECRET_DOMAIN}/rest/v1/short-urls/shorten?apiKey=${SECRET_SHLINK_API_KEY}&format=txt&longUrl="
 
           ; (optional) Let users create a QR code for sharing the paste URL with one click.
           ; It works both when a new paste is created and when you view a paste.
