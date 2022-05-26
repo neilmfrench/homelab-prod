@@ -41,7 +41,7 @@ spec:
               - "shlink.${SECRET_DOMAIN}"
             secretName: "shlink-tls"
     env:
-      DEFAULT_DOMAIN: ${SECRET_DOMAIN}
+      DEFAULT_DOMAIN: shlink.${SECRET_DOMAIN}
       IS_HTTPS_ENABLED: true
       GEOLITE_LICENSE_KEY: ${SECRET_GEOLINK_LICENSE_KEY}
       DB_DRIVER: maria
