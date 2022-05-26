@@ -21,7 +21,7 @@ spec:
           image: shlinkio/shlink-web-client:3.7.1
           env:
             - name: SHLINK_SERVER_URL
-              value: "shlink.${SECRET_DOMAIN}"
+              value: "http://shlink:8080"
             - name: SHLINK_SERVER_API_KEY
               value: "${SECRET_SHLINK_API_KEY}"
           ports:
