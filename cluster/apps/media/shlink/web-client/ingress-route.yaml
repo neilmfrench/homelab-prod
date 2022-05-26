@@ -1,0 +1,31 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: urls-authentik-ingress-route
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`urls.${SECRET_DOMAIN}`)
+      priority: 10
+      middlewares:
+        - name: authentik
+          namespace: networking
+      services:
+        - kind: Service
+          name: shlink-web-client
+          namespace: media
+          port: 80
+    - kind: Rule
+      match: "Host(`urls.${SECRET_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          name: ak-outpost-authentik-embedded-outpost
+          namespace: security
+          port: 9000
+  tls:
+    secretName: urls-tls

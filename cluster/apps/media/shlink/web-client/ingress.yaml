@@ -19,12 +19,3 @@ spec:
       secretName: "urls-tls"
   rules:
     - host: urls.${SECRET_DOMAIN}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: shlink-web-client
-                port:
-                  number: 80
