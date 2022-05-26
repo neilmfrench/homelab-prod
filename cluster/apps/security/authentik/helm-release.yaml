@@ -8,17 +8,18 @@ spec:
   interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://charts.goauthentik.io/
       chart: authentik
-      version: 2022.4.3
+      version: 2022.5.1
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
         namespace: flux-system
       interval: 5m
   values:
-    image:
-      name: ghcr.io/goauthentik/server
-      tag: 2022.4.1
+    # image:
+    #   name: ghcr.io/goauthentik/server
+    #   tag: 2022.4.1
     ingress:
       enabled: true
       ingressClassName: "traefik"
@@ -43,7 +44,6 @@ spec:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       # log_level: debug
       postgresql:
-        # host: '${POSTGRESQL_ADDRESS}'
         name: authentik
         user: authentik
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
@@ -57,6 +57,11 @@ spec:
         username: "${SECRET_AUTHENTIK_EMAIL_USER}"
         password: "${SECRET_AUTHENTIK_EMAIL_KEY}"
         from: "${SECRET_AUTHENTIK_EMAIL_FROM}"
+    prometheus:
+      serviceMonitor:
+        create: true
+      rules:
+        create: true
     redis:
       enabled: true
       auth:
