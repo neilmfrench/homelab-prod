@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shlink-web-client
+  namespace: media
+  labels:
+    app: shlink-web-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shlink-web-client
+  template:
+    metadata:
+      labels:
+        app: shlink-web-client
+    spec:
+      containers:
+        - name: shlink-web-client
+          image: shlinkio/shlink-web-client:3.7.1
+          env:
+            - name: SHLINK_SERVER_URL
+              value: "shlink.${SECRET_DOMAIN}"
+            - name: SHLINK_SERVER_API_KEY
+              value: "${SECRET_SHLINK_API_KEY}"
+          ports:
+            - containerPort: 80
