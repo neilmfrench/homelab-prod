@@ -13,4 +13,4 @@ resources:
   - development
   - home
   - flux-system
-  - games
+  # - games
