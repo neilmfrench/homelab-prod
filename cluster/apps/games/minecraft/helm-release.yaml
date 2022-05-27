@@ -47,6 +47,7 @@ spec:
           service:
             enabled: true
             embedded: false
+            port: 8123
             type: ClusterIP
           ingress:
             ingressClassName: traefik
