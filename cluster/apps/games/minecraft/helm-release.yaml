@@ -37,7 +37,31 @@ spec:
       type: "PAPER"
       difficulty: normal
       pvp: true
-      ops: LordNeiliusVXV
       memory: 4096M
       serviceType: LoadBalancer
       externalTrafficPolicy: Local
+      extraPorts:
+        - name: map
+          containerPort: 8123
+          protocol: TCP
+          service:
+            enabled: true
+            embedded: false
+            type: ClusterIP
+          ingress:
+            ingressClassName: traefik
+            enabled: true
+            annotations:
+              cert-manager.io/cluster-issuer: "letsencrypt-production"
+              hajimari.io/enable: "true"
+              hajimari.io/icon: "google-maps"
+              traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+              external-dns/is-public: "true"
+              external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+            hosts:
+              - name: map.${SECRET_DOMAIN}
+                path: /
+            tls:
+              - secretName: minecraft-map-tls
+                hosts:
+                  - map.${SECRET_DOMAIN}
