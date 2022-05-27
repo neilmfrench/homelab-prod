@@ -15,3 +15,4 @@ resources:
   - crowdsec.yaml
   - tekton-pipelines.yaml
   - tekton-operator.yaml
+  - games.yaml
