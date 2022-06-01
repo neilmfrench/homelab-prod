@@ -44,7 +44,31 @@ update_filter=$(curl -s -X PUT \
     -H "Content-Type: application/json" \
     --data "{\"expression\": \"(ip.src eq ${current_ipv4})\"}" \
 )
-if [[ "$(echo "$update_ipv4" | jq --raw-output '.success')" == "true" && "$(echo "$update_filter" | jq --raw-output '.success')" == "true"]]; then
+
+# update magazine ip
+magazine_zone_id=$(curl -s -X GET \
+    "https://api.cloudflare.com/client/v4/zones?name=${CLOUDFLARE_MAGAZINE_RECORD_NAME#*.}&status=active" \
+    -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+    -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
+    -H "Content-Type: application/json" \
+        | jq --raw-output ".result[0] | .id"
+)
+magazine_record_ipv4=$(curl -s -X GET \
+    "https://api.cloudflare.com/client/v4/zones/${magazine_zone_id}/dns_records?name=${CLOUDFLARE_MAGAZINE_RECORD_NAME}&type=A" \
+    -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+    -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
+    -H "Content-Type: application/json" \
+)
+magazine_record_ipv4_identifier="$(echo "$magazine_record_ipv4" | jq --raw-output '.result[0] | .id')"
+magazine_update_ipv4=$(curl -s -X PUT \
+    "https://api.cloudflare.com/client/v4/zones/${magazine_zone_id}/dns_records/${magazine_record_ipv4_identifier}" \
+    -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
+    -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
+    -H "Content-Type: application/json" \
+    --data "{\"id\":\"${magazine_zone_id}\",\"type\":\"A\",\"proxied\":true,\"name\":\"${CLOUDFLARE_MAGAZINE_RECORD_NAME}\",\"content\":\"${current_ipv4}\"}" \
+)
+
+if [[ "$(echo "$update_ipv4" | jq --raw-output '.success')" == "true" && "$(echo "$magazine_update_ipv4" | jq --raw-output '.success')" == "true" && "$(echo "$update_filter" | jq --raw-output '.success')" == "true"]]; then
     printf "%s - Success - IP Address '%s' has been updated" "$(date -u)" "${current_ipv4}"
     exit 0
 else
