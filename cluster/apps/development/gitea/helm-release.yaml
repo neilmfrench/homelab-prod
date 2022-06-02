@@ -23,7 +23,7 @@ spec:
     gitea:
       admin:
         email: ${SECRET_GITEA_ADMIN_EMAIL}
-        username: admin
+        username: git-admin
         password: ${SECRET_GITEA_ADMIN_PASSWORD}
       config:
         APP_NAME: "Homelab Gitea"
