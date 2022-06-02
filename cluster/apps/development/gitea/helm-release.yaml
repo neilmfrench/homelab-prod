@@ -32,7 +32,7 @@ spec:
           HOST: gitea-postgresql:5432
           NAME: gitea
           USER: gitea
-          PASSWD: ${SECRET_GITEA_DB_PASSWORD}
+          PASSWD: ${SECRET_GITEA_POSTGRESQL_PASSWORD}
           SCHEMA: public
         server:
           SSH_PORT: 22
