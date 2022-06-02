@@ -33,3 +33,4 @@ resources:
   - harbor-charts.yaml
   - crowdsec-charts.yaml
   - privatebin-charts.yaml
+  - gitea-charts.yaml
