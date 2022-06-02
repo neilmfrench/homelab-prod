@@ -27,42 +27,30 @@ spec:
         password: ${SECRET_GITEA_ADMIN_PASSWORD}
       config:
         APP_NAME: "Homelab Gitea"
-        cron.resync_all_sshkeys:
-          ENABLED: true
-          RUN_AT_START: true
         database:
           DB_TYPE: postgres
-          HOST: postgresql-kube.data.svc.cluster.local.:5432
+          HOST: gitea-postgresql:5432
           NAME: gitea
           USER: gitea
           PASSWD: ${SECRET_GITEA_DB_PASSWORD}
           SCHEMA: public
         server:
           SSH_PORT: 22
-          SSH_LISTEN_PORT: 30322
-          SSH_DOMAIN: gitea.${SECRET_CLUSTER_DOMAIN_ROOT}
-          ROOT_URL: https://gitea.${SECRET_CLUSTER_DOMAIN}
+          SSH_DOMAIN: git-ssh.${SECRET_DOMAIN}
+          ROOT_URL: https://git.${SECRET_DOMAIN}
+        mailer:
+          ENABLED: true
+          HOST: ${SECRET_GITEA_MAIL_HOST}
+          FROM: ${SECRET_GITEA_MAIL_FROM}
+          USER: ${SECRET_GITEA_MAIL_USER}
+          PASSWD: ${SECRET_GITEA_MAIL_PASSWORD}
         respository:
           DEFAULT_PRIVATE: true
-        admin:
-          DISABLE_REGULAR_ORG_CREATION: true
-        security:
-          PASSWORD_COMPLEXITY: "lower,upper"
-          MIN_PASSWORD_LENGTH: 12
         service:
           DISABLE_REGISTRATION: true
           REQUIRE_SIGNIN_VIEW: true
-        webhook:
-          ALLOWED_HOST_LIST: "drone.k3s.xpander.ovh"
-
     postgresql:
       enabled: false
-    memcached:
-      image:
-        repository: bitnami/memcached
-        tag: 1.6.15
-      service:
-        port: 11211
     persistence:
       enabled: true
       size: 10Gi
