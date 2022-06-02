@@ -44,6 +44,17 @@ spec:
           FROM: ${SECRET_GITEA_MAIL_FROM}
           USER: ${SECRET_GITEA_MAIL_USER}
           PASSWD: ${SECRET_GITEA_MAIL_PASSWORD}
+        oauth:
+          - name: authentik
+            provider: openidConnect
+            key: ${SECRET_GITEA_AUTHENTIK_CLIENT_ID}
+            secret: ${SECRET_GITEA_AUTHENTIK_CLIENT_SECRET}
+            autoDiscoverUrl: https://id.${SECRET_DOMAIN}/application/o/gitea-slug/.well-known/openid-configuration
+            iconUrl: https://raw.githubusercontent.com/goauthentik/authentik/master/web/icons/icon.png
+            scopes: "email profile"
+            groupClaimName: groups
+            adminGroup: "Gitea Admins"
+            useCustomUrls: false
         respository:
           DEFAULT_PRIVATE: true
         service:
