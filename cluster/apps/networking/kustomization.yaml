@@ -6,4 +6,4 @@ resources:
   - traefik
   - pihole
   - external-dns
-  - error-pages
+  # - error-pages
