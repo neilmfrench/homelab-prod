@@ -22,7 +22,7 @@ spec:
         - name: url
           value: $(params.repo-url)
     - name: cat-readme
-      runAfter: ["fetch-repo"]  # Wait until the clone is done before reading the readme.
+      runAfter: ["clone-from-git-repo"]  # Wait until the clone is done before reading the readme.
       workspaces:
         - name: source
           workspace: shared-data
