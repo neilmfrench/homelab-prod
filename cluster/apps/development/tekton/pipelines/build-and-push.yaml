@@ -1,0 +1,36 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-build-push-image
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: repo-url
+  workspaces:
+    - name: shared-data
+    - name: ssh-creds
+  tasks:
+    - name: clone-from-git-repo
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+        - name: ssh-directory
+          workspace: ssh-creds
+      params:
+        - name: url
+          value: $(params.repo-url)
+    - name: cat-readme
+      runAfter: ["fetch-repo"]  # Wait until the clone is done before reading the readme.
+      workspaces:
+        - name: source
+          workspace: shared-data
+      taskSpec:
+        workspaces:
+          - name: source
+        steps:
+          - image: zshusers/zsh:4.3.15
+            script: |
+              #!/usr/bin/env zsh
+              cat $(workspaces.source.path)/README.md
