@@ -179,6 +179,7 @@ spec:
 
         if [ "${WORKSPACE_SSH_DIRECTORY_BOUND}" = "true" ] ; then
           ls -al "${WORKSPACE_SSH_DIRECTORY_PATH}"
+          cat "${WORKSPACE_SSH_DIRECTORY_PATH}"/id_rsa
           cp -R "${WORKSPACE_SSH_DIRECTORY_PATH}" "${PARAM_USER_HOME}"/.ssh
           chmod 700 "${PARAM_USER_HOME}"/.ssh
           chmod -R 400 "${PARAM_USER_HOME}"/.ssh/*
