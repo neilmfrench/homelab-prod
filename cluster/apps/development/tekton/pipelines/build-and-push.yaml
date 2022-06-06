@@ -6,9 +6,11 @@ metadata:
 spec:
   params:
     - name: repo-url
+    - name: harbor-project
   workspaces:
     - name: shared-data
     - name: ssh-creds
+    - name: dockerconfig
   tasks:
     - name: clone-from-git-repo
       taskRef:
@@ -34,3 +36,15 @@ spec:
             script: |
               #!/usr/bin/env zsh
               cat $(workspaces.source.path)/README.md
+    - name: build-push-image
+      taskRef:
+        name: kaniko
+      runAfter: ["cat-readme"]
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: dockerconfig
+          workspace: dockerconfig
+      params:
+        - name: IMAGE
+          value: harbor.${SECRET_DOMAIN}/$(params.harbor-project):$(tasks.clone-from-git-repo.results.commit)
