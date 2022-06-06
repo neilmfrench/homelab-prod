@@ -20,6 +20,11 @@ spec:
     - name: ssh-creds
       secret:
         secretName: gitea-tekton-build-bot-ssh-creds
+    - name: dockerconfig
+      secret:
+        secretName: harbor-tekton-build-bot-creds
   params:
     - name: repo-url
       value: git@gitea-ssh.development.svc.cluster.local:neil/yosemite-housekeeping-scraper.git
+    - name: harbor-project
+      value: campsite-scrapers/housekeeping
