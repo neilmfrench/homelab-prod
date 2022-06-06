@@ -23,3 +23,5 @@ spec:
   params:
     - name: repo-url
       value: git@gitea-ssh.development.svc.cluster.local:neil/yosemite-housekeeping-scraper.git
+    - name: sslVerify
+      value: false
