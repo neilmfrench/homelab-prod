@@ -22,6 +22,4 @@ spec:
         secretName: gitea-tekton-build-bot-ssh-creds
   params:
     - name: repo-url
-      value: git@git-ssh.neilfren.ch:neil/yosemite-housekeeping-scraper.git
-    - name: sslVerify
-      value: "false"
+      value: git@gitea-ssh.development.svc.cluster.local:neil/yosemite-housekeeping-scraper.git
