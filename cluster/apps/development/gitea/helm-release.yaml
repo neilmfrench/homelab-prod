@@ -27,6 +27,8 @@ spec:
         password: ${SECRET_GITEA_ADMIN_PASSWORD}
       config:
         APP_NAME: "Homelab Gitea"
+        webhook:
+          ALLOWED_HOST_LIST: "*"
         database:
           DB_TYPE: postgres
           HOST: gitea-postgresql:5432
