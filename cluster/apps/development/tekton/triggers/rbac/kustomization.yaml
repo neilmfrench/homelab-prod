@@ -2,6 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - tekton-triggers-service-account.yaml
+  - tekton-triggers-serviceaccount.yaml
   - tekton-triggers-role.yaml
   - tekton-triggers-rolebindings.yaml
