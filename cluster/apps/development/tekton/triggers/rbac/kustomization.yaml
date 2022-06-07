@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - tekton-triggers-serviceaccount.yaml
   - tekton-triggers-role.yaml
+  - tekton-triggers-clusterrole.yaml
   - tekton-triggers-rolebindings.yaml
