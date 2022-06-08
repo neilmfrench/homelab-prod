@@ -28,7 +28,7 @@ spec:
       config:
         APP_NAME: "Homelab Gitea"
         webhook:
-          ALLOWED_HOST_LIST: "10.42.0.0/16"
+          ALLOWED_HOST_LIST: "10.43.0.0/16"
         database:
           DB_TYPE: postgres
           HOST: gitea-postgresql:5432
