@@ -12,7 +12,6 @@ resources:
   - finance.yaml
   - development.yaml
   - home.yaml
-  - crowdsec.yaml
   - tekton-pipelines.yaml
   - tekton-operator.yaml
   - games.yaml
