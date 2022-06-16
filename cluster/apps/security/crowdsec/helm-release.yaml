@@ -90,6 +90,8 @@ spec:
           value: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors"
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
+        - name: TEST
+          value: "TEST"
       acquisition:
         - namespace: networking
           podName: traefik-*
