@@ -25,8 +25,8 @@ spec:
   values:
     configuration:
       annotateNodes: true
-      startTime: "10pm"
-      endTime: "2am"
+      startTime: "7pm"
+      endTime: "11pm"
       logFormat: "json"
       rebootCommand: "/bin/systemctl reboot"
       timeZone: "${TIMEZONE}"
