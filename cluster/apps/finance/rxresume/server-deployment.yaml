@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rxresume-server
+  namespace: finance
+  labels:
+    app: rxresume-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rxresume-server
+  template:
+    metadata:
+      labels:
+        app: rxresume-server
+    spec:
+      containers:
+        - name: rxresume-server
+          image: amruthpillai/reactive-resume:server-v3.4.7
+          env:
+            - name: TZ
+              value: ${TIMEZONE}
+            - name: PUBLIC_URL
+              value: https://resume.${SECRET_DOMAIN}
+            - name: PUBLIC_SERVER_URL
+              value: https://resume.${SECRET_DOMAIN}/api
+            - name: POSTGRES_DB
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: SECRET_KEY
+              value:
+            - name: POSTGRES_HOST
+              value: postgres
+            - name: POSTGRES_PORT
+              value: 5432
+            - name: JWT_SECRET
+              value:
+            - name: JWT_EXPIRY_TIME
+              value: 604800
+            - name: STORAGE_S3_ENABLED
+              value: false
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - mountPath: /app/server/dist/assets/uploads
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: rxresume-server-data
