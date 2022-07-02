@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: rxresume-server-data
-  namespace: home
+  namespace: finance
 spec:
   accessModes:
     - ReadWriteOnce

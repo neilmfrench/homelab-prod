@@ -27,19 +27,19 @@ spec:
             - name: PUBLIC_SERVER_URL
               value: https://resume.${SECRET_DOMAIN}/api
             - name: POSTGRES_DB
-              value: postgres
+              value: rxresume-postgres
             - name: POSTGRES_USER
-              value: postgres
+              value: rxresume-postgres
             - name: POSTGRES_PASSWORD
-              value: postgres
+              value: ${SECRET_RXRESUME_POSTGRES_PASSWORD}
             - name: SECRET_KEY
-              value:
+              value: ${SECRET_RXRESUME_KEY}
             - name: POSTGRES_HOST
-              value: postgres
+              value: rxresume-postgresql
             - name: POSTGRES_PORT
               value: 5432
             - name: JWT_SECRET
-              value:
+              value: ${SECRET_RXRESUME_JWT_KEY}
             - name: JWT_EXPIRY_TIME
               value: 604800
             - name: STORAGE_S3_ENABLED
