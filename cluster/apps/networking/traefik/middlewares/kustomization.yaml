@@ -7,4 +7,5 @@ resources:
   - crowdsec-traefik-bouncer.yaml
   - cloudflare-only.yaml
   - internal-only.yaml
+  - rxresume-strip-api-prefix.yaml
   # - error-pages.yaml

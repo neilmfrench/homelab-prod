@@ -11,10 +11,8 @@ spec:
     - kind: Rule
       match: Host(`resume.${SECRET_DOMAIN}`) && PathPrefix(`/api/`)
       middlewares:
-        - name: stripPrefix
-          prefixes:
-            - "/api"
-          forceSlash: true
+        - name: rxresume-strip-api-prefix
+          namespace: networking
       services:
         - kind: Service
           name: rxresume-server
