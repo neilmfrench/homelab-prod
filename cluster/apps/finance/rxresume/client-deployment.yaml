@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rxresume-client
+  namespace: finance
+  labels:
+    app: rxresume-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rxresume-client
+  template:
+    metadata:
+      labels:
+        app: rxresume-client
+    spec:
+      containers:
+        - name: rxresume-client
+          image: amruthpillai/reactive-resume:client-v3.4.7
+          env:
+            - name: TZ
+              value: "${TIMEZONE}"
+            - name: PUBLIC_URL
+              value: https://resume.${SECRET_DOMAIN}
+            - name: PUBLIC_SERVER_URL
+              value: https://resume.${SECRET_DOMAIN}/api
+            - name: PUBLIC_FLAG_DISABLE_SIGNUPS
+              value: "false"
+          ports:
+            - containerPort: 3000

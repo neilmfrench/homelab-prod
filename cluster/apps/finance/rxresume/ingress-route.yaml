@@ -1,0 +1,32 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rxresume-ingress-route
+  namespace: finance
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`resume.${SECRET_DOMAIN}`) && PathPrefix(`/api/`)
+      middlewares:
+        - name: stripPrefix
+          prefixes:
+            - "/api"
+          forceSlash: true
+      services:
+        - kind: Service
+          name: rxresume-server
+          namespace: finance
+          port: 3000
+    - kind: Rule
+      match: "Host(`resume.${SECRET_DOMAIN}`)"
+      priority: 15
+      services:
+        - kind: Service
+          name: rxresume-client
+          namespace: finance
+          port: 3000
+  tls:
+    secretName: resume-tls

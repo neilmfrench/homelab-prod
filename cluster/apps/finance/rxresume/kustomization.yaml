@@ -7,3 +7,7 @@ resources:
   - postgresql-helm-release.yaml
   - server-deployment.yaml
   - server-service.yaml
+  - client-deployment.yaml
+  - client-service.yaml
+  - fake-ingress.yaml
+  - ingress-route.yaml
