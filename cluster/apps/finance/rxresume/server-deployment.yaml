@@ -37,11 +37,11 @@ spec:
             - name: POSTGRES_HOST
               value: rxresume-postgresql
             - name: POSTGRES_PORT
-              value: 5432
+              value: "5432"
             - name: JWT_SECRET
               value: ${SECRET_RXRESUME_JWT_KEY}
             - name: JWT_EXPIRY_TIME
-              value: 604600
+              value: "604600"
             - name: STORAGE_S3_ENABLED
               value: false
           ports:

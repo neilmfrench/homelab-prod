@@ -5,5 +5,5 @@ resources:
   - data-pvc.yaml
   - postgresql-data-pvc.yaml
   - postgresql-helm-release.yaml
-  # - server-deployment.yaml
-  # - server-service.yaml
+  - server-deployment.yaml
+  - server-service.yaml
