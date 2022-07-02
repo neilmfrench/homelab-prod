@@ -45,7 +45,7 @@ spec:
             - name: STORAGE_S3_ENABLED
               value: "false"
           ports:
-            - containerPort: 3000
+            - containerPort: 3100
           volumeMounts:
             - mountPath: /app/server/dist/assets/uploads
               name: data
