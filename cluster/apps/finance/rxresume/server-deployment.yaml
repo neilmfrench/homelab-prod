@@ -41,7 +41,7 @@ spec:
             - name: JWT_SECRET
               value: "${SECRET_RXRESUME_JWT_KEY}"
             - name: JWT_EXPIRY_TIME
-              value: "604600"
+              value: "604800"
             - name: STORAGE_S3_ENABLED
               value: "false"
           ports:
