@@ -9,8 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`resume.${SECRET_DOMAIN}`) && PathPrefix(`/api/`)
-      priority: 1
+      match: "Host(`resume.${SECRET_DOMAIN}`) && PathPrefix(`/api/`)"
       middlewares:
         - name: rxresume-strip-api-prefix
           namespace: networking
@@ -19,13 +18,12 @@ spec:
           name: rxresume-server
           namespace: finance
           port: 3100
-    # - kind: Rule
-    #   match: "Host(`resume.${SECRET_DOMAIN}`)"
-    #   priority: 15
-    #   services:
-    #     - kind: Service
-    #       name: rxresume-client
-    #       namespace: finance
-    #       port: 3000
+    - kind: Rule
+      match: "Host(`resume.${SECRET_DOMAIN}`)"
+      services:
+        - kind: Service
+          name: rxresume-client
+          namespace: finance
+          port: 3000
   tls:
     secretName: resume-tls
