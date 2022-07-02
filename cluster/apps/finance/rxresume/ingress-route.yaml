@@ -10,7 +10,7 @@ spec:
   routes:
     - kind: Rule
       match: Host(`resume.${SECRET_DOMAIN}`) && PathPrefix(`/api/`)
-      priority: 10
+      priority: 1
       middlewares:
         - name: rxresume-strip-api-prefix
           namespace: networking
