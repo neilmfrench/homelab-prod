@@ -21,7 +21,7 @@ spec:
           image: amruthpillai/reactive-resume:server-v3.4.7
           env:
             - name: TZ
-              value: ${TIMEZONE}
+              value: "${TIMEZONE}"
             - name: PUBLIC_URL
               value: https://resume.${SECRET_DOMAIN}
             - name: PUBLIC_SERVER_URL
@@ -31,15 +31,15 @@ spec:
             - name: POSTGRES_USER
               value: rxresume-postgres
             - name: POSTGRES_PASSWORD
-              value: ${SECRET_RXRESUME_POSTGRES_PASSWORD}
+              value: "${SECRET_RXRESUME_POSTGRES_PASSWORD}"
             - name: SECRET_KEY
-              value: ${SECRET_RXRESUME_KEY}
+              value: "${SECRET_RXRESUME_KEY}"
             - name: POSTGRES_HOST
               value: rxresume-postgresql
             - name: POSTGRES_PORT
               value: "5432"
             - name: JWT_SECRET
-              value: ${SECRET_RXRESUME_JWT_KEY}
+              value: "${SECRET_RXRESUME_JWT_KEY}"
             - name: JWT_EXPIRY_TIME
               value: "604600"
             - name: STORAGE_S3_ENABLED
