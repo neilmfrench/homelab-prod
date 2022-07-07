@@ -24,9 +24,14 @@ spec:
     remediation:
       retries: 3
   values:
+    persistence:
+      defaultClass: true
+      reclaimPolicy: Retain
     defaultSettings:
       storageMinimalAvailablePercentage: "10"
       allowNodeDrainWithLastHealthyReplica: true
+      concurrentAutomaticEngineUpgradePerNodeLimit: 1
+      defaultDataLocality: best-effort
     ingress:
       enabled: true
       ingressClassName: "traefik"
