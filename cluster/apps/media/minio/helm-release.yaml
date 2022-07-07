@@ -66,11 +66,11 @@ spec:
             - *apiHost
     podSecurityContext:
       enabled: false
-      fsGroup: 1002
+      fsGroup: 0
     containerSecurityContext:
       enabled: true
-      runAsUser: 115
-      runAsNonRoot: true
+      runAsUser: 0
+      runAsNonRoot: false
     persistence:
       enabled: true
       existingClaim: minio-data
