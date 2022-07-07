@@ -6,13 +6,13 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: local-path-easystore
+  storageClassName: local-path-easystore-minio
   capacity:
-    storage: 7T
+    storage: 3T
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/easystore
+    path: /mnt/easystore/minio
   nodeAffinity:
     required:
       nodeSelectorTerms:
