@@ -46,9 +46,6 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hajimari.io/enable: "true"
-        external-dns/is-public: "true"
-        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       hostname: &consoleHost "minio.${SECRET_DOMAIN}"
       tls: true
       extraTls:
@@ -60,7 +57,6 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hajimari.io/enable: "true"
         external-dns/is-public: "true"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       hostname: &apiHost "s3.${SECRET_DOMAIN}"
