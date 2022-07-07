@@ -64,13 +64,13 @@ spec:
       extraTls:
         - hosts:
             - *apiHost
-    podSecurityContext:
-      enabled: true
-      fsGroup: 1001
-    containerSecurityContext:
-      enabled: true
-      runAsUser: 1001
-      runAsNonRoot: true
+    # podSecurityContext:
+    #   enabled: true
+    #   fsGroup: 1001
+    # containerSecurityContext:
+    #   enabled: true
+    #   runAsUser: 1001
+    #   runAsNonRoot: true
     persistence:
       enabled: true
       existingClaim: minio-data
