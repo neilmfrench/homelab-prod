@@ -24,6 +24,14 @@ spec:
     remediation:
       retries: 5
   values:
+    image:
+      registry: docker.io
+      repository: minio/minio
+      tag: RELEASE.2022-07-08T00-05-23Z
+    clientImage:
+      registry: docker.io
+      repository: minio/mc
+      tag: RELEASE.2022-07-06T14-54-36Z
     extraEnvVars:
       - name: TZ
         value: "${TIMEZONE}"
