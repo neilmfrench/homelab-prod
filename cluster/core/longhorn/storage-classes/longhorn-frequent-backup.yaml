@@ -8,6 +8,7 @@ parameters:
   numberOfReplicas: "3"
   staleReplicaTimeout: "30"
   fromBackup: ""
+  reclaimPolicy: Retain
   recurringJobSelector: '[
       {
         "name":"frequent",
