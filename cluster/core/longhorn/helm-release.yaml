@@ -32,6 +32,8 @@ spec:
       allowNodeDrainWithLastHealthyReplica: true
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       defaultDataLocality: best-effort
+      backupTarget: "s3://longhorn-backups@dummyregion/longhorn"
+      backupTargetCredentialSecret: minio-svc-secret
     ingress:
       enabled: true
       ingressClassName: "traefik"
