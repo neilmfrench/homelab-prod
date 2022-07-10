@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - data-volume.yaml
   - data-pvc.yaml
-  - helm-release.yaml
+  # - helm-release-minio.yaml
