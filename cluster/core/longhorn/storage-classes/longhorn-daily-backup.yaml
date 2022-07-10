@@ -4,11 +4,11 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: longhorn-daily-backup
 provisioner: driver.longhorn.io
+reclaimPolicy: Retain
 parameters:
   numberOfReplicas: "3"
   staleReplicaTimeout: "30"
   fromBackup: ""
-  reclaimPolicy: Retain
   recurringJobSelector: '[
       {
         "name":"daily",
