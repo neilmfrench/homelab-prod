@@ -57,6 +57,4 @@ spec:
     persistentVolumeClaim:
       enabled: true
       existingClaim: pihole-config
-    admin:
-      existingSecret: "pihole-admin-secret"
-      passwordKey: "pihole-admin-secret"
+    adminPassword: "${SECRET_PIHOLE_ADMIN_PASSWORD}"
