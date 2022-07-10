@@ -5,9 +5,9 @@ metadata:
   name: frequent-backup
   namespace: longhorn-system
 spec:
-  cron: "*/15 * * * *"
+  cron: "0 3 * * *"
   task: "backup"
   groups:
-    - frequent
+    - daily
   retain: 3
   concurrency: 3
