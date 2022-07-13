@@ -50,7 +50,7 @@ spec:
         cpu: "0.05"
         memory: "305M"
       limits:
-        memory: "512M"
+        memory: "1024M"
     nextcloud:
       host: cloud.${SECRET_DOMAIN}
       username: "${SECRET_NEXTCLOUD_ADMIN_USERNAME}"
