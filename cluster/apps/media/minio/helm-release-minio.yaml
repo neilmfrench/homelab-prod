@@ -26,10 +26,10 @@ spec:
   values:
     image:
       repository: quay.io/minio/minio
-      tag: RELEASE.2022-07-15T03-44-22Z
+      tag: RELEASE.2022-07-24T01-54-52Z
     mcImage:
       repository: quay.io/minio/mc
-      tag: RELEASE.2022-07-11T16-16-12Z
+      tag: RELEASE.2022-07-24T02-25-13Z
     mode: standalone
     ignoreChartChecksums: true
     rootUser: admin
