@@ -19,7 +19,7 @@ spec:
   values:
     image:
       name: ghcr.io/goauthentik/server
-      tag: 2022.7.2
+      tag: 2022.7.3
     ingress:
       enabled: true
       ingressClassName: "traefik"
@@ -48,8 +48,8 @@ spec:
         user: authentik
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
       # redis:
-        # host: '{{ .Release.Name }}-redis-master'
-        # password: "${SECRET_AUTHENTIK_REDIS_PASSWORD}"
+      # host: '{{ .Release.Name }}-redis-master'
+      # password: "${SECRET_AUTHENTIK_REDIS_PASSWORD}"
       email:
         host: "${SECRET_AUTHENTIK_EMAIL_HOST}"
         port: 587
