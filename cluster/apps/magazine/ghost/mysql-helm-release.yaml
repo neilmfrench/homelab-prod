@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: bitnami/mysql
-      tag: 8.0.29
+      tag: 8.0.30
     architecture: standalone
     primary:
       persistence:
