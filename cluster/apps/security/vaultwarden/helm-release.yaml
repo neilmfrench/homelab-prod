@@ -22,7 +22,7 @@ spec:
     fullnameOverride: vaultwarden
     image:
       repository: vaultwarden/server
-      tag: 1.25.1
+      tag: 1.25.2
     env:
       SIGNUPS_ALLOWED: false
       INVITATIONS_ALLOWED: true
