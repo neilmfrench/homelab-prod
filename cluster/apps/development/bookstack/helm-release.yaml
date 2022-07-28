@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/bookstack
-      tag: 22.06.20220624
+      tag: 22.07.20220728
     ingress:
       main:
         enabled: true
