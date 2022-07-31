@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghost
-      tag: latest
+      tag: 5.5.0
     resources:
       limits:
         cpu: 2
