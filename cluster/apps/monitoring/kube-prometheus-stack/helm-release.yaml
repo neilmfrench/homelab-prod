@@ -29,12 +29,12 @@ spec:
           slack_api_url: "${SECRET_PROMETHEUS_DISCORD_ALERTS_WEBHOOK}"
           resolve_timeout: 5m
         receivers:
-          - name: 'null'
-          - name: 'discord'
+          - name: "null"
+          - name: "discord"
             slack_configs:
-              - channel: '#prometheus-alerts'
+              - channel: "#prometheus-alerts"
                 icon_url: https://avatars3.githubusercontent.com/u/3380462
-                username: 'prom-alert-bot'
+                username: "prom-alert-bot"
                 send_resolved: true
                 title: |-
                   [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
@@ -47,25 +47,25 @@ spec:
                     {{ end }}
                   {{ end }}
         route:
-          group_by: ['alertname', 'job']
+          group_by: ["alertname", "job"]
           group_wait: 30s
           group_interval: 5m
           repeat_interval: 6h
-          receiver: 'null'
+          receiver: "null"
           routes:
-            - receiver: 'null'
+            - receiver: "null"
               match:
                 alertname: Watchdog
-            - receiver: 'discord'
+            - receiver: "discord"
               match_re:
                 severity: critical|warning|error
               continue: true
         inhibit_rules:
           - source_match:
-              severity: 'critical'
+              severity: "critical"
             target_match:
-              severity: 'warning'
-            equal: ['alertname', 'namespace']
+              severity: "warning"
+            equal: ["alertname", "namespace"]
       ingress:
         enabled: true
         pathType: Prefix
@@ -181,7 +181,8 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
-        retention: 6h
+        retention: 24h
+        retentionSize: "100GB"
         enableAdminAPI: true
         walCompression: true
         storageSpec:
