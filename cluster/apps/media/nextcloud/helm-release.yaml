@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: nextcloud
-      tag: 24.0.4-apache
+      tag: 24.0.5-apache
     # env:
     #   REDIS_HOST_PASSWORD: ""
     persistence:
