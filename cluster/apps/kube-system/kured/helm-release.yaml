@@ -31,5 +31,5 @@ spec:
       rebootCommand: "/bin/systemctl reboot"
       timeZone: "${TIMEZONE}"
       forceReboot: true
-      drainTimeout: 300
-      period: 0h5m0s
+      drainTimeout: "300s"
+      period: "0h5m0s"
