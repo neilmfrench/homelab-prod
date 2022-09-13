@@ -4,4 +4,4 @@ resources:
   - echo-server
   - hajimari
   - homepage
-  - ghost
+  # - ghost
