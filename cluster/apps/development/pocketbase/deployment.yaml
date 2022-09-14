@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocketbase
+  namespace: development
+  labels:
+    app: pocketbase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pocketbase
+  template:
+    metadata:
+      labels:
+        app: pocketbase
+    spec:
+      containers:
+        - name: pocketbase
+          image: ghcr.io/muchobien/pocketbase:0.7.2
+          ports:
+            - containerPort: 8090
+          volumeMounts:
+            - mountPath: /pb_data
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pocketbase-data

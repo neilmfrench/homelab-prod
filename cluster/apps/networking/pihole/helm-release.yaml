@@ -48,6 +48,7 @@ spec:
         - address=/crowdsec-dash.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/tekton.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/alert-manager.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+        - address=/pocketbase.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         # - address=/minio.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         # - address=/harbor-notary.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/k8s1/${SECRET_K8S1_IP}
