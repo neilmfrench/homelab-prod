@@ -9,7 +9,7 @@ configMapGenerator:
       - DEFAULT_TARGET_NAMESPACE=tekton-pipelines
     behavior: replace
 resources:
-  - https://storage.googleapis.com/tekton-releases/operator/previous/0.58.0/release.yaml
+  - https://storage.googleapis.com/tekton-releases/operator/previous/v0.62.0/release.yaml
   - ingress.yaml
   - tasks
   - pipelines
