@@ -28,9 +28,13 @@ spec:
               value: "${TIMEZONE}"
             - name: SNAPSHOT
               value: API
+            - name: NET_MODE
+              value: LAN
           ports:
             - containerPort: 8888
             - containerPort: 8554
+            - containerPort: 1935
+            - containerPort: 5000
           volumeMounts:
             - mountPath: /tokens
               name: config

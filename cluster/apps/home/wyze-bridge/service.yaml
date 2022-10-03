@@ -16,3 +16,9 @@ spec:
     - name: rtsp
       protocol: TCP
       port: 8554
+    - name: web
+      protocol: TCP
+      port: 5000
+    - name: rtmp
+      protocol: TCP
+      port: 1935
