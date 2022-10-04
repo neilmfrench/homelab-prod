@@ -25,7 +25,7 @@ spec:
           - name: repo-revision-from-trigger
             value: "$(tt.params.gitrevision)"
           - name: repo-url
-            value: git@gitea-ssh.development.svc.cluster.local:neil/leagues-pocketbase.git.git
+            value: git@gitea-ssh.development.svc.cluster.local:neil/leagues-pocketbase.git
           - name: harbor-project
             value: leagues-app/leagues-pocketbase
         workspaces:
