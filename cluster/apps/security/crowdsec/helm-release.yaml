@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: crowdsec
-      version: 0.6.0
+      version: 0.7.0
       sourceRef:
         kind: HelmRepository
         name: crowdsec-charts
@@ -56,12 +56,14 @@ spec:
           accessModes:
             - ReadWriteOnce
           storageClassName: longhorn
+          existingClaim: "crowdsec-db-pvc"
           size: 1Gi
         config:
           enabled: true
           accessModes:
             - ReadWriteOnce
           storageClassName: longhorn
+          existingClaim: "crowdsec-config-pvc"
           size: 5Gi
       # metrics:
       #   enabled: true
@@ -80,6 +82,7 @@ spec:
           accessModes:
             - ReadWriteMany
           storageClassName: "longhorn"
+          existingClaim: "crowdsec-agent-config-pvc"
           size: 400Mi
       env:
         # - name: DISABLE_ONLINE_API
