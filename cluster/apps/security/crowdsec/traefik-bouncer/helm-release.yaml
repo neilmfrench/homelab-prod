@@ -23,4 +23,4 @@ spec:
       crowdsec_agent_host: crowdsec-service:8080
     image:
       repository: fbonalair/traefik-crowdsec-bouncer
-      tag: "0.4.0"
+      tag: "0.5.0"
