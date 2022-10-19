@@ -2,7 +2,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - vaultwarden
-  - vaultwarden-backup-test
-  - authentik
-  - crowdsec
+  # - config-pvc.yaml
+  - helm-release.yaml
