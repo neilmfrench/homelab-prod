@@ -17,9 +17,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    image:
-      name: ghcr.io/goauthentik/server
-      tag: 2022.9.0
     ingress:
       enabled: true
       ingressClassName: "traefik"
