@@ -55,12 +55,18 @@ spec:
         registry:
           storageClass: "longhorn"
           size: 15Gi
+          existingClaim: harbor-registry
         chartmuseum:
           storageClass: "longhorn"
           size: 5Gi
+          existingClaim: harbor-chartmuseum
         jobservice:
-          storageClass: "longhorn"
-          size: 1Gi
+          jobLog:
+            storageClass: "longhorn"
+            size: 1Gi
+          scanDataExports:
+            storageClass: "longhorn"
+            size: 1Gi
         database:
           storageClass: "longhorn"
           size: 5Gi
