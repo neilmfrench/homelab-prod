@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: pihole/pihole
-      tag: "2022.10"
+      tag: "2022.11"
     serviceWeb:
       loadBalancerIP: "${SECRET_PIHOLE_INTERNAL_IP}"
       annotations:
