@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: "fireflyiii/core"
-      tag: version-5.7.12
+      tag: version-5.7.15
     persistence:
       enabled: true
       existingClaim: firefly-data

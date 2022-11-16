@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.min.io
       chart: minio
-      version: 5.0.0
+      version: 5.0.1
       sourceRef:
         kind: HelmRepository
         name: minio-charts
@@ -24,12 +24,12 @@ spec:
     remediation:
       retries: 5
   values:
-    image:
-      repository: quay.io/minio/minio
-      tag: RELEASE.2022-09-07T22-25-02Z
-    mcImage:
-      repository: quay.io/minio/mc
-      tag: RELEASE.2022-08-28T20-08-11Z
+    # image:
+    #   repository: quay.io/minio/minio
+    #   tag: RELEASE.2022-09-07T22-25-02Z
+    # mcImage:
+    #   repository: quay.io/minio/mc
+    #   tag: RELEASE.2022-08-28T20-08-11Z
     mode: standalone
     ignoreChartChecksums: true
     rootUser: admin
