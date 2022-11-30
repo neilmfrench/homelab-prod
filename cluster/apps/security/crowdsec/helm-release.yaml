@@ -70,8 +70,6 @@ spec:
       #   serviceMonitor:
       #     enabled: true
       resources:
-        limits:
-          memory: 200Mi
         requests:
           cpu: 150m
           memory: 100Mi
