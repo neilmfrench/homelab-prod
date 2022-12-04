@@ -1,0 +1,183 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openapi-config
+  namespace: development
+data:
+  openapi.json: |
+    {
+      "openapi": "3.0.3",
+      "info": {
+        "title": "FIFA.com OpenAPI Spec",
+        "description": "OpenAPI Spec for https://api.fifa.com",
+        "version": "0.0.1"
+      },
+      "servers": [
+        {
+          "url": "https://api.fifa.com/api/v3"
+        }
+      ],
+      "tags": [
+        {
+          "name": "countries",
+          "description": "Countries known to have participated in FIFA competitions"
+        }
+      ],
+      "paths": {
+        "/countries": {
+          "get": {
+            "tags": ["countries"],
+            "summary": "List all countries",
+            "parameters": [
+              {
+                "name": "x-mdp-continuation-token",
+                "in": "header",
+                "description": "Pagination continuation token",
+                "required": false,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "language",
+                "in": "query",
+                "description": "Language code (defaults to en-GB if not set)",
+                "required": false,
+                "schema": {
+                  "$ref": "#/components/schemas/Locale"
+                }
+              },
+              {
+                "name": "count",
+                "in": "query",
+                "description": "Number of results per page",
+                "required": false,
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "continuationhash",
+                "in": "query",
+                "description": "Pagination continuation hash. Must be used with x-mdp-continuation-token header",
+                "required": false,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Country"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "Locale": {
+            "type": "string",
+            "enum": [
+              "ar-SA",
+              "de-DE",
+              "en-GB",
+              "en-US",
+              "es-ES",
+              "fr-FR",
+              "id-ID",
+              "it-IT",
+              "ja-JP",
+              "ko-KR",
+              "lt-LT",
+              "pl-PL",
+              "pt-BR",
+              "pt-PT",
+              "ru-RU",
+              "zh-CN"
+            ]
+          },
+          "ListResult": {
+            "type": "object",
+            "properties": {
+              "ContinuationToken": {
+                "type": "string"
+              },
+              "ContinuationHash": {
+                "type": "string"
+              }
+            }
+          },
+          "LocalizedObject": {
+            "type": "object",
+            "properties": {
+              "Locale": {
+                "$ref": "#/components/schemas/Locale"
+              },
+              "Description": {
+                "type": "string"
+              }
+            }
+          },
+          "Country": {
+            "type": "object",
+            "properties": {
+              "IdCountry": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "string"
+              },
+              "Iso3166Alpha2": {
+                "type": "string"
+              },
+              "Iso3166Alpha3": {
+                "type": "string"
+              },
+              "Alias": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "GracenoteCode": {
+                "type": "string"
+              },
+              "StatsPerformId": {
+                "type": "string"
+              },
+              "Properties": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "IsUpdateable": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }

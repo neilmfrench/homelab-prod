@@ -9,4 +9,5 @@ resources:
   - tekton
   - gitea
   - pocketbase
+  - fifa-openapi
   # - planka
