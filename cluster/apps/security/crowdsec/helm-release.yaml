@@ -21,7 +21,7 @@ spec:
     container_runtime: containerd
     image:
       repository: crowdsecurity/crowdsec
-      tag: v1.4.3
+      tag: v1.4.2
     secrets:
       username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
       password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
