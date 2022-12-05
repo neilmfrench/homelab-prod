@@ -19,6 +19,7 @@ spec:
       params:
         - name: GIT_SCRIPT
           value: |
+            cat /root/.ssh/id_ed25519
             git clone git@github.com:neilmfrench/homelab-prod.git homelab
             git clone git@gitea-ssh.development.svc.cluster.local:neil/fifa-openapi.git fifa-openapi
             ls -al fifa-openapi
