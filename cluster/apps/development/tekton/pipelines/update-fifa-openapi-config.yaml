@@ -19,8 +19,8 @@ spec:
       params:
         - name: GIT_SCRIPT
           value: |
-            git clone git@gitea-ssh.development.svc.cluster.local:neil/fifa-openapi.git fifa-openapi
             git clone git@github.com:neilmfrench/homelab-prod.git homelab
+            git clone git@gitea-ssh.development.svc.cluster.local:neil/fifa-openapi.git fifa-openapi
             ls -al fifa-openapi
             echo "--------"
             ls -al homelab
