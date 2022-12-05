@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - kaniko.yaml
   - git-clone.yaml
+  - git-cli.yaml

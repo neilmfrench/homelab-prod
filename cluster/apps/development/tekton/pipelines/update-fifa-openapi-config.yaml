@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-update-fifa-openapi-config
+  namespace: tekton-pipelines
+spec:
+  workspaces:
+    - name: shared-data
+    - name: ssh-creds
+  tasks:
+    - name: clone-repos
+      taskRef:
+        name: git-cli
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: ssh-directory
+          workspace: ssh-creds
+      params:
+        - name: GIT_SCRIPT
+          value: |
+            git clone ${SECRET_TEKTON_FIFA_OPENAPI_REPO} fifa-openapi
+            git clone ${SECRET_TEKTON_HOMELAB_REPO} homelab
+            ls -al fifa-openapi
+            echo "--------"
+            ls -al homelab
