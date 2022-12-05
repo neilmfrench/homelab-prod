@@ -73,7 +73,6 @@ spec:
         - name: GIT_SCRIPT
           value: |
             export COMMIT_ID=$(tasks.set-commit-id.results.fifa-openapi-commit-id)
-            echo "Commit ID: $COMMIT_ID"
             git -C homelab checkout -b fifa-openapi-config-update-$COMMIT_ID
             git -C homelab add cluster/apps/development/fifa-openapi/openapi-config.yaml
             git -C homelab commit -m "Automated config update for fifa openapi commit: $COMMIT_ID"
