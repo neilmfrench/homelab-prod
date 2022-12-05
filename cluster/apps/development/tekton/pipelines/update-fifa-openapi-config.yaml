@@ -38,6 +38,9 @@ spec:
             script: |
               /usr/bin/env sh
               set -e
+              pwd
+              ls -al
+              cat $(workspaces.source.path)
               export CONTENT = $(cat $(workspaces.source.path/fifa-openapi/openapi.json))
               yq -i '.data."openapi.json" = env(CONTENT)' $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
               cat $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
