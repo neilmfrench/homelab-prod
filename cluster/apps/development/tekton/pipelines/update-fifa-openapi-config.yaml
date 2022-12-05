@@ -35,6 +35,9 @@ spec:
           - name: source
         steps:
           - image: mikefarah/yq:4.30.5
+            securityContext:
+              runAsUser: 0
+              runAsNonRoot: false
             script: |
               /usr/bin/env sh
               set -e
@@ -42,5 +45,6 @@ spec:
               ls -al
               ls -al $(workspaces.source.path)
               export CONTENT=$(cat $(workspaces.source.path)/fifa-openapi/openapi.json)
+              echo $CONTENT
               yq -i '.data."openapi.json" = env(CONTENT)' $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
               cat $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
