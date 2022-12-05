@@ -25,3 +25,19 @@ spec:
             ls -al fifa-openapi
             echo "--------"
             ls -al homelab
+    - name: update-openapi-configmap
+      runAfter: ["clone-repos"] # Wait until the clone is done before reading the readme.
+      workspaces:
+        - name: source
+          workspace: shared-data
+      taskSpec:
+        workspaces:
+          - name: source
+        steps:
+          - image: mikefarah/yq:4.30.5
+            script: |
+              /usr/bin/env sh
+              set -e
+              export CONTENT = $(cat $(workspaces.source.path/fifa-openapi/openapi.json))
+              yq -i '.data."openapi.json" = env(CONTENT)' $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
+              cat $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
