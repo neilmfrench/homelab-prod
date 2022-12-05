@@ -78,7 +78,20 @@ spec:
             git -C homelab add cluster/apps/development/fifa-openapi/openapi-config.yaml
             git -C homelab commit -m "Automated config update for fifa openapi commit: $COMMIT_ID"
             git -C homelab push origin fifa-openapi-config-update-$COMMIT_ID
-    # - name: create-github-pr
-    #   runAfter: ["push-updated-config"]
-    #   taskRef:
-    #     name: github-open-pr
+    - name: create-github-pr
+      runAfter: ["push-updated-config"]
+      taskRef:
+        name: github-open-pr
+      params:
+        - name: REPO_FULL_NAME
+          value: neilmfrench/homelab-prod
+        - name: HEAD
+          value: fifa-openapi-config-update-$(tasks.set-commit-id.results.fifa-openapi-commit-id)
+        - name: BASE
+          value: main
+        - name: TITLE
+          value: "Update FIFA OpenAPI Config"
+        - name: BODY
+          value: "Updates to latest version of FIFA OpenAPI spec"
+        - name: GITHUB_TOKEN_SECRET_NAME
+          value: github-token
