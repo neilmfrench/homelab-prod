@@ -19,14 +19,27 @@ spec:
       params:
         - name: GIT_SCRIPT
           value: |
-            cat /root/.ssh/id_ed25519
             git clone git@github.com:neilmfrench/homelab-prod.git homelab
             GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone git@gitea-ssh.development.svc.cluster.local:neil/fifa-openapi.git fifa-openapi
-            ls -al fifa-openapi
-            echo "--------"
-            ls -al homelab
+    - name: set-commit-id
+      runAfter: ["clone-repos"]
+      workspaces:
+        - name: source
+          workspace: shared-data
+      taskSpec:
+        workspaces:
+          - name: source
+        results:
+          - name: fifa-openapi-commit-id
+            description: Commit ID for the new OpenAPI config
+        steps:
+          - name: git
+            image:
+            workingDir: $(workspaces.source.path)
+            script: |
+              git -C fifa-openapi rev-parse HEAD | tee $(results.fifa-openapi-commit-id.path)
     - name: update-openapi-configmap
-      runAfter: ["clone-repos"] # Wait until the clone is done before reading the readme.
+      runAfter: ["set-commit-id"] # Wait until the clone is done before reading the readme.
       workspaces:
         - name: source
           workspace: shared-data
@@ -41,13 +54,8 @@ spec:
             script: |
               /usr/bin/env sh
               set -e
-              pwd
-              ls -al
-              ls -al $(workspaces.source.path)
               export CONTENT=$(cat $(workspaces.source.path)/fifa-openapi/openapi.json)
-              echo $CONTENT
               yq -i '.data."openapi.json" = env(CONTENT)' $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
-              cat $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
     - name: push-updated-config
       runAfter: ["update-openapi-configmap"]
       taskRef:
@@ -64,7 +72,7 @@ spec:
           value: ${SECRET_GIT_EMAIL}
         - name: GIT_SCRIPT
           value: |
-            export COMMIT_ID=$(git -C fifa-openapi rev-parse HEAD)
+            export COMMIT_ID=$(tasks.set-commit-id.results.fifa-openapi-commit-id)
             echo "Commit ID: $COMMIT_ID"
             git -C homelab checkout -b fifa-openapi-config-update-$COMMIT_ID
             git -C homelab add cluster/apps/development/fifa-openapi/openapi-config.yaml
