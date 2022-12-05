@@ -58,11 +58,15 @@ spec:
         - name: ssh-directory
           workspace: ssh-creds
       params:
+        - name: GIT_USER_NAME
+          value: ${SECRET_GIT_NAME}
+        - name: GIT_USER_EMAIL
+          value: ${SECRET_GIT_EMAIL}
         - name: GIT_SCRIPT
           value: |
             export COMMIT_ID=$(git -C fifa-openapi rev-parse HEAD)
             echo "Commit ID: $COMMIT_ID"
             git -C homelab checkout -b fifa-open-config-update-$COMMIT_ID
             git -C homelab add cluster/apps/development/fifa-openapi/openapi-config.yaml
-            git -C homelab commit -m "Automated config update for fifa openapi commit: https://git.${SECRET_DOMAIN}/neil/fifa-openapi/commit/$COMMIT_ID"
+            git -C homelab commit -m "Automated config update for fifa openapi commit: $COMMIT_ID"
             git -C homelab push origin fifa-openapi-config-update-$COMMIT_ID
