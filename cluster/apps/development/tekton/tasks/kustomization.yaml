@@ -5,3 +5,4 @@ resources:
   - kaniko.yaml
   - git-clone.yaml
   - git-cli.yaml
+  - github-open-pr.yaml
