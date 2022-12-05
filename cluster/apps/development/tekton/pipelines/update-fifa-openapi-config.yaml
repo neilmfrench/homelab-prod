@@ -41,6 +41,6 @@ spec:
               pwd
               ls -al
               ls -al $(workspaces.source.path)
-              export CONTENT = $(cat $(workspaces.source.path)/fifa-openapi/openapi.json)
+              export CONTENT=$(cat $(workspaces.source.path)/fifa-openapi/openapi.json)
               yq -i '.data."openapi.json" = env(CONTENT)' $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
               cat $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
