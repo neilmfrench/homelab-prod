@@ -40,6 +40,17 @@ data:
             }
           }
         },
+        "/new-test": {
+          "get": {
+            "tags": ["test"],
+            "summary": "Test",
+            "responses": {
+              "200": {
+                "description": "successful operation"
+              }
+            }
+          }
+        },
         "/countries": {
           "get": {
             "tags": ["countries"],
