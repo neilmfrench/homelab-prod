@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: openapi-config
+  name: fifa-openapi-configmap
   namespace: development
 data:
   openapi.json: |

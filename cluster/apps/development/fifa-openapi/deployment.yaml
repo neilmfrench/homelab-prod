@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: fifa-openapi
   namespace: development
+  annotations:
+    configmap.reloader.stakater.com/reload: "fifa-openapi-configmap"
   labels:
     app: fifa-openapi
 spec:
