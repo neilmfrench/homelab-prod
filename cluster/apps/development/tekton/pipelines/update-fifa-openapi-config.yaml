@@ -37,7 +37,7 @@ spec:
             image: docker.io/alpine/git:v2.26.2@sha256:23618034b0be9205d9cc0846eb711b12ba4c9b468efdd8a59aac1d7b1a23363f
             workingDir: $(workspaces.source.path)
             script: |
-              git -C fifa-openapi rev-parse HEAD | tee $(results.fifa-openapi-commit-id.path)
+              printf "%s" "$(git -C fifa-openapi rev-parse HEAD)" | tee $(results.fifa-openapi-commit-id.path)
     - name: update-openapi-configmap
       runAfter: ["set-commit-id"] # Wait until the clone is done before reading the readme.
       workspaces:
