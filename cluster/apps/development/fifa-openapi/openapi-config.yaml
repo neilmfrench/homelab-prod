@@ -22,9 +22,24 @@ data:
         {
           "name": "countries",
           "description": "Countries known to have participated in FIFA competitions"
+        },
+        {
+          "name": "test",
+          "description": "test"
         }
       ],
       "paths": {
+        "/test": {
+          "get": {
+            "tags": ["test"],
+            "summary": "Test",
+            "responses": {
+              "200": {
+                "description": "successful operation"
+              }
+            }
+          }
+        },
         "/countries": {
           "get": {
             "tags": ["countries"],
