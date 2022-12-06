@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - proj-housekeeping-scraper-trigger-template.yaml
   - proj-leagues-pocketbase-trigger-template.yaml
+  - proj-fifa-openapi-trigger-template.yaml

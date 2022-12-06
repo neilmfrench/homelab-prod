@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - gitea-eventlistener.yaml
   - leagues-pocketbase-eventlistener.yaml
+  - fifa-openapi-eventlistener.yaml
