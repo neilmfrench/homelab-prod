@@ -48,14 +48,14 @@ spec:
           - name: source
         steps:
           - image: mikefarah/yq:4.30.5
+            workingDir: $(workspaces.source.path)
             securityContext:
               runAsUser: 0
               runAsNonRoot: false
             script: |
               /usr/bin/env sh
               set -e
-              export CONTENT=$(cat $(workspaces.source.path)/fifa-openapi/openapi.json)
-              yq -i '.data."openapi.json" = env(CONTENT)' $(workspaces.source.path)/homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
+              yq -i '.data."openapi.json" = loadstr("fifa-openapi/openapi.json")' homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
     - name: push-updated-config
       runAfter: ["update-openapi-configmap"]
       taskRef:
