@@ -33,7 +33,7 @@ spec:
       volumes:
         - name: openapi-config
           configMap:
-            name: openapi-config
+            name: fifa-openapi-configmap
             items:
               - key: openapi.json
                 path: openapi.json
