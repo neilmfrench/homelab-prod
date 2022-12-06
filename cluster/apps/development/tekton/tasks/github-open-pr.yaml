@@ -114,7 +114,7 @@ spec:
         open_pr_url = "$(params.API_PATH_PREFIX)" + "/repos/$(params.REPO_FULL_NAME)/pulls"
 
         data = {
-            "head": "$(params.HEAD)",
+            "head": """$(params.HEAD)""",
             "base": "$(params.BASE)",
             "title": "$(params.TITLE)",
             "body": """$(params.BODY)"""
