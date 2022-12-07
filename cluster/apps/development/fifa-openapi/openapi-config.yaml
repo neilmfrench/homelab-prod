@@ -11,7 +11,7 @@ data:
       "info": {
         "title": "FIFA.com OpenAPI Spec",
         "description": "OpenAPI Spec for https://api.fifa.com",
-        "version": "0.0.1"
+        "version": "0.0.2"
       },
       "servers": [
         {
@@ -24,37 +24,65 @@ data:
           "description": "Countries known to have participated in FIFA competitions"
         },
         {
-          "name": "test",
-          "description": "test"
+          "name": "teams",
+          "description": "Teams in FIFA competitions"
+        },
+        {
+          "name": "players",
+          "description": "Players in FIFA competitions"
         }
       ],
       "paths": {
-        "/test": {
+        "/players/{id}": {
           "get": {
-            "tags": ["test"],
-            "summary": "Test",
+            "tags": ["players"],
+            "summary": "Get player by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 229397
+                },
+                "description": "The player ID"
+              },
+              {
+                "name": "language",
+                "in": "query",
+                "description": "Language code (defaults to en-GB if not set)",
+                "required": false,
+                "schema": {
+                  "$ref": "#/components/schemas/Locale"
+                }
+              }
+            ],
             "responses": {
               "200": {
-                "description": "successful operation"
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/Player"
+                        },
+                        {
+                          "$ref": "#/components/schemas/BaseResult"
+                        }
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
         },
-        "/new-test": {
+        "/players/all": {
           "get": {
-            "tags": ["test"],
-            "summary": "Test",
-            "responses": {
-              "200": {
-                "description": "successful operation"
-              }
-            }
-          }
-        },
-        "/countries": {
-          "get": {
-            "tags": ["countries"],
-            "summary": "List all countries",
+            "tags": ["players"],
+            "summary": "Get all players",
             "parameters": [
               {
                 "name": "x-mdp-continuation-token",
@@ -109,7 +137,261 @@ data:
                             "Results": {
                               "type": "array",
                               "items": {
-                                "$ref": "#/components/schemas/Country"
+                                "allOf": [
+                                  {
+                                    "$ref": "#/components/schemas/Player"
+                                  },
+                                  {
+                                    "$ref": "#/components/schemas/BaseResult"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/teams/{id}": {
+          "get": {
+            "tags": ["teams"],
+            "summary": "Get team by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 43922
+                },
+                "description": "The team ID"
+              },
+              {
+                "name": "language",
+                "in": "query",
+                "description": "Language code (defaults to en-GB if not set)",
+                "required": false,
+                "schema": {
+                  "$ref": "#/components/schemas/Locale"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/Team"
+                        },
+                        {
+                          "$ref": "#/components/schemas/BaseResult"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/teams/all": {
+          "get": {
+            "tags": ["teams"],
+            "summary": "Get all teams",
+            "parameters": [
+              {
+                "name": "x-mdp-continuation-token",
+                "in": "header",
+                "description": "Pagination continuation token",
+                "required": false,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "language",
+                "in": "query",
+                "description": "Language code (defaults to en-GB if not set)",
+                "required": false,
+                "schema": {
+                  "$ref": "#/components/schemas/Locale"
+                }
+              },
+              {
+                "name": "count",
+                "in": "query",
+                "description": "Number of results per page",
+                "required": false,
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "continuationhash",
+                "in": "query",
+                "description": "Pagination continuation hash. Must be used with x-mdp-continuation-token header",
+                "required": false,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "allOf": [
+                                  {
+                                    "$ref": "#/components/schemas/Team"
+                                  },
+                                  {
+                                    "$ref": "#/components/schemas/BaseResult"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/countries/{id}": {
+          "get": {
+            "tags": ["countries"],
+            "summary": "Get country by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The country ID"
+              },
+              {
+                "name": "language",
+                "in": "query",
+                "description": "Language code (defaults to en-GB if not set)",
+                "required": false,
+                "schema": {
+                  "$ref": "#/components/schemas/Locale"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/Country"
+                        },
+                        {
+                          "$ref": "#/components/schemas/BaseResult"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/countries": {
+          "get": {
+            "tags": ["countries"],
+            "summary": "Get all countries",
+            "parameters": [
+              {
+                "name": "x-mdp-continuation-token",
+                "in": "header",
+                "description": "Pagination continuation token",
+                "required": false,
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "language",
+                "in": "query",
+                "description": "Language code (defaults to en-GB if not set)",
+                "required": false,
+                "schema": {
+                  "$ref": "#/components/schemas/Locale"
+                }
+              },
+              {
+                "name": "count",
+                "in": "query",
+                "description": "Number of results per page",
+                "required": false,
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "continuationhash",
+                "in": "query",
+                "description": "Pagination continuation hash. Must be used with x-mdp-continuation-token header",
+                "required": false,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "allOf": [
+                                  {
+                                    "$ref": "#/components/schemas/Country"
+                                  },
+                                  {
+                                    "$ref": "#/components/schemas/BaseResult"
+                                  }
+                                ]
                               }
                             }
                           }
@@ -157,6 +439,18 @@ data:
               }
             }
           },
+          "BaseResult": {
+            "type": "object",
+            "properties": {
+              "Properties": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "IsUpdateable": {
+                "type": "boolean"
+              }
+            }
+          },
           "LocalizedObject": {
             "type": "object",
             "properties": {
@@ -165,6 +459,169 @@ data:
               },
               "Description": {
                 "type": "string"
+              }
+            }
+          },
+          "Player": {
+            "type": "object",
+            "properties": {
+              "IdPlayer": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Alias": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "BirthDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "Weight": {
+                "type": "number",
+                "format": "double"
+              },
+              "Height": {
+                "type": "number",
+                "format": "double"
+              },
+              "BirthPlace": {
+                "type": "string"
+              },
+              "IdCountry": {
+                "type": "string"
+              },
+              "InternationalCaps": {
+                "type": "integer"
+              },
+              "InternationalDebut": {
+                "type": "string"
+              },
+              "TopCompetitionDebut": {
+                "type": "string"
+              },
+              "PictureUrl": {
+                "type": "string"
+              },
+              "ThumbnailUrl": {
+                "type": "string"
+              },
+              "TwitterAccount": {
+                "type": "string"
+              },
+              "PreferredFoot": {
+                "type": "string"
+              },
+              "MediaContent": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "LocalizedTwitterAccounts": {
+                "type": "string"
+              },
+              "Goals": {
+                "type": "integer"
+              },
+              "PlayerPicture": {
+                "type": "string"
+              }
+            }
+          },
+          "Team": {
+            "type": "object",
+            "properties": {
+              "IdTeam": {
+                "type": "string"
+              },
+              "IdConfederation": {
+                "type": "string"
+              },
+              "Type": {
+                "type": "integer"
+              },
+              "AgeType": {
+                "type": "integer"
+              },
+              "FootballType": {
+                "type": "integer"
+              },
+              "Gender": {
+                "type": "integer"
+              },
+              "Name": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "IdAssociation": {
+                "type": "string"
+              },
+              "IdCity": {
+                "type": "string"
+              },
+              "Headquarters": {
+                "type": "string"
+              },
+              "TrainingCentre": {
+                "type": "string"
+              },
+              "OfficialSite": {
+                "type": "string"
+              },
+              "City": {
+                "type": "string"
+              },
+              "IdCountry": {
+                "type": "string"
+              },
+              "PostalCode": {
+                "type": "string"
+              },
+              "RegionName": {
+                "type": "string"
+              },
+              "ShortClubName": {
+                "type": "string"
+              },
+              "Abbreviation": {
+                "type": "string"
+              },
+              "Street": {
+                "type": "string"
+              },
+              "FoundationYear": {
+                "type": "integer"
+              },
+              "Stadium": {
+                "type": "string"
+              },
+              "PictureUrl": {
+                "type": "string"
+              },
+              "ThumbnailUrl": {
+                "type": "string"
+              },
+              "DisplayName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Content": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -194,13 +651,6 @@ data:
               },
               "StatsPerformId": {
                 "type": "string"
-              },
-              "Properties": {
-                "type": "object",
-                "additionalProperties": true
-              },
-              "IsUpdateable": {
-                "type": "boolean"
               }
             }
           }
