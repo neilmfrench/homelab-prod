@@ -20,10 +20,10 @@ spec:
     crds: Create
     remediation:
       retries: 3
-  # upgrade:
-  #   crds: CreateReplace
-  #   remediation:
-  #     retries: 3
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 3
   values:
     alertmanager:
       config:
