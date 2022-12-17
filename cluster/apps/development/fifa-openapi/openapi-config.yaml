@@ -11,7 +11,7 @@ data:
       "info": {
         "title": "FIFA.com OpenAPI Spec",
         "description": "OpenAPI Spec for https://api.fifa.com",
-        "version": "0.0.2"
+        "version": "0.0.3"
       },
       "servers": [
         {
@@ -30,32 +30,71 @@ data:
         {
           "name": "players",
           "description": "Players in FIFA competitions"
+        },
+        {
+          "name": "coaches",
+          "description": "Coaches in FIFA competitions"
+        },
+        {
+          "name": "competitions",
+          "description": "FIFA Competitions"
+        },
+        {
+          "name": "seasons",
+          "description": "Seasons in FIFA competitions"
+        },
+        {
+          "name": "stats",
+          "description": "FIFA player stats"
+        },
+        {
+          "name": "stages",
+          "description": "Stages of FIFA competitions"
+        },
+        {
+          "name": "stadiums",
+          "description": "FIFA stadiums"
+        },
+        {
+          "name": "calendar",
+          "description": "FIFA match information"
+        },
+        {
+          "name": "statistics",
+          "description": "FIFA competition statistics"
         }
       ],
       "paths": {
-        "/players/{id}": {
+        "/statistics/headtohead/{teamAID}/{teamBID}": {
           "get": {
-            "tags": ["players"],
-            "summary": "Get player by ID",
+            "tags": ["statistics"],
+            "summary": "Get head to head statistics for two teams",
             "parameters": [
               {
                 "in": "path",
-                "name": "id",
+                "name": "teamAID",
                 "required": true,
                 "schema": {
                   "type": "string",
-                  "example": 229397
+                  "example": 43946
                 },
-                "description": "The player ID"
+                "description": "ID of first team to compare"
               },
               {
-                "name": "language",
-                "in": "query",
-                "description": "Language code (defaults to en-GB if not set)",
-                "required": false,
+                "in": "path",
+                "name": "teamBID",
+                "required": true,
                 "schema": {
-                  "$ref": "#/components/schemas/Locale"
-                }
+                  "type": "string",
+                  "example": 43922
+                },
+                "description": "ID of second team to compare"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
               }
             ],
             "responses": {
@@ -64,14 +103,7 @@ data:
                 "content": {
                   "application/json": {
                     "schema": {
-                      "allOf": [
-                        {
-                          "$ref": "#/components/schemas/Player"
-                        },
-                        {
-                          "$ref": "#/components/schemas/BaseResult"
-                        }
-                      ]
+                      "$ref": "#/components/schemas/HeadToHeadStats"
                     }
                   }
                 }
@@ -79,46 +111,52 @@ data:
             }
           }
         },
-        "/players/all": {
+        "/calendar/{competitionId}/{seasonId}/{stageId}/standing": {
           "get": {
-            "tags": ["players"],
-            "summary": "Get all players",
+            "tags": ["calendar"],
+            "summary": "Get standings for a stage in a season of a competition",
             "parameters": [
               {
-                "name": "x-mdp-continuation-token",
-                "in": "header",
-                "description": "Pagination continuation token",
-                "required": false,
+                "in": "path",
+                "name": "competitionId",
+                "required": true,
                 "schema": {
-                  "type": "string"
-                }
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
               },
               {
-                "name": "language",
-                "in": "query",
-                "description": "Language code (defaults to en-GB if not set)",
-                "required": false,
+                "in": "path",
+                "name": "seasonId",
+                "required": true,
                 "schema": {
-                  "$ref": "#/components/schemas/Locale"
-                }
+                  "type": "string",
+                  "example": 255711
+                },
+                "description": "The season ID"
               },
               {
-                "name": "count",
-                "in": "query",
-                "description": "Number of results per page",
-                "required": false,
+                "in": "path",
+                "name": "stageId",
+                "required": true,
                 "schema": {
-                  "type": "integer"
-                }
+                  "type": "string",
+                  "example": 285063
+                },
+                "description": "The stage ID"
               },
               {
-                "name": "continuationhash",
-                "in": "query",
-                "description": "Pagination continuation hash. Must be used with x-mdp-continuation-token header",
-                "required": false,
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
               }
             ],
             "responses": {
@@ -137,14 +175,649 @@ data:
                             "Results": {
                               "type": "array",
                               "items": {
-                                "allOf": [
-                                  {
-                                    "$ref": "#/components/schemas/Player"
-                                  },
-                                  {
-                                    "$ref": "#/components/schemas/BaseResult"
-                                  }
-                                ]
+                                "$ref": "#/components/schemas/Stadium"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/calendar/matches": {
+          "get": {
+            "tags": ["calendar"],
+            "summary": "Get all matches",
+            "parameters": [
+              {
+                "name": "idSeason",
+                "in": "query",
+                "description": "The season ID",
+                "schema": {
+                  "type": "integer",
+                  "example": 255711
+                }
+              },
+              {
+                "in": "query",
+                "name": "idCompetition",
+                "schema": {
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
+              },
+              {
+                "in": "query",
+                "name": "idTeam",
+                "schema": {
+                  "type": "string",
+                  "example": 43922
+                },
+                "description": "The team ID"
+              },
+              {
+                "in": "query",
+                "name": "idStage",
+                "schema": {
+                  "type": "string",
+                  "example": 285077
+                },
+                "description": "The stage ID"
+              },
+              {
+                "in": "query",
+                "name": "idGroup",
+                "schema": {
+                  "type": "string",
+                  "example": 401
+                },
+                "description": "The group ID"
+              },
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Match"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/stadiums/{id}": {
+          "get": {
+            "tags": ["stadiums"],
+            "summary": "Get stadium by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 400222216
+                },
+                "description": "The stadium ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Stadium"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/stadiums": {
+          "get": {
+            "tags": ["stadiums"],
+            "summary": "Get all stadiums",
+            "parameters": [
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Stadium"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/stages/id/{id}": {
+          "get": {
+            "tags": ["stages"],
+            "summary": "Get stage by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 285077
+                },
+                "description": "The stage ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Stage"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/stages": {
+          "get": {
+            "tags": ["stages"],
+            "summary": "Get all stages",
+            "parameters": [
+              {
+                "name": "idSeason",
+                "in": "query",
+                "description": "The season ID",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "example": 255711
+                }
+              },
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Stage"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/seasons/{id}": {
+          "get": {
+            "tags": ["seasons"],
+            "summary": "Get season by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 255711
+                },
+                "description": "The season ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Season"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/seasons/{competitionId}/{id}": {
+          "get": {
+            "deprecated": true,
+            "tags": ["seasons"],
+            "summary": "Get season by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "competitionId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
+              },
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 255711
+                },
+                "description": "The season ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Season"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/seasons": {
+          "get": {
+            "tags": ["seasons"],
+            "summary": "Get all seasons",
+            "parameters": [
+              {
+                "name": "idCompetition",
+                "in": "query",
+                "description": "The competition ID",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "example": 17
+                }
+              },
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Season"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/competitions/{id}": {
+          "get": {
+            "tags": ["competitions"],
+            "summary": "Get competition by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Competition"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/competitions/all": {
+          "get": {
+            "tags": ["competitions"],
+            "summary": "Get all competitions",
+            "parameters": [
+              {
+                "name": "gender",
+                "in": "query",
+                "description": "Filter by gender",
+                "required": false,
+                "schema": {
+                  "type": "string",
+                  "enum": ["1", "2"]
+                },
+                "examples": {
+                  "one": {
+                    "value": "1",
+                    "summary": "Men's competitions"
+                  },
+                  "two": {
+                    "value": "2",
+                    "summary": "Women's competitions"
+                  }
+                }
+              },
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Competition"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/topseasonplayerstatistics/season/{id}/topscorers": {
+          "get": {
+            "tags": ["stats"],
+            "summary": "Get top scorers for for a season, sorted by goals scored (desc.)",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 254645
+                },
+                "description": "The season ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/PlayersSeasonStats"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/coaches/{id}": {
+          "get": {
+            "tags": ["coaches"],
+            "summary": "Get coach by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 183380
+                },
+                "description": "The coach ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Coach"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/players/{id}": {
+          "get": {
+            "tags": ["players"],
+            "summary": "Get player by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 229397
+                },
+                "description": "The player ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Player"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/players/all": {
+          "get": {
+            "tags": ["players"],
+            "summary": "Get all players",
+            "parameters": [
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Player"
                               }
                             }
                           }
@@ -173,13 +846,7 @@ data:
                 "description": "The team ID"
               },
               {
-                "name": "language",
-                "in": "query",
-                "description": "Language code (defaults to en-GB if not set)",
-                "required": false,
-                "schema": {
-                  "$ref": "#/components/schemas/Locale"
-                }
+                "$ref": "#/components/parameters/languageParam"
               }
             ],
             "responses": {
@@ -188,14 +855,60 @@ data:
                 "content": {
                   "application/json": {
                     "schema": {
-                      "allOf": [
-                        {
-                          "$ref": "#/components/schemas/Team"
-                        },
-                        {
-                          "$ref": "#/components/schemas/BaseResult"
-                        }
-                      ]
+                      "$ref": "#/components/schemas/Team"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/teams/{id}/squad": {
+          "get": {
+            "tags": ["teams"],
+            "summary": "Get team squad for tournament",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "id",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 43922
+                },
+                "description": "The team ID"
+              },
+              {
+                "name": "idCompetition",
+                "in": "query",
+                "description": "The competition ID",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "example": 17
+                }
+              },
+              {
+                "name": "idSeason",
+                "in": "query",
+                "description": "The season ID",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "example": 255711
+                }
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/TeamCompetitionDetails"
                     }
                   }
                 }
@@ -209,40 +922,16 @@ data:
             "summary": "Get all teams",
             "parameters": [
               {
-                "name": "x-mdp-continuation-token",
-                "in": "header",
-                "description": "Pagination continuation token",
-                "required": false,
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/parameters/continuationTokenHeader"
               },
               {
-                "name": "language",
-                "in": "query",
-                "description": "Language code (defaults to en-GB if not set)",
-                "required": false,
-                "schema": {
-                  "$ref": "#/components/schemas/Locale"
-                }
+                "$ref": "#/components/parameters/continuationHashParam"
               },
               {
-                "name": "count",
-                "in": "query",
-                "description": "Number of results per page",
-                "required": false,
-                "schema": {
-                  "type": "integer"
-                }
+                "$ref": "#/components/parameters/countParam"
               },
               {
-                "name": "continuationhash",
-                "in": "query",
-                "description": "Pagination continuation hash. Must be used with x-mdp-continuation-token header",
-                "required": false,
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/parameters/languageParam"
               }
             ],
             "responses": {
@@ -261,14 +950,7 @@ data:
                             "Results": {
                               "type": "array",
                               "items": {
-                                "allOf": [
-                                  {
-                                    "$ref": "#/components/schemas/Team"
-                                  },
-                                  {
-                                    "$ref": "#/components/schemas/BaseResult"
-                                  }
-                                ]
+                                "$ref": "#/components/schemas/Team"
                               }
                             }
                           }
@@ -296,13 +978,7 @@ data:
                 "description": "The country ID"
               },
               {
-                "name": "language",
-                "in": "query",
-                "description": "Language code (defaults to en-GB if not set)",
-                "required": false,
-                "schema": {
-                  "$ref": "#/components/schemas/Locale"
-                }
+                "$ref": "#/components/parameters/languageParam"
               }
             ],
             "responses": {
@@ -311,14 +987,7 @@ data:
                 "content": {
                   "application/json": {
                     "schema": {
-                      "allOf": [
-                        {
-                          "$ref": "#/components/schemas/Country"
-                        },
-                        {
-                          "$ref": "#/components/schemas/BaseResult"
-                        }
-                      ]
+                      "$ref": "#/components/schemas/Country"
                     }
                   }
                 }
@@ -332,40 +1001,16 @@ data:
             "summary": "Get all countries",
             "parameters": [
               {
-                "name": "x-mdp-continuation-token",
-                "in": "header",
-                "description": "Pagination continuation token",
-                "required": false,
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/parameters/continuationTokenHeader"
               },
               {
-                "name": "language",
-                "in": "query",
-                "description": "Language code (defaults to en-GB if not set)",
-                "required": false,
-                "schema": {
-                  "$ref": "#/components/schemas/Locale"
-                }
+                "$ref": "#/components/parameters/continuationHashParam"
               },
               {
-                "name": "count",
-                "in": "query",
-                "description": "Number of results per page",
-                "required": false,
-                "schema": {
-                  "type": "integer"
-                }
+                "$ref": "#/components/parameters/countParam"
               },
               {
-                "name": "continuationhash",
-                "in": "query",
-                "description": "Pagination continuation hash. Must be used with x-mdp-continuation-token header",
-                "required": false,
-                "schema": {
-                  "type": "string"
-                }
+                "$ref": "#/components/parameters/languageParam"
               }
             ],
             "responses": {
@@ -384,14 +1029,7 @@ data:
                             "Results": {
                               "type": "array",
                               "items": {
-                                "allOf": [
-                                  {
-                                    "$ref": "#/components/schemas/Country"
-                                  },
-                                  {
-                                    "$ref": "#/components/schemas/BaseResult"
-                                  }
-                                ]
+                                "$ref": "#/components/schemas/Country"
                               }
                             }
                           }
@@ -406,7 +1044,77 @@ data:
         }
       },
       "components": {
+        "parameters": {
+          "languageParam": {
+            "name": "language",
+            "in": "query",
+            "description": "Language code (defaults to en-GB if not set)",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Locale"
+            }
+          },
+          "continuationHashParam": {
+            "name": "continuationhash",
+            "in": "query",
+            "description": "Pagination continuation hash. Must be used with x-mdp-continuation-token header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "countParam": {
+            "name": "count",
+            "in": "query",
+            "description": "Number of results per page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "continuationTokenHeader": {
+            "name": "x-mdp-continuation-token",
+            "in": "header",
+            "description": "Pagination continuation token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
         "schemas": {
+          "PlayerPositionMapping": {
+            "type": "object",
+            "properties": {
+              "Goalkeeper": {
+                "enum": [0]
+              },
+              "Defender": {
+                "enum": [1]
+              },
+              "Midfielder": {
+                "enum": [2]
+              },
+              "Forward": {
+                "enum": [3]
+              },
+              "Unknown": {
+                "enum": [4]
+              },
+              "Wing": {
+                "enum": [5]
+              },
+              "Pivot": {
+                "enum": [6]
+              },
+              "VAR": {
+                "enum": [7]
+              },
+              "Substitution": {
+                "enum": [8]
+              }
+            }
+          },
           "Locale": {
             "type": "string",
             "enum": [
@@ -439,7 +1147,7 @@ data:
               }
             }
           },
-          "BaseResult": {
+          "BaseModel": {
             "type": "object",
             "properties": {
               "Properties": {
@@ -447,7 +1155,8 @@ data:
                 "additionalProperties": true
               },
               "IsUpdateable": {
-                "type": "boolean"
+                "type": "boolean",
+                "nullable": true
               }
             }
           },
@@ -462,11 +1171,109 @@ data:
               }
             }
           },
-          "Player": {
+          "PlayerStatsPlayerDetails": {
             "type": "object",
             "properties": {
               "IdPlayer": {
                 "type": "string"
+              },
+              "IdCountry": {
+                "type": "string"
+              },
+              "PlayerName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "IdTeam": {
+                "type": "string"
+              },
+              "TeamType": {
+                "type": "integer"
+              }
+            }
+          },
+          "PlayerSeasonStats": {
+            "type": "object",
+            "properties": {
+              "PlayerInfo": {
+                "$ref": "#/components/schemas/PlayerStatsPlayerDetails"
+              },
+              "Total": {
+                "type": "integer"
+              },
+              "Rank": {
+                "type": "integer"
+              },
+              "MatchesPlayed": {
+                "type": "integer"
+              },
+              "ActualMinutesPlayed": {
+                "type": "integer",
+                "nullable": true
+              },
+              "MatchesStarted": {
+                "type": "integer",
+                "nullable": true
+              },
+              "GoalsScored": {
+                "type": "integer"
+              },
+              "Assists": {
+                "type": "integer"
+              },
+              "GoalsScoredOnPenalty": {
+                "type": "integer"
+              },
+              "GoalsScoredByLeftFoot": {
+                "type": "integer"
+              },
+              "GoalsScoredByRightFoot": {
+                "type": "integer"
+              },
+              "GoalsScoredByHead": {
+                "type": "integer"
+              },
+              "GoalsScoredByBackheel": {
+                "type": "integer"
+              },
+              "GoalsScoredByOtherPartOfBody": {
+                "type": "integer"
+              },
+              "TotalAttempts": {
+                "type": "integer"
+              },
+              "AttemptsOnTarget": {
+                "type": "integer"
+              }
+            }
+          },
+          "Picture": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "string"
+              },
+              "PictureUrl": {
+                "type": "string"
+              }
+            }
+          },
+          "MatchOfficial": {
+            "type": "object",
+            "properties": {
+              "IdCountry": {
+                "type": "string"
+              },
+              "OfficialId": {
+                "type": "string"
+              },
+              "NameShort": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
               },
               "Name": {
                 "type": "array",
@@ -474,82 +1281,81 @@ data:
                   "$ref": "#/components/schemas/LocalizedObject"
                 }
               },
-              "Alias": {
+              "OfficialType": {
+                "type": "integer"
+              },
+              "TypeLocalized": {
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/LocalizedObject"
                 }
-              },
-              "BirthDate": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "Weight": {
-                "type": "number",
-                "format": "double"
-              },
-              "Height": {
-                "type": "number",
-                "format": "double"
-              },
-              "BirthPlace": {
-                "type": "string"
-              },
-              "IdCountry": {
-                "type": "string"
-              },
-              "InternationalCaps": {
-                "type": "integer"
-              },
-              "InternationalDebut": {
-                "type": "string"
-              },
-              "TopCompetitionDebut": {
-                "type": "string"
-              },
-              "PictureUrl": {
-                "type": "string"
-              },
-              "ThumbnailUrl": {
-                "type": "string"
-              },
-              "TwitterAccount": {
-                "type": "string"
-              },
-              "PreferredFoot": {
-                "type": "string"
-              },
-              "MediaContent": {
+              }
+            }
+          },
+          "MatchBallPossession": {
+            "type": "object",
+            "properties": {
+              "Intervals": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
-              "LocalizedTwitterAccounts": {
-                "type": "string"
+              "LastX": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "Goals": {
-                "type": "integer"
+              "OverallHome": {
+                "type": "number",
+                "format": "double"
               },
-              "PlayerPicture": {
-                "type": "string"
+              "OverallAway": {
+                "type": "number",
+                "format": "double"
               }
             }
           },
-          "Team": {
+          "MatchTeam": {
             "type": "object",
             "properties": {
+              "Score": {
+                "type": "integer"
+              },
+              "Side": {
+                "type": "string",
+                "nullable": true
+              },
               "IdTeam": {
                 "type": "string"
               },
-              "IdConfederation": {
+              "PictureUrl": {
                 "type": "string"
               },
-              "Type": {
+              "IdCountry": {
+                "type": "string"
+              },
+              "Tactics": {
+                "type": "string"
+              },
+              "TeamType": {
                 "type": "integer"
               },
               "AgeType": {
                 "type": "integer"
+              },
+              "TeamName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Abbreviation": {
+                "type": "string"
+              },
+              "ShortClubName": {
+                "type": "string"
               },
               "FootballType": {
                 "type": "integer"
@@ -557,102 +1363,1345 @@ data:
               "Gender": {
                 "type": "integer"
               },
-              "Name": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/LocalizedObject"
-                }
-              },
               "IdAssociation": {
                 "type": "string"
-              },
-              "IdCity": {
+              }
+            }
+          },
+          "MatchWeather": {
+            "type": "object",
+            "properties": {
+              "Humidity": {
                 "type": "string"
               },
-              "Headquarters": {
+              "Temperature": {
                 "type": "string"
               },
-              "TrainingCentre": {
+              "WindSpeed": {
                 "type": "string"
               },
-              "OfficialSite": {
-                "type": "string"
-              },
-              "City": {
-                "type": "string"
-              },
-              "IdCountry": {
-                "type": "string"
-              },
-              "PostalCode": {
-                "type": "string"
-              },
-              "RegionName": {
-                "type": "string"
-              },
-              "ShortClubName": {
-                "type": "string"
-              },
-              "Abbreviation": {
-                "type": "string"
-              },
-              "Street": {
-                "type": "string"
-              },
-              "FoundationYear": {
+              "Type": {
                 "type": "integer"
               },
-              "Stadium": {
-                "type": "string"
-              },
-              "PictureUrl": {
-                "type": "string"
-              },
-              "ThumbnailUrl": {
-                "type": "string"
-              },
-              "DisplayName": {
+              "TypeLocalized": {
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/LocalizedObject"
-                }
-              },
-              "Content": {
-                "type": "array",
-                "items": {
-                  "type": "string"
                 }
               }
             }
           },
-          "Country": {
+          "MatchResult": {
             "type": "object",
             "properties": {
-              "IdCountry": {
+              "IdMatch": {
                 "type": "string"
               },
-              "Name": {
+              "StartTime": {
+                "type": "string",
+                "format": "datetime"
+              },
+              "Result": {
+                "type": "integer"
+              },
+              "IdGroup": {
                 "type": "string"
               },
-              "Iso3166Alpha2": {
+              "IdStage": {
                 "type": "string"
               },
-              "Iso3166Alpha3": {
+              "HomeTeamScore": {
+                "type": "integer"
+              },
+              "AwayTeamScore": {
+                "type": "integer"
+              },
+              "HomeTeamPenaltyScore": {
+                "type": "integer"
+              },
+              "AwayTeamPenaltyScore": {
+                "type": "integer"
+              },
+              "HomeTeamId": {
                 "type": "string"
               },
-              "Alias": {
+              "AwayTeamId": {
+                "type": "string"
+              }
+            }
+          },
+          "TeamHeadToHeadSummary": {
+            "type": "object",
+            "properties": {
+              "IdTeam": {
+                "type": "string"
+              },
+              "TeamName": {
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/LocalizedObject"
                 }
               },
-              "GracenoteCode": {
+              "PictureUrl": {
                 "type": "string"
               },
-              "StatsPerformId": {
+              "IdCountry": {
                 "type": "string"
+              },
+              "MatchesPlayed": {
+                "type": "integer"
+              },
+              "Wins": {
+                "type": "integer"
+              },
+              "Losses": {
+                "type": "integer"
+              },
+              "Draws": {
+                "type": "integer"
+              },
+              "GoalsScored": {
+                "type": "integer"
+              },
+              "GoalsAgainst": {
+                "type": "integer"
               }
             }
+          },
+          "HeadToHeadMatch": {
+            "type": "object",
+            "properties": {
+              "IdCompetition": {
+                "type": "string"
+              },
+              "IdSeason": {
+                "type": "string"
+              },
+              "IdStage": {
+                "type": "string"
+              },
+              "IdGroup": {
+                "type": "string"
+              },
+              "IdMatch": {
+                "type": "string"
+              },
+              "MatchDay": {
+                "type": "integer"
+              },
+              "StageName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "GroupName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "CompetitionName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Date": {
+                "type": "string",
+                "format": "datetime"
+              },
+              "LocalDate": {
+                "type": "string",
+                "format": "datetime"
+              },
+              "Home": {
+                "$ref": "#/components/schemas/MatchTeam"
+              },
+              "Away": {
+                "$ref": "#/components/schemas/MatchTeam"
+              },
+              "HomeTeamScore": {
+                "type": "integer"
+              },
+              "AwayTeamScore": {
+                "type": "integer"
+              },
+              "AggregateHomeTeamScore": {
+                "type": "integer",
+                "nullable": true
+              },
+              "AggregateAwayTeamScore": {
+                "type": "integer",
+                "nullable": true
+              },
+              "HomeTeamPenaltyScore": {
+                "type": "integer"
+              },
+              "AwayTeamPenaltyScore": {
+                "type": "integer"
+              },
+              "LastPeriodUpdate": {
+                "type": "integer",
+                "nullable": true
+              },
+              "IsHomeMatch": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "Stadium": {
+                "$ref": "#/components/schemas/Stadium"
+              },
+              "MatchTime": {
+                "type": "string"
+              },
+              "SecondHalfTime": {
+                "type": "string",
+                "nullable": true
+              },
+              "FirstHalfTime": {
+                "type": "string",
+                "nullable": true
+              },
+              "FirstHalfExtraTime": {
+                "type": "string",
+                "nullable": true
+              },
+              "SecondHalfExtraTime": {
+                "type": "string",
+                "nullable": true
+              },
+              "Winner": {
+                "type": "string"
+              },
+              "PlaceHolderA": {
+                "type": "string"
+              },
+              "PlaceHolderB": {
+                "type": "string"
+              },
+              "MatchStatus": {
+                "type": "integer"
+              },
+              "ResultType": {
+                "type": "integer"
+              },
+              "MatchNumber": {
+                "type": "integer"
+              },
+              "OfficialityStatus": {
+                "type": "integer"
+              }
+            }
+          },
+          "HeadToHeadStats": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "TeamA": {
+                    "$ref": "#/components/schemas/TeamHeadToHeadSummary"
+                  },
+                  "TeamB": {
+                    "$ref": "#/components/schemas/TeamHeadToHeadSummary"
+                  },
+                  "MatchesList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/HeadToHeadMatch"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "CompetitionStageStandings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "MatchDay": {
+                    "type": "integer"
+                  },
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "IdStage": {
+                    "type": "string"
+                  },
+                  "IdGroup": {
+                    "type": "string"
+                  },
+                  "IdTeam": {
+                    "type": "string"
+                  },
+                  "Date": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "Group": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Won": {
+                    "type": "integer"
+                  },
+                  "Lost": {
+                    "type": "integer"
+                  },
+                  "Drawn": {
+                    "type": "integer"
+                  },
+                  "Played": {
+                    "type": "integer"
+                  },
+                  "HomeWon": {
+                    "type": "integer"
+                  },
+                  "HomeLost": {
+                    "type": "integer"
+                  },
+                  "HomeDrawn": {
+                    "type": "integer"
+                  },
+                  "HomePlayed": {
+                    "type": "integer"
+                  },
+                  "AwayWon": {
+                    "type": "integer"
+                  },
+                  "AwayLost": {
+                    "type": "integer"
+                  },
+                  "AwayDrawn": {
+                    "type": "integer"
+                  },
+                  "AwayPlayed": {
+                    "type": "integer"
+                  },
+                  "Against": {
+                    "type": "integer"
+                  },
+                  "For": {
+                    "type": "integer"
+                  },
+                  "HomeAgainst": {
+                    "type": "integer"
+                  },
+                  "HomeFor": {
+                    "type": "integer"
+                  },
+                  "AwayAgainst": {
+                    "type": "integer"
+                  },
+                  "AwayFor": {
+                    "type": "integer"
+                  },
+                  "Position": {
+                    "type": "integer"
+                  },
+                  "HomePosition": {
+                    "type": "integer"
+                  },
+                  "AwayPosition": {
+                    "type": "integer"
+                  },
+                  "Points": {
+                    "type": "integer"
+                  },
+                  "HomePoints": {
+                    "type": "integer"
+                  },
+                  "AwayPoints": {
+                    "type": "integer"
+                  },
+                  "PreviousPosition": {
+                    "type": "integer"
+                  },
+                  "GoalsDiference": {
+                    "type": "integer"
+                  },
+                  "Team": {
+                    "$ref": "#/components/schemas/Team"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "EndDate": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "FairPlayCoefficient": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "WinByExtraTime": {
+                    "type": "integer"
+                  },
+                  "WinByPenalty": {
+                    "type": "integer"
+                  },
+                  "MatchResults": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MatchResult"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "Match": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "IdStage": {
+                    "type": "string"
+                  },
+                  "IdGroup": {
+                    "type": "string"
+                  },
+                  "Weather": {
+                    "$ref": "#/components/schemas/MatchWeather"
+                  },
+                  "Attendance": {
+                    "type": "string"
+                  },
+                  "IdMatch": {
+                    "type": "string"
+                  },
+                  "MatchDay": {
+                    "type": "integer"
+                  },
+                  "StageName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "GroupName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "CompetitionName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "SeasonName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "SeasonShortName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "LocalDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Home": {
+                    "$ref": "#/components/schemas/MatchTeam"
+                  },
+                  "Away": {
+                    "$ref": "#/components/schemas/MatchTeam"
+                  },
+                  "HomeTeamScore": {
+                    "type": "integer"
+                  },
+                  "AwayTeamScore": {
+                    "type": "integer"
+                  },
+                  "AggregateHomeTeamScore": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "AggregateAwayTeamScore": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "HomeTeamPenaltyScore": {
+                    "type": "integer"
+                  },
+                  "AwayTeamPenaltyScore": {
+                    "type": "integer"
+                  },
+                  "LastPeriodUpdate": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "Leg": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "IsHomeMatch": {
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "Stadium": {
+                    "$ref": "#/components/schemas/Stadium"
+                  },
+                  "IsTicketSalesAllowed": {
+                    "type": "boolean"
+                  },
+                  "MatchTime": {
+                    "type": "string"
+                  },
+                  "SecondHalfTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "FirstHalfTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "FirstHalfExtraTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "SecondHalfExtraTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Winner": {
+                    "type": "string"
+                  },
+                  "MatchReportUrl": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "PlaceHolderA": {
+                    "type": "string"
+                  },
+                  "PlaceHolderB": {
+                    "type": "string"
+                  },
+                  "BallPossession": {
+                    "$ref": "#/components/schemas/MatchBallPossession"
+                  },
+                  "Officials": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MatchOfficial"
+                    }
+                  },
+                  "MatchStatus": {
+                    "type": "integer"
+                  },
+                  "ResultType": {
+                    "type": "integer"
+                  },
+                  "MatchNumber": {
+                    "type": "integer"
+                  },
+                  "TimeDefined": {
+                    "type": "boolean"
+                  },
+                  "OfficialityStatus": {
+                    "type": "integer"
+                  },
+                  "MatchLegInfo": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              }
+            ]
+          },
+          "Stadium": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdStadium": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Capacity": {
+                    "type": "integer"
+                  },
+                  "WebAddress": {
+                    "type": "string"
+                  },
+                  "Built": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "Roof": {
+                    "type": "boolean"
+                  },
+                  "Turf": {
+                    "type": "integer"
+                  },
+                  "IdCity": {
+                    "type": "string"
+                  },
+                  "CityName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "PostalCode": {
+                    "type": "integer"
+                  },
+                  "Street": {
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string"
+                  },
+                  "Fax": {
+                    "type": "string"
+                  },
+                  "Phone": {
+                    "type": "string"
+                  },
+                  "AffiliationCountry": {
+                    "type": "string"
+                  },
+                  "AffiliationRegion": {
+                    "type": "string"
+                  },
+                  "Latitude": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Longitude": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Length": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Width": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            ]
+          },
+          "Stage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdStage": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "SeasonName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "StageLevel": {
+                    "type": "integer"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "EndDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Type": {
+                    "format": "integer"
+                  },
+                  "SequenceOrder": {
+                    "format": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          "Season": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "ShortName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Abbreviation": {
+                    "type": "string"
+                  },
+                  "IdMemberAssociation": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "IdConfederation": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "EndDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "PictureUrl": {
+                    "type": "string"
+                  },
+                  "MascotPictureUrl": {
+                    "type": "string"
+                  },
+                  "MatchBallPictureUrl": {
+                    "type": "string"
+                  },
+                  "HostTeams": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "IdTeam": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "SportType": {
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          "Competition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "IdConfederation": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "IdMemberAssociation": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "IdOwner": {
+                    "type": "string"
+                  },
+                  "Gender": {
+                    "type": "integer"
+                  },
+                  "FootballType": {
+                    "type": "integer"
+                  },
+                  "TeamType": {
+                    "type": "integer"
+                  },
+                  "CompetitionType": {
+                    "type": "integer"
+                  },
+                  "AgeType": {
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          "PlayersSeasonStats": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "PlayerStatsList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PlayerSeasonStats"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "TeamCompetitionDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "IdTeam": {
+                    "type": "string"
+                  },
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "PictureUrl": {
+                    "type": "string"
+                  },
+                  "TeamName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Players": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PlayerCompetitionDetails"
+                    }
+                  },
+                  "Officials": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CoachCompetitionDetails"
+                    }
+                  },
+                  "ParticipationStatus": {
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          "CoachCompetitionDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Coach"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdTeam": {
+                    "type": "string"
+                  },
+                  "Role": {
+                    "type": "integer"
+                  },
+                  "JoinDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "LeaveDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "CompetitionDebut": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DebutDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "SpecialStatus": {
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          "Coach": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdCoach": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Alias": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "BirthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "PictureUrl": {
+                    "type": "string"
+                  },
+                  "ThumbnailUrl": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "PlayerCompetitionDetails": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdTeam": {
+                    "type": "string"
+                  },
+                  "IdPlayer": {
+                    "type": "string"
+                  },
+                  "PlayerName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "ShortName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "JerseyNum": {
+                    "type": "integer"
+                  },
+                  "MatchesPlayed": {
+                    "type": "integer"
+                  },
+                  "Position": {
+                    "type": "integer"
+                  },
+                  "BirthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DebutDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "JoinDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "LeaveDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "PreferredFoot": {
+                    "type": "string"
+                  },
+                  "PictureUrl": {
+                    "type": "string"
+                  },
+                  "ThumbnailUrl": {
+                    "type": "string"
+                  },
+                  "CompetitionDebut": {
+                    "type": "string"
+                  },
+                  "RealPosition": {
+                    "type": "integer"
+                  },
+                  "RealPositionSide": {
+                    "type": "integer"
+                  },
+                  "Goals": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "RedCards": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "YellowCards": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "MediaContent": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "PositionLocalized": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "RealPositionLocalized": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "RealPositionSideLocalized": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "SpecialStatus": {
+                    "type": "integer"
+                  },
+                  "Weight": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Height": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "PlayerPicture": {
+                    "nullable": true,
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Picture"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "Player": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdPlayer": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Alias": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "BirthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Weight": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Height": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "BirthPlace": {
+                    "type": "string"
+                  },
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "InternationalCaps": {
+                    "type": "integer"
+                  },
+                  "InternationalDebut": {
+                    "type": "string"
+                  },
+                  "TopCompetitionDebut": {
+                    "type": "string"
+                  },
+                  "PictureUrl": {
+                    "type": "string"
+                  },
+                  "ThumbnailUrl": {
+                    "type": "string"
+                  },
+                  "TwitterAccount": {
+                    "type": "string"
+                  },
+                  "PreferredFoot": {
+                    "type": "string"
+                  },
+                  "MediaContent": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "LocalizedTwitterAccounts": {
+                    "type": "string"
+                  },
+                  "Goals": {
+                    "type": "integer"
+                  },
+                  "PlayerPicture": {
+                    "nullable": true,
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Picture"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "Team": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdTeam": {
+                    "type": "string"
+                  },
+                  "IdConfederation": {
+                    "type": "string"
+                  },
+                  "Type": {
+                    "type": "integer"
+                  },
+                  "AgeType": {
+                    "type": "integer"
+                  },
+                  "FootballType": {
+                    "type": "integer"
+                  },
+                  "Gender": {
+                    "type": "integer"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "IdAssociation": {
+                    "type": "string"
+                  },
+                  "IdCity": {
+                    "type": "string"
+                  },
+                  "Headquarters": {
+                    "type": "string"
+                  },
+                  "TrainingCentre": {
+                    "type": "string"
+                  },
+                  "OfficialSite": {
+                    "type": "string"
+                  },
+                  "City": {
+                    "type": "string"
+                  },
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "PostalCode": {
+                    "type": "string"
+                  },
+                  "RegionName": {
+                    "type": "string"
+                  },
+                  "ShortClubName": {
+                    "type": "string"
+                  },
+                  "Abbreviation": {
+                    "type": "string"
+                  },
+                  "Street": {
+                    "type": "string"
+                  },
+                  "FoundationYear": {
+                    "type": "integer"
+                  },
+                  "Stadium": {
+                    "type": "string"
+                  },
+                  "PictureUrl": {
+                    "type": "string"
+                  },
+                  "ThumbnailUrl": {
+                    "type": "string"
+                  },
+                  "DisplayName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Content": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "Country": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Iso3166Alpha2": {
+                    "type": "string"
+                  },
+                  "Iso3166Alpha3": {
+                    "type": "string"
+                  },
+                  "Alias": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "GracenoteCode": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "StatsPerformId": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
           }
         }
       }
