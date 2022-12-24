@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: changedetection
+  namespace: monitoring
+  labels:
+    app: changedetection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: changedetection
+  template:
+    metadata:
+      labels:
+        app: changedetection
+    spec:
+      containers:
+        - name: changedetection
+          image: dgtlmoon/changedetection.io:0.40.0.3
+          env:
+            - name: BASE_URL
+              value: https://changedetection.${SECRET_DOMAIN}
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: datastore
+              mountPath: /datastore
+      volumes:
+        - name: datastore
+          persistentVolumeClaim:
+            claimName: changedetection-data
