@@ -11,7 +11,7 @@ data:
       "info": {
         "title": "FIFA.com OpenAPI Spec",
         "description": "OpenAPI Spec for https://api.fifa.com",
-        "version": "0.0.3"
+        "version": "1.0.0"
       },
       "servers": [
         {
@@ -62,9 +62,292 @@ data:
         {
           "name": "statistics",
           "description": "FIFA competition statistics"
+        },
+        {
+          "name": "live",
+          "description": "FIFA Live (not really) stats"
+        },
+        {
+          "name": "timelines",
+          "description": "FIFA Live (not really) events"
+        },
+        {
+          "name": "teamform",
+          "description": "FIFA Team form over time"
+        },
+        {
+          "name": "seasonbracket",
+          "description": "FIFA Season in bracket format"
         }
       ],
       "paths": {
+        "/seasonbracket/season/{seasonId}": {
+          "get": {
+            "tags": ["seasonbracket"],
+            "summary": "Get season in bracket form",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "seasonId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 255711
+                },
+                "description": "The season ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/SeasonBracket"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/teamform/{teamId}": {
+          "get": {
+            "tags": ["teamform"],
+            "summary": "Get form of team over time",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "teamId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 43922
+                },
+                "description": "The team ID"
+              },
+              {
+                "$ref": "#/components/parameters/fromParam"
+              },
+              {
+                "$ref": "#/components/parameters/toParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/TeamForm"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/timelines/{competitionId}/{seasonId}/{stageId}/{matchId}": {
+          "get": {
+            "tags": ["timelines"],
+            "summary": "Get timeline of events for match by ID (same as /live/football/{matchId})",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "competitionId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
+              },
+              {
+                "in": "path",
+                "name": "seasonId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 255711
+                },
+                "description": "The season ID"
+              },
+              {
+                "in": "path",
+                "name": "stageId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 285077
+                },
+                "description": "The stage ID"
+              },
+              {
+                "in": "path",
+                "name": "matchId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 400128145
+                },
+                "description": "The match ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/MatchTimeline"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/timelines/{matchId}": {
+          "get": {
+            "tags": ["timelines"],
+            "summary": "Get timeline of events for match by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "matchId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 400128145
+                },
+                "description": "The match ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/MatchTimeline"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/live/football/{competitionId}/{seasonId}/{stageId}/{matchId}": {
+          "get": {
+            "tags": ["live"],
+            "summary": "Get live match by match ID (same as /live/football/{matchId})",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "competitionId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
+              },
+              {
+                "in": "path",
+                "name": "seasonId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 255711
+                },
+                "description": "The season ID"
+              },
+              {
+                "in": "path",
+                "name": "stageId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 285077
+                },
+                "description": "The stage ID"
+              },
+              {
+                "in": "path",
+                "name": "matchId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 400128145
+                },
+                "description": "The match ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/LiveMatch"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/live/football/{matchId}": {
+          "get": {
+            "tags": ["live"],
+            "summary": "Get live match by match ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "matchId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 400128145
+                },
+                "description": "The match ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/LiveMatch"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "/statistics/headtohead/{teamAID}/{teamBID}": {
           "get": {
             "tags": ["statistics"],
@@ -91,6 +374,12 @@ data:
                 "description": "ID of second team to compare"
               },
               {
+                "$ref": "#/components/parameters/fromParam"
+              },
+              {
+                "$ref": "#/components/parameters/toParam"
+              },
+              {
                 "$ref": "#/components/parameters/countParam"
               },
               {
@@ -104,6 +393,219 @@ data:
                   "application/json": {
                     "schema": {
                       "$ref": "#/components/schemas/HeadToHeadStats"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/calendar/nextmatches": {
+          "get": {
+            "tags": ["calendar"],
+            "summary": "Get next/previous matches",
+            "parameters": [
+              {
+                "name": "numberOfNextMatches",
+                "in": "query",
+                "description": "The season ID",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "example": 1
+                }
+              },
+              {
+                "name": "numberOfPreviousMatches",
+                "in": "query",
+                "description": "The season ID",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "example": 1
+                }
+              },
+              {
+                "name": "idSeason",
+                "in": "query",
+                "description": "The season ID",
+                "schema": {
+                  "type": "integer",
+                  "example": 255711
+                }
+              },
+              {
+                "in": "query",
+                "name": "idCompetition",
+                "schema": {
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
+              },
+              {
+                "in": "query",
+                "name": "idTeam",
+                "schema": {
+                  "type": "string",
+                  "example": 43922
+                },
+                "description": "The team ID"
+              },
+              {
+                "in": "query",
+                "name": "idStage",
+                "schema": {
+                  "type": "string",
+                  "example": 285077
+                },
+                "description": "The stage ID"
+              },
+              {
+                "in": "query",
+                "name": "idGroup",
+                "schema": {
+                  "type": "string",
+                  "example": 401
+                },
+                "description": "The group ID"
+              },
+              {
+                "in": "query",
+                "name": "idMatch",
+                "schema": {
+                  "type": "string",
+                  "example": 400128145
+                },
+                "description": "The match ID"
+              },
+              {
+                "$ref": "#/components/parameters/fromParam"
+              },
+              {
+                "$ref": "#/components/parameters/toParam"
+              },
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Match"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/calendar/{matchId}": {
+          "get": {
+            "tags": ["calendar"],
+            "summary": "Get match by ID",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "matchId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 400128145
+                },
+                "description": "The match ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Match"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/calendar/{competitionId}/{seasonId}/{matchId}": {
+          "get": {
+            "tags": ["calendar"],
+            "summary": "Get match by ID (same as /calendar/{matchId})",
+            "parameters": [
+              {
+                "in": "path",
+                "name": "competitionId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 17
+                },
+                "description": "The competition ID"
+              },
+              {
+                "in": "path",
+                "name": "seasonId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 255711
+                },
+                "description": "The season ID"
+              },
+              {
+                "in": "path",
+                "name": "matchId",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": 400128145
+                },
+                "description": "The match ID"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Match"
                     }
                   }
                 }
@@ -175,7 +677,7 @@ data:
                             "Results": {
                               "type": "array",
                               "items": {
-                                "$ref": "#/components/schemas/Stadium"
+                                "$ref": "#/components/schemas/CompetitionStageStandings"
                               }
                             }
                           }
@@ -237,6 +739,12 @@ data:
                   "example": 401
                 },
                 "description": "The group ID"
+              },
+              {
+                "$ref": "#/components/parameters/fromParam"
+              },
+              {
+                "$ref": "#/components/parameters/toParam"
               },
               {
                 "$ref": "#/components/parameters/continuationTokenHeader"
@@ -543,6 +1051,12 @@ data:
                 }
               },
               {
+                "$ref": "#/components/parameters/fromParam"
+              },
+              {
+                "$ref": "#/components/parameters/toParam"
+              },
+              {
                 "$ref": "#/components/parameters/continuationTokenHeader"
               },
               {
@@ -610,6 +1124,63 @@ data:
                   "application/json": {
                     "schema": {
                       "$ref": "#/components/schemas/Competition"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/competitions/teams/{seasonId}": {
+          "get": {
+            "tags": ["competitions"],
+            "summary": "Get all teams in a competition season",
+            "parameters": [
+              {
+                "name": "seasonId",
+                "in": "path",
+                "description": "The season ID",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "example": 255711
+                }
+              },
+              {
+                "$ref": "#/components/parameters/continuationTokenHeader"
+              },
+              {
+                "$ref": "#/components/parameters/continuationHashParam"
+              },
+              {
+                "$ref": "#/components/parameters/countParam"
+              },
+              {
+                "$ref": "#/components/parameters/languageParam"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/ListResult"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Results": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Team"
+                              }
+                            }
+                          }
+                        }
+                      ]
                     }
                   }
                 }
@@ -1070,6 +1641,28 @@ data:
             "required": false,
             "schema": {
               "type": "integer"
+            }
+          },
+          "fromParam": {
+            "name": "from",
+            "in": "query",
+            "description": "From date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "datetime",
+              "example": "1950-01-01T00:00:00Z"
+            }
+          },
+          "toParam": {
+            "name": "to",
+            "in": "query",
+            "description": "to date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "datetime",
+              "example": "2020-01-01T00:00:00Z"
             }
           },
           "continuationTokenHeader": {
@@ -1593,6 +2186,757 @@ data:
                 "type": "integer"
               }
             }
+          },
+          "LiveMatchCoach": {
+            "type": "object",
+            "properties": {
+              "IdCoach": {
+                "type": "string"
+              },
+              "IdCountry": {
+                "type": "string"
+              },
+              "PictureUrl": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Alias": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Role": {
+                "type": "integer"
+              },
+              "SpecialStatus": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "LiveMatchPlayer": {
+            "type": "object",
+            "properties": {
+              "IdPlayer": {
+                "type": "string"
+              },
+              "IdTeam": {
+                "type": "string"
+              },
+              "ShirtNumber": {
+                "type": "integer"
+              },
+              "Status": {
+                "type": "integer"
+              },
+              "SpecialStatus": {
+                "type": "integer"
+              },
+              "Captain": {
+                "type": "boolean"
+              },
+              "PlayerName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "ShortName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Position": {
+                "type": "integer",
+                "format": "int32",
+                "example": 0
+              },
+              "PlayerPicture": {
+                "$ref": "#/components/schemas/Picture"
+              },
+              "FieldStatus": {
+                "type": "integer"
+              },
+              "LineupX": {
+                "type": "integer"
+              },
+              "LineupY": {
+                "type": "integer"
+              }
+            }
+          },
+          "LiveMatchBooking": {
+            "type": "object",
+            "properties": {
+              "Card": {
+                "type": "integer"
+              },
+              "Period": {
+                "type": "integer"
+              },
+              "IdEvent": {
+                "type": "string",
+                "nullable": true
+              },
+              "EventNumber": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdPlayer": {
+                "type": "string"
+              },
+              "IdCoach": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdTeam": {
+                "type": "string"
+              },
+              "Minute": {
+                "type": "string"
+              },
+              "Reason": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "LiveMatchGoal": {
+            "type": "object",
+            "properties": {
+              "Type": {
+                "type": "integer"
+              },
+              "IdPlayer": {
+                "type": "string"
+              },
+              "Minute": {
+                "type": "string"
+              },
+              "IdAssistPlayer": {
+                "type": "string"
+              },
+              "Period": {
+                "type": "integer"
+              },
+              "IdGoal": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdTeam": {
+                "type": "string"
+              }
+            }
+          },
+          "LiveMatchSubstitution": {
+            "type": "object",
+            "properties": {
+              "IdEvent": {
+                "type": "string",
+                "nullable": true
+              },
+              "Period": {
+                "type": "integer"
+              },
+              "Reason": {
+                "type": "integer"
+              },
+              "SubstitutePosition": {
+                "type": "integer"
+              },
+              "IdPlayerOff": {
+                "type": "string"
+              },
+              "IdPlayerOn": {
+                "type": "string"
+              },
+              "PlayerOffName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "PlayerOnName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Minute": {
+                "type": "string"
+              },
+              "IdTeam": {
+                "type": "string"
+              }
+            }
+          },
+          "LiveMatchTeam": {
+            "type": "object",
+            "properties": {
+              "Score": {
+                "type": "integer"
+              },
+              "Side": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdTeam": {
+                "type": "string"
+              },
+              "PictureUrl": {
+                "type": "string"
+              },
+              "IdCountry": {
+                "type": "string"
+              },
+              "TeamType": {
+                "type": "integer"
+              },
+              "AgeType": {
+                "type": "integer"
+              },
+              "Tactics": {
+                "type": "string"
+              },
+              "TeamName": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Abbreviation": {
+                "type": "string"
+              },
+              "Coaches": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LiveMatchCoach"
+                }
+              },
+              "Players": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LiveMatchPlayer"
+                }
+              },
+              "Bookings": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LiveMatchBooking"
+                }
+              },
+              "Goals": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LiveMatchGoal"
+                }
+              },
+              "Substitutions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LiveMatchSubstitution"
+                }
+              },
+              "FootballType": {
+                "type": "integer"
+              },
+              "Gender": {
+                "type": "integer"
+              },
+              "IdAssociation": {
+                "type": "string"
+              },
+              "ShortClubName": {
+                "type": "string"
+              }
+            }
+          },
+          "Event": {
+            "type": "object",
+            "properties": {
+              "EventId": {
+                "type": "string"
+              },
+              "IdTeam": {
+                "type": "string"
+              },
+              "Timestamp": {
+                "type": "string",
+                "format": "datetime"
+              },
+              "MatchMinute": {
+                "type": "string"
+              },
+              "Period": {
+                "type": "integer"
+              },
+              "HomeGoals": {
+                "type": "integer"
+              },
+              "AwayGoals": {
+                "type": "integer"
+              },
+              "Type": {
+                "type": "integer"
+              },
+              "Qualifiers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "TypeLocalized": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "HomePenaltyGoals": {
+                "type": "integer"
+              },
+              "AwayPenaltyGoals": {
+                "type": "integer"
+              },
+              "EventDescription": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              }
+            }
+          },
+          "SeasonBracketMatch": {
+            "type": "object",
+            "properties": {
+              "IdSeason": {
+                "type": "string"
+              },
+              "IdStage": {
+                "type": "string"
+              },
+              "IdGroup": {
+                "type": "string"
+              },
+              "IdMatch": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string",
+                "format": "datetime"
+              },
+              "LocalDate": {
+                "type": "string",
+                "format": "datetime"
+              },
+              "Stadium": {
+                "$ref": "#/components/schemas/Stadium"
+              },
+              "TeamA": {
+                "type": "string"
+              },
+              "TeamB": {
+                "type": "string"
+              },
+              "PlaceHolderA": {
+                "type": "string"
+              },
+              "PlaceHolderB": {
+                "type": "string"
+              },
+              "HomeTeam": {
+                "$ref": "#/components/schemas/MatchTeam"
+              },
+              "AwayTeam": {
+                "$ref": "#/components/schemas/MatchTeam"
+              },
+              "HomeTeamScore": {
+                "type": "integer"
+              },
+              "AwayTeamScore": {
+                "type": "integer"
+              },
+              "HomeTeamAggregateScore": {
+                "type": "integer",
+                "nullable": true
+              },
+              "AwayTeamAggregateScore": {
+                "type": "integer",
+                "nullable": true
+              },
+              "HomeTeamPenaltyScore": {
+                "type": "integer"
+              },
+              "AwayTeamPenaltyScore": {
+                "type": "integer"
+              },
+              "MatchTime": {
+                "type": "string"
+              },
+              "MatchTimeStatus": {
+                "type": "integer"
+              },
+              "MatchStatus": {
+                "type": "integer"
+              },
+              "ResultType": {
+                "type": "integer"
+              },
+              "Winner": {
+                "type": "string"
+              },
+              "MatchNumber": {
+                "type": "integer"
+              }
+            }
+          },
+          "SeasonBracketGroup": {
+            "type": "object",
+            "properties": {
+              "IdGroup": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Matches": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SeasonBracketMatch"
+                }
+              }
+            }
+          },
+          "SeasonBracketStage": {
+            "type": "object",
+            "properties": {
+              "IdStage": {
+                "type": "string"
+              },
+              "SequenceOrder": {
+                "type": "integer"
+              },
+              "Name": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LocalizedObject"
+                }
+              },
+              "Groups": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SeasonBracketGroup"
+                }
+              },
+              "Matches": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SeasonBracketMatch"
+                }
+              }
+            }
+          },
+          "SeasonBracket": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "IdConfederation": {
+                    "type": "string"
+                  },
+                  "Abbreviation": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "ShortName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "KnockoutStages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SeasonBracketStage"
+                    }
+                  },
+                  "GroupsStages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SeasonBracketStage"
+                    }
+                  },
+                  "Winner": {
+                    "$ref": "#/components/schemas/MatchTeam"
+                  }
+                }
+              }
+            ]
+          },
+          "TeamForm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdTeam": {
+                    "type": "string"
+                  },
+                  "TeamName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "IdCountry": {
+                    "type": "string"
+                  },
+                  "ShortClubName": {
+                    "type": "string"
+                  },
+                  "Abbreviation": {
+                    "type": "string"
+                  },
+                  "PictureUrl": {
+                    "type": "string"
+                  },
+                  "MatchesPlayed": {
+                    "type": "integer"
+                  },
+                  "Wins": {
+                    "type": "integer"
+                  },
+                  "Losses": {
+                    "type": "integer"
+                  },
+                  "Draws": {
+                    "type": "integer"
+                  },
+                  "GoalsScored": {
+                    "type": "integer"
+                  },
+                  "GoalsAgainst": {
+                    "type": "integer"
+                  },
+                  "MatchesList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/HeadToHeadMatch"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "MatchTimeline": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdStage": {
+                    "type": "string"
+                  },
+                  "IdMatch": {
+                    "type": "string"
+                  },
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "IdGroup": {
+                    "type": "string"
+                  },
+                  "Event": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Event"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "LiveMatch": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BaseModel"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "IdMatch": {
+                    "type": "string"
+                  },
+                  "IdStage": {
+                    "type": "string"
+                  },
+                  "IdGroup": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IdSeason": {
+                    "type": "string"
+                  },
+                  "IdCompetition": {
+                    "type": "string"
+                  },
+                  "CompetitionName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "SeasonName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "SeasonShortName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "Stadium": {
+                    "$ref": "#/components/schemas/Stadium"
+                  },
+                  "ResultType": {
+                    "type": "integer"
+                  },
+                  "MatchDay": {
+                    "type": "string"
+                  },
+                  "HomeTeamPenaltyScore": {
+                    "type": "integer"
+                  },
+                  "AwayTeamPenaltyScore": {
+                    "type": "integer"
+                  },
+                  "AggregateHomeTeamScore": {
+                    "type": "integer",
+                    "format": "nullable"
+                  },
+                  "AggregateAwayTeamScore": {
+                    "type": "integer",
+                    "format": "nullable"
+                  },
+                  "Weather": {
+                    "$ref": "#/components/schemas/MatchWeather"
+                  },
+                  "Attendance": {
+                    "type": "string"
+                  },
+                  "Date": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "LocalDate": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "MatchTime": {
+                    "type": "string"
+                  },
+                  "SecondHalfTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "FirstHalfTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "FirstHalfExtraTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "SecondHalfExtraTime": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Winner": {
+                    "type": "string"
+                  },
+                  "Period": {
+                    "type": "integer"
+                  },
+                  "HomeTeam": {
+                    "$ref": "#/components/schemas/LiveMatchTeam"
+                  },
+                  "AwayTeam": {
+                    "$ref": "#/components/schemas/LiveMatchTeam"
+                  },
+                  "BallPossession": {
+                    "$ref": "#/components/schemas/MatchBallPossession"
+                  },
+                  "TerritorialPossesion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "TerritorialThirdPossesion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Officials": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MatchOfficial"
+                    }
+                  },
+                  "MatchStatus": {
+                    "type": "integer"
+                  },
+                  "GroupName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "StageName": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LocalizedObject"
+                    }
+                  },
+                  "OfficialityStatus": {
+                    "type": "integer"
+                  },
+                  "TimeDefined": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            ]
           },
           "HeadToHeadStats": {
             "allOf": [
