@@ -69,7 +69,7 @@ spec:
         - secretName: minio.${SECRET_DOMAIN}-tls
           hosts:
             - *host-console
-    users: []
+    users: null
     environment:
       TZ: "${TIMEZONE}"
       MINIO_UPDATE: "off"
