@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: rxresume-client
-          image: amruthpillai/reactive-resume:client-v3.6.17
+          image: amruthpillai/reactive-resume:client-3.6.17
           env:
             - name: TZ
               value: "${TIMEZONE}"
