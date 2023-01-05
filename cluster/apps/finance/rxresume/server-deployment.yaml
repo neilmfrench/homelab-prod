@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: rxresume-server
-          image: amruthpillai/reactive-resume:server-v3.6.5
+          image: amruthpillai/reactive-resume:server-v3.6.17
           env:
             - name: TZ
               value: "${TIMEZONE}"
