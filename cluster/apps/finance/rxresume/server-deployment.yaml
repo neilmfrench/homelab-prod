@@ -44,6 +44,18 @@ spec:
               value: "604800"
             - name: STORAGE_S3_ENABLED
               value: "false"
+            - name: MAIL_FROM_NAME
+              value: "${SECRET_RXRESUME_MAIL_FROM_NAME}"
+            - name: MAIL_FROM_EMAIL
+              value: "${SECRET_RXRESUME_MAIL_FROM_EMAIL}"
+            - name: MAIL_HOST
+              value: "${SECRET_RXRESUME_MAIL_HOST}"
+            - name: MAIL_PORT
+              value: "587"
+            - name: MAIL_USERNAME
+              value: "${SECRET_RXRESUME_MAIL_USERNAME}"
+            - name: MAIL_PASSWORD
+              value: "${SECRET_RXRESUME_MAIL_PASSWORD}"
           ports:
             - containerPort: 3100
           volumeMounts:
