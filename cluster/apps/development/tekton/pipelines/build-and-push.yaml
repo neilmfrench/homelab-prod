@@ -32,7 +32,7 @@ spec:
         workspaces:
           - name: source
         steps:
-          - image: zshusers/zsh:4.3.15
+          - image: zshusers/zsh:5.8.1
             script: |
               #!/usr/bin/env zsh
               cat $(workspaces.source.path)/README.md
