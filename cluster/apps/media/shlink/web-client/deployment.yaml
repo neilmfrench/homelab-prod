@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: shlink-web-client
-          image: shlinkio/shlink-web-client:3.8.1
+          image: shlinkio/shlink-web-client:3.9.1
           env:
             - name: SHLINK_SERVER_URL
               value: "https://shlink.${SECRET_DOMAIN}"
