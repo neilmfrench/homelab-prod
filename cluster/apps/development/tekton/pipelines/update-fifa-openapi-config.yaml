@@ -47,7 +47,7 @@ spec:
         workspaces:
           - name: source
         steps:
-          - image: mikefarah/yq:4.30.5
+          - image: mikefarah/yq:4.30.6
             workingDir: $(workspaces.source.path)
             securityContext:
               runAsUser: 0
