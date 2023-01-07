@@ -34,3 +34,4 @@ resources:
   - crowdsec-charts.yaml
   - privatebin-charts.yaml
   - gitea-charts.yaml
+  - weave-gitops-charts.yaml
