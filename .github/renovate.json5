@@ -41,5 +41,9 @@
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
+  ],
+  "ignorePaths": [
+    "**/cluster/apps/development/tekton/pipelines/**",
+    "**/cluster/apps/development/tekton/tasks/**"
   ]
 }
