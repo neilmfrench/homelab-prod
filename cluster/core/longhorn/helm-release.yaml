@@ -34,6 +34,7 @@ spec:
       defaultDataLocality: best-effort
       backupTarget: "s3://longhorn-backups@dummyregion/longhorn"
       backupTargetCredentialSecret: minio-svc-secret
+      defaultLonghornStaticStorageClass: longhorn
     ingress:
       enabled: true
       ingressClassName: "traefik"
