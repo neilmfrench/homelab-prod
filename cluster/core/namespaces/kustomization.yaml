@@ -16,3 +16,4 @@ resources:
   - tekton-operator.yaml
   - games.yaml
   - magazine.yaml
+  - test.yaml
