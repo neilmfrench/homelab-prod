@@ -6,7 +6,7 @@ resources:
   - harbor
   - bookstack
   - cloudflared
-  - tekton
+  # - tekton
   - gitea
   - pocketbase
   - fifa-openapi
