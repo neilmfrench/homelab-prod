@@ -4,3 +4,7 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - ingress.yaml
+  - secrets
+  - tasks
+  - pipelines
+  - triggers
