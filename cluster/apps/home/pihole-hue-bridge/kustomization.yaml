@@ -5,5 +5,10 @@ resources:
   - config-pvc.yaml
   - deployment.yaml
   - resource-quota.yaml
-  # - service.yaml
-  # - ingress.yaml
+namespace: home
+configMapGenerator:
+  - name: ha-bridge-config
+    files:
+      - ha-bridge.config
+generatorOptions:
+  disableNameSuffixHash: true
