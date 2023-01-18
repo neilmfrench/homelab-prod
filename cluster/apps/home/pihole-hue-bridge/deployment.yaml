@@ -37,13 +37,13 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            - name: config-file
-              mountPath: /config/ha-bridge-bk.config
-              subPath: ha-bridge-bk.config
+            # - name: config-file
+            #   mountPath: /config/ha-bridge-bk.config
+            #   subPath: ha-bridge-bk.config
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: pihole-hue-bridge-config
-        - name: config-file
-          configMap:
-            name: ha-bridge-config
+        # - name: config-file
+        #   configMap:
+        #     name: ha-bridge-config
