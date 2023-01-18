@@ -37,9 +37,9 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            # - name: config-file
-            #   mountPath: /config/ha-bridge.config
-            #   subPath: ha-bridge.config
+            - name: config-file
+              mountPath: /config/ha-bridge.config
+              subPath: ha-bridge.config
       volumes:
         - name: config-file
           configMap:
