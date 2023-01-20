@@ -49,6 +49,10 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
+    tlsStore:
+      default:
+        defaultCertificate:
+          secretName: "networking/${SECRET_DOMAIN/./-}-production-tls"
     globalArguments:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
