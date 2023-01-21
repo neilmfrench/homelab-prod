@@ -6,4 +6,5 @@ resources:
   - traefik
   - pihole
   - external-dns
+  - dummy-test
   # - error-pages
