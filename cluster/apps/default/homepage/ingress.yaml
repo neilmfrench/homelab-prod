@@ -16,7 +16,7 @@ spec:
   tls:
     - hosts:
         - ${SECRET_DOMAIN}
-      secretName: "homepage-tls"
+      secretName: "networking/${SECRET_DOMAIN/./-}-production-tls"
   rules:
     - host: ${SECRET_DOMAIN}
       http:
