@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-cert-test
+  namespace: networking
+  labels:
+    app: dummy-cert-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummy-cert-test
+  template:
+    metadata:
+      labels:
+        app: dummy-cert-test
+    spec:
+      containers:
+        - name: dummy-cert-test
+          image: nginx:stable-alpine
+          ports:
+            - containerPort: 80
