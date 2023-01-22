@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: changedetection
-          image: dgtlmoon/changedetection.io:0.40.0.4
+          image: dgtlmoon/changedetection.io:0.40.1.1
           env:
             - name: BASE_URL
               value: https://changedetection.${SECRET_DOMAIN}
