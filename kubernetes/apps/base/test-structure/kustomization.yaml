@@ -5,3 +5,4 @@ namespace: test-structure
 resources:
   - ./namespace.yaml
   - ./chart-repository.yaml
+  - ./release.yaml
