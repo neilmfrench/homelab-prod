@@ -9,7 +9,7 @@ spec:
       version: "5.19.11"
   values:
     configs:
-      secrets:
+      secret:
         extra:
           dex.authentik.clientSecret: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_SECRET}
       cm:
