@@ -20,7 +20,7 @@ spec:
           - config:
               issuer: https://id.${SECRET_DOMAIN}/application/o/argocd/
               clientID: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_ID}
-              clientSecret: $dex.authentik.clientSecret
+              clientSecret: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_SECRET_NON_ENCODED}
               insecureEnableGroups: true
               scopes:
                 - openid
