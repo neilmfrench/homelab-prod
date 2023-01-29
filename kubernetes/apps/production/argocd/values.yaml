@@ -26,7 +26,7 @@ spec:
             type: oidc
             id: authentik
       rbac:
-        policy.csv: policy.csv |
+        policy.csv: |
           g, ArgoCD Admins, role:admin
       params:
         server.insecure: true
