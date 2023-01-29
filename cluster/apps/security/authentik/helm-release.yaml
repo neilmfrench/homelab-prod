@@ -20,8 +20,8 @@ spec:
     # image:
     #   repository: ghcr.io/goauthentik/server
     #   tag: 2022.11.1
-    env:
-      AUTHENTIK_LOG_LEVEL: trace
+    # env:
+    #   AUTHENTIK_LOG_LEVEL: trace
     ingress:
       enabled: true
       ingressClassName: "traefik"
