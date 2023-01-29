@@ -9,13 +9,17 @@ spec:
       version: "5.19.11"
   values:
     configs:
+      secrets:
+        extra:
+          dex.authentik.clientSecret: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_SECRET}
       cm:
+        url: https://argocd.${SECRET_DOMAIN}
         dex.config: |
           connectors:
           - config:
               issuer: https://id.${SECRET_DOMAIN}/application/o/argocd/
               clientID: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_ID}
-              clientSecret: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_SECRET}
+              clientSecret: $dex.authentik.clientSecret
               insecureEnableGroups: true
               scopes:
                 - openid
