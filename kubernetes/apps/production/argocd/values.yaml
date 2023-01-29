@@ -8,14 +8,15 @@ spec:
     spec:
       version: "5.19.11"
   values:
-    ingress:
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-      hosts:
-        - host: "argocd.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - "argocd.${SECRET_DOMAIN}"
+    server:
+      ingress:
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: "argocd.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "argocd.${SECRET_DOMAIN}"

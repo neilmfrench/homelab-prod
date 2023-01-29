@@ -16,6 +16,7 @@ spec:
     remediation:
       retries: 3
   values:
-    ingress:
-      enabled: true
-      className: traefik
+    server:
+      ingress:
+        enabled: true
+        className: traefik
