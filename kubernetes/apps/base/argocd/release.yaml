@@ -19,4 +19,4 @@ spec:
     server:
       ingress:
         enabled: true
-        className: traefik
+        ingressClassName: traefik

@@ -13,10 +13,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
-          - host: "argocd.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
+          - "argocd.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - "argocd.${SECRET_DOMAIN}"
