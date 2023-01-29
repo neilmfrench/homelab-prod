@@ -9,6 +9,25 @@ spec:
       version: "5.19.11"
   values:
     configs:
+      cm:
+        dex.config: |
+          connectors:
+          - config:
+              issuer: https://id.${SECRET_DOMAIN}/application/o/argocd/
+              clientID: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_ID}
+              clientSecret: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_SECRET}
+              insecureEnableGroups: true
+              scopes:
+                - openid
+                - profile
+                - email
+                - groups
+            name: authentik
+            type: oidc
+            id: authentik
+      rbac:
+        policy.csv: policy.csv |
+          g, ArgoCD Admins, role:admin
       params:
         server.insecure: true
     server:
