@@ -8,6 +8,9 @@ spec:
     spec:
       version: "5.19.11"
   values:
+    configs:
+      params:
+        server.insecure: true
     server:
       ingress:
         annotations:
