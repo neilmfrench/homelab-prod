@@ -10,6 +10,7 @@ spec:
   values:
     configs:
       secret:
+        createSecret: true
         extra:
           dex.authentik.clientSecret: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_SECRET}
       cm:
