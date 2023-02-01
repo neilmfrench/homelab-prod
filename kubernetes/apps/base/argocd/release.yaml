@@ -10,7 +10,7 @@ spec:
       chart: argo-cd
       sourceRef:
         kind: HelmRepository
-        name: argo-charts
+        name: argo
   interval: 30m
   install:
     remediation:
