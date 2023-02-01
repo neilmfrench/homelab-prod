@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+patches:
+  - target:
+      kind: Kustomization
+      name: apps-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: production-cluster-apps
+  - target:
+      kind: Kustomization
+      name: repositories-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: production-repositories
+patchesStrategicMerge:
+  - ./production-apps.yaml
+  - ./production-repositories.yaml
