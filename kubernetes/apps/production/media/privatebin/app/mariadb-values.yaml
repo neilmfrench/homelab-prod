@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mariadb
+spec:
+  values:
+    auth:
+      rootPassword: "${SECRET_PRIVATEBIN_MARIADB_PASSWORD}"
+      database: privatebin
+      username: privatebin
+      password: "${SECRET_PRIVATEBIN_MARIADB_PASSWORD}"
+      replicationPassword: "${SECRET_PRIVATEBIN_MARIADB_PASSWORD}"
+    primary:
+      persistence:
+        size: 10Gi
+        storageClass: longhorn
+    secondary:
+      persistence:
+        size: 10Gi
+        storageClass: longhorn

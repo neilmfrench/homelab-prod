@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./default
   - ./argocd
+  - ./media
