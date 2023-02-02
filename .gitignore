@@ -20,3 +20,4 @@ tf_destroy.log
 # Hack
 hack/temp-*
 backups/
+hack/test.yaml

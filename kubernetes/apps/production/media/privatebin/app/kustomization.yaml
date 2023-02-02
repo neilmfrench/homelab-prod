@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: media
 resources:
   - ../../../../base/mariadb
+  - ../../../../base/privatebin
 namePrefix: privatebin-
 patchesStrategicMerge:
   - ./mariadb-values.yaml
+  - ./privatebin-values.yaml
