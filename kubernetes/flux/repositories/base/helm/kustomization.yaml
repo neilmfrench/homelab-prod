@@ -5,3 +5,4 @@ resources:
   - ./bitnami.yaml
   - ./argo.yaml
   - ./podinfo.yaml
+  - ./privatebin.yaml

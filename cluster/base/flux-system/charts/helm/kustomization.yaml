@@ -32,6 +32,6 @@ resources:
   - onedev-charts.yaml
   - harbor-charts.yaml
   - crowdsec-charts.yaml
-  - privatebin-charts.yaml
+  # - privatebin-charts.yaml
   - gitea-charts.yaml
   - weave-gitops-charts.yaml
