@@ -6,3 +6,4 @@ resources:
   - ./argo.yaml
   - ./podinfo.yaml
   - ./privatebin.yaml
+  - ./kured.yaml
