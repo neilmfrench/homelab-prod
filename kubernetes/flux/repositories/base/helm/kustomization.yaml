@@ -8,3 +8,4 @@ resources:
   - ./privatebin.yaml
   - ./kured.yaml
   - ./stakater.yaml
+  - ./metrics-server.yaml
