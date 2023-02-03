@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kured
+spec:
+  values:
+    configuration:
+      annotateNodes: true
+      startTime: "7pm"
+      endTime: "11pm"
+      logFormat: "json"
+      rebootCommand: "/bin/systemctl reboot"
+      timeZone: "${TIMEZONE}"
+      forceReboot: true
+      drainTimeout: "300s"
+      period: "0h5m0s"
