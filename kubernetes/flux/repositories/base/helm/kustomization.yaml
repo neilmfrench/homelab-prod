@@ -7,3 +7,4 @@ resources:
   - ./podinfo.yaml
   - ./privatebin.yaml
   - ./kured.yaml
+  - ./stakater.yaml
