@@ -2,11 +2,9 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: vars-not-used
+  name: flux-not-used
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: flux-not-used
   interval: 10m0s
   sourceRef:
     kind: GitRepository
@@ -14,7 +12,3 @@ spec:
   prune: true
   wait: true
   timeout: 5m0s
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age

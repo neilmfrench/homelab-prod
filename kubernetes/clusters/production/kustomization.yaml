@@ -6,11 +6,21 @@ resources:
 patches:
   - target:
       kind: Kustomization
+      name: flux-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: production-cluster-flux
+  - target:
+      kind: Kustomization
       name: vars-not-used
     patch: |-
       - op: replace
         path: /metadata/name
         value: production-cluster-vars
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: production-cluster-flux
   - target:
       kind: Kustomization
       name: repositories-not-used
@@ -42,6 +52,7 @@ patches:
         path: /spec/dependsOn/0/name
         value: production-cluster-infrastructure
 patchesStrategicMerge:
+  - ./production-flux.yaml
   - ./production-vars.yaml
   - ./production-repositories.yaml
   - ./production-infrastructure.yaml
