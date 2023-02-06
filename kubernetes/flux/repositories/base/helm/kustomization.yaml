@@ -9,3 +9,4 @@ resources:
   - ./kured.yaml
   - ./stakater.yaml
   - ./metrics-server.yaml
+  - ./jetstack.yaml
