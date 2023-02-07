@@ -11,3 +11,4 @@ resources:
   - ./metrics-server.yaml
   - ./jetstack.yaml
   - ./metallb.yaml
+  - ./longhorn.yaml

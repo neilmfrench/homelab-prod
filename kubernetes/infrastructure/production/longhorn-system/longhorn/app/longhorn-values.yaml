@@ -1,0 +1,27 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  values:
+    persistence:
+      defaultClass: true
+      reclaimPolicy: Retain
+    defaultSettings:
+      storageMinimalAvailablePercentage: "10"
+      allowNodeDrainWithLastHealthyReplica: true
+      concurrentAutomaticEngineUpgradePerNodeLimit: 1
+      defaultDataLocality: best-effort
+      backupTarget: "s3://longhorn-backups@dummyregion/longhorn"
+      backupTargetCredentialSecret: minio-svc-secret
+      defaultLonghornStaticStorageClass: longhorn
+    ingress:
+      enabled: true
+      ingressClassName: "traefik"
+      tls: true
+      host: "longhorn.${SECRET_DOMAIN}"
+      tlsSecret: "longhorn-dashboard-tls"
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
