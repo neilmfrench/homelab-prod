@@ -9,12 +9,12 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: homelab-source
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: metallb
-      namespace: networking
+      namespace: metallb-system
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -26,12 +26,12 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-metallb
+    - name: cluster-infrastructure-metallb
   path: ./kubernetes/infrastructure/production/metallb-system/metallb/config
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: homelab-source
   wait: true
   interval: 30m
   retryInterval: 1m
