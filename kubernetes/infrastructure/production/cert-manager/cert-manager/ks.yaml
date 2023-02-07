@@ -18,20 +18,20 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-# kind: Kustomization
-# metadata:
-#   name: cluster-infrastructure-cert-manager-issuers
-#   namespace: flux-system
-# spec:
-#   dependsOn:
-#     - name: cluster-infrastructure-cert-manager
-#   path: ./kubernetes/infrastructure/production/cert-manager/cert-manager/issuers
-#   prune: false
-#   sourceRef:
-#     kind: GitRepository
-#     name: homelab-source
-#   interval: 30m
-#   retryInterval: 1m
-#   timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-infrastructure-cert-manager-issuers
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-infrastructure-cert-manager
+  path: ./kubernetes/infrastructure/production/cert-manager/cert-manager/issuers
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
