@@ -10,3 +10,4 @@ resources:
   - ./stakater.yaml
   - ./metrics-server.yaml
   - ./jetstack.yaml
+  - ./metallb.yaml
