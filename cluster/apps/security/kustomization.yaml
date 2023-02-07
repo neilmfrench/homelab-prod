@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - vaultwarden
   - authentik
-  - crowdsec
+  # - crowdsec
