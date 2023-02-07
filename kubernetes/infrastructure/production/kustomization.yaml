@@ -6,3 +6,4 @@ resources:
   - ./cert-manager
   - ./metallb-system
   - ./system-upgrade
+  - ./longhorn-system
