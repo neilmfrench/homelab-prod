@@ -1,196 +1,196 @@
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: kube-prometheus-stack
-  namespace: monitoring
-spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: kube-prometheus-stack
-      version: 43.2.1
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-community-charts
-        namespace: flux-system
-      interval: 5m
-  install:
-    createNamespace: true
-    crds: Create
-    remediation:
-      retries: 3
-  upgrade:
-    crds: CreateReplace
-    remediation:
-      retries: 3
-  values:
-    alertmanager:
-      config:
-        global:
-          slack_api_url: "${SECRET_PROMETHEUS_DISCORD_ALERTS_WEBHOOK}"
-          resolve_timeout: 5m
-        receivers:
-          - name: "null"
-          - name: "discord"
-            slack_configs:
-              - channel: "#prometheus-alerts"
-                icon_url: https://avatars3.githubusercontent.com/u/3380462
-                username: "prom-alert-bot"
-                send_resolved: true
-                title: |-
-                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
-                text: >-
-                  {{ range .Alerts -}}
-                    **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
-                  **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
-                  **Details:**
-                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-                    {{ end }}
-                  {{ end }}
-        route:
-          group_by: ["alertname", "job"]
-          group_wait: 30s
-          group_interval: 5m
-          repeat_interval: 6h
-          receiver: "null"
-          routes:
-            - receiver: "null"
-              match:
-                alertname: Watchdog
-            - receiver: "discord"
-              match_re:
-                severity: critical|warning|error
-              continue: true
-        inhibit_rules:
-          - source_match:
-              severity: "critical"
-            target_match:
-              severity: "warning"
-            equal: ["alertname", "namespace"]
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hosts:
-          - "alert-manager.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - "alert-manager.${SECRET_DOMAIN}"
-            secretName: "alert-manager-tls"
-      alertmanagerSpec:
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: "longhorn"
-              resources:
-                requests:
-                  storage: 5Gi
-    nodeExporter:
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
-    grafana:
-      enabled: false
-      forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          multicluster:
-            etcd:
-              enabled: true
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-          - action: replace
-            sourceLabels:
-              - node
-            targetLabel: instance
-    kubeApiServer:
-      enabled: true
-    kubeControllerManager:
-      enabled: true
-      endpoints:
-        - ${SECRET_K8S1_IP}
-        - ${SECRET_K8S2_IP}
-        - ${SECRET_K8S3_IP}
-      service:
-        enabled: true
-        port: 10257
-        targetPort: 10257
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
-    kubeScheduler:
-      enabled: true
-      endpoints:
-        - ${SECRET_K8S1_IP}
-        - ${SECRET_K8S2_IP}
-        - ${SECRET_K8S3_IP}
-      service:
-        enabled: true
-        port: 10259
-        targetPort: 10259
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
-    kubeProxy:
-      enabled: true
-      endpoints:
-        - ${SECRET_K8S1_IP}
-        - ${SECRET_K8S2_IP}
-        - ${SECRET_K8S3_IP}
-    kubeEtcd:
-      enabled: true
-      endpoints:
-        - ${SECRET_K8S1_IP}
-        - ${SECRET_K8S2_IP}
-        - ${SECRET_K8S3_IP}
-      service:
-        enabled: true
-        port: 2381
-        targetPort: 2381
-    prometheus:
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          # external-dns/is-public: "true"
-          # external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-        hosts:
-          - "prometheus.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - "prometheus.${SECRET_DOMAIN}"
-            secretName: "prometheus-tls"
-      prometheusSpec:
-        replicas: 1
-        replicaExternalLabelName: "replica"
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
-        retention: 24h
-        retentionSize: "100GB"
-        enableAdminAPI: true
-        walCompression: true
-        storageSpec:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: "longhorn"
-              resources:
-                requests:
-                  storage: 100Gi
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: kube-prometheus-stack
+#   namespace: monitoring
+# spec:
+#   interval: 5m
+#   chart:
+#     spec:
+#       chart: kube-prometheus-stack
+#       version: 43.2.1
+#       sourceRef:
+#         kind: HelmRepository
+#         name: prometheus-community-charts
+#         namespace: flux-system
+#       interval: 5m
+#   install:
+#     createNamespace: true
+#     crds: Create
+#     remediation:
+#       retries: 3
+#   upgrade:
+#     crds: CreateReplace
+#     remediation:
+#       retries: 3
+#   values:
+#     alertmanager:
+#       config:
+#         global:
+#           slack_api_url: "${SECRET_PROMETHEUS_DISCORD_ALERTS_WEBHOOK}"
+#           resolve_timeout: 5m
+#         receivers:
+#           - name: "null"
+#           - name: "discord"
+#             slack_configs:
+#               - channel: "#prometheus-alerts"
+#                 icon_url: https://avatars3.githubusercontent.com/u/3380462
+#                 username: "prom-alert-bot"
+#                 send_resolved: true
+#                 title: |-
+#                   [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
+#                 text: >-
+#                   {{ range .Alerts -}}
+#                     **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+#                   **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
+#                   **Details:**
+#                     {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+#                     {{ end }}
+#                   {{ end }}
+#         route:
+#           group_by: ["alertname", "job"]
+#           group_wait: 30s
+#           group_interval: 5m
+#           repeat_interval: 6h
+#           receiver: "null"
+#           routes:
+#             - receiver: "null"
+#               match:
+#                 alertname: Watchdog
+#             - receiver: "discord"
+#               match_re:
+#                 severity: critical|warning|error
+#               continue: true
+#         inhibit_rules:
+#           - source_match:
+#               severity: "critical"
+#             target_match:
+#               severity: "warning"
+#             equal: ["alertname", "namespace"]
+#       ingress:
+#         enabled: true
+#         pathType: Prefix
+#         ingressClassName: "traefik"
+#         annotations:
+#           cert-manager.io/cluster-issuer: "letsencrypt-production"
+#           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+#         hosts:
+#           - "alert-manager.${SECRET_DOMAIN}"
+#         tls:
+#           - hosts:
+#               - "alert-manager.${SECRET_DOMAIN}"
+#             secretName: "alert-manager-tls"
+#       alertmanagerSpec:
+#         storage:
+#           volumeClaimTemplate:
+#             spec:
+#               storageClassName: "longhorn"
+#               resources:
+#                 requests:
+#                   storage: 5Gi
+#     nodeExporter:
+#       serviceMonitor:
+#         relabelings:
+#           - action: replace
+#             regex: (.*)
+#             replacement: $1
+#             sourceLabels:
+#               - __meta_kubernetes_pod_node_name
+#             targetLabel: kubernetes_node
+#     grafana:
+#       enabled: false
+#       forceDeployDashboards: true
+#       sidecar:
+#         dashboards:
+#           multicluster:
+#             etcd:
+#               enabled: true
+#     kubelet:
+#       enabled: true
+#       serviceMonitor:
+#         metricRelabelings:
+#           - action: replace
+#             sourceLabels:
+#               - node
+#             targetLabel: instance
+#     kubeApiServer:
+#       enabled: true
+#     kubeControllerManager:
+#       enabled: true
+#       endpoints:
+#         - ${SECRET_K8S1_IP}
+#         - ${SECRET_K8S2_IP}
+#         - ${SECRET_K8S3_IP}
+#       service:
+#         enabled: true
+#         port: 10257
+#         targetPort: 10257
+#       serviceMonitor:
+#         enabled: true
+#         https: true
+#         insecureSkipVerify: true
+#     kubeScheduler:
+#       enabled: true
+#       endpoints:
+#         - ${SECRET_K8S1_IP}
+#         - ${SECRET_K8S2_IP}
+#         - ${SECRET_K8S3_IP}
+#       service:
+#         enabled: true
+#         port: 10259
+#         targetPort: 10259
+#       serviceMonitor:
+#         enabled: true
+#         https: true
+#         insecureSkipVerify: true
+#     kubeProxy:
+#       enabled: true
+#       endpoints:
+#         - ${SECRET_K8S1_IP}
+#         - ${SECRET_K8S2_IP}
+#         - ${SECRET_K8S3_IP}
+#     kubeEtcd:
+#       enabled: true
+#       endpoints:
+#         - ${SECRET_K8S1_IP}
+#         - ${SECRET_K8S2_IP}
+#         - ${SECRET_K8S3_IP}
+#       service:
+#         enabled: true
+#         port: 2381
+#         targetPort: 2381
+#     prometheus:
+#       ingress:
+#         enabled: true
+#         pathType: Prefix
+#         ingressClassName: "traefik"
+#         annotations:
+#           cert-manager.io/cluster-issuer: "letsencrypt-production"
+#           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+#           # external-dns/is-public: "true"
+#           # external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+#         hosts:
+#           - "prometheus.${SECRET_DOMAIN}"
+#         tls:
+#           - hosts:
+#               - "prometheus.${SECRET_DOMAIN}"
+#             secretName: "prometheus-tls"
+#       prometheusSpec:
+#         replicas: 1
+#         replicaExternalLabelName: "replica"
+#         ruleSelectorNilUsesHelmValues: false
+#         serviceMonitorSelectorNilUsesHelmValues: false
+#         podMonitorSelectorNilUsesHelmValues: false
+#         probeSelectorNilUsesHelmValues: false
+#         retention: 24h
+#         retentionSize: "100GB"
+#         enableAdminAPI: true
+#         walCompression: true
+#         storageSpec:
+#           volumeClaimTemplate:
+#             spec:
+#               storageClassName: "longhorn"
+#               resources:
+#                 requests:
+#                   storage: 100Gi
