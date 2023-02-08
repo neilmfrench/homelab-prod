@@ -13,3 +13,4 @@ resources:
   - ./metallb.yaml
   - ./longhorn.yaml
   - ./calico.yaml
+  - ./prometheus.yaml

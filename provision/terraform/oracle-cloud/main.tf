@@ -22,9 +22,9 @@ module "k3s_cluster" {
   compartment_ocid    = data.sops_file.oracle_cloud_secrets.data["compartment_ocid"]
   cluster_name        = data.sops_file.oracle_cloud_secrets.data["cluster_name"]
   my_public_ip_cidr   = data.sops_file.oracle_cloud_secrets.data["my_public_ip_cidr"]
-  environment         = "staging"
+  environment         = "staging-phx"
   os_image_id         = data.sops_file.oracle_cloud_secrets.data["os_image_id"]
-  k3s_version         = "v1.24.9+k3s2"
+  k3s_version         = "v1.26.1+k3s1"
   disable_ingress     = true
   install_longhorn    = false
   install_certmanager = false
