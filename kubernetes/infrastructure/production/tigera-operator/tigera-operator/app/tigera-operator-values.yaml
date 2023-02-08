@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tigera-operator
+spec:
+  values:
+    installation:
+      calicoNetwork:
+        bgp: Enabled
+        hostPorts: Enabled
+        # note: cannot be modified post-install
+        ipPools:
+          - blockSize: 26
+            cidr: ${SECRET_CLUSTER_CIDR}
+            encapsulation: VXLANCrossSubnet
+            natOutgoing: Enabled
+            nodeSelector: all()
+        linuxDataplane: Iptables
+        multiInterfaceMode: None
+        nodeAddressAutodetectionV4:
+          cidrs:
+            - "${SECRET_CLUSTER_CIDR}"
+      nodeMetricsPort: 9091
+      typhaMetricsPort: 9093
