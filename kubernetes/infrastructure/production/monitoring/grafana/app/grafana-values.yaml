@@ -5,9 +5,6 @@ metadata:
   name: grafana
 spec:
   values:
-    image:
-      repository: ghcr.io/k8s-at-home/grafana
-      tag: v9.1.6
     replicas: 1
     rbac:
       pspEnabled: false
