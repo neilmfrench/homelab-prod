@@ -14,3 +14,4 @@ resources:
   - ./longhorn.yaml
   - ./calico.yaml
   - ./prometheus.yaml
+  - ./grafana.yaml
