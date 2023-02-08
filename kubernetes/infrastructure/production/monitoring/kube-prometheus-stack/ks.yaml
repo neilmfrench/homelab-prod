@@ -2,9 +2,31 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
+  name: cluster-infrastructure-prometheus-operator-crds
+  namespace: flux-system
+spec:
+  path: ./kubernetes/infrastructure/production/monitoring/kube-prometheus-stack/crds
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: prometheus-operator-crds
+      namespace: monitoring
+  interval: 30m
+  retryInterval: 1m
+  timeout: 10m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
   name: cluster-infrastructure-kube-prometheus-stack
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-infrastructure-prometheus-operator-crds
   path: ./kubernetes/infrastructure/production/monitoring/kube-prometheus-stack/app
   prune: true
   sourceRef:
@@ -17,4 +39,4 @@ spec:
       namespace: monitoring
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 10m
