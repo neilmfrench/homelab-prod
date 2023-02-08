@@ -8,3 +8,4 @@ resources:
   - ./system-upgrade
   - ./longhorn-system
   - ./tigera-operator
+  - ./monitoring
