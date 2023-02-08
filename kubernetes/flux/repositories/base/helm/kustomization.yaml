@@ -12,3 +12,4 @@ resources:
   - ./jetstack.yaml
   - ./metallb.yaml
   - ./longhorn.yaml
+  - ./calico.yaml
