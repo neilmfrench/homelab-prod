@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: networking
+resources:
+  - ./secret.sops.yaml
+  - ../../../../base/cloudflare-ddns
+patchesStrategicMerge:
+  - ./cloudflare-ddns-values.yaml
+configMapGenerator:
+  - name: cloudflare-ddns-configmap
+    files:
+      - ./cloudflare-ddns.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
