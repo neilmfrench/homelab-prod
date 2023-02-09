@@ -5,6 +5,6 @@ resources:
   # - cloudflare-ddns
   # - traefik
   - pihole
-  - external-dns
+  # - external-dns
   # - dummy-test
   # - error-pages
