@@ -62,7 +62,7 @@ spec:
       web:
         redirectTo: websecure
       websecure:
-        asDefault: true
+        # asDefault: true
         tls:
           enabled: true
           options: "default"
