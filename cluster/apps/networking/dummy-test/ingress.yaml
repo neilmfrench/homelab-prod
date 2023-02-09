@@ -13,7 +13,6 @@ spec:
   tls:
     - hosts:
         - dummy-cert-test.${SECRET_DOMAIN}
-      secretName: "${SECRET_DOMAIN/./-}-production-tls"
   rules:
     - host: dummy-cert-test.${SECRET_DOMAIN}
       http:
