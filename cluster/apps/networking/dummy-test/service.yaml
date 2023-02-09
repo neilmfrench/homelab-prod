@@ -1,14 +1,14 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: dummy-cert-test
-  namespace: networking
-spec:
-  selector:
-    app: dummy-cert-test
-  type: ClusterIP
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: dummy-cert-test
+#   namespace: networking
+# spec:
+#   selector:
+#     app: dummy-cert-test
+#   type: ClusterIP
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 80
