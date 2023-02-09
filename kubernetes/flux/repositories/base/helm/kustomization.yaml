@@ -15,3 +15,4 @@ resources:
   - ./calico.yaml
   - ./prometheus.yaml
   - ./grafana.yaml
+  - ./bjw-s.yaml
