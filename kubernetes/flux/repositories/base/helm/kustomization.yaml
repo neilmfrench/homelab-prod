@@ -16,3 +16,4 @@ resources:
   - ./prometheus.yaml
   - ./grafana.yaml
   - ./bjw-s.yaml
+  - ./traefik.yaml
