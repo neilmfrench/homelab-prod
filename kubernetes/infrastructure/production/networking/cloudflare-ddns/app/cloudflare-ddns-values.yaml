@@ -17,7 +17,7 @@ spec:
     command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
     envFrom:
       - secretRef:
-          name: cloudflare-ddns-secret
+          name: cloudflare-ddns
     service:
       main:
         enabled: false

@@ -5,9 +5,6 @@ metadata:
   name: external-dns
 spec:
   values:
-    image:
-      repository: k8s.gcr.io/external-dns/external-dns
-      tag: "v0.13.2"
     interval: 5m
     provider: cloudflare
     env:
