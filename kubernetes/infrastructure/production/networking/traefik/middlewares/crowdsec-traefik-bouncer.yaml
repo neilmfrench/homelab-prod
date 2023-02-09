@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: crowdsec-traefik-bouncer
+  namespace: networking
+spec:
+  forwardAuth:
+    address: http://crowdsec-traefik-bouncer-service.security.svc.cluster.local:80/api/v1/forwardAuth
+    trustForwardHeader: true
