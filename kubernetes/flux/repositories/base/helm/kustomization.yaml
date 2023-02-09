@@ -17,3 +17,4 @@ resources:
   - ./grafana.yaml
   - ./bjw-s.yaml
   - ./traefik.yaml
+  - ./external-dns.yaml
