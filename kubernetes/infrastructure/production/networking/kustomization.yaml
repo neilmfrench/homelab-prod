@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./traefik/ks.yaml
   - ./cloudflare-ddns/ks.yaml
+  - ./external-dns/ks.yaml
