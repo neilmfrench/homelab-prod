@@ -77,11 +77,11 @@ spec:
           gnetId: 1860
           revision: 29
           datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/12175
-        calico-felix:
-          gnetId: 12175
-          revision: 5
-          datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/12175
+        # calico-felix:
+        #   gnetId: 12175
+        #   revision: 5
+        #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/2842
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
