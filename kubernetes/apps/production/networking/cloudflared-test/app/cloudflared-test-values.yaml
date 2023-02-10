@@ -1,0 +1,15 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx
+spec:
+  values:
+    image:
+      repository: nginx
+      tag: "stable-alpine"
+    service:
+      main:
+        ports:
+          http:
+            port: 80
