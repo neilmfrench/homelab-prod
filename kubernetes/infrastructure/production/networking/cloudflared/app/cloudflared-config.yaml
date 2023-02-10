@@ -19,7 +19,7 @@ ingress:
   - hostname: git-ssh.${SECRET_DOMAIN}
     service: ssh://gitea-ssh:22
   - hostname: testcf.${SECRET_DOMAIN}
-    service: http://nginx-cf-test:80
+    service: http://cloudflared-test-nginx:80
   # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
   # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
   # in the connection from cloudflared to your local service, not from the internet to cloudflared.
