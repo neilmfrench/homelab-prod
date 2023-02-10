@@ -18,3 +18,4 @@ resources:
   - ./bjw-s.yaml
   - ./traefik.yaml
   - ./external-dns.yaml
+  - ./pihole.yaml
