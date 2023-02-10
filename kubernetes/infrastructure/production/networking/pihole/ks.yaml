@@ -27,6 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-infrastructure-traefik-crds
+    - name: cluster-infrastructure-pihole
   path: ./kubernetes/infrastructure/production/networking/pihole/dashboard
   prune: true
   sourceRef:
