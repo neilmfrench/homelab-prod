@@ -26,7 +26,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - cluster-infrastructure-traefik-crds
+    - name: cluster-infrastructure-traefik-crds
   path: ./kubernetes/infrastructure/production/networking/pihole/dashboard
   prune: true
   sourceRef:
