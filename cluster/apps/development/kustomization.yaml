@@ -5,7 +5,7 @@ resources:
   # - onedev
   - harbor
   # - bookstack
-  - cloudflared
+  # - cloudflared
   - tekton
   - gitea
   - pocketbase
