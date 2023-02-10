@@ -1,23 +1,23 @@
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-cf-test
-  namespace: development
-  labels:
-    app: nginx-cf-test
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx-cf-test
-  template:
-    metadata:
-      labels:
-        app: nginx-cf-test
-    spec:
-      containers:
-        - name: nginx-cf-test
-          image: nginx:stable-alpine
-          ports:
-            - containerPort: 80
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nginx-cf-test
+#   namespace: development
+#   labels:
+#     app: nginx-cf-test
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: nginx-cf-test
+#   template:
+#     metadata:
+#       labels:
+#         app: nginx-cf-test
+#     spec:
+#       containers:
+#         - name: nginx-cf-test
+#           image: nginx:stable-alpine
+#           ports:
+#             - containerPort: 80
