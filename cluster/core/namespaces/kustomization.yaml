@@ -10,7 +10,7 @@ resources:
   # - monitoring.yaml
   - media.yaml
   - finance.yaml
-  - development.yaml
+  # - development.yaml
   - home.yaml
   - tekton-pipelines.yaml
   - tekton-operator.yaml

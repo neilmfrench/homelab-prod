@@ -1,65 +1,65 @@
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: pihole
-  namespace: networking
-spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: pihole
-      version: 2.11.1
-      sourceRef:
-        kind: HelmRepository
-        name: pihole-charts
-        namespace: flux-system
-      interval: 5m
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    remediation:
-      retries: 3
-  values:
-    image:
-      repository: pihole/pihole
-      tag: "2023.01"
-    serviceWeb:
-      loadBalancerIP: "${SECRET_PIHOLE_INTERNAL_IP}"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: pihole-svc
-      type: LoadBalancer
-    serviceDns:
-      loadBalancerIP: "${SECRET_PIHOLE_INTERNAL_IP}"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: pihole-svc
-      type: LoadBalancer
-    dnsmasq:
-      # these won't actually show up in the PiHole gui, but they should be added to the dnsmasq config
-      customDnsEntries:
-        - address=/traefik.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/pihole.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/longhorn.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/prometheus.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/pihole-hue-bridge.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/hass-config.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/crowdsec-dash.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/tekton.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/alert-manager.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/pocketbase.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/changedetection.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/gitops.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/podinfo.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/argocd.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        # - address=/minio.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        # - address=/harbor-notary.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/k8s1/${SECRET_K8S1_IP}
-        - address=/k8s2/${SECRET_K8S2_IP}
-        - address=/k8s3/${SECRET_K8S3_IP}
-        - address=/k8s4/${SECRET_K8S4_IP}
-    persistentVolumeClaim:
-      enabled: true
-      existingClaim: pihole-config
-    adminPassword: "${SECRET_PIHOLE_ADMIN_PASSWORD}"
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: pihole
+#   namespace: networking
+# spec:
+#   interval: 5m
+#   chart:
+#     spec:
+#       chart: pihole
+#       version: 2.11.1
+#       sourceRef:
+#         kind: HelmRepository
+#         name: pihole-charts
+#         namespace: flux-system
+#       interval: 5m
+#   install:
+#     createNamespace: true
+#     remediation:
+#       retries: 3
+#   upgrade:
+#     remediation:
+#       retries: 3
+#   values:
+#     image:
+#       repository: pihole/pihole
+#       tag: "2023.01"
+#     serviceWeb:
+#       loadBalancerIP: "${SECRET_PIHOLE_INTERNAL_IP}"
+#       annotations:
+#         metallb.universe.tf/allow-shared-ip: pihole-svc
+#       type: LoadBalancer
+#     serviceDns:
+#       loadBalancerIP: "${SECRET_PIHOLE_INTERNAL_IP}"
+#       annotations:
+#         metallb.universe.tf/allow-shared-ip: pihole-svc
+#       type: LoadBalancer
+#     dnsmasq:
+#       # these won't actually show up in the PiHole gui, but they should be added to the dnsmasq config
+#       customDnsEntries:
+#         - address=/traefik.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/pihole.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/longhorn.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/prometheus.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/pihole-hue-bridge.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/hass-config.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/crowdsec-dash.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/tekton.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/alert-manager.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/pocketbase.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/changedetection.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/gitops.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/podinfo.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/argocd.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         # - address=/minio.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         # - address=/harbor-notary.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+#         - address=/k8s1/${SECRET_K8S1_IP}
+#         - address=/k8s2/${SECRET_K8S2_IP}
+#         - address=/k8s3/${SECRET_K8S3_IP}
+#         - address=/k8s4/${SECRET_K8S4_IP}
+#     persistentVolumeClaim:
+#       enabled: true
+#       existingClaim: pihole-config
+#     adminPassword: "${SECRET_PIHOLE_ADMIN_PASSWORD}"
