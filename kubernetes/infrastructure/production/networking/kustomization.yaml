@@ -6,3 +6,4 @@ resources:
   - ./traefik/ks.yaml
   - ./cloudflare-ddns/ks.yaml
   - ./external-dns/ks.yaml
+  - ./pihole/ks.yaml

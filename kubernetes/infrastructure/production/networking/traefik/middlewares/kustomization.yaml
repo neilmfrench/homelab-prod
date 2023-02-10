@@ -9,4 +9,5 @@ resources:
   - ./cloudflare-only.yaml
   - ./internal-only.yaml
   - ./rxresume-strip-api-prefix.yaml
+  - ./pihole-redirect-regex.yaml
   # - error-pages.yaml
