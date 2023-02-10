@@ -1,0 +1,68 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: bookstack
+spec:
+  values:
+    image:
+      repository: ghcr.io/linuxserver/bookstack
+      pullPolicy: IfNotPresent
+      tag: "linuxserver/bookstack:23.01.1"
+    env:
+      TZ: ${TIMEZONE}
+      APP_URL: https://docs.${SECRET_DOMAIN}
+      APP_KEY: ${SECRET_BOOKSTACK_KEY}
+      APP_PROXIES: "*"
+      DB_HOST: bookstack-mariadb
+      DB_DATABASE: bookstack
+      DB_USERNAME: bookstack
+      DB_PASSWORD: ${SECRET_BOOKSTACK_MARIADB_PASSWORD}
+      MAIL_DRIVER: smtp
+      MAIL_FROM: ${SECRET_BOOKSTACK_EMAIL_FROM}
+      MAIL_FROM_NAME: ${SECRET_BOOKSTACK_EMAIL_FROM}
+      MAIL_HOST: ${SECRET_BOOKSTACK_EMAIL_HOST}
+      MAIL_PORT: 587
+      MAIL_USERNAME: ${SECRET_BOOKSTACK_EMAIL_USER}
+      MAIL_PASSWORD: ${SECRET_BOOKSTACK_EMAIL_KEY}
+      MAIL_ENCRYPTION: tls
+      ALLOW_CONTENT_SCRIPTS: true # for cloudflare
+      AUTH_METHOD: saml2
+      SAML2_NAME: authentik
+      SAML2_EMAIL_ATTRIBUTE: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+      SAML2_DISPLAY_NAME_ATTRIBUTES: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+      SAML2_EXTERNAL_ID_ATTRIBUTE: http://schemas.goauthentik.io/2021/02/saml/uid
+      SAML2_IDP_ENTITYID: ${SECRET_BOOKSTACK_SAML_METADATA_URL}
+      SAML2_AUTOLOAD_METADATA: true
+      SAML2_USER_TO_GROUPS: true
+      SAML2_GROUP_ATTRIBUTE: http://schemas.xmlsoap.org/claims/Group
+      SAML2_REMOVE_FROM_GROUPS: true
+      # SAML2_DUMP_USER_DETAILS: true
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "docs.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: bookstack-tls
+    persistence:
+      config:
+        enabled: true
+        mountPath: /config
+        existingClaim: bookstack-config
