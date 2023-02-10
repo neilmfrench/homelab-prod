@@ -40,7 +40,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: configmap
+        type: configMap
         name: fifa-openapi-configmap
         mountPath: /mnt/openapi.json
         subPath: openapi.json
