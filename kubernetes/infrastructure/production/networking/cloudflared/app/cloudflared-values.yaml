@@ -5,6 +5,9 @@ metadata:
   name: cloudflared
 spec:
   values:
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "cloudflared-configmap"
     image:
       repository: cloudflare/cloudflared
       tag: "2023.1.0"
