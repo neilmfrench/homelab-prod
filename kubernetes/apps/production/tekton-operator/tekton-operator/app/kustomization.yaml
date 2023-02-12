@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: tekton-operator
+resources:
+  - ../../../../base/tekton-operator
+patchesStrategicMerge:
+  - ./tekton-operator-values.yaml
+patches:
+  - target:
+      kind: ClusterRole
+      name: tekton-operator
+    path: ./rbac-patch.yaml

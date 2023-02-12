@@ -7,3 +7,5 @@ resources:
   - ./media
   - ./development
   - ./networking
+  - ./tekton-operator
+  - ./tekton-pipelines
