@@ -10,7 +10,7 @@ resources:
   # - monitoring
   - media
   - finance
-  - development
+  # - development
   - home
   - flux-system
   - magazine
