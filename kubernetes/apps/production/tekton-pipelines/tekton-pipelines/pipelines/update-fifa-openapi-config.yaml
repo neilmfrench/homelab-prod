@@ -57,7 +57,7 @@ spec:
     #           set -e
     #           yq -i '.data."openapi.json" = loadstr("fifa-openapi/openapi.json")' homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
     - name: push-updated-config
-      runAfter: ["update-openapi-configmap"]
+      runAfter: ["set-commit-id"]
       taskRef:
         name: git-cli
       workspaces:
