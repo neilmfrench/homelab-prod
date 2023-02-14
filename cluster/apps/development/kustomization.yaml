@@ -8,6 +8,6 @@ resources:
   # - cloudflared
   # - tekton
   # - gitea
-  - pocketbase
+  # - pocketbase
   # - fifa-openapi
   # - planka
