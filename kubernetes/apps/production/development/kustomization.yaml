@@ -6,3 +6,4 @@ resources:
   - ./bookstack/ks.yaml
   - ./fifa-openapi/ks.yaml
   - ./gitea/ks.yaml
+  - ./harbor/ks.yaml
