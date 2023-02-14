@@ -19,3 +19,4 @@ resources:
   - ./traefik.yaml
   - ./external-dns.yaml
   - ./pihole.yaml
+  - ./gitea.yaml
