@@ -11,7 +11,8 @@ spec:
       password: "${SECRET_GITEA_POSTGRESQL_PASSWORD}"
       database: "gitea"
       replicationPassword: "${SECRET_GITEA_POSTGRESQL_PASSWORD}"
-    persistence:
-      enabled: true
-      storageClass: longhorn
-      size: 10Gi
+    primary:
+      persistence:
+        enabled: true
+        storageClass: longhorn
+        size: 8Gi
