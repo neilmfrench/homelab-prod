@@ -5,6 +5,8 @@ metadata:
   name: cluster-apps-tekton-pipelines-dashboard
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/dashboard
   prune: true
   sourceRef:
@@ -20,6 +22,8 @@ metadata:
   name: cluster-apps-tekton-pipelines-secrets
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/secrets
   prune: true
   sourceRef:
@@ -35,6 +39,8 @@ metadata:
   name: cluster-apps-tekton-pipelines-rbac
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/rbac
   prune: true
   sourceRef:
@@ -52,6 +58,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-tekton-pipelines-secrets
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks
   prune: true
   sourceRef:
@@ -69,6 +76,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-tekton-pipelines-tasks
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/pipelines
   prune: true
   sourceRef:
@@ -86,6 +94,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-tekton-pipelines-rbac
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/trigger-bindings
   prune: true
   sourceRef:
@@ -105,6 +114,7 @@ spec:
     - name: cluster-apps-tekton-pipelines-secrets
     - name: cluster-apps-tekton-pipelines-rbac
     - name: cluster-apps-tekton-pipelines-pipelines
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/trigger-templates
   prune: true
   sourceRef:
@@ -123,6 +133,7 @@ spec:
   dependsOn:
     - name: cluster-apps-tekton-pipelines-trigger-templates
     - name: cluster-apps-tekton-pipelines-trigger-bindings
+    - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/eventlisteners
   prune: true
   sourceRef:
