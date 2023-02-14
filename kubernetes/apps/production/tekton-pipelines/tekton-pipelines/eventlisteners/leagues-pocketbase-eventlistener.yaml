@@ -1,0 +1,14 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: leagues-pocketbase-webhook
+  namespace: tekton-pipelines
+spec:
+  serviceAccountName: tekton-triggers-service-account
+  triggers:
+    - name: leagues-pocketbase-webhook
+      bindings:
+        - ref: gitea-triggerbinding
+      template:
+        ref: leagues-pocketbase-trigger-template

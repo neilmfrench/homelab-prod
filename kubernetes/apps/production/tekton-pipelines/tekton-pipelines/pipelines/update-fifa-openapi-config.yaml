@@ -1,0 +1,96 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-update-fifa-openapi-config
+  namespace: tekton-pipelines
+spec:
+  workspaces:
+    - name: shared-data
+    - name: ssh-creds
+  tasks:
+    - name: clone-repos
+      taskRef:
+        name: git-cli
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: ssh-directory
+          workspace: ssh-creds
+      params:
+        - name: GIT_SCRIPT
+          value: |
+            git clone git@github.com:neilmfrench/homelab-prod.git homelab
+            GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone git@gitea-ssh.development.svc.cluster.local:neil/fifa-openapi.git fifa-openapi
+    - name: set-commit-id
+      runAfter: ["clone-repos"]
+      workspaces:
+        - name: source
+          workspace: shared-data
+      taskSpec:
+        workspaces:
+          - name: source
+        results:
+          - name: fifa-openapi-commit-id
+            description: Commit ID for the new OpenAPI config
+        steps:
+          - name: git
+            image: docker.io/alpine/git:v2.26.2@sha256:23618034b0be9205d9cc0846eb711b12ba4c9b468efdd8a59aac1d7b1a23363f
+            workingDir: $(workspaces.source.path)
+            script: |
+              printf "%s" "$(git -C fifa-openapi rev-parse HEAD)" | tee $(results.fifa-openapi-commit-id.path)
+    - name: update-openapi-configmap
+      runAfter: ["set-commit-id"] # Wait until the clone is done before reading the readme.
+      workspaces:
+        - name: source
+          workspace: shared-data
+      taskSpec:
+        workspaces:
+          - name: source
+        steps:
+          - image: mikefarah/yq:4.30.5
+            workingDir: $(workspaces.source.path)
+            securityContext:
+              runAsUser: 0
+              runAsNonRoot: false
+            script: |
+              /usr/bin/env sh
+              set -e
+              yq -i '.data."openapi.json" = loadstr("fifa-openapi/openapi.json")' homelab/cluster/apps/development/fifa-openapi/openapi-config.yaml
+    - name: push-updated-config
+      runAfter: ["update-openapi-configmap"]
+      taskRef:
+        name: git-cli
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: ssh-directory
+          workspace: ssh-creds
+      params:
+        - name: GIT_USER_NAME
+          value: ${SECRET_GIT_NAME}
+        - name: GIT_USER_EMAIL
+          value: ${SECRET_GIT_EMAIL}
+        - name: GIT_SCRIPT
+          value: |
+            export COMMIT_ID=$(tasks.set-commit-id.results.fifa-openapi-commit-id)
+            git -C homelab checkout -b fifa-openapi-config-update-$COMMIT_ID
+            git -C homelab add cluster/apps/development/fifa-openapi/openapi-config.yaml
+            git -C homelab commit -m "Automated config update for fifa openapi commit: $COMMIT_ID"
+            git -C homelab push origin fifa-openapi-config-update-$COMMIT_ID
+    - name: create-github-pr
+      runAfter: ["push-updated-config"]
+      taskRef:
+        name: github-open-pr
+      params:
+        - name: REPO_FULL_NAME
+          value: neilmfrench/homelab-prod
+        - name: HEAD
+          value: fifa-openapi-config-update-$(tasks.set-commit-id.results.fifa-openapi-commit-id)
+        - name: BASE
+          value: main
+        - name: TITLE
+          value: "Update FIFA OpenAPI Config"
+        - name: BODY
+          value: "Updates to latest version of FIFA OpenAPI spec"
+        - name: GITHUB_TOKEN_SECRET_NAME
+          value: github-token
