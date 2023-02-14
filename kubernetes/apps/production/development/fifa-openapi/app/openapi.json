@@ -3,7 +3,7 @@
   "info": {
     "title": "FIFA.com OpenAPI Spec",
     "description": "OpenAPI Spec for https://api.fifa.com",
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "servers": [
     {
@@ -13,7 +13,7 @@
   "tags": [
     {
       "name": "countries",
-      "description": "Countries known to have participated in FIFA competitions"
+      "description": "Countries known to have participated in FIFA competitions in all time"
     },
     {
       "name": "teams",
