@@ -74,8 +74,8 @@ spec:
           value: |
             export COMMIT_ID=$(tasks.set-commit-id.results.fifa-openapi-commit-id)
             git -C homelab checkout -b fifa-openapi-config-update-$COMMIT_ID
-            cp fifa-openapi/openapi.json kubernetes/apps/production/development/fifa-openapi/app/openapi.json
-            git -C homelab add kubernetes/apps/production/development/fifa-openapi/app/openapi.json
+            cp fifa-openapi/openapi.json homelab/kubernetes/apps/production/development/fifa-openapi/app/openapi.json
+            git -C homelab add homelab/kubernetes/apps/production/development/fifa-openapi/app/openapi.json
             git -C homelab commit -m "Automated config update for fifa openapi commit: $COMMIT_ID"
             git -C homelab push origin fifa-openapi-config-update-$COMMIT_ID
     - name: create-github-pr
