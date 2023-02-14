@@ -13,9 +13,6 @@ spec:
       replicationPassword: "${SECRET_PRIVATEBIN_MARIADB_PASSWORD}"
     primary:
       persistence:
-        size: 10Gi
-        storageClass: longhorn
-    secondary:
-      persistence:
+        enabled: true
         size: 10Gi
         storageClass: longhorn
