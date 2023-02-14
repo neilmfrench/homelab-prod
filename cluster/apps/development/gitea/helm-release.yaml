@@ -1,90 +1,90 @@
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: gitea
-  namespace: development
-spec:
-  interval: 5m
-  chart:
-    spec:
-      # renovate: registryUrl=https://dl.gitea.io/charts
-      chart: gitea
-      version: 6.0.5
-      sourceRef:
-        kind: HelmRepository
-        name: gitea-charts
-        namespace: flux-system
-      interval: 5m
-  values:
-    image:
-      repository: gitea/gitea
-      tag: 1.18.0
-    gitea:
-      admin:
-        email: ${SECRET_GITEA_ADMIN_EMAIL}
-        username: git-admin
-        password: ${SECRET_GITEA_ADMIN_PASSWORD}
-      config:
-        APP_NAME: "Homelab Gitea"
-        webhook:
-          ALLOWED_HOST_LIST: "10.43.0.0/16"
-        database:
-          DB_TYPE: postgres
-          HOST: gitea-postgresql:5432
-          NAME: gitea
-          USER: gitea
-          PASSWD: ${SECRET_GITEA_POSTGRESQL_PASSWORD}
-          SCHEMA: public
-        server:
-          SSH_PORT: 22
-          SSH_DOMAIN: git-ssh.${SECRET_DOMAIN}
-          ROOT_URL: https://git.${SECRET_DOMAIN}
-        mailer:
-          ENABLED: true
-          HOST: ${SECRET_GITEA_MAIL_HOST}
-          FROM: ${SECRET_GITEA_MAIL_FROM}
-          USER: ${SECRET_GITEA_MAIL_USER}
-          PASSWD: ${SECRET_GITEA_MAIL_PASSWORD}
-        # oauth:
-        #   - name: authentik
-        #     provider: openidConnect
-        #     key: ${SECRET_GITEA_AUTHENTIK_CLIENT_ID}
-        #     secret: ${SECRET_GITEA_AUTHENTIK_CLIENT_SECRET}
-        #     autoDiscoverUrl: https://id.${SECRET_DOMAIN}/application/o/gitea-slug/.well-known/openid-configuration
-        #     iconUrl: https://raw.githubusercontent.com/goauthentik/authentik/master/web/icons/icon.png
-        #     scopes: "email profile"
-        #     groupClaimName: groups
-        #     adminGroup: "Gitea Admins"
-        #     useCustomUrls: false
-        respository:
-          DEFAULT_PRIVATE: true
-        service:
-          DISABLE_REGISTRATION: true
-          REQUIRE_SIGNIN_VIEW: true
-    postgresql:
-      enabled: false
-    persistence:
-      enabled: true
-      size: 10Gi
-      existingClaim: "gitea-data"
-    ingress:
-      enabled: true
-      className: traefik
-      annotations:
-        external-dns/is-public: "true"
-        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "git"
-        hajimari.io/appName: "Gitea"
-      hosts:
-        - host: "git.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - "git.${SECRET_DOMAIN}"
-          secretName: gitea-tls
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: gitea
+#   namespace: development
+# spec:
+#   interval: 5m
+#   chart:
+#     spec:
+#       # renovate: registryUrl=https://dl.gitea.io/charts
+#       chart: gitea
+#       version: 6.0.5
+#       sourceRef:
+#         kind: HelmRepository
+#         name: gitea-charts
+#         namespace: flux-system
+#       interval: 5m
+#   values:
+#     image:
+#       repository: gitea/gitea
+#       tag: 1.18.0
+#     gitea:
+#       admin:
+#         email: ${SECRET_GITEA_ADMIN_EMAIL}
+#         username: git-admin
+#         password: ${SECRET_GITEA_ADMIN_PASSWORD}
+#       config:
+#         APP_NAME: "Homelab Gitea"
+#         webhook:
+#           ALLOWED_HOST_LIST: "10.43.0.0/16"
+#         database:
+#           DB_TYPE: postgres
+#           HOST: gitea-postgresql:5432
+#           NAME: gitea
+#           USER: gitea
+#           PASSWD: ${SECRET_GITEA_POSTGRESQL_PASSWORD}
+#           SCHEMA: public
+#         server:
+#           SSH_PORT: 22
+#           SSH_DOMAIN: git-ssh.${SECRET_DOMAIN}
+#           ROOT_URL: https://git.${SECRET_DOMAIN}
+#         mailer:
+#           ENABLED: true
+#           HOST: ${SECRET_GITEA_MAIL_HOST}
+#           FROM: ${SECRET_GITEA_MAIL_FROM}
+#           USER: ${SECRET_GITEA_MAIL_USER}
+#           PASSWD: ${SECRET_GITEA_MAIL_PASSWORD}
+#         # oauth:
+#         #   - name: authentik
+#         #     provider: openidConnect
+#         #     key: ${SECRET_GITEA_AUTHENTIK_CLIENT_ID}
+#         #     secret: ${SECRET_GITEA_AUTHENTIK_CLIENT_SECRET}
+#         #     autoDiscoverUrl: https://id.${SECRET_DOMAIN}/application/o/gitea-slug/.well-known/openid-configuration
+#         #     iconUrl: https://raw.githubusercontent.com/goauthentik/authentik/master/web/icons/icon.png
+#         #     scopes: "email profile"
+#         #     groupClaimName: groups
+#         #     adminGroup: "Gitea Admins"
+#         #     useCustomUrls: false
+#         respository:
+#           DEFAULT_PRIVATE: true
+#         service:
+#           DISABLE_REGISTRATION: true
+#           REQUIRE_SIGNIN_VIEW: true
+#     postgresql:
+#       enabled: false
+#     persistence:
+#       enabled: true
+#       size: 10Gi
+#       existingClaim: "gitea-data"
+#     ingress:
+#       enabled: true
+#       className: traefik
+#       annotations:
+#         external-dns/is-public: "true"
+#         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+#         cert-manager.io/cluster-issuer: "letsencrypt-production"
+#         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+#         hajimari.io/enable: "true"
+#         hajimari.io/icon: "git"
+#         hajimari.io/appName: "Gitea"
+#       hosts:
+#         - host: "git.${SECRET_DOMAIN}"
+#           paths:
+#             - path: /
+#               pathType: Prefix
+#       tls:
+#         - hosts:
+#             - "git.${SECRET_DOMAIN}"
+#           secretName: gitea-tls

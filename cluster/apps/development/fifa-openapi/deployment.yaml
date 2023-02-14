@@ -1,39 +1,39 @@
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: fifa-openapi
-  namespace: development
-  annotations:
-    configmap.reloader.stakater.com/reload: "fifa-openapi-configmap"
-  labels:
-    app: fifa-openapi
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: fifa-openapi
-  template:
-    metadata:
-      labels:
-        app: fifa-openapi
-    spec:
-      containers:
-        - name: fifa-openapi
-          image: swaggerapi/swagger-ui:v4.15.5
-          env:
-            - name: SWAGGER_JSON
-              value: /mnt/openapi.json
-          ports:
-            - containerPort: 8080
-          volumeMounts:
-            - name: openapi-config
-              mountPath: /mnt/openapi.json
-              subPath: openapi.json
-      volumes:
-        - name: openapi-config
-          configMap:
-            name: fifa-openapi-configmap
-            items:
-              - key: openapi.json
-                path: openapi.json
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: fifa-openapi
+#   namespace: development
+#   annotations:
+#     configmap.reloader.stakater.com/reload: "fifa-openapi-configmap"
+#   labels:
+#     app: fifa-openapi
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: fifa-openapi
+#   template:
+#     metadata:
+#       labels:
+#         app: fifa-openapi
+#     spec:
+#       containers:
+#         - name: fifa-openapi
+#           image: swaggerapi/swagger-ui:v4.15.5
+#           env:
+#             - name: SWAGGER_JSON
+#               value: /mnt/openapi.json
+#           ports:
+#             - containerPort: 8080
+#           volumeMounts:
+#             - name: openapi-config
+#               mountPath: /mnt/openapi.json
+#               subPath: openapi.json
+#       volumes:
+#         - name: openapi-config
+#           configMap:
+#             name: fifa-openapi-configmap
+#             items:
+#               - key: openapi.json
+#                 path: openapi.json

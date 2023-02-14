@@ -1,29 +1,29 @@
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: fifa-openapi
-  namespace: development
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-production
-    external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
-    external-dns/is-public: "true"
-    hajimari.io/enable: "false"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-spec:
-  ingressClassName: "traefik"
-  tls:
-    - hosts:
-        - "fifa-openapi.${SECRET_DOMAIN}"
-      secretName: "fifa-openapi-tls"
-  rules:
-    - host: "fifa-openapi.${SECRET_DOMAIN}"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: fifa-openapi
-                port:
-                  number: 8080
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: fifa-openapi
+#   namespace: development
+#   annotations:
+#     cert-manager.io/cluster-issuer: letsencrypt-production
+#     external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
+#     external-dns/is-public: "true"
+#     hajimari.io/enable: "false"
+#     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+# spec:
+#   ingressClassName: "traefik"
+#   tls:
+#     - hosts:
+#         - "fifa-openapi.${SECRET_DOMAIN}"
+#       secretName: "fifa-openapi-tls"
+#   rules:
+#     - host: "fifa-openapi.${SECRET_DOMAIN}"
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: fifa-openapi
+#                 port:
+#                   number: 8080

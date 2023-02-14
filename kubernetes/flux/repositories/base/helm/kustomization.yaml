@@ -20,3 +20,4 @@ resources:
   - ./external-dns.yaml
   - ./pihole.yaml
   - ./gitea.yaml
+  - ./harbor.yaml
