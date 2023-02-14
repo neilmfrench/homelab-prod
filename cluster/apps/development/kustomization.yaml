@@ -7,7 +7,7 @@ resources:
   # - bookstack
   # - cloudflared
   # - tekton
-  - gitea
+  # - gitea
   - pocketbase
   # - fifa-openapi
   # - planka
