@@ -9,3 +9,4 @@ resources:
   - ./networking
   - ./tekton-operator
   - ./tekton-pipelines
+  - ./security

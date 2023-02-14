@@ -31,11 +31,9 @@ spec:
         registry:
           storageClass: "longhorn"
           size: 15Gi
-          # existingClaim: harbor-registry
         chartmuseum:
           storageClass: "longhorn"
           size: 5Gi
-          # existingClaim: harbor-chartmuseum
         jobservice:
           jobLog:
             storageClass: "longhorn"
