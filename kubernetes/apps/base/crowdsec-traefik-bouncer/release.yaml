@@ -30,7 +30,7 @@ spec:
               kind: Deployment
             patch:
               - op: add
-                paths: /spec/template/spec/containers/0/env/-
+                path: /spec/template/spec/containers/0/env/-
                 value:
                   name: CROWDSEC_BOUNCER_SCHEME
                   value: "https"
