@@ -25,6 +25,14 @@ spec:
         name: crowdsec-lapi-tls
         mountPath: /etc/ssl/crowdsec-lapi
         readOnly: true
+    initContainers:
+      init-cert:
+        image: debian:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c", "update-ca-certificates"]
+        volumeMounts:
+          - name: crowdsec-lapi-tls
+            mountPath: /etc/ssl/crowdsec-lapi
     probes:
       liveness:
         custom: true
@@ -33,7 +41,7 @@ spec:
             path: /api/v1/ping
             port: http
           failureThreshold: 1
-          initialDelaySeconds: 10
+          initialDelaySeconds: 5
           periodSeconds: 10
       readiness:
         custom: true
@@ -42,7 +50,7 @@ spec:
             path: /api/v1/ping
             port: http
           failureThreshold: 1
-          initialDelaySeconds: 10
+          initialDelaySeconds: 5
           periodSeconds: 10
       resources:
         limits:
