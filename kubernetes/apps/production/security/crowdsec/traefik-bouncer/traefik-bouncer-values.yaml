@@ -29,7 +29,7 @@ spec:
       init-cert:
         image: debian:latest
         imagePullPolicy: IfNotPresent
-        command: ["/bin/sh", "-c", "update-ca-certificates"]
+        command: ["/bin/sh", "-c", "apt update && update-ca-certificates"]
         volumeMounts:
           - name: crowdsec-lapi-tls
             mountPath: /etc/ssl/crowdsec-lapi
