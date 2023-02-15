@@ -23,7 +23,7 @@ spec:
         enabled: true
         type: secret
         name: crowdsec-lapi-tls
-        mountPath: /etc/ssl/crowdsec-lapi
+        mountPath: /etc/ssl/certs/crowdsec-lapi
         readOnly: true
     initContainers:
       init-cert:
@@ -37,7 +37,7 @@ spec:
           ]
         volumeMounts:
           - name: crowdsec-lapi-tls
-            mountPath: /etc/ssl/crowdsec-lapi
+            mountPath: /etc/ssl/certs/crowdsec-lapi
     probes:
       liveness:
         custom: true
