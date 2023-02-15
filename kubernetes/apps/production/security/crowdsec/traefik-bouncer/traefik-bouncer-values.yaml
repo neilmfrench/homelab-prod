@@ -6,13 +6,18 @@ metadata:
 spec:
   values:
     image:
-      repository: fbonalair/traefik-crowdsec-bouncer
-      tag: "0.5.0"
+      repository: harbor.${SECRET_DOMAIN}/crowdsec-traefik-bouncer/crowdsec-traefik-bouncer
+      tag: "1.0.0"
+    imagePullSecrets:
+      - name: harbor-neilfrench-regcred
     env:
       CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
       CROWDSEC_AGENT_HOST: crowdsec-service.security:8080
       CROWDSEC_BOUNCER_SCHEME: https
-      GIN_MODE: debug
+      CROWDSEC_BOUNCER_CACHE_MODE: stream
+      CROWDSEC_DEFAULT_CACHE_DURATION: 5m
+      CROWDSEC_BOUNCER_STREAM_INTERVAL: 1m
+      GIN_MODE: release
     service:
       main:
         ports:
@@ -44,14 +49,14 @@ spec:
             mountPath: /tmp/crowdsec-lapi
           - name: certs
             mountPath: /etc/ssl/certs
-    sidecars:
-      debug:
-        image: debian:latest
-        imagePullPolicy: IfNotPresent
-        command: ["/bin/sh", "-c", "sleep infinity"]
-        volumeMounts:
-          - name: certs
-            mountPath: /etc/ssl/certs
+    # sidecars:
+    #   debug:
+    #     image: debian:latest
+    #     imagePullPolicy: IfNotPresent
+    #     command: ["/bin/sh", "-c", "sleep infinity"]
+    #     volumeMounts:
+    #       - name: certs
+    #         mountPath: /etc/ssl/certs
     probes:
       liveness:
         custom: true
