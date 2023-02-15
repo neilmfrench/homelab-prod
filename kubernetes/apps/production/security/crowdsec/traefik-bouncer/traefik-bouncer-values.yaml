@@ -19,11 +19,15 @@ spec:
           http:
             port: 8080
     persistence:
+      certs:
+        enabled: true
+        type: emptyDir
+        mountPath: /etc/ssl/certs/
       crowdsec-lapi-tls:
         enabled: true
         type: secret
         name: crowdsec-lapi-tls
-        mountPath: /etc/ssl/certs/crowdsec-lapi
+        mountPath: /tmp/crowdsec-lapi
         readOnly: true
     initContainers:
       init-cert:
@@ -33,16 +37,21 @@ spec:
           [
             "/bin/sh",
             "-c",
-            "apt update && apt install ca-certificates -y && update-ca-certificates",
+            "cp /tmp/crowdsec-lapi/* /etc/ssl/certs/ && apt update && apt install ca-certificates -y && update-ca-certificates",
           ]
         volumeMounts:
           - name: crowdsec-lapi-tls
-            mountPath: /etc/ssl/certs/crowdsec-lapi
+            mountPath: /tmp/crowdsec-lapi
+          - name: certs
+            mountPath: /etc/ssl/certs
     sidecars:
       debug:
         image: debian:latest
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c", "sleep infinity"]
+        volumeMounts:
+          - name: certs
+            mountPath: /etc/ssl/certs
     probes:
       liveness:
         custom: true
