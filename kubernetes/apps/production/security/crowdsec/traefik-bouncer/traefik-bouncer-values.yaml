@@ -18,6 +18,13 @@ spec:
         ports:
           http:
             port: 8080
+    persistence:
+      crowdsec-lapi-tls:
+        enabled: true
+        type: secret
+        name: crowdsec-lapi-tls
+        mountPath: /etc/ssl/crowdsec-lapi
+        readOnly: true
     probes:
       liveness:
         custom: true
