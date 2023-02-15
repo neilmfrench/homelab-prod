@@ -15,12 +15,14 @@ spec:
         loadBalancerIP: "${METALLB_TRAEFIK_ADDR}"
         externalTrafficPolicy: Local
     logs:
-      general:
-        format: json
-        level: DEBUG
       access:
         enabled: true
-        format: json
+      # general:
+      #   format: json
+      #   level: DEBUG
+      # access:
+      #   enabled: true
+      #   format: json
     ingressClass:
       enabled: true
       isDefaultClass: true
