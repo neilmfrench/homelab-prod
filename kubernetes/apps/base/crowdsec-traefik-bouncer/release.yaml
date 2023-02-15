@@ -22,3 +22,15 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  postRenderers:
+    - kustomize:
+        # https://github.com/fbonalair/traefik-crowdsec-bouncer/blob/cc1abf6238d9dee47e6cd7866e1d51ab9d053dc1/controler/controler.go
+        patchesJson6902:
+          - target:
+              kind: Deployment
+            patch:
+              - op: add
+                paths: /spec/containers/0/env/-
+                value:
+                  - name: CROWDSEC_BOUNCER_SCHEME
+                    value: "https"
