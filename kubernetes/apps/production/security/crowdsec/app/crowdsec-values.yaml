@@ -71,7 +71,7 @@ spec:
             crowdsecurity/http-cve
             crowdsecurity/whitelist-good-actors
         - name: PARSERS
-          value: "crowdsecurity/cri-logs crowdsecurity/docker-logs"
+          value: "crowdsecurity/cri-logs"
       acquisition:
         - namespace: networking
           podName: traefik-*

@@ -49,14 +49,6 @@ spec:
             mountPath: /tmp/crowdsec-lapi
           - name: certs
             mountPath: /etc/ssl/certs
-    # sidecars:
-    #   debug:
-    #     image: debian:latest
-    #     imagePullPolicy: IfNotPresent
-    #     command: ["/bin/sh", "-c", "sleep infinity"]
-    #     volumeMounts:
-    #       - name: certs
-    #         mountPath: /etc/ssl/certs
     probes:
       liveness:
         custom: true
