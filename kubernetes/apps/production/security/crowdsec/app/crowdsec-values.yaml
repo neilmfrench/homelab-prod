@@ -17,8 +17,6 @@ spec:
           value: "${SECRET_CROWDSEC_ENROLL_KEY}"
         - name: ENROLL_INSTANCE_NAME
           value: "homelab k8s cluster"
-        - name: ENROLL_TAGS
-          value: "k8s linux test"
         - name: BOUNCER_KEY_traefik
           value: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
       dashboard:
