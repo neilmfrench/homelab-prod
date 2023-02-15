@@ -5,9 +5,42 @@ metadata:
   name: crowdsec-traefik-bouncer
 spec:
   values:
-    bouncer:
-      crowdsec_bouncer_api_key: ${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}
-      crowdsec_agent_host: crowdsec-service.security:8080
     image:
       repository: fbonalair/traefik-crowdsec-bouncer
       tag: "0.5.0"
+    env:
+      CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
+      CROWDSEC_AGENT_HOST: crowdsec-service.security:8080
+      CROWDSEC_BOUNCER_SCHEME: https
+      GIN_MODE: debug
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+    probes:
+      liveness:
+        custom: true
+        spec:
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+      readiness:
+        custom: true
+        spec:
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+      resources:
+        limits:
+          cpu: 100m
+          memory: 128Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi

@@ -7,11 +7,11 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: crowdsec-traefik-bouncer
-      version: 0.1.2
+      chart: app-template
+      version: 1.3.1
       sourceRef:
         kind: HelmRepository
-        name: crowdsec
+        name: bjw-s
         namespace: flux-system
   maxHistory: 3
   install:
@@ -22,16 +22,3 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  postRenderers:
-    - kustomize:
-        # https://github.com/fbonalair/traefik-crowdsec-bouncer/blob/cc1abf6238d9dee47e6cd7866e1d51ab9d053dc1/controler/controler.go
-        patchesJson6902:
-          - target:
-              kind: Deployment
-              name: crowdsec-traefik-bouncer
-            patch:
-              - op: add
-                path: /spec/template/spec/containers/0/env/-
-                value:
-                  name: CROWDSEC_BOUNCER_SCHEME
-                  value: "https"
