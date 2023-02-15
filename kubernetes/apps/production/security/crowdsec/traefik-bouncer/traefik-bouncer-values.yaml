@@ -38,6 +38,11 @@ spec:
         volumeMounts:
           - name: crowdsec-lapi-tls
             mountPath: /etc/ssl/certs/crowdsec-lapi
+    sidecars:
+      debug:
+        image: debian:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c", "sleep infinity"]
     probes:
       liveness:
         custom: true
