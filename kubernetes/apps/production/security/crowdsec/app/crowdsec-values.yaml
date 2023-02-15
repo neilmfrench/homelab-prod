@@ -61,9 +61,15 @@ spec:
         # - name: USE_FORWARDED_FOR_HEADERS
         #   value: "true"
         - name: COLLECTIONS
-          value: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors"
+          value: >-
+            crowdsecurity/linux
+            crowdsecurity/sshd
+            crowdsecurity/traefik
+            crowdsecurity/base-http-scenarios
+            crowdsecurity/http-cve
+            crowdsecurity/whitelist-good-actors
         - name: PARSERS
-          value: "crowdsecurity/cri-logs"
+          value: "crowdsecurity/cri-logs crowdsecurity/docker-logs"
       acquisition:
         - namespace: networking
           podName: traefik-*
