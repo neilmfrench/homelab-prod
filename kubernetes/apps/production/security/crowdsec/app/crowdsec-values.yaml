@@ -12,6 +12,15 @@ spec:
       username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
       password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
     lapi:
+      env:
+        - name: ENROLL_KEY
+          value: "${SECRET_CROWDSEC_ENROLL_KEY}"
+        - name: ENROLL_INSTANCE_NAME
+          value: "homelab k8s cluster"
+        - name: ENROLL_TAGS
+          value: "k8s linux test"
+        - name: BOUNCER_KEY_traefik
+          value: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
       dashboard:
         enabled: true
         assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
