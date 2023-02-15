@@ -21,3 +21,4 @@ resources:
   - ./pihole.yaml
   - ./gitea.yaml
   - ./harbor.yaml
+  - ./crowdsec.yaml

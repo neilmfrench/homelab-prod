@@ -1,0 +1,63 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crowdsec
+spec:
+  values:
+    container_runtime: containerd
+    tls:
+      enabled: true
+    secrets:
+      username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
+      password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
+    lapi:
+      dashboard:
+        enabled: true
+        assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
+        ingress:
+          enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-production"
+            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          ingressClassName: "traefik"
+          host: "crowdsec-dash.${SECRET_DOMAIN}"
+          tls:
+            - hosts:
+                - "crowdsec-dash.${SECRET_DOMAIN}"
+              secretName: "crowdsec-dash-tls"
+      persistentVolume:
+        data:
+          enabled: true
+          storageClassName: longhorn
+          size: 1Gi
+        config:
+          enabled: true
+          storageClassName: longhorn
+          size: 500Mi
+    agent:
+      persistentVolume:
+        config:
+          enabled: true
+          accessModes:
+            - ReadWriteMany
+          storageClassName: "longhorn"
+          existingClaim: "crowdsec-agent-config-pvc"
+          size: 400Mi
+      env:
+        # - name: DISABLE_ONLINE_API
+        #   value: "true"
+        # - name: USE_FORWARDED_FOR_HEADERS
+        #   value: "true"
+        - name: COLLECTIONS
+          value: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors"
+        - name: PARSERS
+          value: "crowdsecurity/cri-logs"
+      acquisition:
+        - namespace: networking
+          podName: traefik-*
+          program: traefik
+      # metrics:
+      #   enabled: false
+      #   serviceMonitor:
+      #     enabled: false

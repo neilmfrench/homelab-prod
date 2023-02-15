@@ -64,7 +64,7 @@ spec:
             - ReadWriteOnce
           storageClassName: longhorn
           existingClaim: "crowdsec-config-pvc"
-          size: 5Gi
+          size: 1Gi
       # metrics:
       #   enabled: true
       #   serviceMonitor:
