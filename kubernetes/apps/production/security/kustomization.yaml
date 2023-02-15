@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./vaultwarden/ks.yaml
-  # - ./crowdsec/ks.yaml
+  - ./crowdsec/ks.yaml
