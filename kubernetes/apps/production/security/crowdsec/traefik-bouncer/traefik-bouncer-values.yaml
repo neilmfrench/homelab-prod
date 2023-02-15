@@ -1,0 +1,13 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crowdsec-traefik-bouncer
+spec:
+  values:
+    bouncer:
+      crowdsec_bouncer_api_key: ${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}
+      crowdsec_agent_host: crowdsec-service:8080
+    image:
+      repository: fbonalair/traefik-crowdsec-bouncer
+      tag: "0.5.0"
