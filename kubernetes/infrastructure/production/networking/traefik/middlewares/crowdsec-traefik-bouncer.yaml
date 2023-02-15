@@ -5,5 +5,5 @@ metadata:
   namespace: networking
 spec:
   forwardAuth:
-    address: http://crowdsec-traefik-bouncer-service.security.svc.cluster.local:80/api/v1/forwardAuth
+    address: http://crowdsec-traefik-bouncer.security/api/v1/forwardAuth
     trustForwardHeader: true
