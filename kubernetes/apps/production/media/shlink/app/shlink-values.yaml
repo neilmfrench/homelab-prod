@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: shlink
+spec:
+  values:
+    image:
+      repository: shlinkio/shlink
+      tag: "3.4.0"
+    env:
+      DEFAULT_DOMAIN: shlink.${SECRET_DOMAIN}
+      IS_HTTPS_ENABLED: true
+      GEOLITE_LICENSE_KEY: ${SECRET_GEOLINK_LICENSE_KEY}
+      DB_DRIVER: maria
+      DB_NAME: shlink
+      DB_USER: shlink
+      DB_PASSWORD: ${SECRET_SHLINK_MARIADB_PASSWORD}
+      DB_HOST: shlink-mariadb
+      DB_PORT: 3306
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+    persistence:
+      params:
+        enabled: true
+        existingClaim: shlink-param
+        mountPath: /etc/shlink/config/params
