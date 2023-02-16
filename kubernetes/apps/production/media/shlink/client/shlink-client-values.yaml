@@ -1,0 +1,18 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: shlink-client
+spec:
+  values:
+    image:
+      repository: shlinkio/shlink-web-client
+      tag: "3.9.1"
+    env:
+      SHLINK_SERVER_URL: "https://shlink.${SECRET_DOMAIN}"
+      SHLINK_SERVER_API_KEY: "${SECRET_SHLINK_API_KEY}"
+    service:
+      main:
+        ports:
+          http:
+            port: 80
