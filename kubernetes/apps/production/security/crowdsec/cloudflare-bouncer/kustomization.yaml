@@ -11,3 +11,5 @@ configMapGenerator:
       - ./bouncer-config.yaml
 patchesStrategicMerge:
   - ./cloudflare-bouncer-values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
