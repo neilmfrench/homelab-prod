@@ -11,6 +11,10 @@ spec:
     image:
       repository: crowdsecurity/cloudflare-bouncer
       tag: "v0.2.1"
+    command: ["/bin/sh", "-c"]
+    args:
+      - cat /tmp/crowdsec-lapi/ca.crt >> /etc/ssl/certs/ca-certificates.crt;
+        /usr/local/bin/crowdsec-cloudflare-bouncer -c /etc/crowdsec/bouncers/crowdsec-cloudflare-bouncer.yaml
     service:
       main:
         ports:
@@ -23,13 +27,28 @@ spec:
         name: cloudflare-bouncer-configmap
         mountPath: /etc/crowdsec/bouncers
         readOnly: true
-      certs:
+      crowdsec-lapi-tls:
         enabled: true
         type: secret
         name: crowdsec-lapi-tls
-        mountPath: /etc/ssl/certs
+        mountPath: /tmp/crowdsec-lapi
         readOnly: true
       cache:
         enabled: true
         mountPath: /var/lib/crowdsec/crowdsec-cloudflare-bouncer/cache
         existingClaim: crowdsec-cloudflare-bouncer-cache
+    # initContainers:
+    #   init-cert:
+    #     image: alpine:latest
+    #     imagePullPolicy: IfNotPresent
+    #     command:
+    #       [
+    #         "/bin/sh",
+    #         "-c",
+    #         "cat /tmp/crowdsec-lapi/ca.crt >> /etc/ssl/certs/ca-certificates.crt",
+    #       ]
+    #     volumeMounts:
+    #       - name: crowdsec-lapi-tls
+    #         mountPath: /tmp/crowdsec-lapi
+    #       - name: certs
+    #         mountPath: /etc/ssl/certs
