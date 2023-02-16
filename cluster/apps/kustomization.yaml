@@ -8,7 +8,7 @@ resources:
   # - security
   # - system-upgrade
   # - monitoring
-  - media
+  # - media
   - finance
   # - development
   - home
