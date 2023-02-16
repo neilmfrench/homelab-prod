@@ -6,3 +6,4 @@ resources:
   - ./privatebin/ks.yaml
   - ./minio/ks.yaml
   - ./nextcloud/ks.yaml
+  - ./shlink/ks.yaml
