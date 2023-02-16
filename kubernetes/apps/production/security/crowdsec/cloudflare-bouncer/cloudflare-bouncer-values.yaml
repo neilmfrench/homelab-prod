@@ -5,6 +5,9 @@ metadata:
   name: crowdsec-cloudflare-bouncer
 spec:
   values:
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "cloudflare-bouncer-configmap"
     image:
       repository: crowdsecurity/cloudflare-bouncer
       tag: "v0.2.1"
