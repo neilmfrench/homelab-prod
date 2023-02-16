@@ -18,7 +18,7 @@ spec:
         enabled: true
         type: configMap
         name: cloudflare-bouncer-configmap
-        mountPath: /etc/crowdsec/bouncers/crowdsec-cloudflare-bouncer.yaml
+        mountPath: /etc/crowdsec/bouncers
         readOnly: true
       certs:
         enabled: true

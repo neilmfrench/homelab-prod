@@ -8,7 +8,7 @@ resources:
 configMapGenerator:
   - name: cloudflare-bouncer-configmap
     files:
-      - ./bouncer-config.yaml
+      - ./crowdsec-cloudflare-bouncer.yaml
 patchesStrategicMerge:
   - ./cloudflare-bouncer-values.yaml
 generatorOptions:
