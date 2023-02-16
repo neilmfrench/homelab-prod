@@ -1,0 +1,101 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nextcloud
+spec:
+  values:
+    image:
+      repository: nextcloud
+      tag: 25.0.2-apache
+    persistence:
+      enabled: true
+      existingClaim: nextcloud-data
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      tls:
+        - secretName: nextcloud-tls
+          hosts:
+            - cloud.${SECRET_DOMAIN}
+    livenessProbe:
+      enabled: false
+    readinessProbe:
+      enabled: false
+    startupProbe:
+      enabled: false
+    resources:
+      requests:
+        cpu: "0.05"
+        memory: "305M"
+      limits:
+        memory: "5120M"
+    nextcloud:
+      host: cloud.${SECRET_DOMAIN}
+      username: "${SECRET_NEXTCLOUD_ADMIN_USERNAME}"
+      password: "${SECRET_NEXTCLOUD_ADMIN_PASSWORD}"
+      configs:
+        email.config.php: |-
+          <?php
+          $CONFIG = array (
+          'mail_smtpstreamoptions' => array ( 'ssl' => array ( 'security_level' => 1, ), ),
+          );
+        protocol.config.php: |-
+          <?php
+          $CONFIG = array (
+          'overwriteprotocol' => 'https'
+          );
+      mail:
+        enabled: true
+        fromAddress: no-reply
+        domain: ${SECRET_NEXTCLOUD_EMAIL_FROM}
+        smtp:
+          host: ${SECRET_NEXTCLOUD_EMAIL_HOST}
+          secure: ssl
+          port: 465
+          authtype: LOGIN
+          name: ${SECRET_NEXTCLOUD_EMAIL_USER}
+          password: ${SECRET_NEXTCLOUD_EMAIL_KEY}
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      enabled: false
+    mariadb:
+      enabled: true
+      auth:
+        database: nextcloud
+        username: nextcloud
+        rootPassword: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
+        password: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
+      architecture: standalone
+      primary:
+        persistence:
+          enabled: true
+          storageClass: "longhorn"
+          accessMode: ReadWriteOnce
+          size: 8Gi
+    cronjob:
+      enabled: true
+    redis:
+      enabled: true
+      master:
+        persistence:
+          storageClass: longhorn
+        resources:
+          requests:
+            memory: 128Mi
+          limits:
+            memory: 256Mi
+      replica:
+        replicaCount: 1
+        persistence:
+          storageClass: longhorn
+        resources:
+          requests:
+            memory: 128Mi
+          limits:
+            memory: 256Mi
