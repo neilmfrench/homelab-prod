@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: easystore-minio-pv
+  labels:
+    type: local
+spec:
+  storageClassName: local-path-easystore-minio
+  capacity:
+    storage: 3T
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/easystore/minio
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8s4

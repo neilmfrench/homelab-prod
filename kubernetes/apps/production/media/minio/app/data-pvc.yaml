@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: media
+  name: minio-data
+spec:
+  storageClassName: local-path-easystore-minio
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3T

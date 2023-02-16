@@ -1,0 +1,74 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio
+spec:
+  values:
+    mode: standalone
+    ignoreChartChecksums: true
+    rootUser: admin
+    rootPassword: "${SECRET_MINIO_ROOT_PASSWORD}"
+    drivesPerNode: 1
+    replicas: 1
+    persistence:
+      enabled: true
+      existingClaim: minio-data
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      path: /
+      hosts:
+        - &host-console "s3.${SECRET_DOMAIN}"
+      tls:
+        - secretName: s3.${SECRET_DOMAIN}-tls
+          hosts:
+            - *host-console
+    consoleIngress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      path: /
+      hosts:
+        - &host-console "minio.${SECRET_DOMAIN}"
+      tls:
+        - secretName: minio.${SECRET_DOMAIN}-tls
+          hosts:
+            - *host-console
+    users: null
+    environment:
+      TZ: "${TIMEZONE}"
+      MINIO_UPDATE: "off"
+      MINIO_PROMETHEUS_JOB_ID: "minio"
+      MINIO_PROMETHEUS_URL: "http://kube-prometheus-stack-prometheus.monitoring:9090"
+      MINIO_SERVER_URL: "https://s3.${SECRET_DOMAIN}"
+      MINIO_BROWSER_REDIRECT_URL: "https://minio.${SECRET_DOMAIN}"
+      MINIO_IDENTITY_OPENID_CONFIG_URL: "https://id.${SECRET_DOMAIN}/application/o/minio/.well-known/openid-configuration"
+      MINIO_IDENTITY_OPENID_CLIENT_ID: "${SECRET_MINIO_AUTHENTIK_CLIENT_ID}"
+      MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_AUTHENTIK_CLIENT_SECRET}"
+      MINIO_IDENTITY_OPENID_SCOPES: "openid,profile,email,minio"
+    metrics:
+      serviceMonitor:
+        enabled: true
+        public: true
+    resources:
+      requests:
+        memory: 500Mi
+        cpu: 100m
+      limits:
+        memory: 1000Mi
+    securityContext:
+      enabled: true
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+      fsGroupChangePolicy: "OnRootMismatch"
