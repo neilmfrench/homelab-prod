@@ -22,3 +22,4 @@ resources:
   - ./gitea.yaml
   - ./harbor.yaml
   - ./crowdsec.yaml
+  - ./authentik.yaml
