@@ -6,9 +6,9 @@ resources:
   # - metallb-system.yaml
   # - networking.yaml
   # - longhorn-system.yaml
-  - security.yaml
+  # - security.yaml
   # - monitoring.yaml
-  - media.yaml
+  # - media.yaml
   - finance.yaml
   # - development.yaml
   - home.yaml

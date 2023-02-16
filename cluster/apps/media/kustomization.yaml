@@ -5,5 +5,5 @@ resources:
   - nextcloud
   # - privatebin
   - shlink
-  - minio
+  # - minio
   # - plex
