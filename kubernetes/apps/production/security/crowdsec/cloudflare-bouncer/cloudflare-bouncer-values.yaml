@@ -37,18 +37,10 @@ spec:
         enabled: true
         mountPath: /var/lib/crowdsec/crowdsec-cloudflare-bouncer/cache
         existingClaim: crowdsec-cloudflare-bouncer-cache
-    # initContainers:
-    #   init-cert:
-    #     image: alpine:latest
-    #     imagePullPolicy: IfNotPresent
-    #     command:
-    #       [
-    #         "/bin/sh",
-    #         "-c",
-    #         "cat /tmp/crowdsec-lapi/ca.crt >> /etc/ssl/certs/ca-certificates.crt",
-    #       ]
-    #     volumeMounts:
-    #       - name: crowdsec-lapi-tls
-    #         mountPath: /tmp/crowdsec-lapi
-    #       - name: certs
-    #         mountPath: /etc/ssl/certs
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
