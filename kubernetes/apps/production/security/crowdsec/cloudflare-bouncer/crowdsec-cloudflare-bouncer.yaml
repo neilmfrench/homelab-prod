@@ -1,4 +1,4 @@
-crowdsec_lapi_url: https://crowdsec-service:8080/
+crowdsec_lapi_url: https://crowdsec-service.security:8080/
 crowdsec_lapi_key: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_KEY}
 crowdsec_update_frequency: 1m
 ca_cert_path: /etc/ssl/certs/ca.crt

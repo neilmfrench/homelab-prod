@@ -23,6 +23,8 @@ spec:
           value: "k8s linux test"
         - name: BOUNCER_KEY_traefik
           value: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
+        - name: BOUNCER_KEY_cloudflare
+          value: "${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_KEY}"
         - name: LEVEL_DEBUG
           value: "true"
       dashboard:
