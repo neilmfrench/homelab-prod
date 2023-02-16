@@ -18,7 +18,7 @@ spec:
         s02-enrich:
           whitelist-external-ip.yaml: |
             name: crowdsecurity/whitelists
-            description: "Whitelist events from my ip address"
+            description: "Whitelist my external ip"
             whitelist:
               reason: "My external ip"
               ip:
