@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: shlinkio/shlink
-      tag: 3.4.0
+      tag: 3.5.2
     ingress:
       main:
         enabled: true
