@@ -27,7 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-rxresume-database
-  path: ./kubernetes/apps/production/finance/rxresume/aop
+  path: ./kubernetes/apps/production/finance/rxresume/app
   prune: true
   sourceRef:
     kind: GitRepository
