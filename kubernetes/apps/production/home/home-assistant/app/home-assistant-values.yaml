@@ -12,8 +12,9 @@ spec:
       TZ: "${TIMEZONE}"
     service:
       main:
-        type: LoadBalancer
-        externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8123
     ingress:
       main:
         enabled: false
