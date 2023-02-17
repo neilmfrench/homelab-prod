@@ -25,6 +25,8 @@ metadata:
   name: cluster-apps-firefly-iii
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-firefly-iii-database
   path: ./kubernetes/apps/production/finance/firefly-iii/app
   prune: true
   sourceRef:
