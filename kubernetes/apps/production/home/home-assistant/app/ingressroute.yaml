@@ -34,13 +34,13 @@ spec:
     #       name: home-assistant
     #       namespace: home
     #       port: 8123
-    # - kind: Rule
-    #   match: "Host(`home.${SECRET_DOMAIN}`) && PathPrefix(`/api/websocket`)"
-    #   priority: 20
-    #   services:
-    #     - kind: Service
-    #       name: home-assistant
-    #       namespace: home
-    #       port: 8123
+    - kind: Rule
+      match: "Host(`home.${SECRET_DOMAIN}`) && PathPrefix(`/api/websocket`)"
+      priority: 20
+      services:
+        - kind: Service
+          name: home-assistant
+          namespace: home
+          port: 8123
   tls:
     secretName: "home-assistant-tls"
