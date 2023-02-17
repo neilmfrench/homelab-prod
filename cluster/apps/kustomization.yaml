@@ -9,7 +9,7 @@ resources:
   # - system-upgrade
   # - monitoring
   # - media
-  - finance
+  # - finance
   # - development
   - home
   - flux-system

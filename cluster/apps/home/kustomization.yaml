@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - wyze-bridge
   - pihole-hue-bridge
-  - home-assistant
+  # - home-assistant
