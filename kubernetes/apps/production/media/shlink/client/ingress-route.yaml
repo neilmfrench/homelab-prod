@@ -3,7 +3,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: urls-authentik-ingress-route
-  namespace: media
 spec:
   entryPoints:
     - websecure
@@ -16,7 +15,7 @@ spec:
           namespace: networking
       services:
         - kind: Service
-          name: shlink-web-client
+          name: shlink-client
           namespace: media
           port: 80
     - kind: Rule
