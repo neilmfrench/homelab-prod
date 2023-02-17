@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: wyze-bridge
+spec:
+  values:
+    image:
+      repository: mrlt8
+      tag: wyze-bridge:1.11.1
+    env:
+      TZ: "${TIMEZONE}"
+      WYZE_EMAIL: "${SECRET_WYZE_EMAIL}"
+      WYZE_PASSWORD: "${SECRET_WYZE_PASSWORD}"
+      SNAPSHOT: API
+      NET_MODE: LAN
+    service:
+      main:
+        ports:
+          http:
+            port: 8888
+          rtsp:
+            port: 8554
+          web:
+            port: 5000
+          rtmp:
+            port: 1935
+    ingress:
+      main:
+        enabled: false
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+    persistence:
+      config:
+        enabled: true
+        existingClaim: wyze-bridge-config
+        mountPath: /tokens
