@@ -26,14 +26,6 @@ spec:
           name: ak-outpost-authentik-embedded-outpost
           namespace: security
           port: 9000
-    # - kind: Rule
-    #   match: "Host(`home.${SECRET_DOMAIN}`) && PathPrefix(`/auth/`)"
-    #   priority: 20
-    #   services:
-    #     - kind: Service
-    #       name: home-assistant
-    #       namespace: home
-    #       port: 8123
     - kind: Rule
       match: "Host(`home.${SECRET_DOMAIN}`) && PathPrefix(`/api/websocket`)"
       priority: 20
