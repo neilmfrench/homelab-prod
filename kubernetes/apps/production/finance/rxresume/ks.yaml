@@ -18,3 +18,25 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-rxresume
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-rxresume-database
+  path: ./kubernetes/apps/production/finance/rxresume/aop
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: rxresume
+      namespace: finance
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
