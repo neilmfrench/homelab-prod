@@ -10,3 +10,4 @@ resources:
   - ./tekton-operator
   - ./tekton-pipelines
   - ./security
+  - ./finance

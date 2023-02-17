@@ -9,11 +9,11 @@ resources:
   # - security.yaml
   # - monitoring.yaml
   # - media.yaml
-  - finance.yaml
+  # - finance.yaml
   # - development.yaml
   - home.yaml
-  - tekton-pipelines.yaml
-  - tekton-operator.yaml
+  # - tekton-pipelines.yaml
+  # - tekton-operator.yaml
   - games.yaml
   - magazine.yaml
   - test.yaml
