@@ -40,5 +40,5 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: home-assistant-config
+        existingClaim: pihole-hue-bridge-config
         mountPath: /config
