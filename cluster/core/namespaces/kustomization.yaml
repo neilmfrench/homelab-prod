@@ -11,7 +11,7 @@ resources:
   # - media.yaml
   # - finance.yaml
   # - development.yaml
-  - home.yaml
+  # - home.yaml
   # - tekton-pipelines.yaml
   # - tekton-operator.yaml
   - games.yaml
