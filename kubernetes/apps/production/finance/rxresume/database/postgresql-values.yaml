@@ -1,0 +1,18 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgresql
+spec:
+  values:
+    auth:
+      postgresPassword: "${SECRET_RXRESUME_POSTGRES_PASSWORD}"
+      username: "rxresume-postgres"
+      password: "${SECRET_RXRESUME_POSTGRES_PASSWORD}"
+      database: "rxresume-postgres"
+      replicationPassword: "${SECRET_RXRESUME_POSTGRES_PASSWORD}"
+    primary:
+      persistence:
+        enabled: true
+        storageClass: longhorn
+        size: 4Gi
