@@ -11,3 +11,4 @@ resources:
   - ./tekton-pipelines
   - ./security
   - ./finance
+  - ./home
