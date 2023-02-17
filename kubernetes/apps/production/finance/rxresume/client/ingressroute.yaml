@@ -14,7 +14,7 @@ spec:
           namespace: networking
       services:
         - kind: Service
-          name: rxresume-server
+          name: rxresume
           namespace: finance
           port: 3100
     - kind: Rule
