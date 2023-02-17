@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-pihole-hue-bridge
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/production/home/pihole-hue-bridge/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: pihole-hue-bridge
+      namespace: home
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

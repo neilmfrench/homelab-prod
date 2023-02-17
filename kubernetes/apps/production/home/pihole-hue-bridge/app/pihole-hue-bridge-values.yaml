@@ -1,0 +1,44 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pihole-hue-bridge
+spec:
+  values:
+    image:
+      repository: linuxserver/habridge
+      tag: "5.4.1"
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
+    nodeSelector:
+      kubernetes.io/hostname: k8s2
+    env:
+      TZ: "${TIMEZONE}"
+      PUID: "1000"
+      PGID: "1000"
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+          alexa-1:
+            port: 50000
+            protocol: UDP
+          alexa-2:
+            port: 1900
+            protocol: UDP
+    ingress:
+      main:
+        enabled: false
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+    persistence:
+      config:
+        enabled: true
+        existingClaim: home-assistant-config
+        mountPath: /config
