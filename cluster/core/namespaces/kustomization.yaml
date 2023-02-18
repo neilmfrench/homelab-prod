@@ -15,5 +15,5 @@ resources:
   # - tekton-pipelines.yaml
   # - tekton-operator.yaml
   - games.yaml
-  - magazine.yaml
+  # - magazine.yaml
   - test.yaml
