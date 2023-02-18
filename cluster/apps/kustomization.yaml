@@ -13,5 +13,5 @@ resources:
   # - development
   # - home
   - flux-system
-  - magazine
+  # - magazine
   # - games
