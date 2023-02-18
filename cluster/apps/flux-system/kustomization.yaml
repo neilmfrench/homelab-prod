@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - webhook
   - monitoring
-  - weave-gitops
+  # - weave-gitops
