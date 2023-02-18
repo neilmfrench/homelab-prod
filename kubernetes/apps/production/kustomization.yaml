@@ -13,3 +13,4 @@ resources:
   - ./finance
   - ./home
   - ./magazine
+  - ./flux-system
