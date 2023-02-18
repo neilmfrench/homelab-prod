@@ -11,7 +11,7 @@ resources:
   # - media
   # - finance
   # - development
-  - home
+  # - home
   - flux-system
   - magazine
   # - games
