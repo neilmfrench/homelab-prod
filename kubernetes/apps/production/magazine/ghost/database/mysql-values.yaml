@@ -1,0 +1,20 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mysql
+spec:
+  values:
+    image:
+      repository: bitnami/mysql
+      tag: 8.0.31
+    architecture: standalone
+    primary:
+      persistence:
+        existingClaim: ghost-mysql-data
+    auth:
+      rootPassword: "${SECRET_GHOST_MAG_MYSQL_PASSWORD}"
+      database: ghost
+      username: ghost
+      password: "${SECRET_GHOST_MAG_MYSQL_PASSWORD}"
+      replicationPassword: "${SECRET_GHOST_MAG_MYSQL_PASSWORD}"

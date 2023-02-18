@@ -12,3 +12,4 @@ resources:
   - ./security
   - ./finance
   - ./home
+  - ./magazine
