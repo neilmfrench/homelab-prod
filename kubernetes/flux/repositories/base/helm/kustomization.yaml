@@ -26,3 +26,4 @@ resources:
   - ./minio.yaml
   - ./nextcloud.yaml
   - ./firefly.yaml
+  - ./weave-gitops.yaml
