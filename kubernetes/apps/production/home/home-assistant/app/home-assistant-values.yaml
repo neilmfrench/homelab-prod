@@ -50,8 +50,6 @@ spec:
           ingressClassName: "traefik"
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt-production"
-            hajimari.io/enable: "false"
-            hajimari.io/icon: "code-braces-box"
             traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           hosts:
             - host: "hass-config.${SECRET_DOMAIN}"
