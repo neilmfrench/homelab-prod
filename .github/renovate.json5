@@ -23,18 +23,18 @@
     "enabled": true
   },
   "flux": {
-    "fileMatch": ["cluster/.+\\.ya?ml$"]
+    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
   "helm-values": {
-    "fileMatch": ["cluster/.+\\.ya?ml$"]
+    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
   "kubernetes": {
-    "fileMatch": ["cluster/.+\\.ya?ml$", "provision/ansible/.+\\.ya?ml.j2$"]
+    "fileMatch": ["kubernetes/.+\\.ya?ml$", "provision/ansible/.+\\.ya?ml.j2$"]
   },
   "regexManagers": [
     // "Process various other dependencies",
     {
-      "fileMatch": ["cluster/.+\\.ya?ml$", "provision/ansible/.+\\.ya?ml$"],
+      "fileMatch": ["kubernetes/.+\\.ya?ml$", "provision/ansible/.+\\.ya?ml$"],
       "matchStrings": [
         "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
@@ -43,7 +43,7 @@
     }
   ],
   "ignorePaths": [
-    "**/cluster/apps/development/tekton/pipelines/**",
-    "**/cluster/apps/development/tekton/tasks/**"
+    "**/kubernetes/apps/production/tekton-pipelines/tekton-pipelines/pipelines/**",
+    "**kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks/**"
   ]
 }
