@@ -1,8 +1,0 @@
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - kaniko.yaml
-  - git-clone.yaml
-  - git-cli.yaml
-  - github-open-pr.yaml
