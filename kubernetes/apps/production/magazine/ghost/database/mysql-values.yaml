@@ -5,9 +5,6 @@ metadata:
   name: mysql
 spec:
   values:
-    image:
-      repository: bitnami/mysql
-      tag: 8.0.31
     architecture: standalone
     primary:
       persistence:
