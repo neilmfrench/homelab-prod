@@ -41,10 +41,10 @@ variable "fault_domains" {
   default = ["FAULT-DOMAIN-1", "FAULT-DOMAIN-2", "FAULT-DOMAIN-3"]
 }
 
-variable "PATH_TO_PUBLIC_KEY" {
+variable "public_key_path" {
   type        = string
   default     = "~/.ssh/id_rsa.pub"
-  description = "Path to your public key"
+  description = "Path to your public workstation SSH key"
 }
 
 variable "compute_shape" {

@@ -30,16 +30,17 @@ module "k3s_cluster" {
   install_certmanager = false
   install_argocd      = false
   expose_kubeapi      = true
+  public_key_path     = "/home/neil/.ssh/id_rsa.pub"
   source              = "./k3s-oci-cluster"
 }
 
-output "k3s_servers_ips" {
-  value = module.k3s_cluster.k3s_servers_ips
-}
+# output "k3s_servers_ips" {
+#   value = module.k3s_cluster.k3s_servers_ips
+# }
 
-output "k3s_workers_ips" {
-  value = module.k3s_cluster.k3s_workers_ips
-}
+# output "k3s_workers_ips" {
+#   value = module.k3s_cluster.k3s_workers_ips
+# }
 
 output "public_lb_ip" {
   value = module.k3s_cluster.public_lb_ip
