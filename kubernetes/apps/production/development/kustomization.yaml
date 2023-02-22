@@ -7,3 +7,4 @@ resources:
   - ./fifa-openapi/ks.yaml
   - ./gitea/ks.yaml
   - ./harbor/ks.yaml
+  - ./pocketbase/ks.yaml

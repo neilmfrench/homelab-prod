@@ -1,0 +1,39 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pocketbase
+spec:
+  values:
+    image:
+      repository: ghcr.io/muchobien/pocketbase
+      pullPolicy: IfNotPresent
+      tag: "0.12.3"
+    service:
+      main:
+        ports:
+          http:
+            port: 8090
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "pb.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: pocketbase-tls
+    persistence:
+      data:
+        enabled: true
+        mountPath: /pb_data
+        existingClaim: pocketbase-data
