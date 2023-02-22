@@ -4,7 +4,7 @@ area/ansible:
 area/github:
   - ".github/**/*"
 area/kubernetes:
-  - "cluster/**/*"
+  - "kubernetes/**/*"
 area/terraform:
   - "provision/terraform/**/*"
 area/templates:

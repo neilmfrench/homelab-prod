@@ -1,0 +1,44 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: oci-instance-creator
+spec:
+  values:
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "oci-creator-scripts-configmap"
+    image:
+      repository: hashicorp/terraform
+      tag: "1.3.9"
+    envFrom:
+      - secretRef:
+        name: oci-config
+    command: ["/bin/sh"]
+    args: ["/mnt/app/create-oci-instance.sh"]
+    service:
+      main:
+        enabled: false
+    persistence:
+      cache:
+        enabled: true
+        existingClaim: oci-instance-creator-cache
+        mountPath: /mnt/app
+      scripts:
+        enabled: true
+        type: configMap
+        name: oci-creator-scripts-configmap
+    initContainers:
+      init-scripts:
+        image: alpine:latest
+        command:
+          [
+            "/bin/sh",
+            "-c",
+            "ls -al /tmp/scripts && cp /tmp/scripts/* /mnt/app/",
+          ]
+        volumeMounts:
+          - name: scripts
+            mountPath: /tmp/scripts
+          - name: cache
+            mountPath: /mnt/app/

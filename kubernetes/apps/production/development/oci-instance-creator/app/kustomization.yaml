@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: development
+resources:
+  - ./cache-pvc.yaml
+  - ../../../../base/oci-instance-creator
+patchesStrategicMerge:
+  - ./oci-instance-creator-values.yaml
+configMapGenerator:
+  - name: oci-creator-scripts-configmap
+    files:
+      - ./create-oci-instance.sh
+      - ./plan.tf
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
