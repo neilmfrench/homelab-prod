@@ -13,7 +13,7 @@ spec:
       tag: "1.3.9"
     envFrom:
       - secretRef:
-        name: oci-config
+          name: oci-config
     command: ["/bin/sh"]
     args: ["/mnt/app/create-oci-instance.sh"]
     service:
