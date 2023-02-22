@@ -15,7 +15,11 @@ spec:
       - secretRef:
           name: oci-config
     command: ["/bin/sh"]
-    args: ["/mnt/app/create-oci-instance.sh"]
+    args:
+      [
+        "-c",
+        "cd /mnt/app/ && chmod +x create-oci-instance.sh && ./create-oci-instance.sh",
+      ]
     service:
       main:
         enabled: false
