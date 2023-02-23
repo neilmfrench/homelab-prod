@@ -13,7 +13,7 @@ do
     echo "Sleeping for ${sleep_time}s"
     sleep $sleep_time
     echo "Starting attempt #${attempt}"
-    terraform apply -no-color plan.tfplan > tf_apply.log 2>&1
+    terraform apply -no-color -auto-approve > tf_apply.log 2>&1
     status=$?
 
     if [ $status -eq 0 ]; then
