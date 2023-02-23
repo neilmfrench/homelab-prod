@@ -19,13 +19,17 @@ do
     if [ $status -eq 0 ]; then
         success="true"
         error=""
+        wget -q -O- \
+            --post-data="{\"text\":\"Successfully created an OCI instance!\"}" \
+            --header="Content-Type:application/json" \
+            "${SLACK_WEBHOOK}"
     else
         success="false"
         error=$(cat tf_apply.log | grep "Error" | xargs)
     fi
 
     create_record_response=$(wget -q -O- \
-        --post-data="{\"data_center\":\"${TF_VAR_region}\",\"availability_domain\":\"${TF_VAR_availability_domain}\",\"success\":\"${success}\",\"source\":\"k8s1\",\"error\":\"${error}\"}" \
+        --post-data="{\"data_center\":\"${TF_VAR_region}\",\"availability_domain\":\"${TF_VAR_availability_domain}\",\"success\":\"${success}\",\"source\":\"${POD_NAME}\",\"error\":\"${error}\"}" \
         --header="Content-Type:application/json" \
         --header="Authorization: ${PB_TOKEN}" \
         "${PB_BASE}/api/collections/oci_instance_creation_attempts/records"

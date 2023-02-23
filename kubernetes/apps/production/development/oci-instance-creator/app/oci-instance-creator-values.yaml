@@ -14,6 +14,11 @@ spec:
     envFrom:
       - secretRef:
           name: oci-config
+    env:
+      POD_NAME:
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
     command: ["/bin/sh"]
     args:
       [
