@@ -11,7 +11,10 @@ spec:
     persistence:
       enabled: true
       existingClaim: firefly-data
-    secrets: null
+    secrets:
+      env:
+        APP_PASSWORD: "${SECRET_FIREFLY_APP_KEY}"
+        DB_PASSWORD: "${SECRET_FIRELY_MARIADB_PASSWORD}"
     config:
       env:
         SITE_OWNER: "${SECRET_FIREFLY_SITE_OWNER}"
