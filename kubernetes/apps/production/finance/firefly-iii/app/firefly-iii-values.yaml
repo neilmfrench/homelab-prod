@@ -12,7 +12,7 @@ spec:
       enabled: true
       existingClaim: firefly-data
     secrets:
-      env: {}
+      env: null
     config:
       env:
         SITE_OWNER: "${SECRET_FIREFLY_SITE_OWNER}"
