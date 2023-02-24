@@ -11,7 +11,8 @@ spec:
     persistence:
       enabled: true
       existingClaim: firefly-data
-    secrets: {}
+    secrets:
+      env: {}
     config:
       env:
         SITE_OWNER: "${SECRET_FIREFLY_SITE_OWNER}"
