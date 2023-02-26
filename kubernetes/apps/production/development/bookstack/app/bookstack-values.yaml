@@ -8,7 +8,7 @@ spec:
     image:
       repository: ghcr.io/linuxserver/bookstack
       pullPolicy: IfNotPresent
-      tag: "23.01.20230131"
+      tag: "23.02.20230226"
     env:
       TZ: ${TIMEZONE}
       APP_URL: https://docs.${SECRET_DOMAIN}
