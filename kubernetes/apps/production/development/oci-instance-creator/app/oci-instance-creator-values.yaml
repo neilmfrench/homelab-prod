@@ -8,6 +8,7 @@ spec:
     controller:
       annotations:
         configmap.reloader.stakater.com/reload: "oci-creator-scripts-configmap"
+        secret.reloader.stakater.com/reload: "oci-config"
     image:
       repository: hashicorp/terraform
       tag: "1.3.9"
