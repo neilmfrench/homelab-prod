@@ -24,7 +24,7 @@ spec:
           secretName: "authentik-tls"
     authentik:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
-      log_level: trace
+      log_level: info
       postgresql:
         name: authentik
         user: authentik
