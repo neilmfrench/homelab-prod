@@ -4,10 +4,9 @@ metadata:
   name: argocd
   namespace: argocd
 spec:
-  chart:
-    spec:
-      version: "5.19.11"
   values:
+    crds:
+      install: true
     configs:
       secret:
         createSecret: true
