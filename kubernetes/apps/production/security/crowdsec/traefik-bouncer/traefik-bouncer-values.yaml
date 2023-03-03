@@ -6,7 +6,7 @@ metadata:
 spec:
   values:
     image:
-      repository: harbor.${SECRET_DOMAIN}/crowdsec-traefik-bouncer/crowdsec-traefik-bouncer
+      repository: neilmfrench2/crowdsec-traefik-bouncer
       tag: "1.0.0"
     imagePullSecrets:
       - name: harbor-neilfrench-regcred
