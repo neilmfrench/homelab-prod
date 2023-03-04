@@ -67,7 +67,6 @@ spec:
           accessModes:
             - ReadWriteMany
           storageClassName: "longhorn"
-          existingClaim: "crowdsec-agent-config-pvc"
           size: 400Mi
       env:
         # - name: DISABLE_ONLINE_API
