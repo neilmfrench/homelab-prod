@@ -13,9 +13,10 @@ spec:
       - "--redis-url"
       - "campsearch-redis-master:6379"
     service:
-      ports:
-        http:
-          port: 8080
+      main:
+        ports:
+          http:
+            port: 8080
     ingress:
       main:
         enabled: true
