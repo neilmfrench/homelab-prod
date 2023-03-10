@@ -6,7 +6,7 @@ metadata:
 spec:
   values:
     image:
-      repository: hibiken/asynqmon:0.7
+      repository: hibiken/asynqmon
       pullPolicy: IfNotPresent
       tag: "0.7"
     args:
