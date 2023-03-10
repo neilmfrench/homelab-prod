@@ -9,15 +9,26 @@ spec:
       repository: hibiken/asynqmon:0.7
       pullPolicy: IfNotPresent
       tag: "0.7"
-    controller:
-      replicas: 1
-    env:
-      PB_ADDR: "pocketbase.development.svc.cluster.local:8090"
-      PB_USERNAME: "campsite_bot"
-      REDIS_ADDR: "campsearch-redis-master:6379"
-    envFrom:
-      - secretRef:
-          name: campsearch-worker-secrets
+    args:
+      - "--redis-url"
+      - "campsearch-redis-master:6379"
     service:
+      ports:
+        http:
+          port: 8080
+    ingress:
       main:
-        enabled: false
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "campsearch-asynqmon.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: campsearch-asynqmon-tls

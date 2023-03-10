@@ -32,6 +32,7 @@ spec:
         - address=/gitops.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/podinfo.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/argocd.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
+        - address=/campsearch-asynqmon.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         # - address=/minio.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         # - address=/harbor-notary.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/k8s1/${SECRET_K8S1_IP}
