@@ -12,7 +12,7 @@ spec:
     imagePullSecrets:
       - name: harbor-neilfrench-regcred
     controller:
-      replicas: 1
+      replicas: 5
     env:
       PB_ADDR: "http://pocketbase.development.svc.cluster.local:8090"
       PB_USERNAME: "campsite_bot"
