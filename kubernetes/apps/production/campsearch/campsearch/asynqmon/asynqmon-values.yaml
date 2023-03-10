@@ -11,7 +11,7 @@ spec:
       tag: "0.7"
     args:
       - "--redis-url"
-      - "campsearch-redis-master:6379"
+      - "redis://campsearch-redis-master:6379"
     service:
       main:
         ports:
