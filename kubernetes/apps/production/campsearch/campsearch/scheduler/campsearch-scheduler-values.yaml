@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: campsearch-worker
+spec:
+  values:
+    image:
+      repository: harbor.${SECRET_DOMAIN}/campsearch/scheduler
+      pullPolicy: IfNotPresent
+      tag: "0.0.1"
+    imagePullSecrets:
+      - name: harbor-neilfrench-regcred
+    controller:
+      type: cronjob
+      cronjob:
+        concurrencyPolicy: Forbid
+        schedule: "*/5 * * * *"
+        successfulJobsHistory: 3
+        failedJobsHistory: 3
+    env:
+      PB_ADDR: "pocketbase.development.svc.cluster.local:8090"
+      PB_USERNAME: "campsite_bot"
+      REDIS_ADDR: "campsearch-redis-master:6379"
+    envFrom:
+      - secretRef:
+          name: campsearch-worker-secrets
+    service:
+      main:
+        enabled: false
