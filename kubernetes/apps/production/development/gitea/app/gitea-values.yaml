@@ -50,10 +50,6 @@ spec:
           REQUIRE_SIGNIN_VIEW: true
     postgresql:
       enabled: false
-    mysql:
-      enabled: false
-    mariadb:
-      enabled: false
     persistence:
       enabled: true
       existingClaim: "gitea-data"
