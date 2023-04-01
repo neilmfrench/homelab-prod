@@ -24,23 +24,24 @@ module "k3s_cluster" {
   my_public_ip_cidr   = data.sops_file.oracle_cloud_secrets.data["my_public_ip_cidr"]
   environment         = "staging-phx"
   os_image_id         = data.sops_file.oracle_cloud_secrets.data["os_image_id"]
-  k3s_version         = "v1.26.1+k3s1"
+  k3s_version         = "v1.26.3+k3s1"
   disable_ingress     = true
   install_longhorn    = false
   install_certmanager = false
   install_argocd      = false
+  install_argocd_image_updater = false
   expose_kubeapi      = true
   public_key_path     = "/home/neil/.ssh/id_rsa.pub"
   source              = "./k3s-oci-cluster"
 }
 
-# output "k3s_servers_ips" {
-#   value = module.k3s_cluster.k3s_servers_ips
-# }
+output "k3s_servers_ips" {
+  value = module.k3s_cluster.k3s_servers_ips
+}
 
-# output "k3s_workers_ips" {
-#   value = module.k3s_cluster.k3s_workers_ips
-# }
+output "k3s_workers_ips" {
+  value = module.k3s_cluster.k3s_workers_ips
+}
 
 output "public_lb_ip" {
   value = module.k3s_cluster.public_lb_ip

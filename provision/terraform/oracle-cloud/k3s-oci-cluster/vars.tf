@@ -156,7 +156,7 @@ variable "unique_tag_key" {
 
 variable "unique_tag_value" {
   type    = string
-  default = "https://github.com/garutilorenzo/k3s-oci-cluster"
+  default = "https://github.com/neilmfrench/homelab-prod/tree/main/kubernetes"
 }
 
 variable "my_public_ip_cidr" {
