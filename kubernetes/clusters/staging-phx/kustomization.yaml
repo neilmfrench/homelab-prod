@@ -1,0 +1,59 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+patches:
+  - target:
+      kind: Kustomization
+      name: flux-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-flux
+  - target:
+      kind: Kustomization
+      name: vars-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-vars
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-flux
+  - target:
+      kind: Kustomization
+      name: repositories-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-repositories
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-vars
+  - target:
+      kind: Kustomization
+      name: infrastructure-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-infrastructure
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-repositories
+  - target:
+      kind: Kustomization
+      name: apps-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-apps
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-infrastructure
+patchesStrategicMerge:
+  - ./staging-phx-flux.yaml
+  - ./staging-phx-vars.yaml
+  - ./staging-phx-repositories.yaml
+  - ./staging-phx-infrastructure.yaml
+  - ./staging-phx-apps.yaml
