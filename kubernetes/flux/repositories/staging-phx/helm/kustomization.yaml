@@ -13,6 +13,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: argo
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -22,6 +24,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: authentik
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -31,6 +35,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: bitnami
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -40,6 +46,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: calico
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -49,6 +57,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: crowdsec
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -58,6 +68,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: external-dns
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -67,6 +79,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: firefly
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -76,6 +90,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: gitea
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -85,6 +101,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: grafana
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -94,6 +112,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: harbor
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -103,6 +123,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: jetstack
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -112,6 +134,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: kured
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -121,6 +145,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: metallb
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -130,6 +156,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: minio
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -139,6 +167,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: nextcloud
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -148,6 +178,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: pihole
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -157,6 +189,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: external-dns
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -166,6 +200,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: privatebin
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -175,6 +211,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: prometheus
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -184,6 +222,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: stakater
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -193,6 +233,8 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: traefik
+      namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -202,3 +244,5 @@ patches:
         namespace: flux-system
     target:
       kind: HelmRepository
+      name: weave-gitops
+      namespace: flux-system
