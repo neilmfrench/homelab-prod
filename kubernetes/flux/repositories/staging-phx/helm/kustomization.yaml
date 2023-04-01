@@ -9,152 +9,152 @@ patchesStrategicMerge:
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: argo
-    namespace: flux-system
+      name: argo
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: authentik
-    namespace: flux-system
+      name: authentik
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: bitnami
-    namespace: flux-system
+      name: bitnami
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: calico
-    namespace: flux-system
+      name: calico
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: crowdsec
-    namespace: flux-system
+      name: crowdsec
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: external-dns
-    namespace: flux-system
+      name: external-dns
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: firefly
-    namespace: flux-system
+      name: firefly
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: gitea
-    namespace: flux-system
+      name: gitea
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: grafana
-    namespace: flux-system
+      name: grafana
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: harbor
-    namespace: flux-system
+      name: harbor
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: jetstack
-    namespace: flux-system
+      name: jetstack
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: kured
-    namespace: flux-system
+      name: kured
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: metallb
-    namespace: flux-system
+      name: metallb
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: minio
-    namespace: flux-system
+      name: minio
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: nextcloud
-    namespace: flux-system
+      name: nextcloud
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: pihole
-    namespace: flux-system
+      name: pihole
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: podinfo
-    namespace: flux-system
+      name: podinfo
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: privatebin
-    namespace: flux-system
+      name: privatebin
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: prometheus
-    namespace: flux-system
+      name: prometheus
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: stakater
-    namespace: flux-system
+      name: stakater
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: traefik
-    namespace: flux-system
+      name: traefik
+      namespace: flux-system
   - |-
     $patch: delete
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: HelmRepository
     metadata:
-    name: weave-gitops
-    namespace: flux-system
+      name: weave-gitops
+      namespace: flux-system
