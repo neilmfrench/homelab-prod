@@ -27,3 +27,4 @@ resources:
   - ./nextcloud.yaml
   - ./firefly.yaml
   - ./weave-gitops.yaml
+  - ./ingress-nginx.yaml
