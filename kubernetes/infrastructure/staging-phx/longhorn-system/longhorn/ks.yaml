@@ -5,7 +5,7 @@ metadata:
   name: cluster-infrastructure-longhorn
   namespace: flux-system
 spec:
-  path: ./kubernetes/infrastructure/production/longhorn-system/longhorn/app
+  path: ./kubernetes/infrastructure/staging-phx/longhorn-system/longhorn/app
   prune: true
   sourceRef:
     kind: GitRepository
