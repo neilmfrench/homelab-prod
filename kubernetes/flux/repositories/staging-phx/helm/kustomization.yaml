@@ -64,17 +64,6 @@ patches:
       apiVersion: source.toolkit.fluxcd.io/v1beta2
       kind: HelmRepository
       metadata:
-        name: external-dns
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: external-dns
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
-      kind: HelmRepository
-      metadata:
         name: firefly
         namespace: flux-system
     target:
@@ -168,17 +157,6 @@ patches:
     target:
       kind: HelmRepository
       name: pihole
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
-      kind: HelmRepository
-      metadata:
-        name: external-dns
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: external-dns
       namespace: flux-system
   - patch: |-
       $patch: delete
