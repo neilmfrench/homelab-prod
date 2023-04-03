@@ -27,7 +27,7 @@ spec:
 # spec:
 #   dependsOn:
 #     - name: cluster-infrastructure-longhorn
-#   path: ./kubernetes/infrastructure/production/longhorn-system/longhorn/recurring-jobs
+#   path: ./kubernetes/infrastructure/staging-phx/longhorn-system/longhorn/recurring-jobs
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -44,7 +44,7 @@ spec:
 # spec:
 #   dependsOn:
 #     - name: cluster-infrastructure-longhorn-recurring-jobs
-#   path: ./kubernetes/infrastructure/production/longhorn-system/longhorn/storage-classes
+#   path: ./kubernetes/infrastructure/staging-phx/longhorn-system/longhorn/storage-classes
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
