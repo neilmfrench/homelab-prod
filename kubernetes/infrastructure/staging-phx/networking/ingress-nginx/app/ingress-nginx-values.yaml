@@ -15,9 +15,14 @@ spec:
         default: true
       config:
         enable-real-ip: "true"
-        proxy-real-ip-cidr: "0.0.0.0/0"
-        proxy-body-size: "20m"
         use-proxy-protocol: "true"
+        forwarded-for-header: "CF-Connecting-IP"
+        hsts-max-age: "31449600"
+        keep-alive: 120
+        keep-alive-requests: 10000
+        proxy-body-size: "100M"
+        ssl-protocols: "TLSv1.3 TLSv1.2"
+        use-forwarded-headers: "true"
       service:
         type: NodePort
         nodePorts:
@@ -26,3 +31,12 @@ spec:
         externalTrafficPolicy: Local
       metrics:
         enabled: false
+      podAnnotations:
+        configmap.reloader.stakater.com/reload: cloudflare-networks
+  valuesFrom:
+    # Cloudflare Networks
+    # https://www.cloudflare.com/ips/
+    - targetPath: controller.config.proxy-real-ip-cidr
+      kind: ConfigMap
+      name: cloudflare-networks
+      valuesKey: cloudflare-networks.txt

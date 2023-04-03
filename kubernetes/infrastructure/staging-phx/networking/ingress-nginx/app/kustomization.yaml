@@ -6,3 +6,9 @@ resources:
   - ../../../../base/ingress-nginx
 patchesStrategicMerge:
   - ./ingress-nginx-values.yaml
+configMapGenerator:
+  - name: cloudflare-networks
+    files:
+      - ./cloudflare-networks.txt
+generatorOptions:
+  disableNameSuffixHash: true
