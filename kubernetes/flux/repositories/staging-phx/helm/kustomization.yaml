@@ -119,17 +119,6 @@ patches:
       apiVersion: source.toolkit.fluxcd.io/v1beta2
       kind: HelmRepository
       metadata:
-        name: jetstack
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: jetstack
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
-      kind: HelmRepository
-      metadata:
         name: kured
         namespace: flux-system
     target:
