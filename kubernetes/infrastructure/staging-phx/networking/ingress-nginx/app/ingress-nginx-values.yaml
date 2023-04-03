@@ -14,7 +14,6 @@ spec:
       ingressClassResource:
         default: true
       config:
-        allow-snippet-annotations: "true"
         enable-real-ip: "true"
         proxy-real-ip-cidr: "0.0.0.0/0"
         proxy-body-size: "20m"
