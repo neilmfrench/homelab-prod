@@ -1,0 +1,28 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+spec:
+  values:
+    controller:
+      extraEnvs:
+        - name: TZ
+          value: "${TIMEZONE}"
+      publishService:
+        enabled: true
+      ingressClassResource:
+        default: true
+      config:
+        allow-snippet-annotations: "true"
+        enable-real-ip: "true"
+        proxy-real-ip-cidr: "0.0.0.0/0"
+        proxy-body-size: "20m"
+        use-proxy-protocol: "true"
+      service:
+        type: NodePort
+        nodePorts:
+          http: 30080
+          https: 30443
+      metrics:
+        enabled: false
