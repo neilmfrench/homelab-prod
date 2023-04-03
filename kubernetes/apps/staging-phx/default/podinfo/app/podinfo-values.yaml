@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: podinfo
+spec:
+  chart:
+    spec:
+      version: "6.3.5"
+  values:
+    ingress:
+      enabled: true
+      className: "nginx"
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4-phx.${SECRET_DOMAIN}"
+      hosts:
+        - host: &host phx.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: pod-info-tls
+          hosts:
+            - *host
