@@ -14,19 +14,40 @@ spec:
       ingressClassResource:
         default: true
       config:
-        # enable-real-ip: "true"
-        proxy-body-size: "100M"
-        # use-proxy-protocol: "true"
-        proxy-real-ip-cidr: "0.0.0.0/0"
-        # enable-real-ip: "true"
-        # use-proxy-protocol: "true"
+        client-header-timeout: 120
+        client-body-buffer-size: "100M"
+        client-body-timeout: 120
+        custom-http-errors: 400,401,403,404,500,502,503,504
+        enable-brotli: "true"
         forwarded-for-header: "CF-Connecting-IP"
+        hsts-max-age: "31449600"
+        keep-alive: 120
+        keep-alive-requests: 10000
+        proxy-body-size: "100M"
+        ssl-protocols: "TLSv1.3 TLSv1.2"
+        use-forwarded-headers: "true"
+        log-format-escape-json: "true"
+        log-format-upstream: >-
+          {"time": "$time_iso8601", "remote_addr": "$proxy_protocol_addr",
+          "x_forwarded_for": "$proxy_add_x_forwarded_for", "request_id": "$req_id",
+          "remote_user": "$remote_user", "bytes_sent": $bytes_sent, "request_time": $request_time,
+          "status": $status, "vhost": "$host", "request_proto": "$server_protocol",
+          "path": "$uri", "request_query": "$args", "request_length": $request_length,
+          "duration": $request_time,"method": "$request_method", "http_referrer": "$http_referer",
+          "http_user_agent": "$http_user_agent"}
+        # enable-real-ip: "true"
+        # proxy-body-size: "100M"
+        # use-proxy-protocol: "true"
+        # proxy-real-ip-cidr: "0.0.0.0/0"
+        # enable-real-ip: "true"
+        # use-proxy-protocol: "true"
+        # forwarded-for-header: "CF-Connecting-IP"
         # hsts-max-age: "31449600"
         # keep-alive: 120
         # keep-alive-requests: 10000
         # proxy-body-size: "100M"
         # ssl-protocols: "TLSv1.3 TLSv1.2"
-        use-forwarded-headers: "true"
+        # use-forwarded-headers: "true"
         # allow-snippet-annotations: "true"
         # proxy-real-ip-cidr: "0.0.0.0/0"
       service:
@@ -39,10 +60,10 @@ spec:
         enabled: false
       podAnnotations:
         configmap.reloader.stakater.com/reload: cloudflare-networks
-  # valuesFrom:
-  #   # Cloudflare Networks
-  #   # https://www.cloudflare.com/ips/
-  #   - targetPath: controller.config.proxy-real-ip-cidr
-  #     kind: ConfigMap
-  #     name: cloudflare-networks
-  #     valuesKey: cloudflare-networks.txt
+  valuesFrom:
+    # Cloudflare Networks
+    # https://www.cloudflare.com/ips/
+    - targetPath: controller.config.proxy-real-ip-cidr
+      kind: ConfigMap
+      name: cloudflare-networks
+      valuesKey: cloudflare-networks.txt
