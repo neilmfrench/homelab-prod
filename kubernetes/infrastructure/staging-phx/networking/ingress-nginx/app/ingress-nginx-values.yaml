@@ -35,7 +35,7 @@ spec:
           "path": "$uri", "request_query": "$args", "request_length": $request_length,
           "duration": $request_time,"method": "$request_method", "http_referrer": "$http_referer",
           "http_user_agent": "$http_user_agent"}
-        enable-real-ip: "true"
+        enable-real-ip: "false"
         # proxy-body-size: "100M"
         use-proxy-protocol: "true"
         proxy-real-ip-cidr: "0.0.0.0/0"
