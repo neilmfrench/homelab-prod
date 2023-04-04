@@ -14,6 +14,10 @@ spec:
       ingressClassResource:
         default: true
       config:
+        enable-real-ip: "true"
+        proxy-body-size: "100M"
+        use-proxy-protocol: "true"
+        proxy-real-ip-cidr: "0.0.0.0/0"
         # enable-real-ip: "true"
         # use-proxy-protocol: "true"
         # forwarded-for-header: "CF-Connecting-IP"
@@ -24,10 +28,7 @@ spec:
         # ssl-protocols: "TLSv1.3 TLSv1.2"
         # use-forwarded-headers: "false"
         # allow-snippet-annotations: "true"
-        enable-real-ip: "true"
         # proxy-real-ip-cidr: "0.0.0.0/0"
-        proxy-body-size: "100M"
-        use-proxy-protocol: "true"
       service:
         type: NodePort
         nodePorts:
@@ -38,10 +39,10 @@ spec:
         enabled: false
       podAnnotations:
         configmap.reloader.stakater.com/reload: cloudflare-networks
-  valuesFrom:
-    # Cloudflare Networks
-    # https://www.cloudflare.com/ips/
-    - targetPath: controller.config.proxy-real-ip-cidr
-      kind: ConfigMap
-      name: cloudflare-networks
-      valuesKey: cloudflare-networks.txt
+  # valuesFrom:
+  #   # Cloudflare Networks
+  #   # https://www.cloudflare.com/ips/
+  #   - targetPath: controller.config.proxy-real-ip-cidr
+  #     kind: ConfigMap
+  #     name: cloudflare-networks
+  #     valuesKey: cloudflare-networks.txt
