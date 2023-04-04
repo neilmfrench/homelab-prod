@@ -14,9 +14,9 @@ spec:
       ingressClassResource:
         default: true
       config:
-        enable-real-ip: "true"
+        # enable-real-ip: "true"
         proxy-body-size: "100M"
-        use-proxy-protocol: "true"
+        # use-proxy-protocol: "true"
         proxy-real-ip-cidr: "0.0.0.0/0"
         # enable-real-ip: "true"
         # use-proxy-protocol: "true"
