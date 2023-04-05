@@ -7,8 +7,8 @@ resources:
 patchesStrategicMerge:
   - ./ingress-nginx-values.yaml
 configMapGenerator:
-  - name: cloudflare-networks
+  - name: networks
     files:
-      - ./cloudflare-networks.txt
+      - ./networks.txt
 generatorOptions:
   disableNameSuffixHash: true

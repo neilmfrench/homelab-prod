@@ -38,7 +38,7 @@ spec:
         enable-real-ip: "true"
         # proxy-body-size: "100M"
         use-proxy-protocol: "true"
-        proxy-real-ip-cidr: "0.0.0.0/0"
+        # proxy-real-ip-cidr: "0.0.0.0/0"
         # enable-real-ip: "true"
         # use-proxy-protocol: "true"
         # forwarded-for-header: "X-Forwarded-For"
@@ -61,11 +61,12 @@ spec:
       metrics:
         enabled: false
       podAnnotations:
-        configmap.reloader.stakater.com/reload: cloudflare-networks
-  # valuesFrom:
-  #   # Cloudflare Networks
-  #   # https://www.cloudflare.com/ips/
-  #   - targetPath: controller.config.proxy-real-ip-cidr
-  #     kind: ConfigMap
-  #     name: cloudflare-networks
-  #     valuesKey: cloudflare-networks.txt
+        configmap.reloader.stakater.com/reload: networks
+  # TODO figure out why I can't restrict real-ip-cidr
+  valuesFrom:
+    # Cloudflare Networks
+    # https://www.cloudflare.com/ips/
+    - targetPath: controller.config.proxy-real-ip-cidr
+      kind: ConfigMap
+      name: cloudflare-networks
+      valuesKey: cloudflare-networks.txt
