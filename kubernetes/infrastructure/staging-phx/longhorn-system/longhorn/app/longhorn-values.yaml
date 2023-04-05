@@ -17,7 +17,7 @@ spec:
       allowNodeDrainWithLastHealthyReplica: true
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       defaultDataLocality: best-effort
-      backupTarget: "s3://longhorn-backups@dummyregion/longhorn"
+      backupTarget: "s3://longhorn-backups@us-phoenix-1/longhorn"
       backupTargetCredentialSecret: oci-object-storage-secret
       defaultLonghornStaticStorageClass: longhorn
     ingress:
