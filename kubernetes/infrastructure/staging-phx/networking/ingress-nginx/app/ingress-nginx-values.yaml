@@ -24,8 +24,8 @@ spec:
         keep-alive: 120
         keep-alive-requests: 10000
         proxy-body-size: "100M"
-        # ssl-protocols: "TLSv1.3 TLSv1.2"
-        use-forwarded-headers: "true"
+        ssl-protocols: "TLSv1.3 TLSv1.2"
+        # use-forwarded-headers: "true"
         log-format-escape-json: "true"
         log-format-upstream: >-
           {"time": "$time_iso8601", "remote_addr": "$remote_addr", "proxy_protocol_addr": "$proxy_protocol_addr",
@@ -38,12 +38,12 @@ spec:
         enable-real-ip: "true"
         # proxy-body-size: "100M"
         use-proxy-protocol: "true"
-        proxy-real-ip-cidr: "0.0.0.0/0"
+        # proxy-real-ip-cidr: "0.0.0.0/0"
         # enable-real-ip: "true"
         # use-proxy-protocol: "true"
         # forwarded-for-header: "X-Forwarded-For"
         server-snippet: |
-          real_ip_header X-Forwarded-For;
+          real_ip_header CF-Connecting-IP;
         # hsts-max-age: "31449600"
         # keep-alive: 120
         # keep-alive-requests: 10000
@@ -62,10 +62,10 @@ spec:
         enabled: false
       podAnnotations:
         configmap.reloader.stakater.com/reload: cloudflare-networks
-  # valuesFrom:
-  #   # Cloudflare Networks
-  #   # https://www.cloudflare.com/ips/
-  #   - targetPath: controller.config.proxy-real-ip-cidr
-  #     kind: ConfigMap
-  #     name: cloudflare-networks
-  #     valuesKey: cloudflare-networks.txt
+  valuesFrom:
+    # Cloudflare Networks
+    # https://www.cloudflare.com/ips/
+    - targetPath: controller.config.proxy-real-ip-cidr
+      kind: ConfigMap
+      name: cloudflare-networks
+      valuesKey: cloudflare-networks.txt
