@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-flux-webhooks
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/production/flux-system/flux/webhooks
+  path: ./kubernetes/apps/staging-phx/flux-system/flux/webhooks
   prune: true
   sourceRef:
     kind: GitRepository
