@@ -11,6 +11,7 @@ spec:
       enabled: true
       className: "nginx"
       annotations:
+        test: "test"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         external-dns/is-public: "true"
         external-dns.alpha.kubernetes.io/target: "ipv4-phx.${SECRET_DOMAIN}"
