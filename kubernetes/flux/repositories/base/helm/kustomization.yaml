@@ -28,3 +28,4 @@ resources:
   - ./firefly.yaml
   - ./weave-gitops.yaml
   - ./ingress-nginx.yaml
+  - ./backube.yaml
