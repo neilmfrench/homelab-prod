@@ -57,7 +57,7 @@ spec:
         nodePorts:
           http: 30080
           https: 30443
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Local
       metrics:
         enabled: false
       podAnnotations:
