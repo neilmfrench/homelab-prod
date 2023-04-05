@@ -9,6 +9,9 @@ spec:
       repository: debian
       tag: "latest"
     command: ["sleep", "infinity"]
+    service:
+      main:
+        enabled: false
     persistence:
       data:
         enabled: true
