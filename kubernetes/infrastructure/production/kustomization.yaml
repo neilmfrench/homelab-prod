@@ -11,3 +11,4 @@ resources:
   - ./calico-system
   - ./monitoring
   - ./networking
+  - ./volsync
