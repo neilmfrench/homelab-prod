@@ -17,7 +17,7 @@ spec:
       - --hostname
       - vs-test-phx.${SECRET_DOMAIN}
       - --url
-      - localhost:9210
+      - 127.0.0.1:9210
     service:
       main:
         ports:
