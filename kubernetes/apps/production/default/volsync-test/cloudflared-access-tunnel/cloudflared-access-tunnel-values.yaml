@@ -22,7 +22,12 @@ spec:
       main:
         ports:
           http:
+            enabled: false
+            primary: false
+          tcp:
             port: 9210
+            protocol: TCP
+            primary: true
     probes:
       liveness:
         enabled: false
