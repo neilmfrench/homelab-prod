@@ -12,7 +12,7 @@ spec:
       # The Syncthing ID of the peer.
       - ID: MMG7G4Y-JCOTXJF-PEGKNWK-7EPD67L-6KT62WZ-76YKM3T-W2SEOXT-WCLMUAR
         # The address of the peer - this will be used as a data connection.
-        address: tcp://volsync-test-cloudflared-access-tunnel:9210
+        address: tcp://10.43.11.253:9210
         # Whether or not the peer should introduce this ReplicationSource to other peers.
         introducer: false
 # ---
