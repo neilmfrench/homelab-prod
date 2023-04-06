@@ -10,6 +10,7 @@ spec:
       repository: neilmfrench2/volsync-operator
       pullPolicy: IfNotPresent
       tag: "1.0.0"
+      image: "sha256:be7dfd0f188a43ca87e52ad85bdb9a231897a8a61f1b93f835a9c8b3cb4c7fc6"
     manageCRDs: true
     metrics:
       disableAuth: true
