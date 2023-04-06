@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-infrastructure-snapshot-validation-webhook
+  namespace: flux-system
+spec:
+  path: ./kubernetes/infrastructure/staging-phx/kube-system/snapshot-controller/snapshot-validation-webhook
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: snapshot-validation-webhook
+      namespace: kube-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
