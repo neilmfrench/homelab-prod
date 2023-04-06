@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: default
 resources:
   - ./data-pvc.yaml
+  - ./volsync.yaml
   - ../../../../base/volsync-test
 patchesStrategicMerge:
   - ./volsync-test-values.yaml
