@@ -34,6 +34,6 @@ spec:
       tunnel-credentials:
         enabled: true
         type: secret
-        name: cloudflared-tunnel-credentials
+        name: volsync-test-cloudflared-tunnel-credentials
         mountPath: /etc/cloudflared/creds
         readOnly: true
