@@ -15,7 +15,7 @@ spec:
       - access
       - tcp
       - --hostname
-      - vs-test-phx12.${SECRET_DOMAIN}
+      - vs-test-phx.${SECRET_DOMAIN}
       - --url
       - localhost:9210
     service:
