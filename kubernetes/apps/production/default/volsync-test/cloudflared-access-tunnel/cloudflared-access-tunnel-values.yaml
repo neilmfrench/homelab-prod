@@ -1,0 +1,39 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cloudflared-access-tunnel
+spec:
+  values:
+    # controller:
+    #   annotations:
+    #     configmap.reloader.stakater.com/reload: "cloudflared-configmap"
+    image:
+      repository: cloudflare/cloudflared
+      tag: "2023.3.1"
+    args:
+      - access
+      - tcp
+      - --hostname
+      - vs-test-phx.${SECRET_DOMAIN}
+      - --url
+      - localhost:9210
+    service:
+      main:
+        ports:
+          http:
+            port: 9210
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+    persistence:
+      tunnel-credentials:
+        enabled: true
+        type: secret
+        name: cloudflared-tunnel-credentials
+        mountPath: /etc/cloudflared/creds
+        readOnly: true
