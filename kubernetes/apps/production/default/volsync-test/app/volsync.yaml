@@ -1,0 +1,39 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: sync-test-pvc
+spec:
+  sourcePVC: volsync-test-data
+  syncthing:
+    serviceType: ClusterIP
+    # List of peers that this ReplicationSource should connect to.
+    peers:
+      []
+      # # The Syncthing ID of the peer.
+      # - ID: GVONGZX-6FVQPEY-4QWTVLK-TXNJUHA-5UGA625-UBC7HZQ-P5BG2XJ-EHJ4XQ3
+      #   # The address of the peer - this will be used as a data connection.
+      #   address: tcp://10.96.55.168:22000
+      #   # Whether or not the peer should introduce this ReplicationSource to other peers.
+      #   introducer: false
+# ---
+# # yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/replicationsource_v1alpha1.json
+# apiVersion: volsync.backube/v1alpha1
+# kind: ReplicationSource
+# metadata:
+#   name: frigate
+#   namespace: default
+# spec:
+#   sourcePVC: config-frigate-0
+#   trigger:
+#     schedule: "0 0 * * *"
+#   restic:
+#     copyMethod: Snapshot
+#     pruneIntervalDays: 10
+#     repository: frigate-restic-secret
+#     cacheCapacity: 2Gi
+#     volumeSnapshotClassName: csi-ceph-blockpool
+#     storageClassName: ceph-block
+#     retain:
+#       daily: 10
+#       within: 3d
