@@ -15,6 +15,8 @@ ingress:
   # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
   - hostname: git-ssh.${SECRET_DOMAIN}
     service: ssh://gitea-ssh.development.svc.cluster.local:22
+  - hostname: vs-test-home.${SECRET_DOMAIN}
+    service: tcp://volsync-sync-test-pvc-data.default.svc.cluster.local:22000
   - hostname: testcf.${SECRET_DOMAIN}
     service: http://cloudflared-test-nginx:80
   # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
