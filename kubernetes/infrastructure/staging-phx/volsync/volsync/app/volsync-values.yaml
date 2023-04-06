@@ -5,6 +5,11 @@ metadata:
   name: volsync
 spec:
   values:
+    image:
+      # built for arm64
+      repository: neilmfrench2/volsync-operator
+      pullPolicy: IfNotPresent
+      tag: "1.0.0"
     manageCRDs: true
     metrics:
       disableAuth: true
