@@ -18,6 +18,8 @@ spec:
       - vs-test-phx.${SECRET_DOMAIN}
       - --url
       - 0.0.0.0:9210
+      - --loglevel
+      - debug
     service:
       main:
         ports:
