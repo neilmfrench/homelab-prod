@@ -17,6 +17,7 @@ spec:
       - --annotation-filter=external-dns/is-public in (true)
     policy: sync
     sources:
+      - service
       - ingress
     txtPrefix: "k8s."
     txtOwnerId: "home-ops"
