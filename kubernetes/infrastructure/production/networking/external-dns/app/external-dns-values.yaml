@@ -15,6 +15,7 @@ spec:
     extraArgs:
       - --cloudflare-proxied
       - --annotation-filter=external-dns/is-public in (true)
+      - --publish-internal-services
     policy: sync
     logLevel: debug
     sources:
