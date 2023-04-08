@@ -18,3 +18,23 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-vaultwarden-volsync-cloudflared-access-tunnel
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/staging-phx/security/vaultwarden/cloudflared-access-tunnel
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: vaultwarden-volsync-cloudflared-access-tunnel
+      namespace: security
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

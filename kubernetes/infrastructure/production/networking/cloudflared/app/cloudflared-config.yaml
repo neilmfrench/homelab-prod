@@ -17,6 +17,8 @@ ingress:
     service: ssh://gitea-ssh.development.svc.cluster.local:22
   - hostname: vs-test-home.${SECRET_DOMAIN}
     service: tcp://volsync-sync-test-pvc-data.default.svc.cluster.local:22000
+  - hostname: vs-vaultwarden-prod.${SECRET_DOMAIN}
+    service: tcp://volsync-sync-vaultwarden-data.security.svc.cluster.local:22000
   - hostname: testcf.${SECRET_DOMAIN}
     service: http://cloudflared-test-nginx:80
   # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
