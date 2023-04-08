@@ -15,8 +15,8 @@ spec:
     extraArgs:
       - --cloudflare-proxied
       - --annotation-filter=external-dns/is-public in (true)
-      - --log-level=debug
     policy: sync
+    logLevel: debug
     sources:
       - service
       - ingress
