@@ -3,6 +3,8 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: vs-vaultwarden-phx
+  annotations:
+    external-dns/is-public: "true"
 spec:
   endpoints:
     - dnsName: vs-vaultwarden-phx.${SECRET_DOMAIN}
