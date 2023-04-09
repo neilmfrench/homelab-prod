@@ -16,6 +16,8 @@ spec:
       - --cloudflare-proxied
       - --annotation-filter=external-dns/is-public in (true)
       - --publish-internal-services
+      - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
+      - --crd-source-kind=DNSEndpoint
     policy: sync
     logLevel: info
     sources:
