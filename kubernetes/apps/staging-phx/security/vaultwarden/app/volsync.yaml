@@ -20,4 +20,7 @@ spec:
   sourcePVC: vaultwarden
   syncthing:
     serviceType: ClusterIP
-    # peers:
+    peers:
+      - ID: YL42ZPL-RCWB7ZU-MHWHGR2-HPDSZTE-NKJ5VNV-X4ZUICT-426K7P5-D6P2SQS
+        address: tcp://vaultwarden-volsync-cloudflared-access-tunnel:9210
+        introducer: false
