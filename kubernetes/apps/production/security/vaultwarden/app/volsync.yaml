@@ -1,4 +1,15 @@
 ---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: vs-vaultwarden-prod
+spec:
+  endpoints:
+    - dnsName: vs-vaultwarden-prod.${SECRET_DOMAIN}
+      targets:
+        - "${SECRET_CLOUDFLARE_TUNNEL_TARGET}"
+      recordType: CNAME
+---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:

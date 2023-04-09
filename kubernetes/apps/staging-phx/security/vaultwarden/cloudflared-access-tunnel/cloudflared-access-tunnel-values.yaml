@@ -19,10 +19,6 @@ spec:
       - debug
     service:
       main:
-        annotations:
-          external-dns/is-public: "true"
-          external-dns.alpha.kubernetes.io/hostname: vs-vaultwarden-phx.${SECRET_DOMAIN}
-          external-dns.alpha.kubernetes.io/target: "${SECRET_CLOUDFLARE_TUNNEL_TARGET}"
         ports:
           http:
             enabled: false
