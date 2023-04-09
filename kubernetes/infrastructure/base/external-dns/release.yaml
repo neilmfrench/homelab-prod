@@ -23,3 +23,22 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: ClusterRole
+              name: external-dns
+            patch:
+              - op: add
+                path: /rules/-
+                value:
+                  apiGroups: ["externaldns.k8s.io"]
+                  resources: ["dnsendpoints"]
+                  verbs: ["get", "watch", "list"]
+              - op: add
+                path: /rules/-
+                value:
+                  apiGroups: ["externaldns.k8s.io"]
+                  resources: ["dnsendpoints/status"]
+                  verbs: ["*"]
