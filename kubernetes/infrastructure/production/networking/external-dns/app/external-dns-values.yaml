@@ -19,7 +19,7 @@ spec:
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
     policy: sync
-    logLevel: info
+    logLevel: debug
     sources:
       - service
       - ingress
