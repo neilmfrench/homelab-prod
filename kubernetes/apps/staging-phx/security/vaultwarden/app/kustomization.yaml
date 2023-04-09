@@ -5,6 +5,6 @@ namespace: security
 resources:
   - ./data-pvc.yaml
   - ./volsync.yaml
-#   - ../../../../base/vaultwarden
-# patchesStrategicMerge:
-#   - ./vaultwarden-values.yaml
+  - ../../../../base/vaultwarden
+patchesStrategicMerge:
+  - ./vaultwarden-values.yaml
