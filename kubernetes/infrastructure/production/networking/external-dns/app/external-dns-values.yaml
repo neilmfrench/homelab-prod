@@ -17,10 +17,11 @@ spec:
       - --annotation-filter=external-dns/is-public in (true)
       - --publish-internal-services
     policy: sync
-    logLevel: debug
+    logLevel: info
     sources:
       - service
       - ingress
+      - crd
     txtPrefix: "k8s."
     txtOwnerId: "home-ops"
     domainFilters:

@@ -20,6 +20,7 @@ spec:
     sources:
       - service
       - ingress
+      - crd
     txtPrefix: "k8s-phx."
     txtOwnerId: "home-ops"
     domainFilters:
