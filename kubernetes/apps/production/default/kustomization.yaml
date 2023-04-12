@@ -5,4 +5,3 @@ resources:
   - ./homepage/ks.yaml
   - ./podinfo/ks.yaml
   - ./changedetection/ks.yaml
-  - ./volsync-test/ks.yaml

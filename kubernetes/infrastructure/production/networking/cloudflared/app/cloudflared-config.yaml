@@ -15,8 +15,6 @@ ingress:
   # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
   - hostname: git-ssh.${SECRET_DOMAIN}
     service: ssh://gitea-ssh.development.svc.cluster.local:22
-  - hostname: vs-test-home.${SECRET_DOMAIN}
-    service: tcp://volsync-sync-test-pvc-data.default.svc.cluster.local:22000
   - hostname: vs-vaultwarden-prod.${SECRET_DOMAIN}
     service: tcp://volsync-sync-vaultwarden-data.security.svc.cluster.local:22000
   - hostname: testcf.${SECRET_DOMAIN}
