@@ -5,3 +5,4 @@ resources:
   - ./homepage/ks.yaml
   - ./podinfo/ks.yaml
   - ./changedetection/ks.yaml
+  - ./blog/ks.yaml
