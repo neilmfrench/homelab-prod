@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: shlinkio/shlink
-      tag: "3.5.2"
+      tag: "3.5.4"
     env:
       DEFAULT_DOMAIN: shlink.${SECRET_DOMAIN}
       IS_HTTPS_ENABLED: true
