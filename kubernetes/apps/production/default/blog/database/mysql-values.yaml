@@ -8,7 +8,7 @@ spec:
     architecture: standalone
     primary:
       persistence:
-        existingClaim: ghost-mysql-data
+        existingClaim: blog-mysql-data
     auth:
       rootPassword: "${SECRET_GHOST_MYSQL_PASSWORD}"
       database: ghost
