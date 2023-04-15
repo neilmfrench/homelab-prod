@@ -8,7 +8,7 @@ spec:
     image:
       repository: ghcr.io/muchobien/pocketbase
       pullPolicy: IfNotPresent
-      tag: "0.13.2"
+      tag: "0.14.5"
     service:
       main:
         ports:
