@@ -8,4 +8,4 @@ resources:
   - ./gitea/ks.yaml
   - ./harbor/ks.yaml
   - ./pocketbase/ks.yaml
-  - ./oci-instance-creator/ks.yaml
+  # - ./oci-instance-creator/ks.yaml
