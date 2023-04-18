@@ -7,7 +7,7 @@ spec:
     spec:
       version: "6.3.0"
   values:
-    fullnameOverride: podinfo-ext
+    # fullnameOverride: exter
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
