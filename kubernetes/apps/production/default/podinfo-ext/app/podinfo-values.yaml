@@ -22,3 +22,6 @@ spec:
         - secretName: pod-info-ext-tls
           hosts:
             - "ha.${SECRET_DOMAIN}"
+  postRenderers:
+    - kustomize:
+        nameSuffix: -ext
