@@ -7,6 +7,7 @@ spec:
     spec:
       version: "6.3.0"
   values:
+    nameOverride: podinfo-ext
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
@@ -22,6 +23,3 @@ spec:
         - secretName: pod-info-ext-tls
           hosts:
             - "ha.${SECRET_DOMAIN}"
-  postRenderers:
-    - kustomize:
-        nameSuffix: -ext
