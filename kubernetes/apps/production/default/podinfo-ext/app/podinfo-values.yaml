@@ -3,11 +3,12 @@ kind: HelmRelease
 metadata:
   name: podinfo
 spec:
+  releaseName: podinfo-ext
   chart:
     spec:
       version: "6.3.0"
   values:
-    # fullnameOverride: exter
+    fullnameOverride: podinfo-ext
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
