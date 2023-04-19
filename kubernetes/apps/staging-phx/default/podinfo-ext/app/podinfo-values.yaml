@@ -10,6 +10,8 @@ spec:
   values:
     fullnameOverride: podinfo-ext
     ingress:
+      enabled: true
+      className: "nginx"
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         # traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
