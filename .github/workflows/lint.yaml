@@ -1,46 +1,51 @@
 ---
-name: Lint
+name: "Lint"
 
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:
   pull_request:
-    branches: ["main"]
-    paths: ["kubernetes/**"]
-
-env:
-  # Currently no way to detect automatically
-  DEFAULT_BRANCH: main
-  KUBERNETES_DIR: ./kubernetes
-  SCHEMA_DIR: /home/runner/.datree/crdSchemas
+    branches:
+      - main
 
 jobs:
   build:
-    name: Lint
+    name: MegaLinter
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-      - name: Setup Tools
-        run: |
-          brew install fluxcd/tap/flux kubeconform kustomize
-      - name: Download CRDs
-        run: |
-          mkdir -p ${{ env.SCHEMA_DIR }}
-          flux pull artifact oci://ghcr.io/onedr0p/kubernetes-schemas-oci:latest \
-              --output=${{ env.SCHEMA_DIR }}
-      - name: Lint
-        uses: github/super-linter/slim@45fc0d88288beee4701c62761281edfee85655d7 # v5
+      - name: MegaLinter
+        uses: oxsecurity/megalinter@v6.22.2
         env:
+          PRINT_ALPACA: false
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
-          DEFAULT_BRANCH: "${{ env.DEFAULT_BRANCH }}"
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          ANSIBLE_CONFIG_FILE: .ansible-lint
-          MARKDOWN_CONFIG_FILE: .markdownlint.yaml
-          TERRAFORM_TFLINT_CONFIG_FILE: .tflint.hcl
-          YAML_CONFIG_FILE: .yamllint.yaml
-          KUBERNETES_KUBECONFORM_OPTIONS: |
-            -strict -ignore-missing-schemas -kubernetes-version 1.26.0 -skip Secret -schema-location default -schema-location ${{ env.SCHEMA_DIR }}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json -verbose
+          ENABLE_LINTERS: |-
+            ${{
+              join(
+                fromJSON('
+                  [
+                    "ACTION_ACTIONLINT",
+                    "ANSIBLE_ANSIBLE_LINT",
+                    "KUBERNETES_KUBECONFORM",
+                    "MARKDOWN_MARKDOWNLINT",
+                    "REPOSITORY_GIT_DIFF",
+                    "REPOSITORY_SECRETLINT",
+                    "TERRAFORM_TERRAFORM_FMT",
+                    "YAML_PRETTIER",
+                    "YAML_YAMLLINT"
+                  ]
+                '),
+                ','
+              )
+            }}
+          ANSIBLE_DIRECTORY: provision/ansible
+          ANSIBLE_ANSIBLE_LINT_CONFIG_FILE: .github/linters/.ansible-lint
+          KUBERNETES_DIRECTORY: kubernetes
+          KUBERNETES_KUBECONFORM_ARGUMENTS: -strict -kubernetes-version 1.26.0 -skip Secret -schema-location default -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' -verbose
+          MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/linters/.markdownlint.yaml
+          MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
+          YAML_YAMLLINT_CONFIG_FILE: .github/linters/.yamllint.yaml
+          YAML_PRETTIER_CONFIG_FILE: .github/linters/.prettierrc.yaml
+          YAML_PRETTIER_FILTER_REGEX_EXCLUDE: "(.*\\.sops\\.ya?ml)"
