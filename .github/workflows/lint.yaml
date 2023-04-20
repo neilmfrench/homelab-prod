@@ -32,6 +32,9 @@ jobs:
           mkdir -p ${{ env.SCHEMA_DIR }}
           flux pull artifact oci://ghcr.io/onedr0p/kubernetes-schemas-oci:latest \
               --output=${{ env.SCHEMA_DIR }}
+      - name: Print CRDs
+        run: |
+          ls -al ${{ env.SCHEMA_DIR }}
       - name: Lint
         uses: github/super-linter/slim@45fc0d88288beee4701c62761281edfee85655d7 # v5
         env:
@@ -43,4 +46,4 @@ jobs:
           TERRAFORM_TFLINT_CONFIG_FILE: .tflint.hcl
           YAML_CONFIG_FILE: .yamllint.yaml
           KUBERNETES_KUBECONFORM_OPTIONS: |
-            -strict -ignore-missing-schemas -kubernetes-version 1.26.0 -skip Secret -schema-location default -schema-location ${{ env.SCHEMA_DIR }}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json -verbose
+            -strict -kubernetes-version 1.26.0 -skip Secret -schema-location default -schema-location ${{ env.SCHEMA_DIR }}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json -verbose
