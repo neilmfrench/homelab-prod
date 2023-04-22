@@ -39,6 +39,7 @@ spec:
         - address=/k8s2/${SECRET_K8S2_IP}
         - address=/k8s3/${SECRET_K8S3_IP}
         - address=/k8s4/${SECRET_K8S4_IP}
+        - address=/gcp/${SECRET_GCP_IP}
     persistentVolumeClaim:
       enabled: true
       existingClaim: pihole-config
