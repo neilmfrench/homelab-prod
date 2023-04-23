@@ -18,37 +18,37 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-# kind: Kustomization
-# metadata:
-#   name: cluster-infrastructure-longhorn-recurring-jobs
-#   namespace: flux-system
-# spec:
-#   dependsOn:
-#     - name: cluster-infrastructure-longhorn
-#   path: ./kubernetes/infrastructure/staging-phx/longhorn-system/longhorn/recurring-jobs
-#   prune: true
-#   sourceRef:
-#     kind: GitRepository
-#     name: homelab-source
-#   interval: 30m
-#   retryInterval: 1m
-#   timeout: 3m
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-# kind: Kustomization
-# metadata:
-#   name: cluster-infrastructure-longhorn-storage-classes
-#   namespace: flux-system
-# spec:
-#   dependsOn:
-#     - name: cluster-infrastructure-longhorn-recurring-jobs
-#   path: ./kubernetes/infrastructure/staging-phx/longhorn-system/longhorn/storage-classes
-#   prune: true
-#   sourceRef:
-#     kind: GitRepository
-#     name: homelab-source
-#   interval: 30m
-#   retryInterval: 1m
-#   timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-infrastructure-longhorn-recurring-jobs
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-infrastructure-longhorn
+  path: ./kubernetes/infrastructure/staging-phx/longhorn-system/longhorn/recurring-jobs
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-infrastructure-longhorn-storage-classes
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-infrastructure-longhorn-recurring-jobs
+  path: ./kubernetes/infrastructure/staging-phx/longhorn-system/longhorn/storage-classes
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
