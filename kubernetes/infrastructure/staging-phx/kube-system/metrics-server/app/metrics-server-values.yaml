@@ -7,9 +7,6 @@ spec:
   values:
     args:
       - --kubelet-insecure-tls
-      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-      - --kubelet-use-node-status-port
-      - --metric-resolution=40s
     metrics:
       enabled: true
     serviceMonitor:
