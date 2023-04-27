@@ -23,6 +23,7 @@ spec:
               reason: "My external ip"
               ip:
                 - "${SECRET_EXTERNAL_IP}"
+                - "${SECRET_GCP_IP}"
     lapi:
       env:
         - name: ENROLL_KEY
