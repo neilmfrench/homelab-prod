@@ -6,5 +6,5 @@ metadata:
 spec:
   rsync:
     copyMethod: Direct
-    destinationPVC: mysql-data
+    destinationPVC: ghost-mysql-data
     serviceType: ClusterIP
