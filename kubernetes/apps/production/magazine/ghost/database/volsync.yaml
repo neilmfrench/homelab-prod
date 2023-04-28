@@ -2,13 +2,13 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: mySource
-  namespace: source
+  name: magazine-vs-db-source
 spec:
   sourcePVC: ghost-mysql-data
   trigger:
     schedule: "*/5 * * * *"
   rsync:
-    sshKeys: volsync-rsync-dest-src-database-destination
-    address: my.host.com
-    copyMethod: Clone
+    sshKeys: ghost-magazine-vs-db-ssh
+    address: vs-ghost-magazine-db-cloudflared-access-tunnel
+    port: "9210"
+    copyMethod: Direct

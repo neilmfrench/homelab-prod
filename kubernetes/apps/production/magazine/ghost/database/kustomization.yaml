@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: magazine
 resources:
   - ./data-pvc.yaml
+  - ./dest-ssh.sops.yaml
   - ../../../../base/mysql
 namePrefix: ghost-
 patchesStrategicMerge:
