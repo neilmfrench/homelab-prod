@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: magazine
 resources:
   - ../../../../base/cloudflared-access-tunnel
-namePrefix: vaultwarden-volsync-
+namePrefix: vs-ghost-magazine-db
 patchesStrategicMerge:
   - ./cloudflared-access-tunnel-values.yaml

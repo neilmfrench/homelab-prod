@@ -12,7 +12,7 @@ spec:
       - access
       - ssh
       - --hostname
-      - vs-vaultwarden-phx.${SECRET_DOMAIN}
+      - vs-ghost-magazine-db-phx.${SECRET_DOMAIN}
       - --url
       - 0.0.0.0:9210
       - --loglevel
