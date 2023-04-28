@@ -1,0 +1,10 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: magazine-vs-db-destination
+spec:
+  rsync:
+    copyMethod: Direct
+    destinationPVC: mysql-data
+    serviceType: ClusterIP
