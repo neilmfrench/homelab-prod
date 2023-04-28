@@ -10,5 +10,5 @@ spec:
   rsync:
     sshKeys: ghost-magazine-vs-db-ssh
     address: vs-ghost-magazine-db-cloudflared-access-tunnel
-    port: "9210"
+    port: 9210
     copyMethod: Direct
