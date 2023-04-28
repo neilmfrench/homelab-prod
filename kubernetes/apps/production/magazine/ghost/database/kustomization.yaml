@@ -6,6 +6,7 @@ resources:
   - ./data-pvc.yaml
   - ./dest-ssh.sops.yaml
   - ../../../../base/mysql
+  - ./volsync.yaml
 namePrefix: ghost-
 patchesStrategicMerge:
   - ./mysql-values.yaml
