@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rsyslog-server
+spec:
+  values:
+    image:
+      repository: harbor.${SECRET_DOMAIN}/util/rsyslog
+      pullPolicy: IfNotPresent
+      tag: "1.0.0"
+    securityContext:
+      runAsUser: 0
+    service:
+      main:
+        type: LoadBalancer
+        ports:
+          http:
+            enabled: false
+          tcp:
+            enabled: true
+            port: 514
+            protocol: TCP
+          udp:
+            enabled: true
+            port: 514
+            protocol: UDP
+    ingress:
+      main:
+        enabled: false
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+    persistence:
+      data:
+        enabled: true
+        mountPath: /logs
+        existingClaim: rsyslog-server-data

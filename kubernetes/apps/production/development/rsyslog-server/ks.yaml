@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-rsyslog-server
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/production/development/rsyslog-server/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: rsyslog-server
+      namespace: development
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
