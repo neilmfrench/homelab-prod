@@ -35,6 +35,7 @@ spec:
       host: cloud.${SECRET_DOMAIN}
       username: "${SECRET_NEXTCLOUD_ADMIN_USERNAME}"
       password: "${SECRET_NEXTCLOUD_ADMIN_PASSWORD}"
+      containerPort: 8080
       configs:
         email.config.php: |-
           <?php
