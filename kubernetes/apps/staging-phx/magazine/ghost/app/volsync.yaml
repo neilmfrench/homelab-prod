@@ -19,5 +19,5 @@ metadata:
 spec:
   rsync:
     copyMethod: Direct
-    destinationPVC: ghost-mysql-data
+    destinationPVC: ghost-config
     serviceType: ClusterIP

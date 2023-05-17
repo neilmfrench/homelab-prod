@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ghost-config
+  name: config
 spec:
   accessModes:
     - ReadWriteOnce
