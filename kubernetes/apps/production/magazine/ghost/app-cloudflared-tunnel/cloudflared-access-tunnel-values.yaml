@@ -1,0 +1,43 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cloudflared-access-tunnel
+spec:
+  values:
+    image:
+      repository: cloudflare/cloudflared
+      tag: "2023.5.0"
+    args:
+      - access
+      - ssh
+      - --hostname
+      - vs-ghost-magazine-app-phx.${SECRET_DOMAIN}
+      - --url
+      - 0.0.0.0:9210
+      - --loglevel
+      - debug
+    service:
+      main:
+        ports:
+          http:
+            enabled: false
+            primary: false
+          tcp:
+            port: 9210
+            protocol: TCP
+            primary: true
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+    persistence:
+      tunnel-credentials:
+        enabled: true
+        type: secret
+        name: cloudflared-tunnel-credentials
+        mountPath: /etc/cloudflared/creds
+        readOnly: true

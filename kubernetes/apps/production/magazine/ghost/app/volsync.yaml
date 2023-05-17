@@ -8,7 +8,7 @@ spec:
   trigger:
     schedule: "*/5 * * * *"
   rsync:
-    sshKeys: ghost-magazine-vs-app-ssh
+    sshKeys: magazine-vs-app-ssh
     address: vs-ghost-magazine-app-cloudflared-access-tunnel
     port: 9210
     copyMethod: Direct
