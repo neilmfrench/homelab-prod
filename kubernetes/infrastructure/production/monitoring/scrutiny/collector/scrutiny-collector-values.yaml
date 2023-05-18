@@ -12,7 +12,7 @@ spec:
       tag: "v0.7.1-collector"
     env:
       COLLECTOR_API_ENDPOINT: "http://scrutiny-web:8080"
-      COLLECTOR_CRON_SCHEDULE: "*/5 * * * *"
+      COLLECTOR_CRON_SCHEDULE: "0 0 * * *"
     securityContext:
       privileged: true
       capabilities:
