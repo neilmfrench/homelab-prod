@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./data-pvc.yaml
-#   - ../../../../base/influxdb
+  - ../../../../base/influxdb
 namePrefix: scrutiny-
-# patchesStrategicMerge:
-#   - ./influxdb-values.yaml
+patchesStrategicMerge:
+  - ./influxdb-values.yaml
