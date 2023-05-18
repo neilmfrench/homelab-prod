@@ -1,0 +1,28 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: scrutiny-collector
+spec:
+  values:
+    image:
+      repository: ghcr.io/analogj/scrutiny
+      tag: "v0.7.1-collector"
+    env:
+      COLLECTOR_API_ENDPOINT: "http://scrutiny-web:8080"
+    persistence:
+      config:
+        enabled: false
+    service:
+      main:
+        enabled: false
+    ingress:
+      main:
+        enabled: false
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false

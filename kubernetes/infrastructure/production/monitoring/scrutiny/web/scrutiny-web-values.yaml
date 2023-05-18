@@ -10,6 +10,10 @@ spec:
       tag: "v0.7.1-web"
     env:
       SCRUTINY_WEB_INFLUXDB_HOST: "scrutiny-influxdb-influxdb2"
+      SCRUTINY_WEB_INFLUXDB_PORT: 80
+      SCRUTINY_WEB_INFLUXDB_TOKEN: "${INFLUXDB_ADMIN_TOKEN}"
+      SCRUTINY_WEB_INFLUXDB_ORG: "influxdata"
+      SCRUTINY_WEB_INFLUXDB_BUCKET: "default"
     persistence:
       config:
         enabled: true
