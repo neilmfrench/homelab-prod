@@ -191,3 +191,14 @@ patches:
       kind: HelmRepository
       name: weave-gitops
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: influxdb
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: influxdb
+      namespace: flux-system

@@ -30,3 +30,4 @@ resources:
   - ./ingress-nginx.yaml
   - ./backube.yaml
   - ./piraeus.yaml
+  - ./influxdb.yaml
