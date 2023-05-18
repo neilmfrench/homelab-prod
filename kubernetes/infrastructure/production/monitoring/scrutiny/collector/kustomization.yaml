@@ -5,4 +5,4 @@ namespace: monitoring
 resources:
   - ../../../../base/scrutiny-collector
 patchesStrategicMerge:
-  - ./scrutiny-web-values.yaml
+  - ./scrutiny-collector-values.yaml
