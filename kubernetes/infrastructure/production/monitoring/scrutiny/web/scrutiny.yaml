@@ -1,0 +1,3 @@
+notify:
+  urls:
+    - "${SLACK_WEBHOOK_URL}"

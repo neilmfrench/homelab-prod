@@ -14,12 +14,16 @@ spec:
       SCRUTINY_WEB_INFLUXDB_TOKEN: "${INFLUXDB_ADMIN_TOKEN}"
       SCRUTINY_WEB_INFLUXDB_ORG: "influxdata"
       SCRUTINY_WEB_INFLUXDB_BUCKET: "default"
-      SCRUTINY_WEB_NOTIFY_URLS: "${SLACK_WEBHOOK_URL}"
+      # SCRUTINY_WEB_NOTIFY_URLS: "${SLACK_WEBHOOK_URL}"
     persistence:
       config:
         enabled: true
         existingClaim: scrutiny-web-config
         mountPath: /opt/scrutiny/config
+      # config-file:
+      #   enabled: true
+      #   type: configMap
+      #   name: mySettings
     service:
       main:
         ports:

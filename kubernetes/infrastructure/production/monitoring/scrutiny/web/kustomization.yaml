@@ -7,3 +7,9 @@ resources:
   - ../../../../base/scrutiny-web
 patchesStrategicMerge:
   - ./scrutiny-web-values.yaml
+configMapGenerator:
+  - name: scrutiny-config
+    files:
+      - ./scrutiny.yaml
+generatorOptions:
+  disableNameSuffixHash: true
