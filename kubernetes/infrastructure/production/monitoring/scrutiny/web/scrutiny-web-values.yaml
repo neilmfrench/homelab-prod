@@ -1,0 +1,45 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: scrutiny-web
+spec:
+  values:
+    image:
+      repository: ghcr.io/analogj/scrutiny
+      tag: "v0.7.1-web"
+    env:
+      SCRUTINY_WEB_INFLUXDB_HOST: "scrutiny-influxdb-influxdb2"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: scrutiny-web-config
+        mountPath: /opt/scrutiny/config
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "scrutiny.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: scrutiny-tls
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
