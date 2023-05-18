@@ -5,6 +5,6 @@ namespace: monitoring
 resources:
   - ./data-pvc.yaml
 #   - ../../../../base/influxdb
-# namePrefix: scrutiny-
+namePrefix: scrutiny-
 # patchesStrategicMerge:
 #   - ./influxdb-values.yaml
