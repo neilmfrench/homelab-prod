@@ -5,6 +5,9 @@ metadata:
   name: scrutiny-web
 spec:
   values:
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "scrutiny-config"
     image:
       repository: ghcr.io/analogj/scrutiny
       tag: "v0.7.1-web"
