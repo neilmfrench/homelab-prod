@@ -14,7 +14,7 @@ spec:
       SCRUTINY_WEB_INFLUXDB_TOKEN: "${INFLUXDB_ADMIN_TOKEN}"
       SCRUTINY_WEB_INFLUXDB_ORG: "influxdata"
       SCRUTINY_WEB_INFLUXDB_BUCKET: "default"
-      # SCRUTINY_WEB_NOTIFY_URLS: '["http://gotify:80/message?token=a-gotify-token"]'
+      SCRUTINY_WEB_NOTIFY_URLS: '["${SLACK_WEBHOOK_URL}"]'
     persistence:
       config:
         enabled: true
