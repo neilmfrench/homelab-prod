@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./secret-harbor-neilfrench-regcred.yaml
-  - ./campsearch/ks.yaml
+  # - ./campsearch/ks.yaml
