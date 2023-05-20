@@ -6,7 +6,7 @@ metadata:
 spec:
   sourcePVC: ghost-mysql-data
   trigger:
-    schedule: "*/5 * * * *"
+    schedule: "0 * * * *"
   rsync:
     sshKeys: ghost-magazine-vs-db-ssh
     address: vs-ghost-magazine-db-cloudflared-access-tunnel
