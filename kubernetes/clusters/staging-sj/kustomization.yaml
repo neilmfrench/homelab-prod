@@ -39,17 +39,22 @@ patches:
       - op: replace
         path: "/apiVersion"
         value: kustomize.toolkit.fluxcd.io/v1
+  # Top-level repository configuration
+  - path: ./staging-sj-repositories.yaml
+  - target:
+      kind: Kustomization
+      name: repositories-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-repositories
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-sj-cluster-vars
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
 
-# - target:
-#     kind: Kustomization
-#     name: repositories-not-used
-#   patch: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: staging-sj-cluster-repositories
-#     - op: replace
-#       path: /spec/dependsOn/0/name
-#       value: staging-sj-cluster-vars
 # - target:
 #     kind: Kustomization
 #     name: infrastructure-not-used

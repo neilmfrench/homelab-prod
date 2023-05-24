@@ -15,3 +15,14 @@ patches:
       kind: HelmRepository
       name: ingress-nginx
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: cilium
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: cilium
+      namespace: flux-system

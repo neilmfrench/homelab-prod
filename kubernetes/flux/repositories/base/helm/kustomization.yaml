@@ -31,3 +31,4 @@ resources:
   - ./backube.yaml
   - ./piraeus.yaml
   - ./influxdb.yaml
+  - ./cilium.yaml
