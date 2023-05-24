@@ -1,0 +1,77 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+patches:
+  # Cluster source
+  - target:
+      kind: GitRepository
+      name: homelab-source
+    patch: |-
+      - op: replace
+        path: "/apiVersion"
+        value: source.toolkit.fluxcd.io/v1
+  # Top-level Flux configuration
+  - path: ./staging-sj-flux.yaml
+  - target:
+      kind: Kustomization
+      name: flux-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-flux
+  - target:
+      kind: Kustomization
+      name: flux-not-used
+    patch: |-
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
+
+# - target:
+#     kind: Kustomization
+#     name: vars-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-sj-cluster-vars
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-sj-cluster-flux
+# - target:
+#     kind: Kustomization
+#     name: repositories-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-sj-cluster-repositories
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-sj-cluster-vars
+# - target:
+#     kind: Kustomization
+#     name: infrastructure-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-sj-cluster-infrastructure
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-sj-cluster-repositories
+# - target:
+#     kind: Kustomization
+#     name: apps-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-sj-cluster-apps
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-sj-cluster-infrastructure
+# patchesStrategicMerge:
+#   - ./staging-sj-flux.yaml
+# - ./staging-sj-vars.yaml
+# - ./staging-sj-repositories.yaml
+# - ./staging-sj-infrastructure.yaml
+# - ./staging-sj-apps.yaml
