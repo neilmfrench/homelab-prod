@@ -12,6 +12,7 @@ patches:
       - op: replace
         path: "/apiVersion"
         value: source.toolkit.fluxcd.io/v1
+
   # Top-level Flux configuration
   - path: ./staging-sj-flux.yaml
   - target:
@@ -24,6 +25,7 @@ patches:
       - op: replace
         path: "/apiVersion"
         value: kustomize.toolkit.fluxcd.io/v1
+
   # Top-level variable configuration
   - path: ./staging-sj-vars.yaml
   - target:
@@ -39,6 +41,7 @@ patches:
       - op: replace
         path: "/apiVersion"
         value: kustomize.toolkit.fluxcd.io/v1
+
   # Top-level repository configuration
   - path: ./staging-sj-repositories.yaml
   - target:
@@ -55,29 +58,34 @@ patches:
         path: "/apiVersion"
         value: kustomize.toolkit.fluxcd.io/v1
 
-# - target:
-#     kind: Kustomization
-#     name: infrastructure-not-used
-#   patch: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: staging-sj-cluster-infrastructure
-#     - op: replace
-#       path: /spec/dependsOn/0/name
-#       value: staging-sj-cluster-repositories
-# - target:
-#     kind: Kustomization
-#     name: apps-not-used
-#   patch: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: staging-sj-cluster-apps
-#     - op: replace
-#       path: /spec/dependsOn/0/name
-#       value: staging-sj-cluster-infrastructure
-# patchesStrategicMerge:
-#   - ./staging-sj-flux.yaml
-# - ./staging-sj-vars.yaml
-# - ./staging-sj-repositories.yaml
-# - ./staging-sj-infrastructure.yaml
-# - ./staging-sj-apps.yaml
+  # Top-level infrastructure configuration
+  - path: ./staging-sj-infrastructure.yaml
+  - target:
+      kind: Kustomization
+      name: infrastructure-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-infrastructure
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-sj-cluster-repositories
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
+
+  # Top-level app configuration
+  - path: ./staging-sj-apps.yaml
+  - target:
+      kind: Kustomization
+      name: apps-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-apps
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-sj-cluster-infrastructure
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
