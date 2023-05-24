@@ -21,24 +21,25 @@ patches:
       - op: replace
         path: /metadata/name
         value: staging-sj-cluster-flux
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
+  # Top-level variable configuration
+  - path: ./staging-sj-vars.yaml
   - target:
       kind: Kustomization
-      name: flux-not-used
+      name: vars-not-used
     patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-vars
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-sj-cluster-flux
       - op: replace
         path: "/apiVersion"
         value: kustomize.toolkit.fluxcd.io/v1
 
-# - target:
-#     kind: Kustomization
-#     name: vars-not-used
-#   patch: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: staging-sj-cluster-vars
-#     - op: replace
-#       path: /spec/dependsOn/0/name
-#       value: staging-sj-cluster-flux
 # - target:
 #     kind: Kustomization
 #     name: repositories-not-used
