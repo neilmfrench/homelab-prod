@@ -32,3 +32,4 @@ resources:
   - ./piraeus.yaml
   - ./influxdb.yaml
   - ./cilium.yaml
+  - ./rook-ceph.yaml
