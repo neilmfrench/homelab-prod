@@ -45,7 +45,7 @@ spec:
     ipv4:
       enabled: true
     ipv6:
-      enabled: true
+      enabled: false
     hostServices:
       enabled: true
     hostPort:
