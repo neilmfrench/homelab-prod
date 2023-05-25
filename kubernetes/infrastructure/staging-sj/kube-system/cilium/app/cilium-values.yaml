@@ -38,7 +38,7 @@ spec:
       mode: "kubernetes"
     k8s:
       requireIPv4PodCIDR: true
-      requireIPv6PodCIDR: true
+      requireIPv6PodCIDR: false
 
     bpf:
       masquerade: false
