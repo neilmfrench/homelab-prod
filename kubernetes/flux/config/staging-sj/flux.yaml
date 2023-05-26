@@ -36,6 +36,27 @@ spec:
       target:
         kind: Deployment
         name: helm-controller
+    # Restrict flux resource usage
+    - patch: |
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: not-used
+        spec:
+          template:
+            spec:
+              containers:
+                - name: manager
+                  resources:
+                    limits:
+                      cpu: 100m
+                      memory: 512Mi
+                    requests:
+                      cpu: 50m
+                      memory: 100Mi
+      target:
+        kind: Deployment
+        name: (kustomize-controller|helm-controller|source-controller|image-automation-controller|image-reflector-controller|notification-controller)
     # Enable Helm near OOM detection
     # https://fluxcd.io/flux/cheatsheets/bootstrap/#enable-helm-near-oom-detection
     - patch: |
