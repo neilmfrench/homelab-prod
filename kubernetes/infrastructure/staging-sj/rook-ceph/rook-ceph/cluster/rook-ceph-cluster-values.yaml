@@ -8,52 +8,67 @@ spec:
     cephClusterSpec:
       dashboard:
         enabled: false
+      mgr:
+        count: 1
+      storage:
+        useAllNodes: true
+        useAllDevices: true
+        config:
+          osdsPerDevice: "1"
       resources:
         mgr:
           requests:
-            cpu: "1m"
+            cpu: "50m"
             memory: "512Mi"
           limits:
+            cpu: "100m"
             memory: "1Gi"
         mon:
           requests:
-            cpu: "1m"
+            cpu: "25m"
             memory: "512Mi"
           limits:
+            cpu: "50m"
             memory: "1Gi"
         osd:
           requests:
-            cpu: "1m"
+            cpu: "100m"
             memory: "512Mi"
           limits:
-            memory: "4Gi"
+            cpu: "125m"
+            memory: "2Gi"
         mgr-sidecar:
           requests:
-            cpu: "1m"
+            cpu: "25m"
             memory: "100Mi"
           limits:
+            cpu: "35m"
             memory: "200Mi"
         crashcollector:
           requests:
-            cpu: "1m"
+            cpu: "10m"
             memory: "64Mi"
           limits:
+            cpu: "15m"
             memory: "128Mi"
         logcollector:
           requests:
-            cpu: "1m"
+            cpu: "50m"
             memory: "100Mi"
           limits:
+            cpu: "70m"
             memory: "1Gi"
         prepareosd:
           requests:
-            cpu: "1m"
+            cpu: "100m"
             memory: "50Mi"
           limits:
+            cpu: "125m"
             memory: "2Gi"
         cleanup:
           requests:
-            cpu: "1m"
+            cpu: "75m"
             memory: "100Mi"
           limits:
+            cpu: "75m"
             memory: "1Gi"
