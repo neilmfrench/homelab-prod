@@ -2,6 +2,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./kube-system
-  - ./openebs
-  # - ./rook-ceph
+  - ./namespace.yaml
+  - ./openebs-jiva/ks.yaml

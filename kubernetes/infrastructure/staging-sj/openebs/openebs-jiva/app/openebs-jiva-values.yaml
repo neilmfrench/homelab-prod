@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: openebs-jiva
+spec:
+  values:
+    openebsLocalpv:
+      enabled: true
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: DaemonSet
+              name: openebs-jiva-csi-node
+            patch:
+              - op: add
+                path: /spec/template/spec/hostPID
+                value: true
+          - target:
+              kind: ConfigMap
+              name: openebs-jiva-csi-iscsiadm
+            patch:
+              - op: replace
+                path: /data/iscsiadm
+                value: |
+                  #!/bin/sh
+                  iscsid_pid=$(pgrep iscsid)
+
+                  nsenter --mount="/proc/${iscsid_pid}/ns/mnt" --net="/proc/${iscsid_pid}/ns/net" -- /usr/local/sbin/iscsiadm "$@"
