@@ -7,7 +7,7 @@ metadata:
 spec:
   path: ./kubernetes/infrastructure/staging-sj/kube-system/metrics-server/app
   dependsOn:
-    - name: cluster-apps-campsearch-redis
+    - name: cluster-infrastructure-kubelet-serving-cert-approver
   prune: true
   sourceRef:
     kind: GitRepository
