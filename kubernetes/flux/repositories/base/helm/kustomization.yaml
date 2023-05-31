@@ -33,3 +33,4 @@ resources:
   - ./influxdb.yaml
   - ./cilium.yaml
   - ./rook-ceph.yaml
+  - ./openebs-jiva.yaml

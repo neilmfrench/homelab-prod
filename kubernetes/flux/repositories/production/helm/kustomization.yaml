@@ -37,3 +37,14 @@ patches:
       kind: HelmRepository
       name: rook-ceph
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: openebs-jiva
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: openebs-jiva
+      namespace: flux-system
