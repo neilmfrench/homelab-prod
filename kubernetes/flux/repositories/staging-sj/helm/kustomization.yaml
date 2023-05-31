@@ -202,3 +202,14 @@ patches:
       kind: HelmRepository
       name: influxdb
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: rook-ceph
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: rook-ceph
+      namespace: flux-system
