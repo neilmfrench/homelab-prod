@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-infrastructure-kubelet-serving-cert-approver
+  namespace: flux-system
+spec:
+  path: ./kubernetes/infrastructure/staging-sj/kubelet-serving-cert-approver/kubelet-serving-cert-approver/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

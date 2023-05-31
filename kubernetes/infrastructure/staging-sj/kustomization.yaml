@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - ./kube-system
   - ./openebs
+  - ./kubelet-serving-cert-approver
   # - ./rook-ceph
