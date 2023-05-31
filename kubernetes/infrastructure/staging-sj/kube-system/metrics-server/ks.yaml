@@ -6,6 +6,8 @@ metadata:
   namespace: flux-system
 spec:
   path: ./kubernetes/infrastructure/staging-sj/kube-system/metrics-server/app
+  dependsOn:
+    - name: cluster-apps-campsearch-redis
   prune: true
   sourceRef:
     kind: GitRepository
