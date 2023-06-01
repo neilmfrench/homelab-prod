@@ -10,4 +10,4 @@ spec:
     serviceMonitor:
       enabled: false
     apiService:
-      insecureSkipTLSVerify: false
+      insecureSkipTLSVerify: true
