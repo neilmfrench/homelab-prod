@@ -5,4 +5,5 @@ resources:
   - ./kube-system
   - ./openebs
   - ./kubelet-serving-cert-approver
+  - ./cert-manager
   # - ./rook-ceph
