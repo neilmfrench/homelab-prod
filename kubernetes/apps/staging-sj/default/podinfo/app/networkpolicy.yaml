@@ -6,7 +6,7 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
-      app: podinfo
+      app.kubernetes.io/name: podinfo
   ingress:
     - fromCIDR:
         - "${SECRET_EXTERNAL_IP_CIDR}"
