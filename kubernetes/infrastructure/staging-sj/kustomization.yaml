@@ -6,4 +6,5 @@ resources:
   - ./openebs
   - ./kubelet-serving-cert-approver
   - ./cert-manager
+  - ./networking
   # - ./rook-ceph

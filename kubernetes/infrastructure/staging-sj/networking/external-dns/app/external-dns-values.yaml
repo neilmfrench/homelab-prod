@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-dns
+spec:
+  values:
+    interval: 5m
+    provider: cloudflare
+    env:
+      - name: CF_API_EMAIL
+        value: "${SECRET_CLOUDFLARE_EMAIL}"
+      - name: CF_API_KEY
+        value: "${SECRET_CLOUDFLARE_API_KEY}"
+    extraArgs:
+      - --cloudflare-proxied
+      - --annotation-filter=external-dns/is-public in (true)
+      - --publish-internal-services
+      - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
+      - --crd-source-kind=DNSEndpoint
+    policy: sync
+    sources:
+      - service
+      - ingress
+      - crd
+    txtPrefix: "k8s-sj."
+    txtOwnerId: "home-ops"
+    domainFilters:
+      - "${SECRET_DOMAIN}"
