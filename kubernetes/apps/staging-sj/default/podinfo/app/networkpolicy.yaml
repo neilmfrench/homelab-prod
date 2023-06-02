@@ -1,0 +1,12 @@
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "podinfo-cidr-rule"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: podinfo
+  ingress:
+    - fromCIDR:
+        - 20.1.1.1/32
