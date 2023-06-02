@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-uptime-kuma
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/staging-phx/monitoring/uptime-kuma/app
+  path: ./kubernetes/apps/staging-sj/monitoring/uptime-kuma/app
   prune: true
   sourceRef:
     kind: GitRepository
