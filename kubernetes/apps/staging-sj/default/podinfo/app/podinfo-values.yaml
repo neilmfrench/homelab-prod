@@ -9,7 +9,7 @@ spec:
   values:
     ingress:
       enabled: true
-      # className: "nginx"
+      className: "cilium"
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         # external-dns/is-public: "true"
