@@ -63,12 +63,13 @@ spec:
     hubble:
       enabled: true
       metrics:
-        - dns:query;ignoreAAAA
-        - drop
-        - tcp
-        - flow
-        - icmp
-        - http
+        enabled:
+          - dns:query;ignoreAAAA
+          - drop
+          - tcp
+          - flow
+          - icmp
+          - http
       tls:
         enabled: true
         auto:
