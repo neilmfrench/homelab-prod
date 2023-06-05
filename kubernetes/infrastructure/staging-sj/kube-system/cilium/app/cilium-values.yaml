@@ -61,7 +61,23 @@ spec:
       privileged: true
 
     hubble:
-      enabled: false
+      enabled: true
+      metrics:
+        - dns:query;ignoreAAAA
+        - drop
+        - tcp
+        - flow
+        - icmp
+        - http
+      tls:
+        enabled: true
+        auto:
+          enabled: true
+          method: certmanager
+      relay:
+        enabled: true
+      ui:
+        enabled: true
 
     prometheus:
       enabled: false
