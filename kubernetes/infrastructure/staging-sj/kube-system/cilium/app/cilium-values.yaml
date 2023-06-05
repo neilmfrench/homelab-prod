@@ -74,7 +74,7 @@ spec:
         enabled: true
         auto:
           enabled: true
-          method: certmanager
+          method: cronJob
       relay:
         enabled: true
       ui:
