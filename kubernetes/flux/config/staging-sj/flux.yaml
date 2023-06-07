@@ -42,6 +42,16 @@ spec:
     #     group: networking.k8s.io
     #     kind: NetworkPolicy
     #     name: allow-webhooks
+    # Remove the network policies that does not work with Cilium
+    - patch: |
+        $patch: delete
+        apiVersion: networking.k8s.io/v1
+        kind: NetworkPolicy
+        metadata:
+          name: not-used
+      target:
+        group: networking.k8s.io
+        kind: NetworkPolicy
     # Enable drift detection for HelmReleases and set the log level to debug
     # https://fluxcd.io/flux/components/helm/helmreleases/#drift-detection
     - patch: |
