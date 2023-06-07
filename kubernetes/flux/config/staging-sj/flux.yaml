@@ -33,8 +33,8 @@ spec:
               - ipBlock:
                   cidr: 0.0.0.0/0
       target:
+        group: networking.k8s.io
         kind: NetworkPolicy
-        name: allow-webhooks
     # Enable drift detection for HelmReleases and set the log level to debug
     # https://fluxcd.io/flux/components/helm/helmreleases/#drift-detection
     - patch: |
