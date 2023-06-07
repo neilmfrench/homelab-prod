@@ -32,16 +32,16 @@ spec:
     #         from:
     #           - ipBlock:
     #               cidr: 0.0.0.0/0
-    - patch: |
-        - op: add
-          path: /spec/ingress/0/
-          value:
-            ports:
-              - port: 9292
-      target:
-        group: networking.k8s.io
-        kind: NetworkPolicy
-        name: allow-webhooks
+    # - patch: |
+    #     - op: add
+    #       path: /spec/ingress/0/
+    #       value:
+    #         ports:
+    #           - port: 9292
+    #   target:
+    #     group: networking.k8s.io
+    #     kind: NetworkPolicy
+    #     name: allow-webhooks
     # Enable drift detection for HelmReleases and set the log level to debug
     # https://fluxcd.io/flux/components/helm/helmreleases/#drift-detection
     - patch: |

@@ -8,5 +8,5 @@ spec:
     matchLabels:
       app.kubernetes.io/component: notification-controller
   ingress:
-    - fromEndpoints:
-        - {}
+    - fromEntities:
+        - world
