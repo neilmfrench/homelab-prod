@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: magazine
 resources:
   - ./config-pvc.yaml
-#   - ../../../../base/ghost-magazine
-# patchesStrategicMerge:
-#   - ./ghost-values.yaml
+  - ../../../../base/ghost-magazine
+patchesStrategicMerge:
+  - ./ghost-values.yaml
