@@ -25,16 +25,23 @@ spec:
     name: flux-manifests
   patches:
     # Patch allow-ingress NetworkPolicy for cilium
+    # - patch: |
+    #     - op: add
+    #       path: /spec/ingress/-
+    #       value:
+    #         from:
+    #           - ipBlock:
+    #               cidr: 0.0.0.0/0
     - patch: |
         - op: add
-          path: /spec/ingress/-
+          path: /spec/ingress/0/
           value:
-            from:
-              - ipBlock:
-                  cidr: 0.0.0.0/0
+            ports:
+              - port: 9292
       target:
         group: networking.k8s.io
         kind: NetworkPolicy
+        name: allow-ingress
     # Enable drift detection for HelmReleases and set the log level to debug
     # https://fluxcd.io/flux/components/helm/helmreleases/#drift-detection
     - patch: |
