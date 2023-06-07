@@ -27,3 +27,4 @@ spec:
     txtOwnerId: "home-ops"
     domainFilters:
       - "${SECRET_DOMAIN}"
+      - "${SECRET_MAGAZINE_DOMAIN}"
