@@ -50,3 +50,19 @@ spec:
       target:
         kind: Deployment
         name: "(kustomize-controller|helm-controller|source-controller)"
+    - patch: |
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: not-used
+        spec:
+          template:
+            spec:
+              containers:
+                - name: manager
+                  resources:
+                    limits:
+                      memory: 2Gi
+      target:
+        kind: Deployment
+        name: (kustomize-controller|helm-controller|source-controller|notification-controller)
