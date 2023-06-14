@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3
         with:
           fetch-depth: 0
       - name: MegaLinter
-        uses: oxsecurity/megalinter@v6.22.2
+        uses: oxsecurity/megalinter@93700f8c21c59ea784a32abe23896e49e54463b8 # v6.22.2
         env:
           PRINT_ALPACA: false
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
