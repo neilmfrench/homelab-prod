@@ -24,6 +24,7 @@ spec:
               ip:
                 - "${SECRET_EXTERNAL_IP}"
                 - "${SECRET_GCP_IP}"
+                - "45.51.33.231"
     lapi:
       env:
         - name: ENROLL_KEY
