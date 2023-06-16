@@ -35,7 +35,7 @@ spec:
             port: &websocket-port 3012
     ingress:
       main:
-        enabled: true
+        enabled: false
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
