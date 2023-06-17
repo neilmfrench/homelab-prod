@@ -5,7 +5,7 @@ namespace: magazine
 namePrefix: ghost-
 resources:
   - ./config-pvc.yaml
-  - ./volsync.yaml
+  # - ./volsync.yaml
 #   - ../../../../base/ghost-magazine
 # patchesStrategicMerge:
 #   - ./ghost-values.yaml
