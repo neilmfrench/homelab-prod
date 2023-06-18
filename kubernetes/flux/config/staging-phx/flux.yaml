@@ -8,7 +8,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/fluxcd/flux-manifests
   ref:
-    tag: v0.41.2
+    tag: v2.0.0-rc.5
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -24,29 +24,61 @@ spec:
     kind: OCIRepository
     name: flux-manifests
   patches:
+    # - patch: |
+    #     $patch: delete
+    #     apiVersion: networking.k8s.io/v1
+    #     kind: NetworkPolicy
+    #     metadata:
+    #       name: not-used
+    #   target:
+    #     group: networking.k8s.io
+    #     version: v1
+    #     kind: NetworkPolicy
+    # Enable drift detection for HelmReleases and set the log level to debug
+    # https://fluxcd.io/flux/components/helm/helmreleases/#drift-detection
     - patch: |
-        $patch: delete
-        apiVersion: networking.k8s.io/v1
-        kind: NetworkPolicy
-        metadata:
-          name: not-used
-      target:
-        group: networking.k8s.io
-        version: v1
-        kind: NetworkPolicy
-    - patch: |
         - op: add
           path: /spec/template/spec/containers/0/args/-
-          value: --concurrent=8
+          value: --feature-gates=DetectDrift=true,CorrectDrift=false
         - op: add
           path: /spec/template/spec/containers/0/args/-
-          value: --kube-api-qps=500
-        - op: add
-          path: /spec/template/spec/containers/0/args/-
-          value: --kube-api-burst=1000
-        - op: add
-          path: /spec/template/spec/containers/0/args/-
-          value: --requeue-dependency=5s
+          value: --log-level=debug
       target:
         kind: Deployment
-        name: "(kustomize-controller|helm-controller|source-controller)"
+        name: helm-controller
+    # Restrict flux resource usage
+    - patch: |
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: not-used
+        spec:
+          template:
+            spec:
+              containers:
+                - name: manager
+                  resources:
+                    limits:
+                      cpu: 100m
+                      memory: 256Mi
+                    requests:
+                      cpu: 50m
+                      memory: 100Mi
+      target:
+        kind: Deployment
+        name: (kustomize-controller|helm-controller|source-controller|image-automation-controller|image-reflector-controller|notification-controller)
+    # Enable Helm near OOM detection
+    # https://fluxcd.io/flux/cheatsheets/bootstrap/#enable-helm-near-oom-detection
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --feature-gates=OOMWatch=true
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --oom-watch-memory-threshold=95
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --oom-watch-interval=500ms
+      target:
+        kind: Deployment
+        name: helm-controller
