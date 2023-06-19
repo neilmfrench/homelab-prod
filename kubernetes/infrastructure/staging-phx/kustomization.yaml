@@ -5,7 +5,7 @@ resources:
   - ./tigera-operator
   - ./kube-system
   # - ./longhorn-system
-  # - ./networking
+  - ./networking
   # - ./cert-manager
   # - ./volsync
   # - ./system-upgrade
