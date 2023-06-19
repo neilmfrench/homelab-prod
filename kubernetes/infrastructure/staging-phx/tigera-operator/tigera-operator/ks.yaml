@@ -5,7 +5,7 @@ metadata:
   name: cluster-infrastructure-tigera-operator
   namespace: flux-system
 spec:
-  path: ./kubernetes/infrastructure/production/tigera-operator/tigera-operator/app
+  path: ./kubernetes/infrastructure/staging-phx/tigera-operator/tigera-operator/app
   prune: true
   sourceRef:
     kind: GitRepository
