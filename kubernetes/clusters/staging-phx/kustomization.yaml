@@ -26,37 +26,37 @@ patches:
         path: "/apiVersion"
         value: kustomize.toolkit.fluxcd.io/v1
 
-  # # Top-level variable configuration
-  # - path: ./staging-phx-vars.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: vars-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-phx-cluster-vars
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-phx-cluster-flux
-  #     - op: replace
-  #       path: "/apiVersion"
-  #       value: kustomize.toolkit.fluxcd.io/v1
+  # Top-level variable configuration
+  - path: ./staging-phx-vars.yaml
+  - target:
+      kind: Kustomization
+      name: vars-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-vars
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-flux
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
 
-  # # Top-level repository configuration
-  # - path: ./staging-phx-repositories.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: repositories-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-phx-cluster-repositories
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-phx-cluster-vars
-  #     - op: replace
-  #       path: "/apiVersion"
-  #       value: kustomize.toolkit.fluxcd.io/v1
+  # Top-level repository configuration
+  - path: ./staging-phx-repositories.yaml
+  - target:
+      kind: Kustomization
+      name: repositories-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-repositories
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-vars
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
 
   # # Top-level infrastructure configuration
   # - path: ./staging-phx-infrastructure.yaml
