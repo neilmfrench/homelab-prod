@@ -2,9 +2,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./kube-system
-  - ./longhorn-system
-  - ./networking
-  - ./cert-manager
-  - ./volsync
-  - ./system-upgrade
+  - ./tigera-operator
+  - ./calico-system
+  # - ./kube-system
+  # - ./longhorn-system
+  # - ./networking
+  # - ./cert-manager
+  # - ./volsync
+  # - ./system-upgrade
