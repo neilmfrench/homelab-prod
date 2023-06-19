@@ -32,7 +32,7 @@ spec:
           "duration": $request_time,"method": "$request_method", "http_referrer": "$http_referer",
           "http_user_agent": "$http_user_agent"}
         enable-real-ip: "true"
-        use-proxy-protocol: "true"
+        use-proxy-protocol: "false"
         server-snippet: |
           real_ip_header X-Forwarded-For;
       service:
@@ -40,7 +40,7 @@ spec:
         nodePorts:
           http: 30080
           https: 30443
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
       metrics:
         enabled: false
       podAnnotations:
