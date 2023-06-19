@@ -6,6 +6,6 @@ resources:
   - ./kube-system
   - ./longhorn-system
   - ./networking
-  # - ./cert-manager
+  - ./cert-manager
   # - ./volsync
   # - ./system-upgrade
