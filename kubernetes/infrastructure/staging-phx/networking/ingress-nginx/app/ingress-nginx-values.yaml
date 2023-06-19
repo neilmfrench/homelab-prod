@@ -45,8 +45,8 @@ spec:
         enabled: false
       podAnnotations:
         configmap.reloader.stakater.com/reload: networks
-  valuesFrom:
-    - targetPath: controller.config.proxy-real-ip-cidr
-      kind: ConfigMap
-      name: networks
-      valuesKey: networks.txt
+  # valuesFrom:
+  #   - targetPath: controller.config.proxy-real-ip-cidr
+  #     kind: ConfigMap
+  #     name: networks
+  #     valuesKey: networks.txt
