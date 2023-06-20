@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./data-pvc.yaml
-#   - ../../../../base/uptime-kuma
-# patchesStrategicMerge:
-#   - ./uptime-kuma-values.yaml
+  - ../../../../base/uptime-kuma
+patchesStrategicMerge:
+  - ./uptime-kuma-values.yaml

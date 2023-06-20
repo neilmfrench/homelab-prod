@@ -7,4 +7,4 @@ resources:
   - ./base-vars.yaml
   - ./base-repositories.yaml
   - ./base-infrastructure.yaml
-  # - ./base-apps.yaml
+  - ./base-apps.yaml
