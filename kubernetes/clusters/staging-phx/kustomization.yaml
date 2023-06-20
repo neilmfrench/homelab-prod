@@ -74,18 +74,18 @@ patches:
         path: "/apiVersion"
         value: kustomize.toolkit.fluxcd.io/v1
 
-  # # Top-level app configuration
-  # - path: ./staging-phx-apps.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: apps-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-phx-cluster-apps
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-phx-cluster-infrastructure
-  #     - op: replace
-  #       path: "/apiVersion"
-  #       value: kustomize.toolkit.fluxcd.io/v1
+  # Top-level app configuration
+  - path: ./staging-phx-apps.yaml
+  - target:
+      kind: Kustomization
+      name: apps-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-apps
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-infrastructure
+      - op: replace
+        path: "/apiVersion"
+        value: kustomize.toolkit.fluxcd.io/v1
