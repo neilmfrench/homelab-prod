@@ -6,4 +6,4 @@ resources:
   - ./monitoring
   - ./flux-system
   - ./magazine
-  # - ./security
+  - ./security
