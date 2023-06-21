@@ -6,6 +6,6 @@ namePrefix: ghost-
 resources:
   - ./config-pvc.yaml
   # - ./volsync.yaml
-#   - ../../../../base/ghost-magazine
-# patchesStrategicMerge:
-#   - ./ghost-values.yaml
+  - ../../../../base/ghost-magazine
+patchesStrategicMerge:
+  - ./ghost-values.yaml
