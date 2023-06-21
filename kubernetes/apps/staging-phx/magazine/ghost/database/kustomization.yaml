@@ -5,7 +5,7 @@ namespace: magazine
 resources:
   - ./data-pvc.yaml
   # - ./volsync.yaml
-  # - ../../../../base/mysql
+  - ../../../../base/mysql
 namePrefix: ghost-
-# patchesStrategicMerge:
-#   - ./mysql-values.yaml
+patchesStrategicMerge:
+  - ./mysql-values.yaml

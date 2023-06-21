@@ -15,13 +15,13 @@ spec:
       username: ghost
       password: "${SECRET_GHOST_MAG_MYSQL_PASSWORD}"
       replicationPassword: "${SECRET_GHOST_MAG_MYSQL_PASSWORD}"
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - target:
-              kind: StatefulSet
-              name: ghost-mysql
-            patch:
-              - op: replace
-                path: /spec/replicas
-                value: 0
+  # postRenderers:
+  #   - kustomize:
+  #       patchesJson6902:
+  #         - target:
+  #             kind: StatefulSet
+  #             name: ghost-mysql
+  #           patch:
+  #             - op: replace
+  #               path: /spec/replicas
+  #               value: 0
