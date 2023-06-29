@@ -20,33 +20,11 @@ patches:
       apiVersion: source.toolkit.fluxcd.io/v1beta2
       kind: HelmRepository
       metadata:
-        name: authentik
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: authentik
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
-      kind: HelmRepository
-      metadata:
         name: crowdsec
         namespace: flux-system
     target:
       kind: HelmRepository
       name: crowdsec
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
-      kind: HelmRepository
-      metadata:
-        name: firefly
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: firefly
       namespace: flux-system
   - patch: |-
       $patch: delete
