@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: kubelet-csr-approver
+    includeCRDs: true
+    releaseName: kubelet-csr-approver
+    namespace: kube-system
+    valuesFile: ./values.yaml
+    skipTests: true
+    version: 1.0.1
+    repo: https://postfinance.github.io/kubelet-csr-approver
+# REQUIRED: Use transformers to avoid creating the labels & annotations on all references rather than only metadata/annotations or metadata/labels respectively
+transformers:
+  - ./transformers.yaml
