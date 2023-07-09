@@ -4,15 +4,6 @@ kind: Kustomization
 resources:
   - ../base
 patches:
-  # Cluster source
-  - target:
-      kind: GitRepository
-      name: homelab-source
-    patch: |-
-      - op: replace
-        path: "/apiVersion"
-        value: source.toolkit.fluxcd.io/v1
-
   # Top-level Flux configuration
   - path: ./staging-phx-flux.yaml
   - target:
@@ -22,9 +13,6 @@ patches:
       - op: replace
         path: /metadata/name
         value: staging-phx-cluster-flux
-      - op: replace
-        path: "/apiVersion"
-        value: kustomize.toolkit.fluxcd.io/v1
 
   # Top-level variable configuration
   - path: ./staging-phx-vars.yaml
@@ -38,9 +26,6 @@ patches:
       - op: replace
         path: /spec/dependsOn/0/name
         value: staging-phx-cluster-flux
-      - op: replace
-        path: "/apiVersion"
-        value: kustomize.toolkit.fluxcd.io/v1
 
   # Top-level repository configuration
   - path: ./staging-phx-repositories.yaml
@@ -54,9 +39,6 @@ patches:
       - op: replace
         path: /spec/dependsOn/0/name
         value: staging-phx-cluster-vars
-      - op: replace
-        path: "/apiVersion"
-        value: kustomize.toolkit.fluxcd.io/v1
 
   # Top-level infrastructure configuration
   - path: ./staging-phx-infrastructure.yaml
@@ -70,9 +52,6 @@ patches:
       - op: replace
         path: /spec/dependsOn/0/name
         value: staging-phx-cluster-repositories
-      - op: replace
-        path: "/apiVersion"
-        value: kustomize.toolkit.fluxcd.io/v1
 
   # Top-level app configuration
   - path: ./staging-phx-apps.yaml
@@ -86,6 +65,3 @@ patches:
       - op: replace
         path: /spec/dependsOn/0/name
         value: staging-phx-cluster-infrastructure
-      - op: replace
-        path: "/apiVersion"
-        value: kustomize.toolkit.fluxcd.io/v1

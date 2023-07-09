@@ -15,23 +15,23 @@ spec:
       kind: GitRepository
       name: homelab-source
       namespace: flux-system
-    - apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       name: production-cluster-flux
       namespace: flux-system
-    - apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       name: production-cluster-vars
       namespace: flux-system
-    - apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       name: production-cluster-repositories
       namespace: flux-system
-    - apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       name: production-cluster-infrastructure
       namespace: flux-system
-    - apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       name: production-cluster-apps
       namespace: flux-system

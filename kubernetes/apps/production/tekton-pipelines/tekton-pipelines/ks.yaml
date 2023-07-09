@@ -1,5 +1,5 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-dashboard
@@ -16,7 +16,7 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-secrets
@@ -33,7 +33,7 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-rbac
@@ -50,7 +50,7 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-tasks
@@ -68,7 +68,7 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-pipelines
@@ -86,7 +86,7 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-trigger-bindings
@@ -104,7 +104,7 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-trigger-templates
@@ -124,7 +124,7 @@ spec:
   retryInterval: 1m
   timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-pipelines-eventlisteners

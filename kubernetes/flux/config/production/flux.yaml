@@ -8,9 +8,9 @@ spec:
   interval: 10m
   url: oci://ghcr.io/fluxcd/flux-manifests
   ref:
-    tag: v0.41.2
+    tag: v2.0.0
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flux
@@ -62,7 +62,35 @@ spec:
                 - name: manager
                   resources:
                     limits:
+                      cpu: 2000m
                       memory: 2Gi
       target:
         kind: Deployment
         name: (kustomize-controller|helm-controller|source-controller|notification-controller)
+    # Enable drift detection for HelmReleases and set the log level to debug
+    # https://fluxcd.io/flux/components/helm/helmreleases/#drift-detection
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --feature-gates=DetectDrift=true,CorrectDrift=false
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --log-level=debug
+      target:
+        kind: Deployment
+        name: helm-controller
+    # Enable Helm near OOM detection
+    # https://fluxcd.io/flux/cheatsheets/bootstrap/#enable-helm-near-oom-detection
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --feature-gates=OOMWatch=true
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --oom-watch-memory-threshold=95
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --oom-watch-interval=500ms
+      target:
+        kind: Deployment
+        name: helm-controller

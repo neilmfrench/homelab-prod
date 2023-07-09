@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - ../base
 patches:
+  # Top-level Flux configuration
+  - path: ./production-flux.yaml
   - target:
       kind: Kustomization
       name: flux-not-used
@@ -11,49 +13,55 @@ patches:
       - op: replace
         path: /metadata/name
         value: production-cluster-flux
-  - target:
-      kind: Kustomization
-      name: vars-not-used
-    patch: |-
-      - op: replace
-        path: /metadata/name
-        value: production-cluster-vars
-      - op: replace
-        path: /spec/dependsOn/0/name
-        value: production-cluster-flux
-  - target:
-      kind: Kustomization
-      name: repositories-not-used
-    patch: |-
-      - op: replace
-        path: /metadata/name
-        value: production-cluster-repositories
-      - op: replace
-        path: /spec/dependsOn/0/name
-        value: production-cluster-vars
-  - target:
-      kind: Kustomization
-      name: infrastructure-not-used
-    patch: |-
-      - op: replace
-        path: /metadata/name
-        value: production-cluster-infrastructure
-      - op: replace
-        path: /spec/dependsOn/0/name
-        value: production-cluster-repositories
-  - target:
-      kind: Kustomization
-      name: apps-not-used
-    patch: |-
-      - op: replace
-        path: /metadata/name
-        value: production-cluster-apps
-      - op: replace
-        path: /spec/dependsOn/0/name
-        value: production-cluster-infrastructure
-patchesStrategicMerge:
-  - ./production-flux.yaml
-  - ./production-vars.yaml
-  - ./production-repositories.yaml
-  - ./production-infrastructure.yaml
-  - ./production-apps.yaml
+
+#   # Top-level variable configuration
+#   - path: ./production-vars.yaml
+#   - target:
+#       kind: Kustomization
+#       name: vars-not-used
+#     patch: |-
+#       - op: replace
+#         path: /metadata/name
+#         value: production-cluster-vars
+#       - op: replace
+#         path: /spec/dependsOn/0/name
+#         value: production-cluster-flux
+
+#   # Top-level repository configuration
+#   - path: ./production-repositories.yaml
+#   - target:
+#       kind: Kustomization
+#       name: repositories-not-used
+#     patch: |-
+#       - op: replace
+#         path: /metadata/name
+#         value: production-cluster-repositories
+#       - op: replace
+#         path: /spec/dependsOn/0/name
+#         value: production-cluster-vars
+
+#   # Top-level infrastructure configuration
+#   - path: ./production-infrastructure.yaml
+#   - target:
+#       kind: Kustomization
+#       name: infrastructure-not-used
+#     patch: |-
+#       - op: replace
+#         path: /metadata/name
+#         value: production-cluster-infrastructure
+#       - op: replace
+#         path: /spec/dependsOn/0/name
+#         value: production-cluster-repositories
+
+#   # Top-level app configuration
+#   - path: ./production-apps.yaml
+#   - target:
+#       kind: Kustomization
+#       name: apps-not-used
+#     patch: |-
+#       - op: replace
+#         path: /metadata/name
+#         value: production-cluster-apps
+#       - op: replace
+#         path: /spec/dependsOn/0/name
+#         value: production-cluster-infrastructure
