@@ -7,4 +7,5 @@ resources:
   - ./reloader/ks.yaml
   - ./metrics-server/ks.yaml
   - ./cilium/ks.yaml
+  - ./coredns/ks.yaml
   # - ./snapshot-controller/ks.yaml
