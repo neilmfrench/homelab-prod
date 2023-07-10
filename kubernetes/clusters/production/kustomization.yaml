@@ -40,18 +40,18 @@ patches:
         path: /spec/dependsOn/0/name
         value: production-cluster-vars
 
-#   # Top-level infrastructure configuration
-#   - path: ./production-infrastructure.yaml
-#   - target:
-#       kind: Kustomization
-#       name: infrastructure-not-used
-#     patch: |-
-#       - op: replace
-#         path: /metadata/name
-#         value: production-cluster-infrastructure
-#       - op: replace
-#         path: /spec/dependsOn/0/name
-#         value: production-cluster-repositories
+  # Top-level infrastructure configuration
+  - path: ./production-infrastructure.yaml
+  - target:
+      kind: Kustomization
+      name: infrastructure-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: production-cluster-infrastructure
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: production-cluster-repositories
 
 #   # Top-level app configuration
 #   - path: ./production-apps.yaml
