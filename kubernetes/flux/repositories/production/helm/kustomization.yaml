@@ -20,22 +20,44 @@ patches:
       apiVersion: source.toolkit.fluxcd.io/v1beta2
       kind: HelmRepository
       metadata:
-        name: cilium
+        name: calico
         namespace: flux-system
     target:
       kind: HelmRepository
-      name: cilium
+      name: calico
       namespace: flux-system
   - patch: |-
       $patch: delete
       apiVersion: source.toolkit.fluxcd.io/v1beta2
       kind: HelmRepository
       metadata:
-        name: rook-ceph
+        name: longhorn
         namespace: flux-system
     target:
       kind: HelmRepository
-      name: rook-ceph
+      name: longhorn
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: metallb
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: metallb
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: pihole
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: pihole
       namespace: flux-system
   - patch: |-
       $patch: delete

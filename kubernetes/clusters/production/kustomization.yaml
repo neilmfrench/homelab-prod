@@ -27,18 +27,18 @@ patches:
         path: /spec/dependsOn/0/name
         value: production-cluster-flux
 
-#   # Top-level repository configuration
-#   - path: ./production-repositories.yaml
-#   - target:
-#       kind: Kustomization
-#       name: repositories-not-used
-#     patch: |-
-#       - op: replace
-#         path: /metadata/name
-#         value: production-cluster-repositories
-#       - op: replace
-#         path: /spec/dependsOn/0/name
-#         value: production-cluster-vars
+  # Top-level repository configuration
+  - path: ./production-repositories.yaml
+  - target:
+      kind: Kustomization
+      name: repositories-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: production-cluster-repositories
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: production-cluster-vars
 
 #   # Top-level infrastructure configuration
 #   - path: ./production-infrastructure.yaml
