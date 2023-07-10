@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./kube-system
   - ./cert-manager
+  - ./rook-ceph
   # - ./metallb-system
   # - ./system-upgrade
   # - ./longhorn-system
