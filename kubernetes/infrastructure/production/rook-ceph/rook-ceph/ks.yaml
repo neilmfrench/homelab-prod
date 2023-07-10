@@ -25,7 +25,7 @@ spec:
 #   name: cluster-infrastructure-rook-ceph-cluster
 #   namespace: flux-system
 # spec:
-#   path: ./kubernetes/infrastructure/staging-sj/rook-ceph/rook-ceph/cluster
+#   path: ./kubernetes/infrastructure/production/rook-ceph/rook-ceph/cluster
 #   dependsOn:
 #     - name: cluster-infrastructure-rook-ceph-operator
 #   prune: true
