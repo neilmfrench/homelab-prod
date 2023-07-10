@@ -5,12 +5,9 @@ metadata:
   name: metrics-server
 spec:
   values:
-    args:
-      - --kubelet-insecure-tls
-      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-      - --kubelet-use-node-status-port
-      - --metric-resolution=15s
     metrics:
       enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false
+    apiService:
+      insecureSkipTLSVerify: true
