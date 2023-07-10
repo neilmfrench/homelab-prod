@@ -6,3 +6,4 @@ metadata:
   namespace: flux-system
 data:
   TIMEZONE: "America/Los_Angeles"
+  L2_TRAEFIK_ADDR: "172.16.20.30"
