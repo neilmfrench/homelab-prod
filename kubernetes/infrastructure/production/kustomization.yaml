@@ -11,5 +11,5 @@ resources:
   # - ./tigera-operator
   # - ./calico-system
   # - ./monitoring
-  # - ./networking
+  - ./networking
   # - ./volsync
