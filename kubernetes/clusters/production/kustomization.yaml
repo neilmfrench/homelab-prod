@@ -14,18 +14,18 @@ patches:
         path: /metadata/name
         value: production-cluster-flux
 
-#   # Top-level variable configuration
-#   - path: ./production-vars.yaml
-#   - target:
-#       kind: Kustomization
-#       name: vars-not-used
-#     patch: |-
-#       - op: replace
-#         path: /metadata/name
-#         value: production-cluster-vars
-#       - op: replace
-#         path: /spec/dependsOn/0/name
-#         value: production-cluster-flux
+  # Top-level variable configuration
+  - path: ./production-vars.yaml
+  - target:
+      kind: Kustomization
+      name: vars-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: production-cluster-vars
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: production-cluster-flux
 
 #   # Top-level repository configuration
 #   - path: ./production-repositories.yaml
