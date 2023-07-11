@@ -14,10 +14,10 @@ spec:
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         # traefik.ingress.kubernetes.io/router.middlewares: networking-crowdsec-traefik-bouncer@kubernetescrd
       hosts:
-        - host: "hb.${SECRET_DOMAIN}"
+        - host: &host "hb.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
       tls:
         - hosts:
-            - "podinfo.${SECRET_DOMAIN}"
+            - *host
