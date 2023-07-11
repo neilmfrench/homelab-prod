@@ -14,5 +14,5 @@ spec:
       replicationPassword: "${SECRET_FIRELY_MARIADB_PASSWORD}"
     primary:
       persistence:
-        size: 10Gi
-        storageClass: longhorn
+        size: 8Gi
+        storageClass: ceph-block

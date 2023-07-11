@@ -10,7 +10,7 @@ resources:
   # - ./tekton-operator
   # - ./tekton-pipelines
   - ./security
-  # - ./finance
+  - ./finance
   # - ./home
   # - ./magazine
   # - ./flux-system
