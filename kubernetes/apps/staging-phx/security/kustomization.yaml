@@ -5,4 +5,4 @@ resources:
   - ./namespace.yaml
   # - ./secrets
   # - ./vaultwarden/ks.yaml
-  - ./authentik/ks.yaml
+  # - ./authentik/ks.yaml
