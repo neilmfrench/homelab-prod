@@ -38,22 +38,25 @@ spec:
         from: "${SECRET_AUTHENTIK_EMAIL_FROM}"
     prometheus:
       serviceMonitor:
-        create: true
+        create: false
       rules:
-        create: true
+        create: false
     redis:
       enabled: true
       auth:
         enabled: false
       master:
         persistence:
-          storageClass: longhorn
+          storageClass: ceph-block
+          size: 4Gi
       replica:
         persistence:
-          storageClass: longhorn
+          storageClass: ceph-block
+          size: 4Gi
     postgresql:
       enabled: true
       postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
       persistence:
         enabled: true
-        storageClass: longhorn
+        storageClass: ceph-block
+        size: 6Gi

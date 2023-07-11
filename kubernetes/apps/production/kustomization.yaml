@@ -9,7 +9,7 @@ resources:
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines
-  # - ./security
+  - ./security
   # - ./finance
   # - ./home
   # - ./magazine
