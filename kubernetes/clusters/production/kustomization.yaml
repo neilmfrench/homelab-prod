@@ -53,15 +53,15 @@ patches:
         path: /spec/dependsOn/0/name
         value: production-cluster-repositories
 
-#   # Top-level app configuration
-#   - path: ./production-apps.yaml
-#   - target:
-#       kind: Kustomization
-#       name: apps-not-used
-#     patch: |-
-#       - op: replace
-#         path: /metadata/name
-#         value: production-cluster-apps
-#       - op: replace
-#         path: /spec/dependsOn/0/name
-#         value: production-cluster-infrastructure
+  # Top-level app configuration
+  - path: ./production-apps.yaml
+  - target:
+      kind: Kustomization
+      name: apps-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: production-cluster-apps
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: production-cluster-infrastructure

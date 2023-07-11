@@ -2,7 +2,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: podinfo
-  namespace: default
 spec:
   chart:
     spec:
@@ -13,7 +12,7 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         # traefik.ingress.kubernetes.io/router.middlewares: networking-crowdsec-traefik-bouncer@kubernetescrd
       hosts:
-        - host: "podinfo.${SECRET_DOMAIN}"
+        - host: "hb.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
