@@ -96,7 +96,7 @@ spec:
                 memory: 4Gi
         storageClass:
           enabled: true
-          isDefault: true
+          isDefault: false
           name: ceph-filesystem
           pool: data0
           reclaimPolicy: Delete
