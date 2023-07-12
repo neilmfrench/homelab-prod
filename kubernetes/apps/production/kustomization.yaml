@@ -13,5 +13,5 @@ resources:
   - ./finance
   # - ./home
   # - ./magazine
-  # - ./flux-system
+  - ./flux-system
   # - ./campsearch
