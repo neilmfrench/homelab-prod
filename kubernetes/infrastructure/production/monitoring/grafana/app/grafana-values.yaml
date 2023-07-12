@@ -14,6 +14,8 @@ spec:
       GF_LOG_FILTERS: rendering:debug
       GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
       GF_DATE_FORMATS_FULL_DATE: "MMM Do, YYYY hh:mm:ss a"
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
+      GF_SECURITY_ALLOW_EMBEDDING: true
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
     grafana.ini:
       orgs:
@@ -84,10 +86,23 @@ spec:
           gnetId: 1860
           revision: 31
           datasource: Prometheus
-        # # Ref: https://grafana.com/grafana/dashboards/12175
-        # calico-felix:
-        #   gnetId: 12175
-        #   revision: 5
+        # Ref: https://grafana.com/grafana/dashboards/5342-ceph-pools/
+        ceph-pools:
+          gnetId: 5342
+          revision: 9
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/5336-ceph-osd-single/
+        ceph-osd:
+          gnetId: 5336
+          revision: 9
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/2842-ceph-cluster/
+        ceph-cluster:
+          gnetId: 2842
+          revision: 17
+          datasource: Prometheus
+        # cert-manager:
+        #   url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
         #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/2842
         flux-cluster:
@@ -123,10 +138,10 @@ spec:
           revision: 2
           datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13502
-        minio:
-          gnetId: 13502
-          revision: 10
-          datasource: Prometheus
+        # minio:
+        #   gnetId: 13502
+        #   revision: 10
+        #   datasource: Prometheus
     sidecar:
       dashboards:
         enabled: true
@@ -152,10 +167,10 @@ spec:
         external-dns/is-public: "true"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       hosts:
-        - "grafana.${SECRET_DOMAIN}"
+        - &host "grafana.${SECRET_DOMAIN}"
       tls:
         - hosts:
-            - "grafana.${SECRET_DOMAIN}"
+            - *host
           secretName: "grafana-tls"
     serviceAccount:
       create: true

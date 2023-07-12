@@ -5,5 +5,5 @@ resources:
   - ./namespace.yaml
   - ./thanos/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
-  # - ./grafana/ks.yaml
+  - ./grafana/ks.yaml
   - ./scrutiny/ks.yaml
