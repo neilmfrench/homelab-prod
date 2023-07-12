@@ -38,9 +38,9 @@ spec:
         from: "${SECRET_AUTHENTIK_EMAIL_FROM}"
     prometheus:
       serviceMonitor:
-        create: false
+        create: true
       rules:
-        create: false
+        create: true
     redis:
       enabled: true
       auth:

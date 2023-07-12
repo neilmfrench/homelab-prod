@@ -30,8 +30,8 @@ spec:
         config:
           osdsPerDevice: "1"
     monitoring:
-      enabled: false
-      createPrometheusRules: false
+      enabled: true
+      createPrometheusRules: true
     ingress:
       dashboard:
         ingressClassName: traefik

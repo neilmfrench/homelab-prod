@@ -56,7 +56,7 @@ spec:
         apiVersion: 1
         providers:
           - name: "default"
-            folder: "public"
+            folder: ""
             type: file
             disableDeletion: false
             editable: true
@@ -69,13 +69,20 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://kube-prometheus-stack-prometheus:9090/
+            url: http://thanos-query-frontend:9090
+            isDefault: true
+          - name: Alertmanager
+            type: alertmanager
+            access: proxy
+            url: http://kube-prometheus-stack-alertmanager:9093
+            jsonData:
+              implementation: prometheus
     dashboards:
       default:
         # Ref: https://grafana.com/grafana/dashboards/1860-node-exporter-full/
         node-exporter-full:
           gnetId: 1860
-          revision: 29
+          revision: 31
           datasource: Prometheus
         # # Ref: https://grafana.com/grafana/dashboards/12175
         # calico-felix:
