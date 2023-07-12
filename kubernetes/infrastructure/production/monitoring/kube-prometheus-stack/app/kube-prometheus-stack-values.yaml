@@ -183,7 +183,7 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         retention: 2d
-        retentionSize: 100GB
+        retentionSize: 40GB
         enableAdminAPI: true
         walCompression: true
         thanos:
@@ -199,4 +199,4 @@ spec:
               storageClassName: ceph-block
               resources:
                 requests:
-                  storage: 100Gi
+                  storage: 60Gi
