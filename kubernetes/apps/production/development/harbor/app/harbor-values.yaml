@@ -29,26 +29,20 @@ spec:
       resourcePolicy: "keep"
       persistentVolumeClaim:
         registry:
-          storageClass: "longhorn"
+          storageClass: "ceph-block"
           size: 15Gi
-        chartmuseum:
-          storageClass: "longhorn"
-          size: 5Gi
         jobservice:
           jobLog:
-            storageClass: "longhorn"
-            size: 1Gi
-          scanDataExports:
-            storageClass: "longhorn"
+            storageClass: "ceph-block"
             size: 1Gi
         database:
-          storageClass: "longhorn"
+          storageClass: "ceph-block"
           size: 5Gi
         redis:
-          storageClass: "longhorn"
+          storageClass: "ceph-block"
           size: 1Gi
         trivy:
-          storageClass: "longhorn"
+          storageClass: "ceph-block"
           size: 5Gi
       imageChartStorage:
         type: filesystem

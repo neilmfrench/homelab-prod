@@ -5,7 +5,7 @@ resources:
   - ./default
   # - ./argocd
   # - ./media
-  # - ./development
+  - ./development
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines
