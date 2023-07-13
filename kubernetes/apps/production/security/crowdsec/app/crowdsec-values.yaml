@@ -58,7 +58,7 @@ spec:
           storageClassName: ceph-block
           size: 1Gi
         config:
-          enabled: true
+          enabled: false
           storageClassName: ceph-block
           size: 500Mi
     agent:
