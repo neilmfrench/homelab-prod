@@ -8,8 +8,8 @@ spec:
     image:
       repository: neilmfrench2/crowdsec-traefik-bouncer
       tag: "1.0.0"
-    imagePullSecrets:
-      - name: harbor-neilfrench-regcred
+    # imagePullSecrets:
+    #   - name: harbor-neilfrench-regcred
     env:
       CROWDSEC_BOUNCER_API_KEY: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
       CROWDSEC_AGENT_HOST: crowdsec-service.security:8080
@@ -70,8 +70,7 @@ spec:
           periodSeconds: 10
       resources:
         limits:
-          cpu: 100m
-          memory: 128Mi
+          memory: 256Mi
         requests:
           cpu: 100m
           memory: 128Mi
