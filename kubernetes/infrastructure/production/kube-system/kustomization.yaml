@@ -8,4 +8,4 @@ resources:
   - ./metrics-server/ks.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
-  # - ./snapshot-controller/ks.yaml
+  - ./snapshot-controller/ks.yaml

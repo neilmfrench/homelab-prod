@@ -6,6 +6,6 @@ metadata:
 spec:
   values:
     image:
-      tag: "v5.0.1"
+      tag: "v6.2.2"
     serviceAccount:
       create: true

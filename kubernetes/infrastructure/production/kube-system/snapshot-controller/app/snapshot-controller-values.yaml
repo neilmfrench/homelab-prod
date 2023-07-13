@@ -6,14 +6,25 @@ metadata:
 spec:
   values:
     image:
-      tag: "v5.0.1"
+      tag: "v6.2.2"
     volumeSnapshotClasses:
-      - name: longhorn-backup-vsc
-        driver: driver.longhorn.io
+      - name: csi-rbdplugin-snapclass
+        driver: rook-ceph.rbd.csi.ceph.com
         annotations:
           snapshot.storage.kubernetes.io/is-default-class: "true"
         parameters:
-          type: bak
+          clusterID: rook-ceph
+          csi.storage.k8s.io/snapshotter-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph
+        deletionPolicy: Delete
+      - name: csi-cephfsplugin-snapclass
+        driver: rook-ceph.cephfs.csi.ceph.com
+        annotations:
+          snapshot.storage.kubernetes.io/is-default-class: "true"
+        parameters:
+          clusterID: rook-ceph
+          csi.storage.k8s.io/snapshotter-secret-name: rook-csi-cephfs-provisioner
+          csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph
         deletionPolicy: Delete
     serviceMonitor:
       create: false
