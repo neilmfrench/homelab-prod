@@ -7,7 +7,7 @@ spec:
   values:
     container_runtime: containerd
     image:
-      tag: "v1.5.2"
+      tag: "v1.4.6"
     tls:
       enabled: true
     secrets:
