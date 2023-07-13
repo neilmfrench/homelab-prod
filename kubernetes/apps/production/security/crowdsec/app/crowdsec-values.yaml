@@ -7,7 +7,7 @@ spec:
   values:
     container_runtime: containerd
     image:
-      tag: "v1.4.6"
+      tag: "v1.5.2"
     tls:
       enabled: true
     secrets:
@@ -24,7 +24,6 @@ spec:
               ip:
                 - "${SECRET_EXTERNAL_IP}"
                 - "${SECRET_GCP_IP}"
-                - "45.51.33.231"
     lapi:
       env:
         - name: ENROLL_KEY
@@ -32,7 +31,7 @@ spec:
         - name: ENROLL_INSTANCE_NAME
           value: "homelab-k8s-cluster"
         - name: ENROLL_TAGS
-          value: "k8s linux test"
+          value: "k8s linux homelab"
         - name: BOUNCER_KEY_traefik
           value: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
         - name: BOUNCER_KEY_cloudflare
@@ -48,10 +47,10 @@ spec:
             cert-manager.io/cluster-issuer: "letsencrypt-production"
             traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           ingressClassName: "traefik"
-          host: "crowdsec-dash.${SECRET_DOMAIN}"
+          host: &host "crowdsec-dash.${SECRET_DOMAIN}"
           tls:
             - hosts:
-                - "crowdsec-dash.${SECRET_DOMAIN}"
+                - *host
               secretName: "crowdsec-dash-tls"
       persistentVolume:
         data:
@@ -68,7 +67,7 @@ spec:
           enabled: true
           accessModes:
             - ReadWriteMany
-          storageClassName: "longhorn"
+          storageClassName: ceph-filesystem
           size: 400Mi
       env:
         # - name: DISABLE_ONLINE_API
@@ -89,7 +88,7 @@ spec:
         - namespace: networking
           podName: traefik-*
           program: traefik
-      # metrics:
-      #   enabled: false
-      #   serviceMonitor:
-      #     enabled: false
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
