@@ -13,4 +13,4 @@ resources:
   - ./monitoring
   - ./networking
   - ./kyverno
-  # - ./volsync
+  - ./volsync
