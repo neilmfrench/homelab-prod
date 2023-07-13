@@ -6,4 +6,4 @@ resources:
   - ./podinfo/ks.yaml
   # - ./podinfo-ext/ks.yaml
   # - ./changedetection/ks.yaml
-  # - ./blog/ks.yaml
+  - ./blog/ks.yaml

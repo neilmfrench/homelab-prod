@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 8Gi
-  storageClassName: longhorn
+      storage: 4Gi
+  storageClassName: ceph-block
