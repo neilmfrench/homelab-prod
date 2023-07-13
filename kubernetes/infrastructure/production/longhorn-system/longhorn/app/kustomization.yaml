@@ -3,7 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: longhorn-system
 resources:
-  - minio-svc-credentials.sops.yaml
+  - ./minio-svc-credentials.sops.yaml
   - ../../../../base/longhorn
 patchesStrategicMerge:
   - ./longhorn-values.yaml
