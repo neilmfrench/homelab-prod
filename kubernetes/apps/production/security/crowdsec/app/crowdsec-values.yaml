@@ -55,11 +55,11 @@ spec:
       persistentVolume:
         data:
           enabled: true
-          storageClassName: longhorn
+          storageClassName: ceph-block
           size: 1Gi
         config:
           enabled: true
-          storageClassName: longhorn
+          storageClassName: ceph-block
           size: 500Mi
     agent:
       persistentVolume:
