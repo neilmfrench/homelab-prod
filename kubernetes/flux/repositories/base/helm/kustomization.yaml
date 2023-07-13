@@ -35,3 +35,4 @@ resources:
   - ./rook-ceph.yaml
   - ./openebs-jiva.yaml
   - ./coredns.yaml
+  - ./kyverno.yaml

@@ -213,3 +213,14 @@ patches:
       kind: HelmRepository
       name: longhorn
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: kyverno
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: kyverno
+      namespace: flux-system
