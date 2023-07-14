@@ -15,4 +15,4 @@ spec:
     primary:
       persistence:
         size: 8Gi
-        storageClass: longhorn
+        storageClass: ceph-block

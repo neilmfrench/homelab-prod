@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: development
 resources:
   - ./config-pvc.yaml
-  - ../../../../base/bookstack
-patchesStrategicMerge:
-  - ./bookstack-values.yaml
+#   - ../../../../base/bookstack
+# patchesStrategicMerge:
+#   - ./bookstack-values.yaml
