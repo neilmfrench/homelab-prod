@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: development
 resources:
   - ./data-pvc.yaml
-  - ../../../../base/gitea
-patchesStrategicMerge:
-  - ./gitea-values.yaml
+#   - ../../../../base/gitea
+# patchesStrategicMerge:
+#   - ./gitea-values.yaml
