@@ -11,7 +11,7 @@ resources:
   # - ./tekton-pipelines
   - ./security
   - ./finance
-  # - ./home
+  - ./home
   # - ./magazine
   - ./flux-system
   # - ./campsearch
