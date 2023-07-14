@@ -71,9 +71,9 @@ spec:
 
     l2announcements:
       enabled: true
-      leaseDuration: 30s
-      leaseRenewDeadline: 10s
-      leaseRetryPeriod: 4s
+      leaseDuration: 120s
+      leaseRenewDeadline: 60s
+      leaseRetryPeriod: 6s
 
     loadBalancer:
       algorithm: maglev
