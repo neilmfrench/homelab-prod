@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./bookstack/ks.yaml
-  # - ./fifa-openapi/ks.yaml
+  - ./fifa-openapi/ks.yaml
   - ./gitea/ks.yaml
   - ./harbor/ks.yaml
   # - ./pocketbase/ks.yaml
