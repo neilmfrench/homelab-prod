@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: amruthpillai/reactive-resume
-      tag: "client-3.6.18"
+      tag: "client-3.8.1"
     env:
       TZ: ${TIMEZONE}
       PUBLIC_URL: https://resume.${SECRET_DOMAIN}

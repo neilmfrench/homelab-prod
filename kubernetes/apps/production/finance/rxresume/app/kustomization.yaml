@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: finance
 resources:
   - ./data-pvc.yaml
-#   - ../../../../base/rxresume
-# patchesStrategicMerge:
-#   - ./rxresume-values.yaml
+  - ../../../../base/rxresume
+patchesStrategicMerge:
+  - ./rxresume-values.yaml
