@@ -13,12 +13,12 @@ no-autoupdate: true
 # E.g. `cloudflared tunnel route dns example-tunnel tunnel.example.com`.
 ingress:
   # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
-  - hostname: vs-vaultwarden-phx.${SECRET_DOMAIN}
-    service: tcp://volsync-sync-vaultwarden-data.security.svc.cluster.local:22000
-  - hostname: vs-ghost-magazine-db-phx.${SECRET_DOMAIN}
-    service: ssh://volsync-rsync-dst-ghost-magazine-vs-db-destination.magazine.svc.cluster.local:22
-  - hostname: vs-ghost-magazine-app-phx.${SECRET_DOMAIN}
-    service: ssh://volsync-rsync-dst-ghost-magazine-vs-app-destination.magazine.svc.cluster.local:22
+  # - hostname: vs-vaultwarden-phx.${SECRET_DOMAIN}
+  #   service: tcp://volsync-sync-vaultwarden-data.security.svc.cluster.local:22000
+  # - hostname: vs-ghost-magazine-db-phx.${SECRET_DOMAIN}
+  #   service: ssh://volsync-rsync-dst-ghost-magazine-vs-db-destination.magazine.svc.cluster.local:22
+  # - hostname: vs-ghost-magazine-app-phx.${SECRET_DOMAIN}
+  #   service: ssh://volsync-rsync-dst-ghost-magazine-vs-app-destination.magazine.svc.cluster.local:22
   # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
   # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
   # in the connection from cloudflared to your local service, not from the internet to cloudflared.
