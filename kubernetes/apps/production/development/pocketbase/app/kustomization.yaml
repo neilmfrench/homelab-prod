@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: development
 resources:
   - ./data-pvc.yaml
-  - ../../../../base/pocketbase
-patchesStrategicMerge:
-  - ./pocketbase-values.yaml
+#   - ../../../../base/pocketbase
+# patchesStrategicMerge:
+#   - ./pocketbase-values.yaml

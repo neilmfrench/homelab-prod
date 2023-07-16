@@ -7,7 +7,7 @@ resources:
   - ./fifa-openapi/ks.yaml
   - ./gitea/ks.yaml
   - ./harbor/ks.yaml
-  # - ./pocketbase/ks.yaml
+  - ./pocketbase/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml
   # - ./oci-instance-creator/ks.yaml
