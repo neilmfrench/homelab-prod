@@ -73,7 +73,7 @@ spec:
       primary:
         persistence:
           enabled: true
-          storageClass: "longhorn"
+          storageClass: ceph-block
           accessMode: ReadWriteOnce
           size: 8Gi
     cronjob:
@@ -82,7 +82,7 @@ spec:
       enabled: true
       master:
         persistence:
-          storageClass: longhorn
+          storageClass: ceph-block
         resources:
           requests:
             memory: 128Mi
@@ -91,7 +91,7 @@ spec:
       replica:
         replicaCount: 1
         persistence:
-          storageClass: longhorn
+          storageClass: ceph-block
         resources:
           requests:
             memory: 128Mi
