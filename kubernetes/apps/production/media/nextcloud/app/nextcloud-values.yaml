@@ -88,6 +88,7 @@ spec:
             memory: 128Mi
           limits:
             memory: 256Mi
+        disableCommands: []
       replica:
         replicaCount: 1
         persistence:
@@ -97,3 +98,4 @@ spec:
             memory: 128Mi
           limits:
             memory: 256Mi
+        disableCommands: []
