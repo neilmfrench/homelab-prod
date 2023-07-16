@@ -24,11 +24,11 @@ spec:
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       path: /
       hosts:
-        - &host-console "s3.${SECRET_DOMAIN}"
+        - &host "s3.${SECRET_DOMAIN}"
       tls:
         - secretName: s3.${SECRET_DOMAIN}-tls
           hosts:
-            - *host-console
+            - *host
     consoleIngress:
       enabled: true
       ingressClassName: traefik
