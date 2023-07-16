@@ -5,9 +5,9 @@ metadata:
   namespace: media
   name: minio-data
 spec:
-  storageClassName: local-path-easystore-minio
+  storageClassName: local-path-backup-minio
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3T
+      storage: 4T

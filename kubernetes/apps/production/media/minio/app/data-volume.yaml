@@ -2,17 +2,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: easystore-minio-pv
+  name: backup-minio-pv
   labels:
     type: local
 spec:
-  storageClassName: local-path-easystore-minio
+  storageClassName: local-path-backup-minio
   capacity:
-    storage: 3T
+    storage: 4T
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/easystore/minio
+    path: /var/mnt/backup/minio
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -20,4 +20,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - k8s4
+                - talos-4
