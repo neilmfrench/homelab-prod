@@ -12,7 +12,7 @@ spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - urls.${SECRET_DOMAIN}
+        - &host "urls.${SECRET_DOMAIN}"
       secretName: "urls-tls"
   rules:
-    - host: urls.${SECRET_DOMAIN}
+    - host: *host
