@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: media
 resources:
   - ./param-pvc.yaml
-#   - ../../../../base/shlink
-# patchesStrategicMerge:
-#   - ./shlink-values.yaml
+  - ../../../../base/shlink
+patchesStrategicMerge:
+  - ./shlink-values.yaml
