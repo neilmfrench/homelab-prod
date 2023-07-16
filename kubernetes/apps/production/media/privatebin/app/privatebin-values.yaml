@@ -5,9 +5,6 @@ metadata:
   name: privatebin
 spec:
   values:
-    image:
-      repository: privatebin/nginx-fpm-alpine
-      tag: "1.5.1"
     controller:
       kind: Deployment
       emptyDir: true
