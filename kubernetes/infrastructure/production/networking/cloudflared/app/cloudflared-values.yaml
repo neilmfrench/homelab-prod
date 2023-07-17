@@ -10,7 +10,7 @@ spec:
         configmap.reloader.stakater.com/reload: "cloudflared-configmap"
     image:
       repository: cloudflare/cloudflared
-      tag: "2023.7.0"
+      tag: "2023.7.1"
     args:
       - tunnel
       - --config
