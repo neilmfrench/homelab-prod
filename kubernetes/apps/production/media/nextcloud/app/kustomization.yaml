@@ -5,6 +5,7 @@ namespace: media
 resources:
   - ./data-pvc.yaml
   - ./restic-config.sops.yaml
+  - ./mariadb-restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/nextcloud
 patchesStrategicMerge:
