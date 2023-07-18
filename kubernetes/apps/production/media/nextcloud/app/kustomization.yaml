@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: media
 resources:
   - ./data-pvc.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/nextcloud
 patchesStrategicMerge:
   - ./nextcloud-values.yaml
