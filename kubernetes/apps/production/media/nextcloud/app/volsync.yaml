@@ -16,3 +16,21 @@ spec:
     retain:
       daily: 7
       within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: nextcloud-mariadb
+spec:
+  sourcePVC: data-nextcloud-mariadb-0
+  trigger:
+    schedule: "0 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: nextcloud-mariadb-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      within: 3d
