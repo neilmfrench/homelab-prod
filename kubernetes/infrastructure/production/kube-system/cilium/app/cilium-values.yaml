@@ -72,8 +72,15 @@ spec:
     l2announcements:
       enabled: true
       leaseDuration: 120s
-      leaseRenewDeadline: 60s
+      leaseRenewDeadline: 10s
       leaseRetryPeriod: 6s
+
+    k8sClientRateLimit:
+      # -- The sustained request rate in requests per second.
+      qps: 15
+      # -- The burst request rate in requests per second.
+      # The rate limiter will allow short bursts with a higher rate.
+      burst: 20
 
     loadBalancer:
       algorithm: maglev
