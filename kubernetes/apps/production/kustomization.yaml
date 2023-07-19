@@ -8,7 +8,7 @@ resources:
   - ./development
   # - ./networking
   - ./tekton-operator
-  # - ./tekton-pipelines
+  - ./tekton-pipelines
   - ./security
   - ./finance
   - ./home

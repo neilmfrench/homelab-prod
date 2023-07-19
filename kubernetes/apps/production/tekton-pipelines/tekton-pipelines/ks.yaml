@@ -15,130 +15,130 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines-secrets
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/secrets
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines-rbac
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/rbac
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines-tasks
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-pipelines-secrets
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines-pipelines
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-pipelines-tasks
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/pipelines
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines-trigger-bindings
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-pipelines-rbac
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/trigger-bindings
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines-trigger-templates
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-pipelines-secrets
-    - name: cluster-apps-tekton-pipelines-rbac
-    - name: cluster-apps-tekton-pipelines-pipelines
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/trigger-templates
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines-eventlisteners
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-pipelines-trigger-templates
-    - name: cluster-apps-tekton-pipelines-trigger-bindings
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/eventlisteners
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-tekton-pipelines-secrets
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-apps-tekton-operator
+#   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/secrets
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-tekton-pipelines-rbac
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-apps-tekton-operator
+#   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/rbac
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-tekton-pipelines-tasks
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-apps-tekton-pipelines-secrets
+#     - name: cluster-apps-tekton-operator
+#   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-tekton-pipelines-pipelines
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-apps-tekton-pipelines-tasks
+#     - name: cluster-apps-tekton-operator
+#   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/pipelines
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-tekton-pipelines-trigger-bindings
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-apps-tekton-pipelines-rbac
+#     - name: cluster-apps-tekton-operator
+#   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/trigger-bindings
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-tekton-pipelines-trigger-templates
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-apps-tekton-pipelines-secrets
+#     - name: cluster-apps-tekton-pipelines-rbac
+#     - name: cluster-apps-tekton-pipelines-pipelines
+#     - name: cluster-apps-tekton-operator
+#   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/trigger-templates
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-tekton-pipelines-eventlisteners
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-apps-tekton-pipelines-trigger-templates
+#     - name: cluster-apps-tekton-pipelines-trigger-bindings
+#     - name: cluster-apps-tekton-operator
+#   path: ./kubernetes/apps/production/tekton-pipelines/tekton-pipelines/eventlisteners
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
