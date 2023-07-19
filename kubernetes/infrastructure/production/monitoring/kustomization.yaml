@@ -8,4 +8,4 @@ resources:
   - ./grafana/ks.yaml
   - ./scrutiny/ks.yaml
   - ./vpa/ks.yaml
-  # - ./goldilocks/ks.yaml
+  - ./goldilocks/ks.yaml
