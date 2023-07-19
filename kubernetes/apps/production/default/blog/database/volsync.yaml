@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: mariadb
+  name: mysql
 spec:
   sourcePVC: blog-mysql-data
   trigger:
@@ -10,7 +10,7 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 7
-    repository: blog-mariadb-restic-config
+    repository: blog-mysql-restic-config
     volumeSnapshotClassName: csi-rbdplugin-snapclass
     storageClassName: ceph-block
     retain:
