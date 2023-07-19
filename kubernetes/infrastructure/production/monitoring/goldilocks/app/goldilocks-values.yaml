@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: goldilocks
+spec:
+  values:
+    controller:
+      resources:
+        requests:
+          cpu: 25m
+          memory: 50Mi
+        limits:
+          cpu: null
+          memory: 200Mi
+    dashboard:
+      replicaCount: 1
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        ingressClassName: traefik
+        hosts:
+          - host: &host "goldilocks.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: Prefix
+        tls:
+          - hosts:
+              - *host
+      resources:
+        requests:
+          cpu: 25m
+          memory: 50Mi
+        limits:
+          cpu: null
+          memory: 200Mi
