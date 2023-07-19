@@ -5,6 +5,8 @@ metadata:
   name: cluster-infrastructure-goldilocks
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-infrastructure-vpa
   path: ./kubernetes/infrastructure/production/monitoring/goldilocks/app
   prune: true
   sourceRef:
