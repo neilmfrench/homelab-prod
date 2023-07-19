@@ -11,3 +11,4 @@ metadata:
     pod-security.kubernetes.io/warn: privileged
     pod-security.kubernetes.io/warn-version: latest
     kustomize.toolkit.fluxcd.io/prune: disabled
+    goldilocks.fairwinds.com/enabled: "true"
