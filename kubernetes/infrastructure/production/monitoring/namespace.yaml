@@ -4,7 +4,6 @@ kind: Namespace
 metadata:
   name: monitoring
   labels:
-    goldilocks.fairwinds.com/enabled: true
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/enforce-version: latest
     pod-security.kubernetes.io/audit: privileged
@@ -12,3 +11,4 @@ metadata:
     pod-security.kubernetes.io/warn: privileged
     pod-security.kubernetes.io/warn-version: latest
     kustomize.toolkit.fluxcd.io/prune: disabled
+    goldilocks.fairwinds.com/enabled: true
