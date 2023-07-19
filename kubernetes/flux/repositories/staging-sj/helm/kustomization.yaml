@@ -224,3 +224,14 @@ patches:
       kind: HelmRepository
       name: kyverno
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: fairwinds
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: fairwinds
+      namespace: flux-system

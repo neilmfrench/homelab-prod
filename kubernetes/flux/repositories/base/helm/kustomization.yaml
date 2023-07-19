@@ -36,3 +36,4 @@ resources:
   - ./openebs-jiva.yaml
   - ./coredns.yaml
   - ./kyverno.yaml
+  - ./fairwinds.yaml
