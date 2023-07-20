@@ -37,3 +37,4 @@ resources:
   - ./coredns.yaml
   - ./kyverno.yaml
   - ./fairwinds.yaml
+  - ./kubelet-csr-approver.yaml

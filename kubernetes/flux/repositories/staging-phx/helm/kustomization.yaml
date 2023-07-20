@@ -213,3 +213,14 @@ patches:
       kind: HelmRepository
       name: fairwinds
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: kubelet-csr-approver
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: kubelet-csr-approver
+      namespace: flux-system
