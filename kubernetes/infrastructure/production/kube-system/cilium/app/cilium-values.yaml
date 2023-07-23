@@ -72,7 +72,7 @@ spec:
     l2announcements:
       enabled: true
       leaseDuration: 120s
-      leaseRenewDeadline: 10s
+      leaseRenewDeadline: 30s
       leaseRetryPeriod: 6s
 
     k8sClientRateLimit:
