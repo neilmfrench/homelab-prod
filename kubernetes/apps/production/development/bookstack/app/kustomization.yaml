@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: development
 resources:
   - ./config-pvc.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/bookstack
 patchesStrategicMerge:
   - ./bookstack-values.yaml
