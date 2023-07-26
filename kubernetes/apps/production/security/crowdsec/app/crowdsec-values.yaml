@@ -38,6 +38,12 @@ spec:
           value: "${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_KEY}"
         - name: LEVEL_DEBUG
           value: "true"
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 150m
+          memory: 256Mi
       dashboard:
         enabled: true
         assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
@@ -84,6 +90,12 @@ spec:
             crowdsecurity/whitelist-good-actors
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 150m
+          memory: 256Mi
       acquisition:
         - namespace: networking
           podName: traefik-*
