@@ -6,8 +6,8 @@ metadata:
 spec:
   values:
     container_runtime: containerd
-    image:
-      tag: "v1.4.6"
+    # image:
+    #   tag: "v1.4.6"
     tls:
       enabled: true
     secrets:
