@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: development
 resources:
   - ./data-pvc.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/pocketbase
 patchesStrategicMerge:
   - ./pocketbase-values.yaml
