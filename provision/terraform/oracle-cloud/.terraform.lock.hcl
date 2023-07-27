@@ -55,7 +55,7 @@ provider "registry.terraform.io/hashicorp/random" {
 
 provider "registry.terraform.io/oracle/oci" {
   version     = "5.6.0"
-  constraints = ">= 4.64.0"
+  constraints = "5.6.0"
   hashes = [
     "h1:0xc6y28YCVrMJx1n2Dv1+AwIpYAvIktalbH2Im1Op+A=",
     "h1:31h3s1S7PJ7aTe7Ona+A6tc3bjwKBHIUzGT+CvOXkZU=",
