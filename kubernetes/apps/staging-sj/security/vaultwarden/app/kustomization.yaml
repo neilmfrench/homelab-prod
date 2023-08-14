@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: security
 resources:
   - ./data-pvc.yaml
-#   - ../../../../base/vaultwarden
-# patchesStrategicMerge:
-#   - ./vaultwarden-values.yaml
+  - ../../../../base/vaultwarden
+patchesStrategicMerge:
+  - ./vaultwarden-values.yaml
