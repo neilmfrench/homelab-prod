@@ -60,6 +60,8 @@ spec:
           CONN_STR: redis+cluster://:gitea@gitea-redis-cluster-headless.<namespace>.svc.cluster.local:6379/0?pool_size=100&idle_timeout=180s&
     postgresql:
       enabled: false
+    postgresql-ha:
+      enabled: false
     persistence:
       enabled: true
       mount: true
