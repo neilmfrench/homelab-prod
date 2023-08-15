@@ -65,6 +65,7 @@ spec:
     persistence:
       enabled: true
       mount: true
+      create: false
       claimName: "gitea-data"
     ingress:
       enabled: true
