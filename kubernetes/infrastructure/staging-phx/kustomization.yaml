@@ -7,5 +7,5 @@ resources:
   - ./longhorn-system
   - ./networking
   - ./cert-manager
-  # - ./volsync
+  - ./volsync
   - ./system-upgrade
