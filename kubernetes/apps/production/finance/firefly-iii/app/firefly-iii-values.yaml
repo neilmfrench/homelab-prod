@@ -6,8 +6,9 @@ metadata:
 spec:
   values:
     image:
+      # renovate: datasource=docker image=fireflyiii/core
       repository: "fireflyiii/core"
-      tag: version-6.0.16
+      tag: version-6.0.20
     persistence:
       enabled: true
       existingClaim: firefly-data
