@@ -6,8 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: cilium
-      version: 1.14.0-rc.0
+      version: 1.14.0
   values:
     k8sServiceHost: "api.cluster.local"
     k8sServicePort: "6443"
