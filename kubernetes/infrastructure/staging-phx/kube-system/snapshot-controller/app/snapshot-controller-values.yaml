@@ -6,14 +6,21 @@ metadata:
 spec:
   values:
     image:
-      tag: "v5.0.1"
+      tag: "v6.2.1"
     volumeSnapshotClasses:
       - name: longhorn-backup-vsc
         driver: driver.longhorn.io
         annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "true"
+          snapshot.storage.kubernetes.io/is-default-class: "false"
         parameters:
           type: bak
+        deletionPolicy: Delete
+      - name: longhorn-snapshot-vsc
+        driver: driver.longhorn.io
+        annotations:
+          snapshot.storage.kubernetes.io/is-default-class: "true"
+        parameters:
+          type: snap
         deletionPolicy: Delete
     serviceMonitor:
       create: false
