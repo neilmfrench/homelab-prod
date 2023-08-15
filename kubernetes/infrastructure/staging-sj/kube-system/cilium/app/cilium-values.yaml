@@ -4,6 +4,9 @@ kind: HelmRelease
 metadata:
   name: cilium
 spec:
+  chart:
+    spec:
+      version: 1.14.0
   values:
     k8sServiceHost: "api.cluster.local"
     k8sServicePort: "6443"
