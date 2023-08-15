@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: magazine
 resources:
   - ./config-pvc.yaml
-  # - ./volsync.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/ghost-magazine
 patchesStrategicMerge:
   - ./ghost-values.yaml
