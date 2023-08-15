@@ -1,0 +1,23 @@
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: magazine-vs-phx-destination
+  annotations:
+    external-dns/is-public: "true"
+spec:
+  endpoints:
+    - dnsName: vs-ghost-magazine-db-phx.${SECRET_DOMAIN}
+      targets:
+        - "${SECRET_CLOUDFLARE_TUNNEL_TARGET}"
+      recordType: CNAME
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: magazine-vs-db-destination
+spec:
+  rsync:
+    copyMethod: Direct
+    destinationPVC: ghost-mysql-data
+    serviceType: ClusterIP

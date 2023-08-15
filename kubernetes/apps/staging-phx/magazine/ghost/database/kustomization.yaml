@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: magazine
 resources:
   - ./data-pvc.yaml
-  # - ./volsync.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/mysql
 namePrefix: ghost-
 patchesStrategicMerge:
