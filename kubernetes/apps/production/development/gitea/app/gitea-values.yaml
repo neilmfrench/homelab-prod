@@ -48,10 +48,21 @@ spec:
         service:
           DISABLE_REGISTRATION: true
           REQUIRE_SIGNIN_VIEW: true
+        session:
+          PROVIDER: redis-cluster
+          PROVIDER_CONFIG: redis+cluster://:gitea@gitea-redis-cluster-headless.<namespace>.svc.cluster.local:6379/0?pool_size=100&idle_timeout=180s&
+        cache:
+          ENABLED: true
+          ADAPTER: redis-cluster
+          HOST: redis+cluster://:gitea@gitea-redis-cluster-headless.<namespace>.svc.cluster.local:6379/0?pool_size=100&idle_timeout=180s&
+        queue:
+          TYPE: redis
+          CONN_STR: redis+cluster://:gitea@gitea-redis-cluster-headless.<namespace>.svc.cluster.local:6379/0?pool_size=100&idle_timeout=180s&
     postgresql:
       enabled: false
     persistence:
       enabled: true
+      mount: true
       existingClaim: "gitea-data"
     ingress:
       enabled: true
