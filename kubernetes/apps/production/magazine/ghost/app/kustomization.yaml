@@ -5,7 +5,7 @@ namespace: magazine
 resources:
   - ./config-pvc.yaml
   #   - ./dest-ssh.sops.yaml
-  # - ../../../../base/ghost-magazine
+  - ../../../../base/ghost-magazine
 #   # - ./volsync.yaml
-# patchesStrategicMerge:
-#   - ./ghost-values.yaml
+patchesStrategicMerge:
+  - ./ghost-values.yaml
