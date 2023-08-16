@@ -12,6 +12,6 @@ resources:
   - ./security
   - ./finance
   - ./home
-  # - ./magazine
+  - ./magazine
   - ./flux-system
   # - ./campsearch
