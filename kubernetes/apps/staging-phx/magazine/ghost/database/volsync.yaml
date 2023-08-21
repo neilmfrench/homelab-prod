@@ -12,7 +12,7 @@ spec:
     pruneIntervalDays: 7
     repository: ghost-mysql-restic-config
     volumeSnapshotClassName: longhorn-snapshot-vsc
-    storageClassName: longhorn
+    storageClassName: longhorn-volsync
     retain:
       daily: 7
       within: 3d
