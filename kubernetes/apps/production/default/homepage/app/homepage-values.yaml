@@ -8,6 +8,8 @@ spec:
     image:
       repository: harbor.${SECRET_DOMAIN}/homepage/vscode-portfolio-sveltekit
       tag: 7972333cfe25588f623ea684dcf5695a9a32063c
+    imagePullSecrets:
+      - name: harbor-neilfrench-regcred
     service:
       main:
         ports:
