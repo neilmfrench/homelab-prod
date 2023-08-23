@@ -28,7 +28,7 @@ spec:
                 resources:
                   requests:
                     storage: 100Mi
-                storageClassName: longhorn
+                storageClassName: ceph-block
           - name: ssh-creds
             secret:
               secretName: gitea-tekton-build-bot-ssh-creds

@@ -21,9 +21,9 @@ spec:
           name: pipeline-build-push-image
         params:
           - name: repo-url-from-trigger
-            value: '$(tt.params.gitrepositoryurl)'
+            value: "$(tt.params.gitrepositoryurl)"
           - name: repo-revision-from-trigger
-            value: '$(tt.params.gitrevision)'
+            value: "$(tt.params.gitrevision)"
           - name: repo-url
             value: git@gitea-ssh.development.svc.cluster.local:neil/yosemite-housekeeping-scraper.git
           - name: harbor-project
@@ -37,7 +37,7 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi
-                storageClassName: longhorn
+                storageClassName: ceph-block
           - name: ssh-creds
             secret:
               secretName: gitea-tekton-build-bot-ssh-creds
