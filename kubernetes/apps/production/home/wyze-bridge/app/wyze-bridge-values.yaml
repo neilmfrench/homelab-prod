@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: mrlt8/wyze-bridge
-      tag: "2.3.14"
+      tag: "2.3.17"
     env:
       TZ: "${TIMEZONE}"
       WYZE_EMAIL: "${SECRET_WYZE_EMAIL}"
