@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: finance
 resources:
   - ./data-pvc.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/rxresume
 patchesStrategicMerge:
   - ./rxresume-values.yaml
