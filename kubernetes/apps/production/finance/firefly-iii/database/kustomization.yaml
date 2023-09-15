@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: finance
 resources:
   - ./restic-config.sops.yaml
+  - ./oci-phx-restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/mariadb
 namePrefix: firefly-iii-
