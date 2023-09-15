@@ -8,3 +8,4 @@ resources:
   - ./external-dns/ks.yaml
   # - ./pihole/ks.yaml
   - ./cloudflared/ks.yaml
+  - ./k8gb/ks.yaml
