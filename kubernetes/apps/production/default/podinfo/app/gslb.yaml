@@ -7,14 +7,18 @@ spec:
   ingress:
     ingressClassName: traefik
     rules:
-      - host: gslb.${SECRET_DOMAIN}
+      - host: &host gslb.${SECRET_DOMAIN}
         http:
           paths:
             - path: /
+              pathType: Prefix
               backend:
                 service:
                   name: podinfo
                   port:
                     name: http
+    tls:
+      - hosts:
+          - *host
   strategy:
     type: roundRobin
