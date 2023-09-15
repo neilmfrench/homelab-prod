@@ -3,9 +3,6 @@ kind: HelmRelease
 metadata:
   name: podinfo
 spec:
-  chart:
-    spec:
-      version: "6.3.5"
   values:
     ingress:
       enabled: true
