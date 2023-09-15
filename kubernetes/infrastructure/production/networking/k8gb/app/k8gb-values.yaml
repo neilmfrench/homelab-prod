@@ -7,7 +7,7 @@ spec:
   values:
     k8gb:
       imageRepo: "docker.io/absaoss/k8gb"
-      deployCrds: true
+      deployCrds: false
       deployRbac: true
       # -- dnsZone controlled by gslb
       dnsZone: "${SECRET_DOMAIN}"
