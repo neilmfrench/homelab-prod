@@ -17,7 +17,7 @@ spec:
       edgeDNSServers:
         - "1.1.1.1"
       clusterGeoTag: "hb"
-      extGslbClustersGeoTags: "us"
+      extGslbClustersGeoTags: "phx"
       reconcileRequeueSeconds: 30
       coredns:
         extra_plugins: ""

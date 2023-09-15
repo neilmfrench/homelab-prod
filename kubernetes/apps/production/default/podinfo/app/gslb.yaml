@@ -1,0 +1,20 @@
+---
+apiVersion: k8gb.absa.oss/v1beta1
+kind: Gslb
+metadata:
+  name: podinfo
+spec:
+  ingress:
+    ingressClassName: traefik
+    rules:
+      - host: gslb.${SECRET_DOMAIN}
+        http:
+          paths:
+            - path: /
+              backend:
+                service:
+                  name: podinfo
+                  port:
+                    name: http
+  strategy:
+    type: roundRobin
