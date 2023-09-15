@@ -5,6 +5,7 @@ namespace: security
 resources:
   - ./data-pvc.yaml
   - ./restic-config.sops.yaml
+  - ./oci-phx-restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/vaultwarden
 patchesStrategicMerge:
