@@ -1,0 +1,12 @@
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: podinfo
+spec:
+  endpoints:
+    - dnsName: gslb.${SECRET_DOMAIN}
+      recordTTL: 180
+      recordType: NS
+      targets:
+        - "${SECRET_EXTERNAL_IP}"
