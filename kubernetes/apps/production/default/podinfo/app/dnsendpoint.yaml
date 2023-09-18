@@ -2,7 +2,7 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: podinfo
+  name: podinfo-external
 spec:
   endpoints:
     - dnsName: gslb.${SECRET_DOMAIN}
