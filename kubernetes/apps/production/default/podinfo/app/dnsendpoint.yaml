@@ -7,6 +7,6 @@ spec:
   endpoints:
     - dnsName: gslb.${SECRET_DOMAIN}
       recordTTL: 180
-      recordType: NS
+      recordType: A
       targets:
         - "${SECRET_EXTERNAL_IP}"
