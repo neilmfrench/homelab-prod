@@ -8,3 +8,4 @@ resources:
   - ./nextcloud/ks.yaml
   - ./shlink/ks.yaml
   - ./shared-media/ks.yaml
+  - ./sonarr/ks.yaml
