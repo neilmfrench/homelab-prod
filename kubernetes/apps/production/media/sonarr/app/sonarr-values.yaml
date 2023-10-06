@@ -62,15 +62,15 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
-      fsGroupChangePolicy: OnRootMismatch
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
-        - 10000
+        - 100
 
     persistence:
       config:
         enabled: true
         existingClaim: sonarr-config
-        mountPath: /media
+        mountPath: /config
         readOnly: false
       media:
         enabled: true
