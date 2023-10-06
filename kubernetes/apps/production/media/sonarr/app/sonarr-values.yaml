@@ -6,7 +6,7 @@ metadata:
 spec:
   values:
     controller:
-      type: statefulset
+      strategy: Recreate
       annotations:
         reloader.stakater.com/auto: "true"
 
