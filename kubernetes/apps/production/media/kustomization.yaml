@@ -7,3 +7,4 @@ resources:
   - ./minio/ks.yaml
   - ./nextcloud/ks.yaml
   - ./shlink/ks.yaml
+  - ./shared-media/ks.yaml
