@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: radarr
 spec:
   values:
     controller:
@@ -11,15 +11,15 @@ spec:
         reloader.stakater.com/auto: "true"
 
     image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.0.688@sha256:651261e5fdcc5399edda1bff312a50cad131a36d6a8f8dc39e43a352f4f2e0c3
+      repository: ghcr.io/onedr0p/radarr-develop
+      tag: 5.0.3.8107@sha256:2c4fca668420dfa87b286da9b0a43f6dc64fd26329f9e914bc2de58887091eaf
 
     env:
       TZ: "${TIMEZONE}"
-      SONARR__INSTANCE_NAME: Sonarr
-      SONARR__PORT: &port 8080
-      SONARR__APPLICATION_URL: "https://sonarr.${SECRET_DOMAIN}"
-      SONARR__LOG_LEVEL: info
+      RADARR__INSTANCE_NAME: Radarr
+      RADARR__PORT: &port 8080
+      RADARR__APPLICATION_URL: "https://radarr.${SECRET_DOMAIN}"
+      RADARR__LOG_LEVEL: info
 
     service:
       main:
@@ -51,7 +51,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hosts:
-          - host: &host "sonarr.${SECRET_DOMAIN}"
+          - host: &host "radarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -70,7 +70,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: sonarr-config
+        existingClaim: radarr-config
         mountPath: /config
         readOnly: false
       media:

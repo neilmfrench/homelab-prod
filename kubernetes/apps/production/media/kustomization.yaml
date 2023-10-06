@@ -9,3 +9,4 @@ resources:
   - ./shlink/ks.yaml
   - ./shared-media/ks.yaml
   - ./sonarr/ks.yaml
+  - ./radarr/ks.yaml
