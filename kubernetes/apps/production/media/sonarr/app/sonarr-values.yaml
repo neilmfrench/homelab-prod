@@ -72,11 +72,11 @@ spec:
         existingClaim: sonarr-config
         mountPath: /config
         readOnly: false
-      media:
-        enabled: true
-        existingClaim: shared-media-data
-        mountPath: /media
-        readOnly: false
+      # media:
+      #   enabled: true
+      #   existingClaim: shared-media-data
+      #   mountPath: /media
+      #   readOnly: false
 
     resources:
       requests:
