@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: shlink-param
+  name: shared-media-data
 spec:
   accessModes:
     - ReadWriteMany
