@@ -18,6 +18,11 @@ spec:
       PROWLARR__PORT: &port 8080
       PROWLARR__APPLICATION_URL: "https://prowlarr.${SECRET_DOMAIN}"
       PROWLARR__LOG_LEVEL: info
+      PROWLARR__API_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: prowlarr-api-key
+            key: api-key
     service:
       main:
         ports:

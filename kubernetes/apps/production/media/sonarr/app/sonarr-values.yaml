@@ -18,6 +18,11 @@ spec:
       SONARR__PORT: &port 8080
       SONARR__APPLICATION_URL: "https://sonarr.${SECRET_DOMAIN}"
       SONARR__LOG_LEVEL: info
+      SONARR__API_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: sonarr-api-key
+            key: api-key
     service:
       main:
         ports:

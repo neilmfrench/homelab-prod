@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: sonarr-api-key
+type: Opaque
+stringData:
+    api-key: ENC[AES256_GCM,data:xxJ3uSZJyI6ZHi4Bb0FQXGiPYUHbSeZP1nmsbUUiCKE=,iv:dxHZcmw2N8psL/7JclG6C0X6toK1LUfMAjsNaEWF8wA=,tag:eupR6pWl+NcfYYjp8C7OWw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2VldzOTVMU2ZmVmJneTN5
+            UjdpcGpqcHRHYjgxanVaVHJhOGFPSkF0MVNjCjk1QWJ1UURobklna2xydTMySHho
+            dWZWcmYvT3dKcy9Rdk9pWDVvQ281MUkKLS0tIDRmekhJNHZLRW80SG80TGlnZExp
+            NG9SZU9SMnFQR3pieTJsRjZLWXdCTUkKoYEi4xOvUbovE3nMGU7n/TYp1S/KlXVB
+            js9pB6o9wZ1gvyEjM6c4ovh8GT2bJptXXmpR60jEX6COD8GJcrU6GA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-07T16:44:14Z"
+    mac: ENC[AES256_GCM,data:pHCQitp5Uf83Z9hhYJWi2946RVkifOCkzAn69dWaKb1wmy1j2dpcGpOiI9VavUuueV/vXqTLrATcMvDqGos299kLevbttyOQbchRXTyuq4E89aQ039DIp2Ber9cqqtEMbko2QwEvN06YJXa7PtEP07IU+fRmmEXWdFi72c2RpA8=,iv:80QlJZu4Ss3OxGSfM3Jdj1VDe0p+Zcmh8RDGK86oMxQ=,tag:i92IDbphlt4Nw1KEyMB46Q==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

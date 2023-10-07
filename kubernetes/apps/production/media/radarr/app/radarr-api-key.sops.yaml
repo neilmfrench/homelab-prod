@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: radarr-api-key
+type: Opaque
+stringData:
+    api-key: ENC[AES256_GCM,data:Xhceph+1wuZlDwvSntznooR3Ivg+HV3cxAQrcH5bLk0=,iv:okKvYC9YcLm917TMU9oxrMYEYC3P/7LKvdiOXIZgkuQ=,tag:g9djBijlCCOh2f6114He2g==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWK0JWa0tIajZpRGlvYTV1
+            bkRWMGlHUFl5SEdWTlpRQm1Kc3A1N1k5SndzCkVhM0VxOENUR0pTQ1lCU1dHN1ZL
+            d0w1dEdqc0ttSUVTb2VUbXFnNWtkeDQKLS0tIDlkTW1ibTlRcllLbEwvUmExbjJa
+            aHNWRy9jbzBNVnRUVFF2VmdOWXN1L1EKjzG46QA4cK6xE+FZKLa+PLKfPeZp3L2t
+            oMckdbLMhAwr916pMFOB8HJeZqQYiAEWR4z+W8VBFBUnRyYADKl9Fw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-07T16:44:56Z"
+    mac: ENC[AES256_GCM,data:cFd1SYo3xsdf64pJirvhKrVlssSPaOg0F9f8lGLBZa8rwUfpVeC9sDufXvcAsP5zOi3eCmE3hN3om8pU3IllqAw6XPqAWV/51+U+zi46HBo6UdIto7S0sWE7zPSkWcl0rf2OZ3U23eW2XIfBu8dQiaP/Htvcl7eCnjH5EPvUAoQ=,iv:ZfjL1wysU7HdHjKRqNFENta7gkBE1owUVov9HFBylew=,tag:onMaAJ+mqyrZ/tzIOMHU4w==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

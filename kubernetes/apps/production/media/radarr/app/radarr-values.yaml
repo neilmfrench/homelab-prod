@@ -18,6 +18,11 @@ spec:
       RADARR__PORT: &port 8080
       RADARR__APPLICATION_URL: "https://radarr.${SECRET_DOMAIN}"
       RADARR__LOG_LEVEL: info
+      RADARR__API_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: radarr-api-key
+            key: api-key
     service:
       main:
         ports:
