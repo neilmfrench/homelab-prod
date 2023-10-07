@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: prowlarr
 spec:
   values:
     controller:
@@ -10,14 +10,14 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
     image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.0.688@sha256:651261e5fdcc5399edda1bff312a50cad131a36d6a8f8dc39e43a352f4f2e0c3
+      repository: ghcr.io/onedr0p/prowlarr-nightly
+      tag: 1.9.3.4012@sha256:2a7a89fd77965fe9f0b3cc95128593bcf9a3ea984231deb9857bfa9099e62c2e
     env:
       TZ: "${TIMEZONE}"
-      SONARR__INSTANCE_NAME: Sonarr
-      SONARR__PORT: &port 8080
-      SONARR__APPLICATION_URL: "https://sonarr.${SECRET_DOMAIN}"
-      SONARR__LOG_LEVEL: info
+      PROWLARR__INSTANCE_NAME: Prowlarr
+      PROWLARR__PORT: &port 8080
+      PROWLARR__APPLICATION_URL: "https://prowlarr.${SECRET_DOMAIN}"
+      PROWLARR__LOG_LEVEL: info
     service:
       main:
         ports:
@@ -46,7 +46,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hosts:
-          - host: &host "sonarr.${SECRET_DOMAIN}"
+          - host: &host "prowlarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -58,22 +58,13 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
     persistence:
       config:
         enabled: true
-        existingClaim: sonarr-config
-        mountPath: /config
-        readOnly: false
-      media:
-        enabled: true
-        existingClaim: shared-media-data
-        mountPath: /media
-        readOnly: false
+        existingClaim: prowlarr-config
     resources:
       requests:
-        memory: 100Mi
         cpu: 25m
+        memory: 100Mi
       limits:
         memory: 500Mi

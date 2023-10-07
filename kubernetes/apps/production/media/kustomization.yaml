@@ -10,3 +10,4 @@ resources:
   - ./shared-media/ks.yaml
   - ./sonarr/ks.yaml
   - ./radarr/ks.yaml
+  - ./prowlarr/ks.yaml

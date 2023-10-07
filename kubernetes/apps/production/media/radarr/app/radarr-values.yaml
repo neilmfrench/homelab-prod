@@ -9,24 +9,20 @@ spec:
       strategy: Recreate
       annotations:
         reloader.stakater.com/auto: "true"
-
     image:
       repository: ghcr.io/onedr0p/radarr-develop
       tag: 5.0.3.8107@sha256:2c4fca668420dfa87b286da9b0a43f6dc64fd26329f9e914bc2de58887091eaf
-
     env:
       TZ: "${TIMEZONE}"
       RADARR__INSTANCE_NAME: Radarr
       RADARR__PORT: &port 8080
       RADARR__APPLICATION_URL: "https://radarr.${SECRET_DOMAIN}"
       RADARR__LOG_LEVEL: info
-
     service:
       main:
         ports:
           http:
             port: *port
-
     probes:
       liveness: &probes
         enabled: true
@@ -42,7 +38,6 @@ spec:
       readiness: *probes
       startup:
         enabled: false
-
     ingress:
       main:
         enabled: true
@@ -58,7 +53,6 @@ spec:
         tls:
           - hosts:
               - *host
-
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
@@ -66,7 +60,6 @@ spec:
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
-
     persistence:
       config:
         enabled: true
@@ -78,10 +71,9 @@ spec:
         existingClaim: shared-media-data
         mountPath: /media
         readOnly: false
-
     resources:
       requests:
-        memory: 350Mi
         cpu: 25m
+        memory: 100Mi
       limits:
-        memory: 5000Mi
+        memory: 500Mi
