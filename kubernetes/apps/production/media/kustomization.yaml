@@ -8,7 +8,7 @@ resources:
   - ./nextcloud/ks.yaml
   - ./shlink/ks.yaml
   - ./shared-media/ks.yaml
-  - ./sonarr/ks.yaml
-  - ./radarr/ks.yaml
-  - ./prowlarr/ks.yaml
-  - ./sabnzbd/ks.yaml
+  # - ./sonarr/ks.yaml
+  # - ./radarr/ks.yaml
+  # - ./prowlarr/ks.yaml
+  # - ./sabnzbd/ks.yaml
