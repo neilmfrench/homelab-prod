@@ -8,6 +8,14 @@ spec:
     image:
       repository: ghcr.io/onedr0p/sabnzbd
       tag: 4.1.0@sha256:5f573118a91bed154524bdc7d52425848c2a9a7edda456e4c69a0208f0ce8366
+    env:
+      SABNZBD__HOST_WHITELIST_ENTRIES: >-
+        sabnzbd,
+        sabnzbd.media,
+        sabnzbd.media.svc,
+        sabnzbd.media.svc.cluster,
+        sabnzbd.media.svc.local,
+        sabnzbd.${SECRET_DOMAIN}
     service:
       main:
         ports:
