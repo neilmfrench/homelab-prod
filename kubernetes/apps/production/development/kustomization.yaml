@@ -8,6 +8,7 @@ resources:
   - ./gitea/ks.yaml
   - ./harbor/ks.yaml
   - ./pocketbase/ks.yaml
+  - ./planka/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml
   # - ./oci-instance-creator/ks.yaml
