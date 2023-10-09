@@ -59,27 +59,7 @@ spec:
           - hosts:
               - *host
             secretName: planka-tls
-    initContainers:
-      init-dirs:
-        image: debian:latest
-        imagePullPolicy: IfNotPresent
-        command:
-          [
-            "/bin/sh",
-            "-c",
-            "mkdir -p /mnt/user-avatars && mkdir -p /mnt/project-background-images && mkdir -p /mnt/attachments && ls -al /mnt",
-          ]
-        volumeMounts:
-          - name: data
-            mountPath: /mnt
-        securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
-          fsGroup: 1000
     persistence:
-      data:
-        enabled: true
-        existingClaim: planka-data
       user-avatars:
         enabled: true
         existingClaim: planka-data
