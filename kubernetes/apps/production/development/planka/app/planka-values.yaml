@@ -67,7 +67,7 @@ spec:
           [
             "/bin/sh",
             "-c",
-            "mkdir -p /mnt/user-avatars && mkdir -p /mnt/project-background-images && mkdir -p /mnt/attachments",
+            "mkdir -p /mnt/user-avatars && mkdir -p /mnt/project-background-images && mkdir -p /mnt/attachments && ls -al /mnt",
           ]
         volumeMounts:
           - name: data
