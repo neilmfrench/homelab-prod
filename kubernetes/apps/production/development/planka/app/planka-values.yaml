@@ -1,0 +1,83 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: planka
+spec:
+  values:
+    controller:
+      strategy: Recreate
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: ghcr.io/plankanban/planka
+      tag: "1.12.0"
+    env:
+      DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql:5432/planka"
+      BASE_URL: "https://tasks.${SECRET_DOMAIN}"
+      SECRET_KEY: "${SECRET_PLANKA_KEY}"
+      TRUST_PROXY: "0"
+      DEFAULT_ADMIN_EMAIL: "admin@${SECRET_DOMAIN}"
+      DEFAULT_ADMIN_PASSWORD: "${SECRET_PLANKA_ADMIN_PASSWORD}"
+      DEFAULT_ADMIN_NAME: Admin
+      DEFAULT_ADMIN_USERNAME: admin
+    service:
+      main:
+        ports:
+          http:
+            port: &port 1337
+    probes:
+      liveness: &probes
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /
+            port: *port
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness: *probes
+      startup:
+        enabled: false
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "tasks.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: planka-tls
+    persistence:
+      user-avatars:
+        enabled: true
+        existingClaim: planka-data
+        mountPath: /app/public/user-avatars
+        subPath: user-avatars
+      project-background-images:
+        enabled: true
+        existingClaim: planka-data
+        mountPath: /app/public/project-background-images
+        subPath: project-background-images
+      attachments:
+        enabled: true
+        existingClaim: planka-data
+        mountPath: /app/private/attachments
+        subPath: attachments
+    resources:
+      requests:
+        cpu: 25m
+        memory: 128Mi
+      limits:
+        memory: 512Mi
