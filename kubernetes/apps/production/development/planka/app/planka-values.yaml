@@ -62,19 +62,16 @@ spec:
     persistence:
       user-avatars:
         enabled: true
-        existingClaim: planka-data
+        existingClaim: planka-data-user-avatars
         mountPath: /app/public/user-avatars
-        subPath: user-avatars
       project-background-images:
         enabled: true
-        existingClaim: planka-data
+        existingClaim: planka-data-project-background-images
         mountPath: /app/public/project-background-images
-        subPath: project-background-images
       attachments:
         enabled: true
-        existingClaim: planka-data
+        existingClaim: planka-data-attachments
         mountPath: /app/private/attachments
-        subPath: attachments
     resources:
       requests:
         cpu: 25m
