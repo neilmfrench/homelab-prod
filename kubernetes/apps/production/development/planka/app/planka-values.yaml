@@ -21,6 +21,15 @@ spec:
       DEFAULT_ADMIN_PASSWORD: "${SECRET_PLANKA_ADMIN_PASSWORD}"
       DEFAULT_ADMIN_NAME: Admin
       DEFAULT_ADMIN_USERNAME: admin
+      OIDC_ISSUER: "https://id.${SECRET_DOMAIN}/application/o/planka/"
+      OIDC_AUDIENCE: "${SECRET_PLANKA_AUTHENTIK_CLIENT_ID}"
+      OIDC_CLIENT_ID: "${SECRET_PLANKA_AUTHENTIK_CLIENT_ID}"
+      OIDC_ROLES_ATTRIBUTE: "groups"
+      OIDC_ADMIN_ROLES: "Planka Admins"
+      OIDC_REDIRECT_URI: "http://tasks.${SECRET_DOMAIN}/OidcLogin"
+      OIDC_JWKS_URI: "https://id.${SECRET_DOMAIN}/application/o/planka/jwks/"
+      OIDC_SKIP_USER_INFO: "false"
+      OIDC_SCOPES: "openid profile email"
     service:
       main:
         ports:
