@@ -75,9 +75,9 @@ spec:
 
     l2announcements:
       enabled: true
-      leaseDuration: 120s
-      leaseRenewDeadline: 30s
-      leaseRetryPeriod: 6s
+      leaseDuration: 300s
+      leaseRenewDeadline: 60s
+      leaseRetryPeriod: 10s
 
     k8sClientRateLimit:
       # -- The sustained request rate in requests per second.
