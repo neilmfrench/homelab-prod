@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: ghost
-      tag: 5.61.3
+      tag: 5.72.0
     # resources:
     #   limits:
     #     cpu: 2
