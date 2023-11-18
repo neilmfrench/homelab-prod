@@ -5,6 +5,6 @@ namespace: default
 resources:
   - ../../../../base/podinfo
   - ./gslb.yaml
-  - ./dnsendpoint.yaml
+  # - ./dnsendpoint.yaml
 patchesStrategicMerge:
   - ./podinfo-values.yaml
