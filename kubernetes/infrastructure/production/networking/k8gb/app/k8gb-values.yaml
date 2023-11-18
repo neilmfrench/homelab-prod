@@ -7,7 +7,7 @@ spec:
   values:
     k8gb:
       imageRepo: "harbor.${SECRET_DOMAIN}/k8gb/k8gb"
-      imageTag: "0.0.1"
+      imageTag: "0.0.2"
       deployCrds: false
       deployRbac: true
       # -- dnsZone controlled by gslb
