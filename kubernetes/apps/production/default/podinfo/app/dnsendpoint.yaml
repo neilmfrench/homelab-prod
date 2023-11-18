@@ -5,7 +5,7 @@ metadata:
   name: podinfo-external
 spec:
   endpoints:
-    - dnsName: gslb.${SECRET_DOMAIN}
+    - dnsName: localtargets-gslb.${SECRET_DOMAIN}
       recordTTL: 180
       recordType: A
       targets:
