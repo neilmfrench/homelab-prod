@@ -26,7 +26,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-infrastructure-traefik
+    - name: cluster-infrastructure-ingress-nginx
   path: ./kubernetes/infrastructure/staging-phx/networking/ingress-nginx/certificates
   prune: true
   sourceRef:
