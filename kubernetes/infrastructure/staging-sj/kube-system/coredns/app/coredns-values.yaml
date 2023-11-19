@@ -13,9 +13,9 @@ spec:
       clusterIP: "10.96.0.10"
     serviceAccount:
       create: true
-    # deployment:
-    #   annotations:
-    #     reloader.stakater.com/auto: "true"
+    deployment:
+      annotations:
+        reloader.stakater.com/auto: "true"
     servers:
       - zones:
           - zone: .
@@ -28,6 +28,10 @@ spec:
           - name: health
             configBlock: |-
               lameduck 5s
+          - name: hosts
+            configBlock: |-
+              ${SECRET_PHX_EXTERNAL_IP} gslb-ns-phx-neilfren-ch.neilfren.ch
+              fallthrough
           - name: ready
           - name: kubernetes
             parameters: cluster.local in-addr.arpa ip6.arpa
