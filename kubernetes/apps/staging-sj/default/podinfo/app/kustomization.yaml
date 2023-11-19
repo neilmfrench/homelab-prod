@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: default
 resources:
   - ../../../../base/podinfo
-  - ./networkpolicy.yaml
+  # - ./networkpolicy.yaml
 patchesStrategicMerge:
   - ./podinfo-values.yaml
