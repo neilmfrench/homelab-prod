@@ -16,7 +16,7 @@ spec:
       # -- main zone which would contain gslb zone to delegate
       edgeDNSZone: "${SECRET_DOMAIN}"
       edgeDNSServers:
-        - "1.1.1.1"
+        - "${SECRET_PHX_EXTERNAL_IP}"
       clusterGeoTag: "sj"
       extGslbClustersGeoTags: "phx"
       reconcileRequeueSeconds: 30
