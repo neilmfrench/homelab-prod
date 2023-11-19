@@ -8,6 +8,8 @@ metadata:
 spec:
   ingress:
     ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-production"
     rules:
       - host: &host podinfo-gslb.${SECRET_DOMAIN}
         http:
