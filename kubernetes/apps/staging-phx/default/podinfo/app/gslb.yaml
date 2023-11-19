@@ -5,7 +5,6 @@ metadata:
   name: podinfo
   annotations:
     k8gb.io/external-ip: "${SECRET_PHX_EXTERNAL_IP}"
-    cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
   ingress:
     ingressClassName: nginx
