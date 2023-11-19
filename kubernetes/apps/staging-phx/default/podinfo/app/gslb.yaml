@@ -22,6 +22,5 @@ spec:
     tls:
       - hosts:
           - *host
-        secretName: pod-info-tls
   strategy:
     type: roundRobin
