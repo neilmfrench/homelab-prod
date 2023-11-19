@@ -1,0 +1,27 @@
+---
+apiVersion: k8gb.absa.oss/v1beta1
+kind: Gslb
+metadata:
+  name: podinfo
+  annotations:
+    k8gb.io/external-ip: "${SECRET_PHX_EXTERNAL_IP}"
+spec:
+  ingress:
+    ingressClassName: nginx
+    rules:
+      - host: &host podinfo-gslb.${SECRET_DOMAIN}
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: podinfo
+                  port:
+                    name: http
+    tls:
+      - hosts:
+          - *host
+        secretName: pod-info-tls
+  strategy:
+    type: roundRobin
