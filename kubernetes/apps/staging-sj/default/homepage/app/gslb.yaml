@@ -1,0 +1,26 @@
+---
+apiVersion: k8gb.absa.oss/v1beta1
+kind: Gslb
+metadata:
+  name: homepage
+  annotations:
+    k8gb.io/external-ip: "${SECRET_SJ_EXTERNAL_IP}"
+spec:
+  ingress:
+    ingressClassName: cilium
+    rules:
+      - host: &host me.${SECRET_DOMAIN}
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: homepage
+                  port:
+                    name: http
+    tls:
+      - hosts:
+          - *host
+  strategy:
+    type: roundRobin

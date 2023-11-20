@@ -15,7 +15,7 @@ spec:
         valueFrom:
           fieldRef:
             fieldPath: metadata.name
-      CLUSTER_NAME: "San Jose"
+      CLUSTER_NAME: "Phoenix"
     service:
       main:
         ports:
