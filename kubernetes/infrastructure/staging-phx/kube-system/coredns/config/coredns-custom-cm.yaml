@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+data:
+  "${SECRET_DOMAIN}.server": |
+    ${SECRET_DOMAIN} {
+      log
+      errors
+      health {
+          lameduck 5s
+      }
+      hosts {
+        ${SECRET_PHX_EXTERNAL_IP} gslb-ns-phx-neilfren-ch.${SECRET_DOMAIN}
+        ${SECRET_SJ_EXTERNAL_IP} gslb-ns-sj-neilfren-ch.${SECRET_DOMAIN}
+        ${SECRET_EXTERNAL_IP} gslb-ns-hb-neilfren-ch.${SECRET_DOMAIN}
+        fallthrough
+      }
+      ready
+      kubernetes cluster.local in-addr.arpa ip6.arpa {
+          pods insecure
+          fallthrough in-addr.arpa ip6.arpa
+          ttl 30
+      }
+      prometheus 0.0.0.0:9153
+      forward . /etc/resolv.conf
+      cache 30
+      loop
+      reload
+      loadbalance
+    }
