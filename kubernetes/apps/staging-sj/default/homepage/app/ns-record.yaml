@@ -1,0 +1,12 @@
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: homepage-ns
+spec:
+  endpoints:
+    - dnsName: "me.${SECRET_DOMAIN}"
+      recordTTL: 60
+      recordType: NS
+      targets:
+        - "ipv4-sj.${SECRET_DOMAIN}"
