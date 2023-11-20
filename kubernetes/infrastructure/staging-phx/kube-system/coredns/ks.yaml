@@ -5,7 +5,7 @@ metadata:
   name: cluster-infrastructure-coredns
   namespace: flux-system
 spec:
-  path: ./kubernetes/infrastructure/staging-phx/kube-system/coredns/app
+  path: ./kubernetes/infrastructure/staging-phx/kube-system/coredns/config
   prune: true
   sourceRef:
     kind: GitRepository
