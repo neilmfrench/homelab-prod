@@ -31,7 +31,7 @@ spec:
           - name: hosts
             configBlock: |-
               ${SECRET_PHX_EXTERNAL_IP} gslb-ns-phx-neilfren-ch.${SECRET_DOMAIN}
-              ${SECRET_SJ_EXTERNAL_IP} gslb-ns-phx-neilfren-ch.${SECRET_DOMAIN}
+              ${SECRET_SJ_EXTERNAL_IP} gslb-ns-sj-neilfren-ch.${SECRET_DOMAIN}
               ${SECRET_EXTERNAL_IP} gslb-ns-hb-neilfren-ch.${SECRET_DOMAIN}
               fallthrough
           - name: ready
