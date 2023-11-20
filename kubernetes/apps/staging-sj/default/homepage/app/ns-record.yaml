@@ -8,6 +8,7 @@ metadata:
 spec:
   endpoints:
     - dnsName: me.${SECRET_DOMAIN}
+      recordTTL: 60
       recordType: NS
       targets:
         - "ipv4-sj.${SECRET_DOMAIN}"
