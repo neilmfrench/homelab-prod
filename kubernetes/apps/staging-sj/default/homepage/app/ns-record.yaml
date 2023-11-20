@@ -3,6 +3,8 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: homepage-ns
+  annotations:
+    external-dns/is-public: "true"
 spec:
   endpoints:
     - dnsName: "me.${SECRET_DOMAIN}"
