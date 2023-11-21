@@ -7,46 +7,38 @@
   </div>
 </p>
 
-# HomeLab Kubernetes Cluster with Talos and k3s
+#  HomeLab Kubernetes Cluster with Talos and k3s
 
 Welcome to the IaC repository for my personal homelab Kubernetes clusters! I have 3 homelab clusters - 1 "on-prem" (sitting on a side table next to my desk) and 2 in Oracle cloud, taking advantage of their extremely generous free tier offerings. All cluster workloads are [managed as code](https://github.com/neilmfrench/homelab-prod/tree/main/kubernetes) using [Flux](https://github.com/fluxcd/flux2) and deployed using [Ansible + Terraform](https://github.com/neilmfrench/homelab-prod/tree/main/provision). 
 
-## On-prem [Talos](https://github.com/siderolabs/talos) cluster:
+# 📁 Repository structure
 
-#### Hardware
-4 nodes (3 control plane, 1 worker):
-- Dell OptiPlex 3080 Micro
-  - CPU: i3 10100T (4C/8T, 3.80 GHz)
-  - 32GB RAM
-  - Disks
-    - Intel Optane 118GB (OS)
-    - Samsung 2TB Enterprise-grade SSD (Ceph cluster)
+The Git repository contains the following directories under `kubernetes` and are ordered below by how Flux will apply them.
 
-#### Infrastructure
-- Networking: [Cilium](https://github.com/cilium/cilium)
-- Storage: [Rook-ceph](https://github.com/rook/rook)
+```sh
+📁 kubernetes             # k8s clusters defined as code
+├─📁 bootstrap            # bootstrap config, loaded once for cluster creation
+├─📁 flux                 # flux, gitops operator, loaded before everything
+├─📁 clusters             # cluster config, loaded before 📁 infrastructure and 📁 apps
+├─📁 infrastructure       # crucial apps, namespaced dir tree, loaded before 📁 apps
+└─📁 apps                 # regular apps, namespaced dir tree, loaded last
+```
 
-## Oracle Cloud Phoenix [k3s](https://k3s.io) cluster:
-4 nodes (3 control plane, 1 worker):
-- Ampere A1 VM
-  - CPU: Single core 3.0Ghz ARM64
-  - 6GB RAM
-  - 50GB virtual disk 
+# 💻 Clusters
 
-#### Infrastructure
-- Networking: [Calico](https://github.com/projectcalico/calico)
-- Storage: [Longhorn](https://github.com/longhorn/longhorn)
+| Cluster     | Nodes    | CPU | RAM | Disks | OS | Networking | Storage | 
+|----------|----------|-----|-----|-------|----|------------|---------|
+| On-prem     | 4 (3 controlplane, 1 worker) | i3 10100T (4C/8T, 3.8 GHz) | 32GB | <ul><li>118Gb Intel Optane (OS)</li> <li>2TB Samsung Enterprise-grade SSD (Ceph cluster)</li></ul>| [Talos](https://github.com/siderolabs/talos) | [Cilium](https://github.com/cilium/cilium) | [Rook-ceph](https://github.com/rook/rook) |
+| Oracle Cloud (Phoenix) | 4 (3 controlplane, 1 worker) | Single core 3.0Ghz ARM64 | 6GB | 50GB Virtual Disk | [k3s](https://k3s.io) | [Calico](https://github.com/projectcalico/calico) | [Longhorn](https://github.com/longhorn/longhorn) |
+| Oracle Cloud (San Jose) | 4 (3 controlplane, 1 worker) | Single core 3.0Ghz ARM64 | 6GB | 50GB Virtual Disk | [Talos](https://github.com/siderolabs/talos) | [Cilium](https://github.com/cilium/cilium) | [OpenEBS Jiva](https://github.com/openebs/jiva) |
 
-## Oracle Cloud San Jose [Talos](https://github.com/siderolabs/talos) cluster
-4 nodes (3 control plane, 1 worker):
-- Ampere A1 VM
-  - CPU: Single core 3.0Ghz ARM64
-  - 6GB RAM
-  - 50GB virtual disk 
+## :wrench:&nbsp; Tools
 
-#### Infrastructure
-- Networking: [Cilium](https://github.com/cilium/cilium)
-- Storage: [OpenEBS Jiva](https://github.com/openebs/jiva)
+| Tool                                                               | Purpose                                                             |
+|--------------------------------------------------------------------|---------------------------------------------------------------------|
+| [go-task](https://github.com/go-task/task)                         | A task runner / simpler Make alternative written in Go              |
+| [sops](https://github.com/mozilla/sops)                            | Encrypts k8s secrets with GnuPG                                     |
 
-## Read More
+## 📖 Read More
 Check out my [blog](https://blog.neilfren.ch/) for more in-depth arcticles on my Homelab, as well as DevSecOps in general!
+
