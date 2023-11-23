@@ -11,7 +11,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/plankanban/planka
-      tag: "1.14.2"
+      tag: "1.15.0"
     env:
       DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql:5432/planka"
       BASE_URL: "https://tasks.${SECRET_DOMAIN}"
