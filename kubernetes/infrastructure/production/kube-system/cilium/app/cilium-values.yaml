@@ -77,10 +77,10 @@ spec:
 
     k8sClientRateLimit:
       # -- The sustained request rate in requests per second.
-      qps: 15
+      qps: 25
       # -- The burst request rate in requests per second.
       # The rate limiter will allow short bursts with a higher rate.
-      burst: 25
+      burst: 35
 
     loadBalancer:
       algorithm: maglev
