@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: postgresql-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:qZ2+V0bcXwxhAUxhUo3Y2Hx3qgJ2se5jVygIkHFgF6SxRO2yCofyO2Db7rCDsMi6rxL7n8EBUL49+OI5q1pnrwnW001A+FFGxKW41KO7q/FB,iv:4EGHu8ZiR2RFrSZKypIpHreIiS2JMEH6O/l8uE+XHB4=,tag:NB6VoSDASPORgkhQp5TKyg==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:rdLCt15hqhw1PnWj,iv:Xb+L3vhM88N1ajJgmx1q1OQL2NuZGeC2R7Ljzkrutpw=,tag:DeSvIxXYYEGgSLSekcWBlw==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:tdeb2pzyOaWvPpo3snQ3Jg==,iv:4MQcgs6WdcNafCP4Fp80cBPyUjrUBJR9bfeAWE+eRSY=,tag:I+uvcibgeBonF8xN+NRmKg==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Ew32cZXCGx6xxStGUQYeHoe2wBQOhho7cvenKtvht40=,iv:qfw7O5ztOIHO37/JQ69Uu7vfZHUbBXT242bM2k/ioyA=,tag:mDJeG06eXlW41pGrTyd2gw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXYnRiWjBVeUhpYmFjNnRa
+            T1V1cG80cVRaaisrVGx4WGxpclJRSFZBaUVzCmJrQ3F4WHpKN0xCQ0pDRmFyc0NU
+            enJYM2RJcDB2Nk4xZGpyTm5wbHliK0kKLS0tIHhpNldnVW50bmJTak9yS1NGTjFv
+            Y254M20vdy9BRDdDbWFCVTNOU0FYRzAKGdcGGVGL0KH5kXeaC9JrE1MTpawDRgnt
+            46riqTXDyohEfGp5iIZy+1h2z1FyRjQO7zWRJt2/UU8D+Ihho+Lm3A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-11-23T18:24:19Z"
+    mac: ENC[AES256_GCM,data:DcVriVtEnetxO2HTHQnQyOdBLdMe4T8iZNbjoYzBzfO0Kf5vrbFK5Oqcvwax8iY8jLMAd8uM6w2ECLtKOCKct19e6vozFVPU3O1HQbSLMLc2owFDX1LecX3tv8N93kbemAzcgdrHY+iwAo0FJMwm81D/xnOUMnXRpcXt8Wo2Zk8=,iv:CmKGKqLhSj9K+zLiC8fik+3CPmBK3JF+R28fxL7TUIE=,tag:95PYdQzvDuTYi47sowHWTA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3
