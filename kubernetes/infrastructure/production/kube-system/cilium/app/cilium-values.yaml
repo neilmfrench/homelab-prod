@@ -4,10 +4,6 @@ kind: HelmRelease
 metadata:
   name: cilium
 spec:
-  chart:
-    spec:
-      chart: cilium
-      version: 1.14.2
   values:
     k8sServiceHost: "cluster.${SECRET_DOMAIN}"
     ipv4NativeRoutingCIDR: "10.222.0.0/16"
