@@ -8,21 +8,25 @@ spec:
     controller:
       annotations:
         configmap.reloader.stakater.com/reload: "fifa-openapi-configmap"
-    image:
-      repository: swaggerapi/swagger-ui
-      pullPolicy: IfNotPresent
-      tag: "v5.10.3"
-    env:
-      SWAGGER_JSON: /mnt/openapi.json
+      main:
+        containers:
+          main:
+            image:
+              repository: swaggerapi/swagger-ui
+              pullPolicy: IfNotPresent
+              tag: "v5.10.3"
+            env:
+              SWAGGER_JSON: /mnt/openapi.json
     service:
       main:
         ports:
           http:
+            enabled: true
             port: 8080
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns/is-public: "true"
@@ -32,7 +36,9 @@ spec:
           - host: &host "fifa-openapi.${SECRET_DOMAIN}"
             paths:
               - path: /
-                type: Prefix
+                pathType: Prefix
+                service:
+                  name: main
         tls:
           - hosts:
               - *host
@@ -42,6 +48,7 @@ spec:
         enabled: true
         type: configMap
         name: fifa-openapi-configmap
-        mountPath: /mnt/openapi.json
-        subPath: openapi.json
-        readOnly: true
+        globalMounts:
+          - path: /mnt/openapi.json
+            subPath: openapi.json
+            readOnly: true
