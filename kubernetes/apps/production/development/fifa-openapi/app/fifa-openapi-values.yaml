@@ -5,10 +5,10 @@ metadata:
   name: fifa-openapi
 spec:
   values:
-    controller:
-      annotations:
-        configmap.reloader.stakater.com/reload: "fifa-openapi-configmap"
+    controllers:
       main:
+        annotations:
+          configmap.reloader.stakater.com/reload: "fifa-openapi-configmap"
         containers:
           main:
             image:
