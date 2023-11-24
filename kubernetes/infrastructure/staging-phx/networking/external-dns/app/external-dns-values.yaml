@@ -18,6 +18,8 @@ spec:
       - --publish-internal-services
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
+      - --managed-record-types=A, AAAA, CNAME, NS
+    logLevel: info
     policy: sync
     sources:
       - service

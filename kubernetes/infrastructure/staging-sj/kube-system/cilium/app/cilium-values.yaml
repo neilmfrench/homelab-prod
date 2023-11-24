@@ -93,6 +93,8 @@ spec:
       default: true
       loadbalancerMode: shared
       enforceHttps: true
+      defaultSecretNamespace: networking
+      defaultSecretName: neilfren-ch-production-tls
       secretsNamespace:
         create: true
         name: cilium-secrets

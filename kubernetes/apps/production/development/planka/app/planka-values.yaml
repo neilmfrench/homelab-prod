@@ -11,16 +11,16 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/plankanban/planka
-      tag: "1.14.2"
+      tag: "1.15.0"
     env:
       DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql:5432/planka"
       BASE_URL: "https://tasks.${SECRET_DOMAIN}"
       SECRET_KEY: "${SECRET_PLANKA_KEY}"
       TRUST_PROXY: "0"
-      DEFAULT_ADMIN_EMAIL: "admin@${SECRET_DOMAIN}"
-      DEFAULT_ADMIN_PASSWORD: "${SECRET_PLANKA_ADMIN_PASSWORD}"
-      DEFAULT_ADMIN_NAME: Admin
-      DEFAULT_ADMIN_USERNAME: admin
+      # DEFAULT_ADMIN_EMAIL: "admin@${SECRET_DOMAIN}"
+      # DEFAULT_ADMIN_PASSWORD: "${SECRET_PLANKA_ADMIN_PASSWORD}"
+      # DEFAULT_ADMIN_NAME: Admin
+      # DEFAULT_ADMIN_USERNAME: admin
       OIDC_ISSUER: "https://id.${SECRET_DOMAIN}/application/o/planka/"
       OIDC_CLIENT_ID: "${SECRET_PLANKA_AUTHENTIK_CLIENT_ID}"
       OIDC_CLIENT_SECRET: "${SECRET_PLANKA_AUTHENTIK_CLIENT_SECRET}"

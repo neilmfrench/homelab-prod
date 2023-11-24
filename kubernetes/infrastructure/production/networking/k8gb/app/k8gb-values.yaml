@@ -6,7 +6,8 @@ metadata:
 spec:
   values:
     k8gb:
-      imageRepo: "docker.io/absaoss/k8gb"
+      imageRepo: "harbor.${SECRET_DOMAIN}/k8gb/k8gb"
+      imageTag: "0.0.3"
       deployCrds: false
       deployRbac: true
       # -- dnsZone controlled by gslb

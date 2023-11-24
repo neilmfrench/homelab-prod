@@ -28,6 +28,12 @@ spec:
           - name: health
             configBlock: |-
               lameduck 5s
+          - name: hosts
+            configBlock: |-
+              ${SECRET_PHX_EXTERNAL_IP} gslb-ns-phx-neilfren-ch.${SECRET_DOMAIN}
+              ${SECRET_SJ_EXTERNAL_IP} gslb-ns-sj-neilfren-ch.${SECRET_DOMAIN}
+              ${SECRET_EXTERNAL_IP} gslb-ns-hb-neilfren-ch.${SECRET_DOMAIN}
+              fallthrough
           - name: ready
           - name: kubernetes
             parameters: cluster.local in-addr.arpa ip6.arpa

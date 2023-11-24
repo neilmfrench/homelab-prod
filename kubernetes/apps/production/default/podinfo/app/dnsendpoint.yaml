@@ -3,9 +3,13 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: podinfo-external
+  annotations:
+    k8gb.absa.oss/dnstype: local
+  labels:
+    k8gb.absa.oss/dnstype: local
 spec:
   endpoints:
-    - dnsName: gslb.${SECRET_DOMAIN}
+    - dnsName: localtargets-gslb.${SECRET_DOMAIN}
       recordTTL: 180
       recordType: A
       targets:

@@ -4,10 +4,6 @@ kind: HelmRelease
 metadata:
   name: cilium
 spec:
-  chart:
-    spec:
-      chart: cilium
-      version: 1.14.2
   values:
     k8sServiceHost: "cluster.${SECRET_DOMAIN}"
     ipv4NativeRoutingCIDR: "10.222.0.0/16"
@@ -75,16 +71,16 @@ spec:
 
     l2announcements:
       enabled: true
-      leaseDuration: 300s
-      leaseRenewDeadline: 60s
-      leaseRetryPeriod: 10s
+      leaseDuration: 600s
+      leaseRenewDeadline: 120s
+      leaseRetryPeriod: 20s
 
     k8sClientRateLimit:
       # -- The sustained request rate in requests per second.
-      qps: 15
+      qps: 35
       # -- The burst request rate in requests per second.
       # The rate limiter will allow short bursts with a higher rate.
-      burst: 25
+      burst: 45
 
     loadBalancer:
       algorithm: maglev

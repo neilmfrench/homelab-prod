@@ -1,0 +1,69 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: k8gb
+spec:
+  values:
+    k8gb:
+      imageRepo: "harbor.${SECRET_DOMAIN}/k8gb/k8gb"
+      imageTag: "0.0.5"
+      deployCrds: false
+      deployRbac: true
+      # -- dnsZone controlled by gslb
+      dnsZone: "${SECRET_DOMAIN}"
+      dnsZoneNegTTL: 300
+      # -- main zone which would contain gslb zone to delegate
+      edgeDNSZone: "${SECRET_DOMAIN}"
+      edgeDNSServers:
+        - "1.1.1.1"
+      clusterGeoTag: "sj"
+      extGslbClustersGeoTags: "phx"
+      reconcileRequeueSeconds: 30
+      coredns:
+        extra_plugins: ""
+      log:
+        # -- log format (simple,json)
+        format: simple
+        # -- log level (panic,fatal,error,warn,info,debug,trace)
+        level: info
+      splitBrainCheck: false
+      metricsAddress: "0.0.0.0:8080"
+      securityContext:
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        runAsUser: 1000
+      exposeMetrics: false
+      serviceMonitor:
+        enabled: false
+    externaldns:
+      image: ghcr.io/k8gb-io/external-dns:v0.13.4-azure-ns
+      interval: "20s"
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 65534
+        runAsNonRoot: true
+    coredns:
+      isClusterService: false
+      serviceType: NodePort
+      deployment:
+        skipConfig: true
+      image:
+        repository: absaoss/k8s_crd
+        tag: v0.0.11
+      serviceAccount:
+        create: true
+        name: coredns
+    infoblox:
+      enabled: false
+    route53:
+      enabled: false
+    ns1:
+      enabled: false
+    openshift:
+      enabled: false
+    rfc2136:
+      enabled: false
+    tracing:
+      enabled: false

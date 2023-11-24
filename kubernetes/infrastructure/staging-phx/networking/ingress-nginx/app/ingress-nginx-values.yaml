@@ -9,6 +9,8 @@ spec:
       extraEnvs:
         - name: TZ
           value: "${TIMEZONE}"
+      extraArgs:
+        default-ssl-certificate: "networking/neilfren-ch-production-tls"
       publishService:
         enabled: true
       ingressClassResource:

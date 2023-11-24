@@ -3,6 +3,8 @@ apiVersion: k8gb.absa.oss/v1beta1
 kind: Gslb
 metadata:
   name: podinfo
+  annotations:
+    k8gb.io/external-ip: "${SECRET_EXTERNAL_IP}"
 spec:
   ingress:
     ingressClassName: traefik
