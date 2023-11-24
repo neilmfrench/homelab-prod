@@ -5,19 +5,25 @@ metadata:
   name: pocketbase
 spec:
   values:
-    image:
-      repository: ghcr.io/muchobien/pocketbase
-      pullPolicy: IfNotPresent
-      tag: "0.19.4"
+    controllers:
+      main:
+        enabled: true
+        containers:
+          main:
+            image:
+              repository: ghcr.io/muchobien/pocketbase
+              pullPolicy: IfNotPresent
+              tag: "0.19.4"
     service:
       main:
         ports:
           http:
+            enabled: true
             port: 8090
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns/is-public: "true"
@@ -28,6 +34,8 @@ spec:
             paths:
               - path: /
                 type: Prefix
+                service:
+                  name: main
         tls:
           - hosts:
               - *host
@@ -35,5 +43,6 @@ spec:
     persistence:
       data:
         enabled: true
-        mountPath: /pb_data
         existingClaim: pocketbase-data
+        globalMounts:
+          - path: /pb_data

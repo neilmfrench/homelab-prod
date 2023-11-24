@@ -7,6 +7,7 @@ spec:
   values:
     controllers:
       main:
+        enabled: true
         annotations:
           configmap.reloader.stakater.com/reload: "fifa-openapi-configmap"
         containers:
