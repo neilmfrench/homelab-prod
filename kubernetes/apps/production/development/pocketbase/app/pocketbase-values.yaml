@@ -14,8 +14,16 @@ spec:
               repository: ghcr.io/muchobien/pocketbase
               pullPolicy: IfNotPresent
               tag: "0.19.4"
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
     service:
       main:
+        enabled: true
         ports:
           http:
             enabled: true

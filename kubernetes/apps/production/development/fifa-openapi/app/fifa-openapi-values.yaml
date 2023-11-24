@@ -18,8 +18,16 @@ spec:
               tag: "v5.10.3"
             env:
               SWAGGER_JSON: /mnt/openapi.json
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
     service:
       main:
+        enabled: true
         ports:
           http:
             enabled: true

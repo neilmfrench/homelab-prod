@@ -5,48 +5,62 @@ metadata:
   name: bookstack
 spec:
   values:
-    image:
-      repository: ghcr.io/linuxserver/bookstack
-      pullPolicy: IfNotPresent
-      tag: "23.10.20231030"
-    env:
-      TZ: ${TIMEZONE}
-      APP_URL: https://docs.${SECRET_DOMAIN}
-      APP_KEY: ${SECRET_BOOKSTACK_KEY}
-      APP_PROXIES: "*"
-      DB_HOST: bookstack-mariadb
-      DB_DATABASE: bookstack
-      DB_USERNAME: bookstack
-      DB_PASSWORD: ${SECRET_BOOKSTACK_MARIADB_PASSWORD}
-      MAIL_DRIVER: smtp
-      MAIL_FROM: ${SECRET_BOOKSTACK_EMAIL_FROM}
-      MAIL_FROM_NAME: ${SECRET_BOOKSTACK_EMAIL_FROM}
-      MAIL_HOST: ${SECRET_BOOKSTACK_EMAIL_HOST}
-      MAIL_PORT: 587
-      MAIL_USERNAME: ${SECRET_BOOKSTACK_EMAIL_USER}
-      MAIL_PASSWORD: ${SECRET_BOOKSTACK_EMAIL_KEY}
-      MAIL_ENCRYPTION: tls
-      ALLOW_CONTENT_SCRIPTS: true # for cloudflare
-      AUTH_METHOD: saml2
-      SAML2_NAME: authentik
-      SAML2_EMAIL_ATTRIBUTE: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
-      SAML2_DISPLAY_NAME_ATTRIBUTES: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
-      SAML2_EXTERNAL_ID_ATTRIBUTE: http://schemas.goauthentik.io/2021/02/saml/uid
-      SAML2_IDP_ENTITYID: ${SECRET_BOOKSTACK_SAML_METADATA_URL}
-      SAML2_AUTOLOAD_METADATA: true
-      SAML2_USER_TO_GROUPS: true
-      SAML2_GROUP_ATTRIBUTE: http://schemas.xmlsoap.org/claims/Group
-      SAML2_REMOVE_FROM_GROUPS: true
-      # SAML2_DUMP_USER_DETAILS: true
+    controllers:
+      main:
+        enabled: true
+        containers:
+          main:
+            image:
+              repository: ghcr.io/linuxserver/bookstack
+              pullPolicy: IfNotPresent
+              tag: "23.10.20231030"
+            env:
+              TZ: ${TIMEZONE}
+              APP_URL: https://docs.${SECRET_DOMAIN}
+              APP_KEY: ${SECRET_BOOKSTACK_KEY}
+              APP_PROXIES: "*"
+              DB_HOST: bookstack-mariadb
+              DB_DATABASE: bookstack
+              DB_USERNAME: bookstack
+              DB_PASSWORD: ${SECRET_BOOKSTACK_MARIADB_PASSWORD}
+              MAIL_DRIVER: smtp
+              MAIL_FROM: ${SECRET_BOOKSTACK_EMAIL_FROM}
+              MAIL_FROM_NAME: ${SECRET_BOOKSTACK_EMAIL_FROM}
+              MAIL_HOST: ${SECRET_BOOKSTACK_EMAIL_HOST}
+              MAIL_PORT: 587
+              MAIL_USERNAME: ${SECRET_BOOKSTACK_EMAIL_USER}
+              MAIL_PASSWORD: ${SECRET_BOOKSTACK_EMAIL_KEY}
+              MAIL_ENCRYPTION: tls
+              ALLOW_CONTENT_SCRIPTS: true # for cloudflare
+              AUTH_METHOD: saml2
+              SAML2_NAME: authentik
+              SAML2_EMAIL_ATTRIBUTE: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+              SAML2_DISPLAY_NAME_ATTRIBUTES: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+              SAML2_EXTERNAL_ID_ATTRIBUTE: http://schemas.goauthentik.io/2021/02/saml/uid
+              SAML2_IDP_ENTITYID: ${SECRET_BOOKSTACK_SAML_METADATA_URL}
+              SAML2_AUTOLOAD_METADATA: true
+              SAML2_USER_TO_GROUPS: true
+              SAML2_GROUP_ATTRIBUTE: http://schemas.xmlsoap.org/claims/Group
+              SAML2_REMOVE_FROM_GROUPS: true
+              # SAML2_DUMP_USER_DETAILS: true
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
     service:
       main:
+        enabled: true
         ports:
           http:
+            enabled: true
             port: 80
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns/is-public: "true"
@@ -57,6 +71,8 @@ spec:
             paths:
               - path: /
                 type: Prefix
+                service:
+                  name: main
         tls:
           - hosts:
               - *host
@@ -64,5 +80,6 @@ spec:
     persistence:
       config:
         enabled: true
-        mountPath: /config
         existingClaim: bookstack-config
+        globalMounts:
+          - path: /config
