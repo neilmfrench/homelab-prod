@@ -14,8 +14,8 @@ spec:
           main:
             image:
               repository: swaggerapi/swagger-ui
-              pullPolicy: IfNotPresent
               tag: "v5.10.3"
+              pullPolicy: IfNotPresent
             env:
               SWAGGER_JSON: /mnt/openapi.json
             probes:

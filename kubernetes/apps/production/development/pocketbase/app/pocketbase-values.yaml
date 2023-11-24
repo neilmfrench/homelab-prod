@@ -12,8 +12,8 @@ spec:
           main:
             image:
               repository: ghcr.io/muchobien/pocketbase
-              pullPolicy: IfNotPresent
               tag: "0.19.4"
+              pullPolicy: IfNotPresent
             probes:
               liveness:
                 enabled: true

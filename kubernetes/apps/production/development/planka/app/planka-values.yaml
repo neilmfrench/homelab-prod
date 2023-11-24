@@ -5,52 +5,68 @@ metadata:
   name: planka
 spec:
   values:
-    controller:
-      strategy: Recreate
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: ghcr.io/plankanban/planka
-      tag: "1.15.0"
-    env:
-      DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql:5432/planka"
-      BASE_URL: "https://tasks.${SECRET_DOMAIN}"
-      SECRET_KEY: "${SECRET_PLANKA_KEY}"
-      TRUST_PROXY: "0"
-      # DEFAULT_ADMIN_EMAIL: "admin@${SECRET_DOMAIN}"
-      # DEFAULT_ADMIN_PASSWORD: "${SECRET_PLANKA_ADMIN_PASSWORD}"
-      # DEFAULT_ADMIN_NAME: Admin
-      # DEFAULT_ADMIN_USERNAME: admin
-      OIDC_ISSUER: "https://id.${SECRET_DOMAIN}/application/o/planka/"
-      OIDC_CLIENT_ID: "${SECRET_PLANKA_AUTHENTIK_CLIENT_ID}"
-      OIDC_CLIENT_SECRET: "${SECRET_PLANKA_AUTHENTIK_CLIENT_SECRET}"
-      OIDC_ROLES_ATTRIBUTE: "groups"
-      OIDC_ADMIN_ROLES: "Planka Admins"
-      OIDC_SCOPES: "openid profile email"
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+    controllers:
+      main:
+        enabled: true
+        containers:
+          main:
+            image:
+              repository: ghcr.io/plankanban/planka
+              tag: "1.15.0"
+              pullPolicy: IfNotPresent
+            env:
+              DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql:5432/planka"
+              BASE_URL: "https://tasks.${SECRET_DOMAIN}"
+              SECRET_KEY: "${SECRET_PLANKA_KEY}"
+              TRUST_PROXY: "0"
+              # DEFAULT_ADMIN_EMAIL: "admin@${SECRET_DOMAIN}"
+              # DEFAULT_ADMIN_PASSWORD: "${SECRET_PLANKA_ADMIN_PASSWORD}"
+              # DEFAULT_ADMIN_NAME: Admin
+              # DEFAULT_ADMIN_USERNAME: admin
+              OIDC_ISSUER: "https://id.${SECRET_DOMAIN}/application/o/planka/"
+              OIDC_CLIENT_ID: "${SECRET_PLANKA_AUTHENTIK_CLIENT_ID}"
+              OIDC_CLIENT_SECRET: "${SECRET_PLANKA_AUTHENTIK_CLIENT_SECRET}"
+              OIDC_ROLES_ATTRIBUTE: "groups"
+              OIDC_ADMIN_ROLES: "Planka Admins"
+              OIDC_SCOPES: "openid profile email"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 1337
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 25m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
     service:
       main:
+        enabled: true
         ports:
           http:
-            port: &port 1337
-    probes:
-      liveness: &probes
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /
+            enabled: true
             port: *port
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      readiness: *probes
-      startup:
-        enabled: false
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           external-dns/is-public: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
@@ -61,31 +77,25 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
         tls:
           - hosts:
               - *host
             secretName: planka-tls
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       user-avatars:
         enabled: true
         existingClaim: planka-data-user-avatars
-        mountPath: /app/public/user-avatars
+        globalMounts:
+          - path: /app/public/user-avatars
       project-background-images:
         enabled: true
         existingClaim: planka-data-project-background-images
-        mountPath: /app/public/project-background-images
+        globalMounts:
+          - path: /app/public/project-background-images
       attachments:
         enabled: true
         existingClaim: planka-data-attachments
-        mountPath: /app/private/attachments
-    resources:
-      requests:
-        cpu: 25m
-        memory: 128Mi
-      limits:
-        memory: 512Mi
+        globalMounts:
+          - path: /app/private/attachments
