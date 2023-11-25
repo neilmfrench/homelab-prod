@@ -8,33 +8,33 @@ spec:
     image:
       repository: neilmfrench2/volsync-operator
       pullPolicy: IfNotPresent
-      tag: "1.0.0"
-      image: "neilmfrench2/volsync-operator@sha256:be7dfd0f188a43ca87e52ad85bdb9a231897a8a61f1b93f835a9c8b3cb4c7fc6"
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
     rclone:
       repository: neilmfrench2/volsync-operator
       pullPolicy: IfNotPresent
-      tag: "1.0.0"
-      image: "neilmfrench2/volsync-operator@sha256:be7dfd0f188a43ca87e52ad85bdb9a231897a8a61f1b93f835a9c8b3cb4c7fc6"
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
     restic:
       repository: neilmfrench2/volsync-operator
       pullPolicy: IfNotPresent
-      tag: "1.0.0"
-      image: "neilmfrench2/volsync-operator@sha256:be7dfd0f188a43ca87e52ad85bdb9a231897a8a61f1b93f835a9c8b3cb4c7fc6"
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
     rsync:
       repository: neilmfrench2/volsync-operator
       pullPolicy: IfNotPresent
-      tag: "1.0.0"
-      image: "neilmfrench2/volsync-operator@sha256:be7dfd0f188a43ca87e52ad85bdb9a231897a8a61f1b93f835a9c8b3cb4c7fc6"
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
     rsync-tls:
       repository: neilmfrench2/volsync-operator
       pullPolicy: IfNotPresent
-      tag: "1.0.0"
-      image: "neilmfrench2/volsync-operator@sha256:be7dfd0f188a43ca87e52ad85bdb9a231897a8a61f1b93f835a9c8b3cb4c7fc6"
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
     syncthing:
       repository: neilmfrench2/volsync-operator
       pullPolicy: IfNotPresent
-      tag: "1.0.0"
-      image: "neilmfrench2/volsync-operator@sha256:be7dfd0f188a43ca87e52ad85bdb9a231897a8a61f1b93f835a9c8b3cb4c7fc6"
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
     manageCRDs: true
     metrics:
       disableAuth: true
