@@ -5,8 +5,9 @@ metadata:
   name: snapshot-controller
 spec:
   values:
-    image:
-      tag: "v6.2.2"
+    chart:
+      spec:
+        version: 2.0.2
     volumeSnapshotClasses:
       - name: csi-rbdplugin-snapclass
         driver: rook-ceph.rbd.csi.ceph.com
