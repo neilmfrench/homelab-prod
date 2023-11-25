@@ -4,10 +4,10 @@ kind: HelmRelease
 metadata:
   name: snapshot-controller
 spec:
+  chart:
+    spec:
+      version: 2.0.2
   values:
-    chart:
-      spec:
-        version: 2.0.2
     volumeSnapshotClasses:
       - name: csi-rbdplugin-snapclass
         driver: rook-ceph.rbd.csi.ceph.com
