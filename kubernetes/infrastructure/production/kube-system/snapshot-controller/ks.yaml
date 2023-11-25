@@ -25,8 +25,6 @@ metadata:
   name: cluster-infrastructure-snapshot-controller
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-infrastructure-snapshot-validation-webhook
   path: ./kubernetes/infrastructure/production/kube-system/snapshot-controller/app
   prune: true
   sourceRef:
