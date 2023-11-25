@@ -5,22 +5,26 @@ metadata:
   name: snapshot-controller
 spec:
   values:
-    image:
-      tag: "v6.2.1"
-    volumeSnapshotClasses:
-      - name: longhorn-backup-vsc
-        driver: driver.longhorn.io
-        annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "false"
-        parameters:
-          type: bak
-        deletionPolicy: Delete
-      - name: longhorn-snapshot-vsc
-        driver: driver.longhorn.io
-        annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "true"
-        parameters:
-          type: snap
-        deletionPolicy: Delete
-    serviceMonitor:
-      create: false
+    controller:
+      image:
+        tag: "v6.2.1"
+      volumeSnapshotClasses:
+        - name: longhorn-backup-vsc
+          driver: driver.longhorn.io
+          annotations:
+            snapshot.storage.kubernetes.io/is-default-class: "false"
+          parameters:
+            type: bak
+          deletionPolicy: Delete
+        - name: longhorn-snapshot-vsc
+          driver: driver.longhorn.io
+          annotations:
+            snapshot.storage.kubernetes.io/is-default-class: "true"
+          parameters:
+            type: snap
+          deletionPolicy: Delete
+      serviceMonitor:
+        create: false
+    webhook:
+      image:
+        tag: "v6.2.1"

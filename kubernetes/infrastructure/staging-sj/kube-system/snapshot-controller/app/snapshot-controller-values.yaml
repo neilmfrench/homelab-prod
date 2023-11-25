@@ -5,13 +5,12 @@ metadata:
   name: snapshot-controller
 spec:
   values:
-    image:
-      tag: "v6.2.2"
-    volumeSnapshotClasses:
-      - name: csi-cstor-snapshotclass
-        driver: cstor.csi.openebs.io
-        annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "false"
-        deletionPolicy: Delete
-    serviceMonitor:
-      create: false
+    controller:
+      volumeSnapshotClasses:
+        - name: csi-cstor-snapshotclass
+          driver: cstor.csi.openebs.io
+          annotations:
+            snapshot.storage.kubernetes.io/is-default-class: "false"
+          deletionPolicy: Delete
+      serviceMonitor:
+        create: false
