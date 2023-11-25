@@ -1,33 +1,11 @@
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-infrastructure-snapshot-validation-webhook
-  namespace: flux-system
-spec:
-  path: ./kubernetes/infrastructure/production/kube-system/snapshot-controller/validation-webhook
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: snapshot-validation-webhook
-      namespace: kube-system
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
 # ---
 # apiVersion: kustomize.toolkit.fluxcd.io/v1
 # kind: Kustomization
 # metadata:
-#   name: cluster-infrastructure-snapshot-controller
+#   name: cluster-infrastructure-snapshot-validation-webhook
 #   namespace: flux-system
 # spec:
-#   dependsOn:
-#     - name: cluster-infrastructure-snapshot-validation-webhook
-#   path: ./kubernetes/infrastructure/production/kube-system/snapshot-controller/app
+#   path: ./kubernetes/infrastructure/production/kube-system/snapshot-controller/validation-webhook
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -35,8 +13,30 @@ spec:
 #   healthChecks:
 #     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
 #       kind: HelmRelease
-#       name: snapshot-controller
+#       name: snapshot-validation-webhook
 #       namespace: kube-system
 #   interval: 30m
 #   retryInterval: 1m
 #   timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-infrastructure-snapshot-controller
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-infrastructure-snapshot-validation-webhook
+  path: ./kubernetes/infrastructure/production/kube-system/snapshot-controller/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: snapshot-controller
+      namespace: kube-system
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
