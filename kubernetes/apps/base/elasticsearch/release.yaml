@@ -7,7 +7,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: elastic
+      chart: elasticsearch
       version: 8.5.2
       sourceRef:
         kind: HelmRepository
