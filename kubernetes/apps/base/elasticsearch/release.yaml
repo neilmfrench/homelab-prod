@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: elasticsearch
-      version: 8.5.2
+      version: 8.5.1
       sourceRef:
         kind: HelmRepository
         name: elastic
