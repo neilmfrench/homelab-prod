@@ -1,0 +1,821 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: bitbucket
+spec:
+  values:
+    replicaCount: 1
+
+    image:
+      repository: atlassian/bitbucket
+      pullPolicy: IfNotPresent
+      tag: "7.21.7"
+
+    database:
+      url: jdbc:postgresql://bitbucket-postgresql:5432/bitbucket
+      driver: org.postgresql.Driver
+      credentials:
+        secretName: bitbucket-database-credentials
+        usernameSecretKey: username
+        passwordSecretKey: password
+
+    volumes:
+      localHome:
+        persistentVolumeClaim:
+          create: true
+          storageClassName: ceph-block
+          resources:
+            requests:
+              storage: 4Gi
+        persistentVolumeClaimRetentionPolicy:
+          whenDeleted:
+          whenScaled:
+        customVolume: {}
+        mountPath: "/var/atlassian/application-data/bitbucket"
+
+      sharedHome:
+        persistentVolume:
+          create: false
+          nfs:
+            server: ""
+            path: ""
+          mountOptions: []
+        persistentVolumeClaim:
+          create: false
+          storageClassName:
+          volumeName:
+          accessMode: ReadWriteMany
+          resources:
+            requests:
+              storage: 1Gi
+        customVolume:
+          persistentVolumeClaim:
+            claimName: bitbucket-shared-data
+        mountPath: "/var/atlassian/application-data/shared-home"
+        subPath:
+        nfsPermissionFixer:
+          enabled: false
+          mountPath: "/shared-home"
+          imageRepo: alpine
+          imageTag: latest
+          resources: {}
+          command:
+      additional: []
+
+    ingress:
+      create: true
+      className: "traefik"
+      nginx: false
+      maxBodySize: 250m
+      proxyConnectTimeout: 60
+      proxyReadTimeout: 60
+      proxySendTimeout: 60
+      host: bitbucket.${SECRET_DOMAIN}
+      path:
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      https: true
+      tlsSecretName: bitbucket-tls
+
+    bitbucket:
+      useHelmReleaseNameAsContainerName: false
+      service:
+        port: 80
+        sshPort: 7999
+        type: ClusterIP
+        sessionAffinity: None
+        sessionAffinityConfig:
+          clientIP:
+            timeoutSeconds:
+        loadBalancerIP:
+        contextPath:
+        annotations: {}
+
+      sshService:
+        enabled: false
+        port: 22
+        host:
+        type: LoadBalancer
+        loadBalancerIP:
+        annotations: {}
+
+      hazelcastService:
+        enabled: false
+        port: 5701
+        type: ClusterIP
+        annotations: {}
+
+      securityContextEnabled: true
+      securityContext:
+        fsGroup: 2003
+      containerSecurityContext: {}
+      setPermissions: true
+      ports:
+        http: 7990
+        ssh: 7999
+        hazelcast: 5701
+
+      # Bitbucket licensing details
+      #
+      license:
+        # -- The name of the K8s Secret that contains the Bitbucket license key. If specified, then
+        # the license will be automatically populated during Bitbucket setup. Otherwise, it will
+        # need to be provided via the browser after initial startup. An Example of creating
+        # a K8s secret for the license below:
+        # 'kubectl create secret generic <secret-name> --from-literal=license-key=<license>
+        # https://kubernetes.io/docs/concepts/configuration/secret/#opaque-secrets
+        #
+        secretName:
+
+        # -- The key in the K8s Secret that contains the Bitbucket license key
+        #
+        secretKey:
+
+      sysadminCredentials:
+        secretName: bitbucket-sysadmin-credentials
+        usernameSecretKey: username
+        passwordSecretKey: password
+        displayNameSecretKey: displayName
+        emailAddressSecretKey: emailAddress
+
+      displayName:
+
+      clustering:
+        enabled: true
+        group:
+          secretName:
+          nameSecretKey: name
+          passwordSecretKey: password
+
+      readinessProbe:
+        enabled: true
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 1
+        failureThreshold: 60
+        customProbe: {}
+      startupProbe:
+        enabled: false
+        initialDelaySeconds: 60
+        periodSeconds: 5
+        failureThreshold: 120
+      livenessProbe:
+        enabled: false
+        initialDelaySeconds: 60
+        periodSeconds: 5
+        timeoutSeconds: 1
+        failureThreshold: 12
+        customProbe: {}
+      elasticSearch:
+        # -- The base URL of the external Elasticsearch instance to be used, for example:
+        # http://elasticsearch-master.<namespace>.svc.cluster.local:9200
+        # If this is defined, then Bitbucket will disable its internal Elasticsearch instance.
+        #
+        baseUrl:
+
+        # Elasticsearch's connection details
+        #
+        credentials:
+          # -- The name of the Kubernetes Secret that contains the Elasticsearch credentials.
+          # Example of creating a credentials K8s secret below:
+          # 'kubectl create secret generic <secret-name> --from-literal=username=<username> \
+          # --from-literal=password=<password>'
+          # https://kubernetes.io/docs/concepts/configuration/secret/#opaque-secrets
+          #
+          secretName:
+
+          # -- The key in the Kubernetes Secret that contains the Elasticsearch username.
+          #
+          usernameSecretKey: username
+
+          # -- The key in the Kubernetes Secret that contains the Elasticsearch password.
+          #
+          passwordSecretKey: password
+
+      shutdown:
+        terminationGracePeriodSeconds: 35
+        command: "/shutdown-wait.sh"
+
+      postStart:
+        command:
+
+      podManagementStrategy: OrderedReady
+      resources:
+        jvm:
+          maxHeap: "1g"
+          minHeap: "512m"
+
+        container:
+          requests:
+            cpu: "0.5"
+
+            memory: "2G"
+          #  limits:
+          #    cpu: "2"
+          #    memory: "2G"
+
+      # -- Application Mode
+      #
+      # This can be either 'default' or 'mirror'
+      #
+      applicationMode: "default"
+
+      # Mirror Configuration
+      #
+      mirror:
+        # -- Specifies the URL of the upstream Bitbucket server for this mirror.
+        #
+        upstreamUrl:
+
+      # Mesh configuration
+      mesh:
+        # -- Enable Bitbucket Mesh. See: https://confluence.atlassian.com/bitbucketserver/bitbucket-mesh-1128304351.html
+        #
+        enabled: false
+
+        # -- Experimental! Automatically register Bitbucket mesh nodes with the Bitbucket server.
+        # `bitbucket.sysadminCredentials.secretName` needs to be defined to provide credentials
+        # to post-install node registration jobs that are created only for new Helm chart installations.
+        # It is recommended to manually register Mesh nodes in Butbucket UI.
+        #
+        nodeAutoRegistration: false
+
+        # -- Experimental! Automatically create all new repositories on Bitbucket mesh nodes.
+        # `bitbucket.sysadminCredentials.secretName` needs to be defined to provide credentials
+        # to node post-install job. It is recommended to manually configure it in Bitbucket UI.
+        #
+        setByDefault: false
+
+        # -- The Bitbucket Mesh image to use
+        # https://hub.docker.com/r/atlassian/bitbucket-mesh
+        #
+        image:
+          # -- The Bitbucket Mesh image repository
+          # https://hub.docker.com/r/atlassian/bitbucket-mesh
+          #
+          repository: atlassian/bitbucket-mesh
+
+          # -- Image pull policy
+          #
+          pullPolicy: IfNotPresent
+
+          # -- The docker image tag to be used
+          #
+          tag: "2.0.1"
+
+        # -- Number of Bitbucket Mesh nodes. Do not change it. Currently, only the quorum of 3 mesh nodes is supported.
+        # Reducing the number of replicas will result in mesh degradation while increasing the number of Mesh nodes
+        # will result in new nodes being unused by the Bitbucket server.
+        #
+        replicaCount: 3
+
+        service:
+          # -- Bitbucket Mesh port
+          #
+          port: 7777
+
+          # -- The type of K8s service to use for Bitbucket mesh service
+          #
+          type: ClusterIP
+
+          # -- Use specific loadBalancerIP. Only applies to service type LoadBalancer.
+          #
+          loadBalancerIP:
+
+          # -- Bitbucket mesh service annotations
+          #
+          annotations: {}
+
+        # -- Custom annotations that will be applied to all Bitbucket Mesh pods
+        #
+        podAnnotations: {}
+        #  name: <value>
+
+        # -- Custom labels that will be applied to all Bitbucket Mesh pods
+        #
+        podLabels: {}
+        #  name: <value>
+
+        # -- Bitbucket Mesh resources requests and limits
+        #
+        resources:
+          # -- Bitbucket Mesh JVM heap settings
+          #
+          jvm:
+            maxHeap: "1g"
+            minHeap: "512m"
+
+          # -- Bitbucket Mesh container cpu/mem requests and limits
+          #
+          container:
+            requests:
+              cpu: "1"
+              memory: "2G"
+            limits:
+              cpu: "2"
+              memory: "2G"
+
+        # -- Mesh home volume settings. Disabling persistence results in data loss!
+        #
+        volume:
+          create: true
+          resources:
+            requests:
+              storage: 1Gi
+          storageClass:
+          mountPath: "/var/atlassian/application-data/mesh"
+
+        # -- Defines any additional environment variables to be passed to the Bitbucket mesh containers.
+        #
+        additionalEnvironmentVariables: {}
+
+        # -- Specifies a list of additional arguments that can be passed to the Bitbucket Mesh JVM, e.g.
+        # system properties.
+        #
+        additionalJvmArgs: []
+
+        # -- Additional initContainer definitions that will be added to all Bitbucket pods
+        #
+        additionalInitContainers: {}
+        #  - name: <name>
+        #    image: <image>:<tag>
+
+        # -- Additional existing ConfigMaps and Secrets not managed by Helm that should be
+        # mounted into service container
+        #
+        additionalFiles:
+        # Example:
+        # - name: keystore
+        #   type: secret
+        #   key: keystore.jks
+        #   mountPath: /var/ssl
+
+        # -- Standard K8s node-selectors that will be applied to all Bitbucket Mesh pods
+        #
+        nodeSelector: {}
+        #  name: <value>
+
+        # -- Standard Kubernetes affinities that will be applied to all Bitbucket mesh pods
+        #
+        affinity: {}
+
+        # -- Standard K8s tolerations that will be applied to all Bitbucket Mesh pods
+        #
+        tolerations: {}
+        # - effect: <name>
+        #   operator: <operator>
+        #   key: <key>
+
+        # -- Defines topology spread constraints for Bitbucket Mesh pods. See details:
+        # https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+        #
+        topologySpreadConstraints: {}
+        # - maxSkew: 1
+        #   topologyKey: kubernetes.io/hostname
+        #   whenUnsatisfiable: ScheduleAnyway
+        #   labelSelector:
+        #     matchLabels:
+
+        # -- Standard K8s schedulerName that will be applied to all Bitbucket pods.
+        # Check Kubernetes documentation on how to configure multiple schedulers:
+        # https://kubernetes.io/docs/tasks/extend-kubernetes/configure-multiple-schedulers/#specify-schedulers-for-pods
+        #
+        schedulerName:
+
+        # -- Pod PriorityClassName
+        # https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass
+        #
+        priorityClassName:
+
+        # See: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-management-policies
+        #
+        podManagementPolicy: OrderedReady
+
+        shutdown:
+          # -- The termination grace period for pods during shutdown. This
+          # should be set to the Bitbucket internal grace period (default 30
+          # seconds), plus a small buffer to allow the JVM to fully terminate.
+          #
+          terminationGracePeriodSeconds: 35
+
+        # -- Certificates to be added to Java truststore. Provide reference to a secret that contains the certificates
+        #
+        additionalCertificates:
+          secretName:
+          customCmd:
+
+      # -- Specifies a list of additional arguments that can be passed to the Bitbucket JVM, e.g.
+      # system properties.
+      #
+      additionalJvmArgs: []
+
+      # -- Specifies a list of additional Java libraries that should be added to the
+      # Bitbucket container. Each item in the list should specify the name of the volume
+      # that contains the library, as well as the name of the library file within that
+      # volume's root directory. Optionally, a subDirectory field can be included to
+      # specify which directory in the volume contains the library file. Additional details:
+      # https://atlassian.github.io/data-center-helm-charts/examples/external_libraries/EXTERNAL_LIBS/
+      #
+      additionalLibraries: []
+      #  - volumeName:
+      #    subDirectory:
+      #    fileName:
+
+      # -- Specifies a list of additional Bitbucket plugins that should be added to the
+      # Bitbucket container. Note plugins installed via this method will appear as
+      # bundled plugins rather than user plugins. These should be specified in the same
+      # manner as the 'additionalLibraries' property. Additional details:
+      # https://atlassian.github.io/data-center-helm-charts/examples/external_libraries/EXTERNAL_LIBS/
+      #
+      # NOTE: only .jar files can be loaded using this approach. OBR's can be extracted
+      # (unzipped) to access the associated .jar
+      #
+      # An alternative to this method is to install the plugins via "Manage Apps" in the
+      # product system administration UI.
+      #
+      additionalBundledPlugins: []
+      #  - volumeName:
+      #    subDirectory:
+      #    fileName:
+
+      # -- Defines any additional volumes mounts for the Bitbucket container. These
+      # can refer to existing volumes, or new volumes can be defined via
+      # 'volumes.additional'.
+      #
+      additionalVolumeMounts: []
+
+      # -- Defines any additional environment variables to be passed to the Bitbucket
+      # container. See https://hub.docker.com/r/atlassian/bitbucket-server for
+      # supported variables.
+      #
+      additionalEnvironmentVariables: []
+
+      # -- Defines any additional ports for the Bitbucket container.
+      #
+      additionalPorts: []
+      #  - name: jmx
+      #    containerPort: 5555
+      #    protocol: TCP
+
+      # -- Defines additional volumeClaimTemplates that should be applied to the Bitbucket pod.
+      # Note that this will not create any corresponding volume mounts;
+      # those needs to be defined in bitbucket.additionalVolumeMounts
+      #
+      additionalVolumeClaimTemplates: []
+      #  - name: myadditionalvolumeclaim
+      #    storageClassName:
+      #    resources:
+      #      requests:
+      #        storage: 1Gi
+
+      # -- Defines topology spread constraints for Bitbucket pods. See details:
+      # https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+      #
+      topologySpreadConstraints: []
+      # - maxSkew: 1
+      #   topologyKey: kubernetes.io/hostname
+      #   whenUnsatisfiable: ScheduleAnyway
+      #   labelSelector:
+      #     matchLabels:
+
+      # -- Certificates to be added to Java truststore. Provide reference to a secret that contains the certificates
+      #
+      additionalCertificates:
+        secretName:
+        customCmd:
+
+    # Monitoring
+    #
+    monitoring:
+      # -- Expose JMX metrics with jmx_exporter https://github.com/prometheus/jmx_exporter
+      #
+      exposeJmxMetrics: false
+
+      # --  JMX exporter init container configuration
+      #
+      jmxExporterInitContainer:
+        # -- Whether to run JMX exporter init container as root to copy JMX exporter binary to shared home volume.
+        # Set to false if running containers as root is not allowed in the cluster.
+        #
+        runAsRoot: true
+
+        # -- Custom SecurityContext for the jmx exporter init container
+        #
+        customSecurityContext: {}
+
+        # -- Resources requests and limits for the JMX exporter init container
+        # See: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+        #
+        resources: {}
+        #  requests:
+        #    cpu: "1m"
+        #    memory: "20Mi"
+        #  limits:
+        #    cpu: "1"
+        #    memory: "1G"
+
+      # -- Annotations added to the jmx service
+      #
+      jmxServiceAnnotations: {}
+
+      # -- Fetch jmx_exporter jar from the image. If set to false make sure to manually copy the jar
+      # to shared home and provide an absolute path in jmxExporterCustomJarLocation
+      #
+      fetchJmxExporterJar: true
+
+      # -- Image repository with jmx_exporter jar
+      #
+      jmxExporterImageRepo: bitnami/jmx-exporter
+
+      # -- Image tag to be used to pull jmxExporterImageRepo
+      #
+      jmxExporterImageTag: 0.18.0
+
+      # -- Port number on which metrics will be available
+      #
+      jmxExporterPort: 9999
+
+      # -- JMX exporter port type
+      #
+      jmxExporterPortType: ClusterIP
+
+      # -- Location of jmx_exporter jar file if mounted from a secret or manually copied to shared home
+      #
+      jmxExporterCustomJarLocation:
+
+      # -- Custom JMX config with the rules
+      #
+      jmxExporterCustomConfig: {}
+      #  rules:
+      #   - pattern: ".*"
+
+      serviceMonitor:
+        # -- Create ServiceMonitor to start scraping metrics. ServiceMonitor CRD needs to be created in advance.
+        #
+        create: false
+
+        # -- ServiceMonitorSelector of the prometheus instance.
+        #
+        prometheusLabelSelector:
+          {}
+          # release: prometheus
+
+        # -- Scrape interval for the JMX service.
+        #
+        scrapeIntervalSeconds: 30
+
+      grafana:
+        # -- Create ConfigMaps with Grafana dashboards
+        #
+        createDashboards: false
+
+        # -- Label selector for Grafana dashboard importer sidecar
+        #
+        dashboardLabels:
+          {}
+          # grafana_dashboard: dc_monitoring
+
+        # -- Annotations added to Grafana dashboards ConfigMaps. See: https://github.com/kiwigrid/k8s-sidecar#usage
+        #
+        dashboardAnnotations:
+          {}
+          # k8s-sidecar-target-directory: /tmp/dashboards/example-folder
+
+    # Fluentd configuration
+    #
+    # Bitbucket log collection and aggregation can be enabled using Flunetd. This config
+    # assumes an existing ELK stack has been stood up and is available.
+    # https://www.fluentd.org/
+    #
+    fluentd:
+      # -- Set to 'true' if the Fluentd sidecar (DaemonSet) should be added to each pod
+      #
+      enabled: false
+
+      # -- The Fluentd sidecar image repository
+      #
+      imageRepo: fluent/fluentd-kubernetes-daemonset
+
+      # -- The Fluentd sidecar image tag
+      #
+      imageTag: v1.11.5-debian-elasticsearch7-1.2
+
+      # -- Resources requests and limits for fluentd sidecar container
+      # See: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+      #
+      resources: {}
+      #  requests:
+      #    cpu: "1m"
+      #    memory: "20Mi"
+      #  limits:
+      #    cpu: "1"
+      #    memory: "1G"
+
+      # -- The command used to start Fluentd. If not supplied the default command
+      # will be used: "fluentd -c /fluentd/etc/fluent.conf -v"
+      #
+      # Note: The custom command can be free-form, however pay particular attention to
+      # the process that should ultimately be left running in the container. This process
+      # should be invoked with 'exec' so that signals are appropriately propagated to it,
+      # for instance SIGTERM. An example of how such a command may look is:
+      # "<command 1> && <command 2> && exec <primary command>"
+      command:
+
+      # -- Set to 'true' if a custom config (see 'configmap-fluentd.yaml' for default)
+      # should be used for Fluentd. If enabled this config must be supplied via the
+      # 'fluentdCustomConfig' property below.
+      #
+      customConfigFile: false
+
+      # -- Custom fluent.conf file
+      #
+      fluentdCustomConfig: {}
+      # fluent.conf: |
+      #   <source>
+      #     @type tail
+      #     <parse>
+      #     @type multiline
+      #     format_firstline /\d{4}-\d{1,2}-\d{1,2}/
+      #     </parse>
+      #     path /application-data/logs/atlassian-bitbucket-access.log*
+      #     pos_file /tmp/bitbucketlog.pos
+      #     tag bitbucket-access-logs
+      #   </source>
+
+      # Elasticsearch config based on your ELK stack
+      #
+      elasticsearch:
+        # -- Set to 'true' if Fluentd should send all log events to an Elasticsearch service.
+        #
+        enabled: true
+
+        # -- The hostname of the Elasticsearch service that Fluentd should send logs to.
+        #
+        hostname: elasticsearch
+
+      # -- Specify custom volumes to be added to Fluentd container (e.g. more log sources)
+      #
+      extraVolumes: []
+      # - name: local-home
+      #   mountPath: application-data/logs
+      #   subPath: log
+      #   readOnly: true
+
+    # -- Custom annotations that will be applied to all Bitbucket pods
+    #
+    podAnnotations: {}
+    #  name: <value>
+
+    # -- Custom labels that will be applied to all Bitbucket pods
+    #
+    podLabels: {}
+    #  name: <value>
+
+    # -- Standard K8s node-selectors that will be applied to all Bitbucket pods
+    #
+    nodeSelector: {}
+    #  name: <value>
+
+    # -- Standard K8s tolerations that will be applied to all Bitbucket pods
+    #
+    tolerations: []
+    # - effect: <name>
+    #   operator: <operator>
+    #   key: <key>
+
+    # -- Standard Kubernetes affinities that will be applied to all Bitbucket pods
+    # Due to the performance requirements it is highly recommended running all Bitbucket pods
+    # in the same availability zone as your dedicated NFS server. To achieve this, you
+    # can define `affinity` and `podAffinity` rules that will place all pods into the same zone,
+    # and therefore minimise the real distance between the application pods and the shared storage.
+    # More specific documentation can be found in the official Affinity and Anti-affinity documentation:
+    #  https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
+    #
+    # This is an example on how to ensure the pods are in the same zone as NFS server that is labeled with `role=nfs-server`:
+    #
+    #   podAffinity:
+    #    requiredDuringSchedulingIgnoredDuringExecution:
+    #      - labelSelector:
+    #          matchExpressions:
+    #            - key: role
+    #              operator: In
+    #              values:
+    #                - nfs-server # needs to be the same value as NFS server deployment
+    #        topologyKey: topology.kubernetes.io/zone
+    affinity: {}
+
+    # -- Standard K8s schedulerName that will be applied to all Bitbucket pods.
+    # Check Kubernetes documentation on how to configure multiple schedulers:
+    # https://kubernetes.io/docs/tasks/extend-kubernetes/configure-multiple-schedulers/#specify-schedulers-for-pods
+    #
+    schedulerName:
+
+    # -- Priority class for the application pods. The PriorityClass with this name needs to be available in the cluster.
+    # For details see https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass
+    #
+    priorityClassName:
+
+    # -- Additional container definitions that will be added to all Bitbucket pods
+    #
+    additionalContainers: []
+    #  - name: <name>
+    #    image: <image>:<tag>
+
+    # -- Additional initContainer definitions that will be added to all Bitbucket pods
+    #
+    additionalInitContainers: []
+    #  - name: <name>
+    #    image: <image>:<tag>
+
+    # -- Additional labels that should be applied to all resources
+    #
+    additionalLabels: {}
+    #  name: <value>
+
+    # -- Additional existing ConfigMaps and Secrets not managed by Helm that should be
+    # mounted into service container. Configuration details below (camelCase is important!):
+    # 'name'      - References existing ConfigMap or secret name.
+    # 'type'      - 'configMap' or 'secret'
+    # 'key'       - The file name.
+    # 'mountPath' - The destination directory in a container.
+    # VolumeMount and Volumes are added with this name and index position, for example;
+    # custom-config-0, keystore-2
+    #
+    additionalFiles: []
+    # Examples:
+    #  - name: custom-config
+    #    type: configMap
+    #    key: log4j.properties
+    #    mountPath:  /var/atlassian
+    #  - name: custom-config
+    #    type: configMap
+    #    key: web.xml
+    #    mountPath: /var/atlassian
+    #  - name: keystore
+    #    type: secret
+    #    key: keystore.jks
+    #    mountPath: /var/ssl
+
+    # -- Additional host aliases for each pod, equivalent to adding them to the /etc/hosts file.
+    # https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
+    additionalHosts: []
+    #  - ip: "127.0.0.1"
+    #    hostnames:
+    #    - "foo.local"
+    #    - "bar.local"
+
+    # -- PodDisruptionBudget: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+    # You can specify only one of maxUnavailable and minAvailable in a single PodDisruptionBudget. When both minAvailable and maxUnavailable are set, maxUnavailable takes precedence.
+    #
+    podDisruptionBudget:
+      enabled: false
+      labels: {}
+      annotations: {}
+      minAvailable:
+      maxUnavailable:
+
+    # -- Create additional ConfigMaps with given names, keys and content. Ther Helm release name will be used as a prefix
+    # for a ConfigMap name, fileName is used as subPath
+    #
+    additionalConfigMaps: []
+    #  - name: extra-configmap
+    #    keys:
+    #      - fileName: hello.properties
+    #        mountPath: /opt/atlassian/jira/atlassian-jira/WEB-INF/classes
+    #        defaultMode:
+    #        content: |
+    #          foo=bar
+    #          hello=world
+    #      - fileName: hello.xml
+    #        mountPath: /opt/atlassian/jira/atlassian-jira/WEB-INF/classes
+    #        content: |
+    #          <xml>
+    #          </xml>
+
+    atlassianAnalyticsAndSupport:
+      analytics:
+        # -- Mount ConfigMap with selected Helm chart values as a JSON
+        # which DC products will read and send analytics events to Atlassian data pipelines
+        #
+        enabled: true
+
+      helmValues:
+        # -- Mount ConfigMap with selected Helm chart values as a YAML file
+        # which can be optionally including to support.zip
+        #
+        enabled: true
+
+    # -- Metadata and pod spec for pods started in Helm tests
+    #
+    testPods:
+      labels: {}
+      annotations: {}
+      nodeSelector: {}
+      tolerations: []
+      affinity: {}
+      schedulerName:
+      image:
+        permissionsTestContainer: debian:stable-slim
+        statusTestContainer: alpine:latest

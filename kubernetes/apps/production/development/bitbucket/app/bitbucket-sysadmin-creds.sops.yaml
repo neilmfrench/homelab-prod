@@ -1,0 +1,30 @@
+# yamllint disable
+apiVersion: v1
+kind: Secret
+metadata:
+    name: bitbucket-sysadmin-credentials
+stringData:
+    username: ENC[AES256_GCM,data:B/QzJA==,iv:RSIdonjHkRyoe/XW6K53i48dTil5OiuCGs9aa3iOFYU=,tag:9OUzgzg6NXZIbYZnyvt0qw==,type:str]
+    password: ENC[AES256_GCM,data:9TQbUlYClT6tWUbL,iv:9ZR+5/cwk5ceq0PNE7ojEyqmCZzB1tgbugWs30bDhC0=,tag:tb7rjh0cIi6Mb9z5iBQQcw==,type:str]
+    displayName: ENC[AES256_GCM,data:5dhm/u9v6qVrGbI=,iv:sdGsBIQ55UhHTZMtdQkbT/dtfYjNpRMn5sw0MJ+5ejE=,tag:JLproOK4wzk9K2p36AIP3A==,type:str]
+    emailAddress: ENC[AES256_GCM,data:R0rXjl9WhRK9KqpBgphjPA==,iv:VOV12llj74AjHsokUeToBSf8vCkOwTotT4IIJnZ/UXs=,tag:MNlN5uwV4eRLgkj/UX/GkQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiVjY3Z0U2am15WUk3MWpJ
+            dDA2bk5TdGxzd1piRDl6d3Y1SDEwVGtIalRVClJEeG5QcEZ6SUFzQmdXakl2M1Jk
+            YmRMOVJxMENTaUdDVStyVk9vaTZFSjQKLS0tIENua0pFSTFPSE96VWVCSU9uMXIv
+            WWlQTHhVZ2ZiMGV6dlFORU9xUDJoaXMKgGm0vMud264g2MNQzTrYgdEY1GAi15SY
+            eM8N+bzaod1J2Cn04Nn7UxGaT6F7LLnj9I7sLRkngPmeOOWHe0gJDA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-12-19T21:29:18Z"
+    mac: ENC[AES256_GCM,data:QqS2rAIHkCzLbyMyXPNGdxFYIVMaOT4ZeUGDiWzQ08VKLQ9kDyzBT/b0UIYzysj4RtIcQwsa+VYlF3KNycM8keu5DtJQiELg9NP8u/USjLmHaZdcOxTutraEC9PIJKKelSHfs8nopRglWb7kgMs+wbu/d7gCCJmgOSziOOFxb8Q=,iv:ShneqhqZ4B1U7hJHtoxoOEV5mu1ztbHs/ROU5qYu8Zg=,tag:i8rB7Gcqm1BBc70JafylBw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

@@ -1,0 +1,28 @@
+# yamllint disable
+apiVersion: v1
+kind: Secret
+metadata:
+    name: bitbucket-database-credentials
+stringData:
+    username: ENC[AES256_GCM,data:sfrV/spWT2cD,iv:3psMlERa1TehrMTedYt7hkV/ZxdyySgl23U9ERCE2o8=,tag:gCl3VhlU8H/9urbFcU+l4A==,type:str]
+    password: ENC[AES256_GCM,data:z5DYup1u0p/yEqbL,iv:JOkZa6iASrd1M3YcTWU1UAb7i8WGoGEyU3BDcfdn8ak=,tag:VIIRySQ15YMdUX4ql7JKkQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSQXRBbnErdysrNDhQbmNR
+            bVJtclNPZTJXQ3BUT01vaTZWcitMTENsSEVvClhjb2NLNGpQZE80TjB5Tk1qOGxx
+            RkJTUTFhcEZDZjBiZUx5RVBDUUVaZkEKLS0tIFZoemRTY2RpbC8rQUdLbEtYbHRx
+            d1hNbkREMU9FeVU2QzlNM3plbjhuM3MKGsrMivnwtYgklhbPVEhEtmCBczXF8vR2
+            oVReigjdHdhdDSTwq5JyCjxEKggZfd7DZFmk9hcZkiffn2jd04oYSg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-12-19T21:13:30Z"
+    mac: ENC[AES256_GCM,data:+ob9hPjftjvGUx/R2/94qwbs2Hx8+7KFvpVadZtGvbG/5WhgxWvb1FALKpvHMx3OSmxAd5lhgcaKXHT4yE7s6u4I2Gf0p/bYEwXYEYBZaefQGodPaNdAbO8OrKbRTguuK6GBHGf3SIPYA3SFclxhIfCmoG2dLtHmrKFpfOzcYJE=,iv:tyO0+7QcugkG6v9NrkDyRZ+hn0O5xZ6U9k93jMpqSKI=,tag:3vkVpHJqYnhXlANn2bssmA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

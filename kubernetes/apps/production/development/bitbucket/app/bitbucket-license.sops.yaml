@@ -1,0 +1,27 @@
+# yamllint disable
+apiVersion: v1
+kind: Secret
+metadata:
+    name: bitbucket-license
+stringData:
+    license-key: ENC[AES256_GCM,data:DjmSqA==,iv:orn8exSAEfBj32ftY13rXblHdAF4gQM8GVS6h8AbqQY=,tag:wUYwYerhVqfTH2d44xjmrg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxSDR2dE5BSzJIb3pUczFx
+            Zll3bUZ5dVVrTVQ4Qmpqajlybm1ETVBIaFg0CnkxUVIyQk9VaGNyMUtUMWNCQ3hS
+            Qk9oeGVYWFFMMUplVHlsMTBJU2JXYTQKLS0tIE54dnc5VmtYck05Wi9VUWx2ZWlJ
+            Q2hlWWVTakhjcDFWV0tYMExBMkRCMTQKeUOGc0Qnfgm2pxsO9mV2lArjauJrNzsL
+            kANvTeE8Sjs/XNRQ/EB+Sp6Wzc9rrU+gTCce1nbh9Uk8y+BMVdEBlg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-12-19T21:35:44Z"
+    mac: ENC[AES256_GCM,data:w1GL+KcfKvxr9h0nRT5G8EOU+AiAQjgNvKb81TeQDWWx/r/DdE3jFXNf6m2/wNfwMBCfZN6lN72jSNOTOzKQZKibKRKnycsUCf1RgHVkvscJJZdxpud7oSpypyFvt8/B3Vq6/SFTRWhPglv/Xd6ugTk+AQJknU/BMsxF8qjRl7s=,iv:ixzCAmsTbFA0Ms/0rt0USn/T8gdCrBVHHKud7X/FwSQ=,tag:2H8PaKQH9yd1CRGyziZkcg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3
