@@ -157,29 +157,10 @@ spec:
         failureThreshold: 12
         customProbe: {}
       elasticSearch:
-        # -- The base URL of the external Elasticsearch instance to be used, for example:
-        # http://elasticsearch-master.<namespace>.svc.cluster.local:9200
-        # If this is defined, then Bitbucket will disable its internal Elasticsearch instance.
-        #
-        baseUrl:
-
-        # Elasticsearch's connection details
-        #
+        baseUrl: http://bitbucket-elasticsearch-master:9200
         credentials:
-          # -- The name of the Kubernetes Secret that contains the Elasticsearch credentials.
-          # Example of creating a credentials K8s secret below:
-          # 'kubectl create secret generic <secret-name> --from-literal=username=<username> \
-          # --from-literal=password=<password>'
-          # https://kubernetes.io/docs/concepts/configuration/secret/#opaque-secrets
-          #
-          secretName:
-
-          # -- The key in the Kubernetes Secret that contains the Elasticsearch username.
-          #
+          secretName: bitbucket-elasticsearch-master-credentials
           usernameSecretKey: username
-
-          # -- The key in the Kubernetes Secret that contains the Elasticsearch password.
-          #
           passwordSecretKey: password
 
       shutdown:
