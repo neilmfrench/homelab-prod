@@ -4,6 +4,10 @@ kind: HelmRelease
 metadata:
   name: postgresql
 spec:
+  chart:
+    spec:
+      chart: postgresql
+      version: 12.12.10
   values:
     auth:
       postgresPassword: "${SECRET_BITBUCKET_POSTGRESQL_PASSWORD}"
