@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: postgresql
-      version: 12.12.10
+      version: 11.9.13
   values:
     auth:
       postgresPassword: "${SECRET_BITBUCKET_POSTGRESQL_PASSWORD}"
