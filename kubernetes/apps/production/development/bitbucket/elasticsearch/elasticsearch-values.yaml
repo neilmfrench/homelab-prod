@@ -244,7 +244,7 @@ spec:
       timeoutSeconds: 5
 
     # https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html#request-params wait_for_status
-    clusterHealthCheckParams: "wait_for_status=green"
+    clusterHealthCheckParams: ""
 
     ## Use an alternate scheduler.
     ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
