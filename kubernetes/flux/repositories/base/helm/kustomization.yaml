@@ -38,3 +38,4 @@ resources:
   - ./kyverno.yaml
   - ./fairwinds.yaml
   - ./kubelet-csr-approver.yaml
+  - ./atlassian.yaml
