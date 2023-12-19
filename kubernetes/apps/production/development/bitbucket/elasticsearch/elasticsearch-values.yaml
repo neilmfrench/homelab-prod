@@ -7,7 +7,6 @@ spec:
   values:
     clusterName: "elasticsearch"
     nodeGroup: "master"
-
     # The service that non master groups will try to connect to when joining the cluster
     # This should be set to clusterName + "-" + nodeGroup for your master group
     masterService: ""
