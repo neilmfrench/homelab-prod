@@ -257,3 +257,14 @@ patches:
       kind: HelmRepository
       name: atlassian
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: elastic
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: elastic
+      namespace: flux-system

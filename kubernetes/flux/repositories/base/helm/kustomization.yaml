@@ -39,3 +39,4 @@ resources:
   - ./fairwinds.yaml
   - ./kubelet-csr-approver.yaml
   - ./atlassian.yaml
+  - ./elastic.yaml
