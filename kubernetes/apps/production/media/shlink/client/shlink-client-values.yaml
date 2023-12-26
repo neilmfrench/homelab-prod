@@ -5,14 +5,28 @@ metadata:
   name: shlink-client
 spec:
   values:
-    image:
-      repository: shlinkio/shlink-web-client
-      tag: "3.10.2"
-    env:
-      SHLINK_SERVER_URL: "https://shlink.${SECRET_DOMAIN}"
-      SHLINK_SERVER_API_KEY: "${SECRET_SHLINK_API_KEY}"
+    controllers:
+      main:
+        enabled: true
+        containers:
+          main:
+            image:
+              repository: shlinkio/shlink-web-client
+              tag: "3.10.2"
+            env:
+              SHLINK_SERVER_URL: "https://shlink.${SECRET_DOMAIN}"
+              SHLINK_SERVER_API_KEY: "${SECRET_SHLINK_API_KEY}"
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
     service:
       main:
+        enabled: true
         ports:
           http:
+            enabled: true
             port: 80
