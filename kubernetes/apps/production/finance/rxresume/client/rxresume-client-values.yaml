@@ -37,6 +37,7 @@ spec:
         enabled: true
         ports:
           http:
+            enabled: true
             port: 3000
     ingress:
       main:
