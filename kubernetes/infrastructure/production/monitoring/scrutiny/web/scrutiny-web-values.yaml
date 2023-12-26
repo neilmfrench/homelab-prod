@@ -5,38 +5,46 @@ metadata:
   name: scrutiny-web
 spec:
   values:
-    controller:
-      annotations:
-        configmap.reloader.stakater.com/reload: "scrutiny-config"
-    image:
-      repository: ghcr.io/analogj/scrutiny
-      tag: "v0.7.2-web"
-    env:
-      SCRUTINY_WEB_INFLUXDB_HOST: "scrutiny-influxdb-influxdb2"
-      SCRUTINY_WEB_INFLUXDB_PORT: 80
-      SCRUTINY_WEB_INFLUXDB_TOKEN: "${INFLUXDB_ADMIN_TOKEN}"
-      SCRUTINY_WEB_INFLUXDB_ORG: "influxdata"
-      SCRUTINY_WEB_INFLUXDB_BUCKET: "default"
-    persistence:
-      config:
+    controllers:
+      main:
         enabled: true
-        existingClaim: scrutiny-web-config
-        mountPath: /opt/scrutiny/config
-      config-file:
-        enabled: true
-        type: configMap
-        name: scrutiny-config
-        mountPath: /opt/scrutiny/config/scrutiny.yaml
-        subPath: scrutiny.yaml
+        annotations:
+          configmap.reloader.stakater.com/reload: "scrutiny-config"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/analogj/scrutiny
+              tag: "v0.7.2-web"
+            env:
+              SCRUTINY_WEB_INFLUXDB_HOST: "scrutiny-influxdb-influxdb2"
+              SCRUTINY_WEB_INFLUXDB_PORT: 80
+              SCRUTINY_WEB_INFLUXDB_TOKEN: "${INFLUXDB_ADMIN_TOKEN}"
+              SCRUTINY_WEB_INFLUXDB_ORG: "influxdata"
+              SCRUTINY_WEB_INFLUXDB_BUCKET: "default"
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 25m
+                memory: 56Mi
+              limits:
+                memory: 128Mi
     service:
       main:
+        enabled: true
         ports:
           http:
+            enabled: true
             port: 8080
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        className: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
@@ -44,15 +52,23 @@ spec:
           - host: &host "scrutiny.${SECRET_DOMAIN}"
             paths:
               - path: /
-                type: Prefix
+                pathType: Prefix
+                service:
+                  name: main
         tls:
           - hosts:
               - *host
             secretName: scrutiny-tls
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
+    persistence:
+      config:
+        enabled: true
+        existingClaim: scrutiny-web-config
+        globalMounts:
+          - path: /opt/scrutiny/config
+      config-file:
+        enabled: true
+        type: configMap
+        name: scrutiny-config
+        globalMounts:
+          - path: /opt/scrutiny/config/scrutiny.yaml
+            subPath: scrutiny.yaml
