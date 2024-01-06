@@ -40,3 +40,4 @@ resources:
   - ./kubelet-csr-approver.yaml
   - ./atlassian.yaml
   - ./elastic.yaml
+  - ./christianknell.yaml
