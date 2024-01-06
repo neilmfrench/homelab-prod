@@ -31,17 +31,17 @@ spec:
             patch:
               - op: replace
                 path: /spec/template/spec/containers/0/livenessProbe/initialDelaySeconds
-                value: 60
+                value: 120
               - op: replace
                 path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
-                value: 60
+                value: 120
           - target:
               kind: Deployment
               name: baserow-wsgi
             patch:
               - op: replace
                 path: /spec/template/spec/containers/0/livenessProbe/initialDelaySeconds
-                value: 60
+                value: 120
               - op: replace
                 path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
-                value: 60
+                value: 120
