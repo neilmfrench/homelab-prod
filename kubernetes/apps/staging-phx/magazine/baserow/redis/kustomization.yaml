@@ -3,10 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: magazine
 resources:
-  # - ./restic-config.sops.yaml
-  # - ./volsync.yaml
-  - ./data-pvc.yaml
-  - ../../../../base/postgresql
+  - ../../../../base/redis
 namePrefix: baserow-
 patchesStrategicMerge:
-  - ./postgresql-values.yaml
+  - ./redis-values.yaml
