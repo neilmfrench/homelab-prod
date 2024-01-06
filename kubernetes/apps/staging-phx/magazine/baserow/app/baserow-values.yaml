@@ -212,7 +212,7 @@ spec:
           # -- The folder in which the backend will store user uploaded files
           root: "/baserow/media"
           # -- The URL at which user uploaded media files will be made available
-          url: "$PUBLIC_BACKEND_URL/media/"
+          url: "https://baserow-api.${SECRET_MAGAZINE_DOMAIN}/media/"
         # -- If set to "true" when the Baserow backend service starts up it will automatically apply database migrations. Set to any other value to disable. If you disable this then you must remember to manually apply the database migrations when upgrading Baserow to a new version.
         migrateOnStartup: "true"
         # -- How long before actions are cleaned up, actions are used to let you undo/redo so this is effectively the max length of time you can undo/redo can action.
