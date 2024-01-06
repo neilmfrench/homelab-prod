@@ -222,7 +222,7 @@ spec:
         # -- The maximum number of rows that can be requested at once.
         rowPageSizeLimit: "200"
         # -- The Secret key used by Django for cryptographic signing such as generating secure password reset links and managing sessions. See https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECRET_KEY for more details.
-        secretKey: ""
+        secretKey: "${SECRET_BASEROW_KEY}"
         # -- Controls when snapshots expire, set in number of days. Expired snapshots will be automatically deleted.
         snapshotExpirationTimeDays: "360"
         # -- The number of seconds before the background sync templates job will timeout if not yet completed.
@@ -309,12 +309,13 @@ spec:
       publicFrontendUrl: "https://baserow.${SECRET_MAGAZINE_DOMAIN}"
     postgresql:
       enabled: false
-      secretName: baserow-postgresql-credentials
     externalPostgresql:
       auth:
         database: baserow
         password: ${SECRET_BASEROW_POSTGRESQL_PASSWORD}
         username: baserow
+        existingSecret: baserow-postgresql
+        userPasswordKey: password
       hostname: "baserow-postgresql"
       port: 5432
     redis:
