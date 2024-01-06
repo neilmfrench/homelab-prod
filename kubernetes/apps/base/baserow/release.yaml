@@ -22,3 +22,26 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: Deployment
+              name: baserow-asgi
+            patch:
+              - op: replace
+                path: /spec/template/spec/containers/0/livenessProbe/initialDelaySeconds
+                value: 60
+              - op: replace
+                path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
+                value: 60
+          - target:
+              kind: Deployment
+              name: baserow-wsgi
+            patch:
+              - op: replace
+                path: /spec/template/spec/containers/0/livenessProbe/initialDelaySeconds
+                value: 60
+              - op: replace
+                path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
+                value: 60
