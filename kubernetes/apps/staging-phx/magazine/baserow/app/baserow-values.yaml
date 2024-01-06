@@ -9,7 +9,7 @@ spec:
       image:
         repository: baserow/web-frontend
         pullPolicy: IfNotPresent
-        tag: "1.20.2"
+        tag: "1.22.1"
       podSecurityContext:
         fsGroup: 9999
         runAsGroup: 9999
@@ -66,7 +66,7 @@ spec:
         image:
           repository: baserow/backend
           pullPolicy: IfNotPresent
-          tag: "1.20.2"
+          tag: "1.22.1"
         podSecurityContext:
           fsGroup: 9999
           runAsGroup: 9999
@@ -95,8 +95,8 @@ spec:
       celery:
         image:
           repository: baserow/backend
-          pullPolicy: Always
-          tag: "1.20.2"
+          pullPolicy: IfNotPresent
+          tag: "1.22.1"
         podSecurityContext:
           fsGroup: 9999
           runAsGroup: 9999
@@ -263,8 +263,8 @@ spec:
       wsgi:
         image:
           repository: baserow/backend
-          pullPolicy: Always
-          tag: "1.20.2"
+          pullPolicy: IfNotPresent
+          tag: "1.22.1"
         # -- Resource limits and requests for the controller pods.
         resources:
           {}
@@ -309,6 +309,7 @@ spec:
       publicFrontendUrl: "https://baserow.${SECRET_MAGAZINE_DOMAIN}"
     postgresql:
       enabled: false
+      secretName: baserow-postgresql-credentials
     externalPostgresql:
       auth:
         database: baserow
@@ -321,5 +322,5 @@ spec:
     externalRedis:
       auth:
         enabled: false
-      hostname: ""
+      hostname: "baserow-redis-master"
       port: 6379
