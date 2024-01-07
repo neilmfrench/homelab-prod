@@ -10,6 +10,8 @@ spec:
         runAsGroup: 9999
         runAsNonRoot: true
         runAsUser: 9999
+        fsGroup: 9999
+        fsGroupChangePolicy: "OnRootMismatch"
     controllers:
       main:
         enabled: true
