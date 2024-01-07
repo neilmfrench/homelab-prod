@@ -30,6 +30,8 @@ spec:
               DATABASE_PORT: "5432"
               REDIS_HOST: "baserow-redis-master"
               REDIS_PORT: "6379"
+              REDIS_PASSWORD: ""
+              REDIS_USER: ""
             probes:
               liveness:
                 enabled: false
