@@ -28,7 +28,7 @@ spec:
               DATABASE_USER: baserow
               DATABASE_PASSWORD: ${SECRET_BASEROW_POSTGRESQL_PASSWORD}
               DATABASE_PORT: "5432"
-              NO_COLOR: "Logs are unreadable"
+              NO_COLOR: "true"
             probes:
               liveness:
                 enabled: false
