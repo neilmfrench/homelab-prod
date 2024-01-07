@@ -28,6 +28,7 @@ spec:
               DATABASE_USER: baserow
               DATABASE_PASSWORD: ${SECRET_BASEROW_POSTGRESQL_PASSWORD}
               DATABASE_PORT: "5432"
+              NO_COLOR: "Logs are unreadable"
             probes:
               liveness:
                 enabled: false
@@ -49,8 +50,8 @@ spec:
               requests:
                 cpu: 25m
                 memory: 128Mi
-              limits:
-                memory: 1024Mi
+              # limits:
+              #   memory: 1024Mi
     service:
       main:
         enabled: true
