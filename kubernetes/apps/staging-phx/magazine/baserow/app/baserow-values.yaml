@@ -31,19 +31,20 @@ spec:
               REDIS_HOST: "baserow-redis-master"
               REDIS_PORT: "6379"
             probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /api/_health/
-                    port: &port 80
-                  initialDelaySeconds: 120
-                  periodSeconds: 10
-                  timeoutSeconds: 10
-                  failureThreshold: 3
-                  successThreshold: 1
-              readiness: *probes
+              liveness:
+                enabled: false
+                # custom: true
+                # spec:
+                #   httpGet:
+                #     path: /api/_health/
+                #     port: &port 80
+                #   initialDelaySeconds: 120
+                #   periodSeconds: 10
+                #   timeoutSeconds: 10
+                #   failureThreshold: 3
+                #   successThreshold: 1
+              readiness:
+                enabled: false
               startup:
                 enabled: false
             resources:
@@ -58,7 +59,7 @@ spec:
         ports:
           http:
             enabled: true
-            port: *port
+            port: 80
     ingress:
       main:
         enabled: true
