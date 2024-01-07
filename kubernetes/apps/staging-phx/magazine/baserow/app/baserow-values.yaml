@@ -28,10 +28,6 @@ spec:
               DATABASE_USER: baserow
               DATABASE_PASSWORD: ${SECRET_BASEROW_POSTGRESQL_PASSWORD}
               DATABASE_PORT: "5432"
-              REDIS_HOST: "baserow-redis-master"
-              REDIS_PORT: "6379"
-              REDIS_PASSWORD: ""
-              REDIS_USER: ""
             probes:
               liveness:
                 enabled: false
