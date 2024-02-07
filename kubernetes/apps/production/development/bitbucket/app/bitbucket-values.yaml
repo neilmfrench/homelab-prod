@@ -10,7 +10,7 @@ spec:
     image:
       repository: atlassian/bitbucket
       pullPolicy: IfNotPresent
-      tag: "7.21.7"
+      tag: "7.21.22"
 
     database:
       url: jdbc:postgresql://bitbucket-postgresql:5432/bitbucket
