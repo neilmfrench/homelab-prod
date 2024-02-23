@@ -58,8 +58,10 @@ spec:
           size: 4Gi
     postgresql:
       enabled: true
-      postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
-      persistence:
-        enabled: true
-        storageClass: ceph-block
-        size: 6Gi
+      auth:
+        password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+      primary:
+        persistence:
+          enabled: true
+          storageClass: ceph-block
+          size: 6Gi
