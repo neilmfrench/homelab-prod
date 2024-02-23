@@ -41,6 +41,7 @@
   ],
   "ignorePaths": [
     "**/kubernetes/apps/production/tekton-pipelines/tekton-pipelines/pipelines/**",
-    "**kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks/**"
+    "**kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks/**",
+    "**/kubernetes/apps/production/development/bitbucket/**"
   ]
 }
