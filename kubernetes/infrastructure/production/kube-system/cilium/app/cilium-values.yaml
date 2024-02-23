@@ -30,7 +30,8 @@ spec:
     enableK8sEndpointSlice: true
     localRedirectPolicy: true
 
-    tunnel: "disabled"
+    # tunnel: "disabled"
+    routingMode: native
     autoDirectNodeRoutes: true
 
     healthChecking: true

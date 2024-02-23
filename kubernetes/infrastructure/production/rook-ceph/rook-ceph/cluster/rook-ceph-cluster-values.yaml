@@ -24,11 +24,20 @@ spec:
         urlPrefix: /
         ssl: false
       storage:
-        useAllNodes: true
+        useAllNodes: false
         useAllDevices: false
-        deviceFilter: sda
+        # deviceFilter: sda
         config:
           osdsPerDevice: "1"
+        nodes:
+          - name: "talos-1"
+            deviceFilter: "sda"
+          - name: "talos-2"
+            deviceFilter: "sda"
+          - name: "talos-3"
+            deviceFilter: "sda"
+          - name: "talos-4"
+            deviceFilter: "sdb"
     monitoring:
       enabled: true
       createPrometheusRules: true

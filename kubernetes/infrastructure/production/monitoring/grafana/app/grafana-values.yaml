@@ -5,6 +5,7 @@ metadata:
   name: grafana
 spec:
   values:
+    assertNoLeakedSecrets: false
     replicas: 1
     rbac:
       pspEnabled: false

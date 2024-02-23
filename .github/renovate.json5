@@ -41,6 +41,13 @@
   ],
   "ignorePaths": [
     "**/kubernetes/apps/production/tekton-pipelines/tekton-pipelines/pipelines/**",
-    "**kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks/**"
+    "**kubernetes/apps/production/tekton-pipelines/tekton-pipelines/tasks/**",
+    "**/kubernetes/apps/production/development/bitbucket/**",
+    "**/kubernetes/apps/base/argocd/**",
+    "**/kubernetes/infrastructure/base/metallb/**",
+    "**/kubernetes/apps/production/media/sabnzbd/app/**",
+    "**/kubernetes/apps/production/media/radarr/app/**",
+    "**/kubernetes/apps/production/media/sonarr/app/**",
+    "**/kubernetes/apps/production/media/prowlarr/app/**"
   ]
 }

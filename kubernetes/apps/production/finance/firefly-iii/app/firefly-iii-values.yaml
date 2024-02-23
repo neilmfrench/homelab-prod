@@ -8,7 +8,7 @@ spec:
     image:
       # renovate: datasource=docker image=fireflyiii/core
       repository: "fireflyiii/core"
-      tag: version-6.0.30
+      tag: version-6.1.9
     persistence:
       enabled: true
       existingClaim: firefly-data
@@ -16,6 +16,7 @@ spec:
       env:
         APP_PASSWORD: "${SECRET_FIREFLY_APP_KEY}"
         DB_PASSWORD: "${SECRET_FIRELY_MARIADB_PASSWORD}"
+      appKey: ${SECRET_FIREFLY_APP_KEY}
     config:
       env:
         SITE_OWNER: "${SECRET_FIREFLY_SITE_OWNER}"
