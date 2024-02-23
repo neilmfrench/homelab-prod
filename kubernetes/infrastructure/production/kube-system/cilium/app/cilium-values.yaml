@@ -31,6 +31,7 @@ spec:
     localRedirectPolicy: true
 
     tunnel: "disabled"
+    routingMode: "native"
     autoDirectNodeRoutes: true
 
     healthChecking: true
