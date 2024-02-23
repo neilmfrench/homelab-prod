@@ -178,3 +178,4 @@ spec:
     persistence:
       enabled: true
       existingClaim: grafana-config
+    assertNoLeakedSecrets: false
