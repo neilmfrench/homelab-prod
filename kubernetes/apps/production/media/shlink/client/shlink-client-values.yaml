@@ -12,7 +12,7 @@ spec:
           main:
             image:
               repository: shlinkio/shlink-web-client
-              tag: "3.10.2"
+              tag: "4.0.1"
             env:
               SHLINK_SERVER_URL: "https://shlink.${SECRET_DOMAIN}"
               SHLINK_SERVER_API_KEY: "${SECRET_SHLINK_API_KEY}"
