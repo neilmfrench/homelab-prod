@@ -8,24 +8,24 @@ spec:
     architecture: standalone
     primary:
       persistence:
-        existingClaim: ghost-mysql-data
+        existingClaim: jake-mysql-restored
       livenessProbe:
         enabled: true
-        initialDelaySeconds: 20
+        initialDelaySeconds: 40
         periodSeconds: 20
         timeoutSeconds: 1
         failureThreshold: 5
         successThreshold: 1
       readinessProbe:
         enabled: true
-        initialDelaySeconds: 20
+        initialDelaySeconds: 40
         periodSeconds: 20
         timeoutSeconds: 1
         failureThreshold: 5
         successThreshold: 1
       startupProbe:
         enabled: true
-        initialDelaySeconds: 20
+        initialDelaySeconds: 40
         periodSeconds: 20
         timeoutSeconds: 1
         failureThreshold: 15
