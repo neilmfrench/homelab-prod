@@ -48,6 +48,8 @@
     "**/kubernetes/apps/production/media/sabnzbd/app/**",
     "**/kubernetes/apps/production/media/radarr/app/**",
     "**/kubernetes/apps/production/media/sonarr/app/**",
-    "**/kubernetes/apps/production/media/prowlarr/app/**"
+    "**/kubernetes/apps/production/media/prowlarr/app/**",
+    "**/kubernetes/infrastructure/base/kube-vip/**",
+    "**/provision/ansible/playbooks/templates/kube-vip-daemonset.yaml.j2"
   ]
 }
