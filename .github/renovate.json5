@@ -50,6 +50,7 @@
     "**/kubernetes/apps/production/media/sonarr/app/**",
     "**/kubernetes/apps/production/media/prowlarr/app/**",
     "**/kubernetes/infrastructure/base/kube-vip/**",
-    "**/provision/ansible/playbooks/templates/kube-vip-daemonset.yaml.j2"
+    "**/provision/ansible/playbooks/templates/kube-vip-daemonset.yaml.j2",
+    "**/kubernetes/infrastructure/base/pihole/**"
   ]
 }

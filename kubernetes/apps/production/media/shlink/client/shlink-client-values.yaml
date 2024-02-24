@@ -18,11 +18,11 @@ spec:
               SHLINK_SERVER_API_KEY: "${SECRET_SHLINK_API_KEY}"
             probes:
               liveness:
-                enabled: true
+                enabled: false
               readiness:
-                enabled: true
+                enabled: false
               startup:
-                enabled: true
+                enabled: false
     service:
       main:
         enabled: true
