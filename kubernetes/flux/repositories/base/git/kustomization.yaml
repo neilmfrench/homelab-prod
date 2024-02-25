@@ -5,3 +5,4 @@ resources:
   - ./traefik-crds.yaml
   - ./tekton-operator-chart.yaml
   - ./k8gb-chart.yaml
+  - ./weave-gitops-chart.yaml
