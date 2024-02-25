@@ -44,3 +44,8 @@ spec:
         type: hostPath
         hostPath: /run/udev
         readOnly: true
+      dev:
+        enabled: true
+        type: hostPath
+        hostPath: /dev
+        readOnly: true
