@@ -8,7 +8,7 @@ spec:
   releaseName: tekton-operator
   chart:
     spec:
-      chart: chart
+      chart: charts/tekton-operator
       sourceRef:
         kind: GitRepository
         name: tekton-chart
