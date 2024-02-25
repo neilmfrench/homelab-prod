@@ -26,3 +26,14 @@ patches:
       kind: GitRepository
       name: traefik-crd-source
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: weave-gitops-chart
+        namespace: flux-system
+    target:
+      kind: GitRepository
+      name: weave-gitops-chart
+      namespace: flux-system
