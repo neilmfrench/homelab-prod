@@ -32,6 +32,11 @@ spec:
                 enabled: true
               startup:
                 enabled: true
+            securityContext:
+              privileged: true
+              capabilities:
+                add:
+                  - SYS_RAWIO
     service:
       main:
         enabled: false
