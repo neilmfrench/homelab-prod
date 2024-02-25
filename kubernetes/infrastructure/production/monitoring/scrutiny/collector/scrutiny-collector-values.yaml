@@ -5,12 +5,6 @@ metadata:
   name: scrutiny-collector
 spec:
   values:
-    defaultPodOptions:
-      securityContext:
-        privileged: true
-        capabilities:
-          add:
-            - SYS_RAWIO
     controllers:
       main:
         enabled: true
@@ -23,7 +17,6 @@ spec:
             env:
               COLLECTOR_API_ENDPOINT: "http://scrutiny-web:8080"
               COLLECTOR_CRON_SCHEDULE: "0 0 * * *"
-              DEBUG: true
               COLLECTOR_RUN_STARTUP: true
             probes:
               liveness:
@@ -48,9 +41,4 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /run/udev
-        readOnly: true
-      dev:
-        enabled: true
-        type: hostPath
-        hostPath: /dev
         readOnly: true
