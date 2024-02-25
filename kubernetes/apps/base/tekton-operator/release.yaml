@@ -22,3 +22,26 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: ClusterRole
+              name: tekton-operator
+            patch:
+              - op: add
+                path: /rules/-
+                value:
+                  apiGroups:
+                    - tekton.dev
+                  resources:
+                    - stepactions
+                    - stepactions/status
+                  verbs:
+                    - get
+                    - list
+                    - create
+                    - update
+                    - delete
+                    - patch
+                    - watch
