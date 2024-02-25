@@ -23,6 +23,8 @@ spec:
             env:
               COLLECTOR_API_ENDPOINT: "http://scrutiny-web:8080"
               COLLECTOR_CRON_SCHEDULE: "0 0 * * *"
+              DEBUG: true
+              COLLECTOR_RUN_STARTUP: true
             probes:
               liveness:
                 enabled: true
