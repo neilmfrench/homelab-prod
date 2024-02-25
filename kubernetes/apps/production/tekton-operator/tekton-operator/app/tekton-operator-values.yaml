@@ -6,3 +6,5 @@ metadata:
 spec:
   values:
     installCRDs: true
+    operator:
+      defaultTargetNamespace: tekton-pipelines
