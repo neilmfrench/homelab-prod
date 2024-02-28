@@ -5,6 +5,12 @@ metadata:
   name: scrutiny-collector
 spec:
   values:
+    defaultPodOptions:
+      securityContext:
+        privileged: true
+        capabilities:
+          add:
+            - SYS_RAWIO
     controllers:
       main:
         enabled: true
@@ -25,11 +31,11 @@ spec:
                 enabled: true
               startup:
                 enabled: true
-            securityContext:
-              privileged: true
-              capabilities:
-                add:
-                  - SYS_RAWIO
+            # securityContext:
+            #   privileged: true
+            #   capabilities:
+            #     add:
+            #       - SYS_RAWIO
     service:
       main:
         enabled: false
