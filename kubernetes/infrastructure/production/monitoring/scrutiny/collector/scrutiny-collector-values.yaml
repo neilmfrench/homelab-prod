@@ -8,9 +8,9 @@ spec:
     defaultPodOptions:
       securityContext:
         privileged: true
-        capabilities:
-          add:
-            - SYS_RAWIO
+        # capabilities:
+        #   add:
+        #     - SYS_RAWIO
     controllers:
       main:
         enabled: true
