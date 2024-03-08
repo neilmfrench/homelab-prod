@@ -8,7 +8,7 @@ spec:
     architecture: standalone
     primary:
       persistence:
-        existingClaim: jake-mysql-restored
+        existingClaim: ghost-mysql-data
       livenessProbe:
         enabled: true
         initialDelaySeconds: 40
