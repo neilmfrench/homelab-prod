@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: magazine
 resources:
   - ./data-pvc.yaml
-  # - ./restic-config.sops.yaml
-  # - ./volsync.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/postgresql
 namePrefix: baserow-
 patchesStrategicMerge:
