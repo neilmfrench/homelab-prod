@@ -6,5 +6,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://christianknell.github.io/helm-charts
+  url: https://charts.christianhuth.de
   timeout: 3m
