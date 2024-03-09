@@ -8,3 +8,7 @@ spec:
     installCRDs: true
     operator:
       defaultTargetNamespace: tekton-pipelines
+    pruner:
+      image:
+        repository: "gcr.io/tekton-releases/dogfooding/tkn"
+        tag: "latest"
