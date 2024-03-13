@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: planka-data-user-avatars-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:VguncqjDRGqHuIBbElZnoqA8/WjA8LQeh7xuzxMEGT7cvfvqzqPhk6/ZspR5Kvwcun0BsQ7JOHKoflVGJmlgZFlu9Eem0ieXv2EG8Ye57SyKwMM=,iv:FIBD1FktEGY5/89qYTWdr5iJeJ/Idc24IX5cpecoWB8=,tag:VWC/tR0ieEgFGK4U0ycBOA==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:Nty+8Ujc4N/MCfpg,iv:j/T+PajW25VkoB7h3acjWvLPcJgOiQFweZuMapu8Zw4=,tag:LOy4MRbJ3mjGM+39tdH5JA==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:tdeb2pzyOaWvPpo3snQ3Jg==,iv:4MQcgs6WdcNafCP4Fp80cBPyUjrUBJR9bfeAWE+eRSY=,tag:I+uvcibgeBonF8xN+NRmKg==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Ew32cZXCGx6xxStGUQYeHoe2wBQOhho7cvenKtvht40=,iv:qfw7O5ztOIHO37/JQ69Uu7vfZHUbBXT242bM2k/ioyA=,tag:mDJeG06eXlW41pGrTyd2gw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXYnRiWjBVeUhpYmFjNnRa
+            T1V1cG80cVRaaisrVGx4WGxpclJRSFZBaUVzCmJrQ3F4WHpKN0xCQ0pDRmFyc0NU
+            enJYM2RJcDB2Nk4xZGpyTm5wbHliK0kKLS0tIHhpNldnVW50bmJTak9yS1NGTjFv
+            Y254M20vdy9BRDdDbWFCVTNOU0FYRzAKGdcGGVGL0KH5kXeaC9JrE1MTpawDRgnt
+            46riqTXDyohEfGp5iIZy+1h2z1FyRjQO7zWRJt2/UU8D+Ihho+Lm3A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-03-13T07:17:47Z"
+    mac: ENC[AES256_GCM,data:ySIQzerPm1bca/PXol76QbWtN3Scw0cfalg5czRU2C5mcWGxz+wwEicCf0Bin1H7G63eyrtUOEhVrja2uesQMOJrn+Nu6ZmVg8QYGyGakNpA+13rBP5WENj0GjZCf+TIrlrCNhSiuSxiHmA02BrJYupGOMo6CHbX0R1DGjAPZTs=,iv:Nk/dpvXBePhIFPYmmy0F8Rol07n2Wo3nYj1HZ42heMo=,tag:KAXZPSlFKwpwhRboSoo93g==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1

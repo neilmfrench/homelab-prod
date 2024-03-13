@@ -4,8 +4,10 @@ kind: Kustomization
 namespace: development
 resources:
   - ./data-pvc.yaml
-  # - ./restic-config.sops.yaml
-  # - ./volsync.yaml
+  - ./restic-config-user-avatars.sops.yaml
+  - ./restic-config-attachments.sops.yaml
+  - ./restic-config-project-background-images.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/planka
 patchesStrategicMerge:
   - ./planka-values.yaml

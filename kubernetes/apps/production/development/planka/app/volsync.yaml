@@ -1,0 +1,54 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: planka-data-user-avatars
+spec:
+  sourcePVC: planka-data-user-avatars
+  trigger:
+    schedule: "0 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: planka-data-user-avatars-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: planka-data-attachments
+spec:
+  sourcePVC: planka-data-attachments
+  trigger:
+    schedule: "0 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: planka-data-attachments-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: planka-data-project-background-images
+spec:
+  sourcePVC: planka-data-project-background-images
+  trigger:
+    schedule: "0 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: planka-data-project-background-images-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      within: 3d
