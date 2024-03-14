@@ -11,7 +11,7 @@ spec:
         secret.reloader.stakater.com/reload: "oci-config"
     image:
       repository: hashicorp/terraform
-      tag: "1.6.4"
+      tag: "1.7.5"
     envFrom:
       - secretRef:
           name: oci-config
