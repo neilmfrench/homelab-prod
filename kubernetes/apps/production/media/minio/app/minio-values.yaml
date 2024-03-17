@@ -14,6 +14,8 @@ spec:
     persistence:
       enabled: true
       existingClaim: minio-data
+    service:
+      type: LoadBalancer
     ingress:
       enabled: true
       ingressClassName: traefik
