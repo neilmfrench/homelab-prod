@@ -16,6 +16,7 @@ spec:
       existingClaim: minio-data
     service:
       type: LoadBalancer
+      loadBalancerIP: 172.16.20.10
     ingress:
       enabled: true
       ingressClassName: traefik
