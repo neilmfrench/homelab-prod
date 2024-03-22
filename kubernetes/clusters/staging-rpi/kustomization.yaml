@@ -1,0 +1,67 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+patches:
+  # Top-level Flux configuration
+  - path: ./staging-rpi-flux.yaml
+  - target:
+      kind: Kustomization
+      name: flux-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-rpi-cluster-flux
+
+  # # Top-level variable configuration
+  # - path: ./staging-rpi-vars.yaml
+  # - target:
+  #     kind: Kustomization
+  #     name: vars-not-used
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: staging-rpi-cluster-vars
+  #     - op: replace
+  #       path: /spec/dependsOn/0/name
+  #       value: staging-rpi-cluster-flux
+
+  # # Top-level repository configuration
+  # - path: ./staging-rpi-repositories.yaml
+  # - target:
+  #     kind: Kustomization
+  #     name: repositories-not-used
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: staging-rpi-cluster-repositories
+  #     - op: replace
+  #       path: /spec/dependsOn/0/name
+  #       value: staging-rpi-cluster-vars
+
+  # # Top-level infrastructure configuration
+  # - path: ./staging-rpi-infrastructure.yaml
+  # - target:
+  #     kind: Kustomization
+  #     name: infrastructure-not-used
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: staging-rpi-cluster-infrastructure
+  #     - op: replace
+  #       path: /spec/dependsOn/0/name
+  #       value: staging-rpi-cluster-repositories
+
+  # # Top-level app configuration
+  # - path: ./staging-rpi-apps.yaml
+  # - target:
+  #     kind: Kustomization
+  #     name: apps-not-used
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: staging-rpi-cluster-apps
+  #     - op: replace
+  #       path: /spec/dependsOn/0/name
+  #       value: staging-rpi-cluster-infrastructure
