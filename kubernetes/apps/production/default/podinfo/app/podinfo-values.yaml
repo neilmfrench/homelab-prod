@@ -10,6 +10,7 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         external-dns/is-public: "true"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        cert-manager.io/cluster-issuer: letsencrypt-production
         # traefik.ingress.kubernetes.io/router.middlewares: networking-crowdsec-traefik-bouncer@kubernetescrd
       hosts:
         - host: &host "test.staging.${SECRET_DOMAIN}"
