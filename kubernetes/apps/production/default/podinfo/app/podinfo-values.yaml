@@ -20,3 +20,4 @@ spec:
       tls:
         - hosts:
             - *host
+          secretName: podinfo-tls
