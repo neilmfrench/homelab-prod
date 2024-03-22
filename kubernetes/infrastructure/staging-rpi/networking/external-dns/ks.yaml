@@ -5,7 +5,7 @@ metadata:
   name: cluster-infrastructure-external-dns
   namespace: flux-system
 spec:
-  path: ./kubernetes/infrastructure/staging-phx/networking/external-dns/app
+  path: ./kubernetes/infrastructure/staging-rpi/networking/external-dns/app
   prune: true
   sourceRef:
     kind: GitRepository

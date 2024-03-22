@@ -25,8 +25,7 @@ spec:
       - service
       - ingress
       - crd
-    txtPrefix: "k8s-phx."
+    txtPrefix: "k8s-rpi."
     txtOwnerId: "home-ops"
     domainFilters:
       - "${SECRET_DOMAIN}"
-      - "${SECRET_MAGAZINE_DOMAIN}"
