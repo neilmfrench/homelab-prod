@@ -14,18 +14,18 @@ patches:
         path: /metadata/name
         value: staging-rpi-cluster-flux
 
-  # # Top-level variable configuration
-  # - path: ./staging-rpi-vars.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: vars-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-rpi-cluster-vars
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-rpi-cluster-flux
+  # Top-level variable configuration
+  - path: ./staging-rpi-vars.yaml
+  - target:
+      kind: Kustomization
+      name: vars-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-rpi-cluster-vars
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-rpi-cluster-flux
 
   # # Top-level repository configuration
   # - path: ./staging-rpi-repositories.yaml
