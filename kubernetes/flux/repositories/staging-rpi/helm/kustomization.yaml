@@ -97,17 +97,6 @@ patches:
       apiVersion: source.toolkit.fluxcd.io/v1beta2
       kind: HelmRepository
       metadata:
-        name: metallb
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: metallb
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
-      kind: HelmRepository
-      metadata:
         name: minio
         namespace: flux-system
     target:
