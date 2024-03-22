@@ -1,0 +1,50 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base/git
+patches:
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: tekton-chart
+        namespace: flux-system
+    target:
+      kind: GitRepository
+      name: tekton-chart
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: traefik-crd-source
+        namespace: flux-system
+    target:
+      kind: GitRepository
+      name: traefik-crd-source
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: weave-gitops-chart
+        namespace: flux-system
+    target:
+      kind: GitRepository
+      name: weave-gitops-chart
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: k8gb-chart
+        namespace: flux-system
+    target:
+      kind: GitRepository
+      name: k8gb-chart
+      namespace: flux-system

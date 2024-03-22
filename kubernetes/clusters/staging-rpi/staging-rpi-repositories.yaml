@@ -1,0 +1,7 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: repositories-not-used
+  namespace: flux-system
+spec:
+  path: ./kubernetes/flux/repositories/staging-rpi

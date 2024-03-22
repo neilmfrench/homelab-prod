@@ -27,18 +27,18 @@ patches:
         path: /spec/dependsOn/0/name
         value: staging-rpi-cluster-flux
 
-  # # Top-level repository configuration
-  # - path: ./staging-rpi-repositories.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: repositories-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-rpi-cluster-repositories
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-rpi-cluster-vars
+  # Top-level repository configuration
+  - path: ./staging-rpi-repositories.yaml
+  - target:
+      kind: Kustomization
+      name: repositories-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-rpi-cluster-repositories
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-rpi-cluster-vars
 
   # # Top-level infrastructure configuration
   # - path: ./staging-rpi-infrastructure.yaml
