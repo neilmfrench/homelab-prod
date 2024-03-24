@@ -17,21 +17,21 @@ spec:
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: staging-phx-cluster-flux
+      name: staging-rpi-cluster-flux
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: staging-phx-cluster-vars
+      name: staging-rpi-cluster-vars
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: staging-phx-cluster-repositories
+      name: staging-rpi-cluster-repositories
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: staging-phx-cluster-infrastructure
+      name: staging-rpi-cluster-infrastructure
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: staging-phx-cluster-apps
+      name: staging-rpi-cluster-apps
       namespace: flux-system
