@@ -1,6 +1,7 @@
 ignore: |
   *.sops.*
   gotk-components.yaml
+  install.yaml
 extends: default
 rules:
   truthy:
