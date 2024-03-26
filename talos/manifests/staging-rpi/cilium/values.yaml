@@ -1,6 +1,7 @@
 ---
 k8sServiceHost: "localhost"
 ipv4NativeRoutingCIDR: "10.224.0.0/16"
+# ipv6NativeRoutingCIDR: ""
 k8sServicePort: "7445"
 
 cluster:
@@ -53,7 +54,7 @@ bgp:
 ipv4:
   enabled: true
 ipv6:
-  enabled: true
+  enabled: false
 hostServices:
   enabled: true
 hostPort:
@@ -131,3 +132,14 @@ securityContext:
 
 ingressController:
   enabled: false
+
+extraContainers:
+  - name: setup-accept-ra
+    image: busybox
+    command:
+      - sh
+      - "-c"
+      - "echo 2 > /hostproc/sys/net/ipv6/conf/eth0/accept_ra; while :; do  sleep 30;done"
+    volumeMounts:
+      - mountPath: /hostproc
+        name: hostproc
