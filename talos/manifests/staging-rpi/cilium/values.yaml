@@ -142,4 +142,4 @@ extraContainers:
       - "echo 2 > /hostproc/sys/net/ipv6/conf/eth0/accept_ra; while :; do  sleep 30;done"
     volumeMounts:
       - mountPath: /hostproc
-        name: hostproc
+        name: fake
