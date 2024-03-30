@@ -1,0 +1,151 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cilium
+spec:
+  chart:
+    spec:
+      chart: cilium
+      version: 1.15.1
+  values:
+    k8sServiceHost: "localhost"
+    ipv4NativeRoutingCIDR: "10.0.0.0/8"
+    # ipv6NativeRoutingCIDR: ""
+    k8sServicePort: "7445"
+
+    cluster:
+      name: staging-rpi
+      id: 2
+
+    operator:
+      enabled: true
+      rollOutPods: true
+      replicas: 1
+      prometheus:
+        enabled: false
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      tolerations:
+        - operator: Exists
+          effect: NoSchedule
+
+    identityAllocationMode: crd
+    kubeProxyReplacement: true
+    enableK8sEndpointSlice: true
+    localRedirectPolicy: true
+
+    # tunnel: "disabled"
+    routingMode: native
+    autoDirectNodeRoutes: true
+    devices: [eth0]
+
+    healthChecking: true
+
+    cni:
+      install: true
+
+    containerRuntime:
+      integration: containerd
+      socketPath: /system/run/containerd/containerd.sock
+
+    ipam:
+      mode: "kubernetes"
+    k8s:
+      requireIPv4PodCIDR: true
+      requireIPv6PodCIDR: false
+
+    endpointRoutes:
+      enabled: true
+    bpf:
+      masquerade: true
+    bgp:
+      enabled: false
+    ipv4:
+      enabled: true
+    ipv6:
+      enabled: false
+    hostServices:
+      enabled: true
+    hostPort:
+      enabled: true
+    nodePort:
+      enabled: true
+    externalIPs:
+      enabled: true
+    hostFirewall:
+      enabled: true
+
+    l2announcements:
+      enabled: true
+      leaseDuration: 600s
+      leaseRenewDeadline: 120s
+      leaseRetryPeriod: 20s
+
+    k8sClientRateLimit:
+      # -- The sustained request rate in requests per second.
+      qps: 35
+      # -- The burst request rate in requests per second.
+      # The rate limiter will allow short bursts with a higher rate.
+      burst: 45
+
+    loadBalancer:
+      algorithm: maglev
+      mode: dsr
+
+    hubble:
+      enabled: true
+      metrics:
+        enabled:
+          - dns:query
+          - drop
+          - tcp
+          - flow
+          - port-distribution
+          - icmp
+          - http
+        serviceMonitor:
+          enabled: false
+      relay:
+        enabled: true
+        rollOutPods: true
+        prometheus:
+          serviceMonitor:
+            enabled: false
+      ui:
+        enabled: true
+        service:
+          annotations:
+            # Enable Omni Workload Proxying for this service
+            omni-kube-service-exposer.sidero.dev/port: "50080"
+            omni-kube-service-exposer.sidero.dev/label: Hubble
+
+    prometheus:
+      enabled: false
+
+    cgroup:
+      autoMount:
+        enabled: false
+      hostRoot: /sys/fs/cgroup
+
+    securityContext:
+      capabilities:
+        ciliumAgent:
+          - CHOWN
+          - KILL
+          - NET_ADMIN
+          - NET_RAW
+          - IPC_LOCK
+          - SYS_ADMIN
+          - SYS_RESOURCE
+          - DAC_OVERRIDE
+          - FOWNER
+          - SETGID
+          - SETUID
+        cleanCiliumState:
+          - NET_ADMIN
+          - SYS_ADMIN
+          - SYS_RESOURCE
+
+    ingressController:
+      enabled: false
