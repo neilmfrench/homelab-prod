@@ -36,7 +36,8 @@ spec:
     localRedirectPolicy: true
 
     # tunnel: "disabled"
-    routingMode: native
+    routingMode: tunnel
+    tunnelProtocol: vxlan
     autoDirectNodeRoutes: true
     devices: [eth0]
 
