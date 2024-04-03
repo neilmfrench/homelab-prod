@@ -6,4 +6,4 @@ resources:
   # - ./metallb-system
   - ./kubelet-serving-cert-approver
   - ./cert-manager
-  # - ./networking
+  - ./networking
