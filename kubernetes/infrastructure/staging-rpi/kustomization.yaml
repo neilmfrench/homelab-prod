@@ -5,5 +5,5 @@ resources:
   - ./kube-system
   # - ./metallb-system
   - ./kubelet-serving-cert-approver
-  # - ./cert-manager
+  - ./cert-manager
   # - ./networking
