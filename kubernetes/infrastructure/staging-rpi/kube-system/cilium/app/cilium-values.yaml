@@ -38,7 +38,7 @@ spec:
     # tunnel: "disabled"
     routingMode: tunnel
     tunnelProtocol: vxlan
-    autoDirectNodeRoutes: true
+    autoDirectNodeRoutes: false
     devices: [eth0]
 
     healthChecking: true
