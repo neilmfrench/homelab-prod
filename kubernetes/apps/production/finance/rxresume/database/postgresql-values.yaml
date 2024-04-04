@@ -12,6 +12,12 @@ spec:
       database: "rxresume-postgres"
       replicationPassword: "${SECRET_RXRESUME_POSTGRES_PASSWORD}"
     primary:
+      resources:
+        requests:
+          cpu: 125m
+          memory: 256Mi
+        limits:
+          memory: 1024Mi
       persistence:
         enabled: true
         storageClass: ceph-block

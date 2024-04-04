@@ -4,9 +4,6 @@ kind: HelmRelease
 metadata:
   name: postgresql
 spec:
-  chart:
-    spec:
-      version: 15.2.2
   values:
     auth:
       postgresPassword: "${SECRET_BASEROW_POSTGRESQL_PASSWORD}"
@@ -15,6 +12,12 @@ spec:
       database: "baserow"
       replicationPassword: "${SECRET_BASEROW_POSTGRESQL_PASSWORD}"
     primary:
+      resources:
+        requests:
+          cpu: 250m
+          memory: 256Mi
+        limits:
+          memory: 1024Mi
       persistence:
         enabled: true
         existingClaim: baserow-postgresql-data

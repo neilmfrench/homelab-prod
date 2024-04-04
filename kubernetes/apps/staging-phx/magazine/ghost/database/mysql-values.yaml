@@ -7,6 +7,12 @@ spec:
   values:
     architecture: standalone
     primary:
+      resources:
+        requests:
+          cpu: 250m
+          memory: 256Mi
+        limits:
+          memory: 1024Mi
       persistence:
         existingClaim: ghost-mysql-data
       livenessProbe:
