@@ -12,6 +12,12 @@ spec:
       database: "planka"
       replicationPassword: "${SECRET_PLANKA_POSTGRESQL_PASSWORD}"
     primary:
+      resources:
+        requests:
+          cpu: 125m
+          memory: 256Mi
+        limits:
+          memory: 1024Mi
       persistence:
         enabled: true
         storageClass: ceph-block
