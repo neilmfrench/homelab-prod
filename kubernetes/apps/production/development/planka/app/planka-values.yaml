@@ -18,7 +18,7 @@ spec:
           main:
             image:
               repository: ghcr.io/plankanban/planka
-              tag: "1.15.0"
+              tag: "1.16.1"
               pullPolicy: IfNotPresent
             env:
               DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql:5432/planka"
