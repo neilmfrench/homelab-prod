@@ -12,6 +12,10 @@ spec:
     k8sServiceHost: "api.cluster.local"
     k8sServicePort: "6443"
 
+    cluster:
+      name: staging-sj
+      id: 3
+
     operator:
       enabled: true
       rollOutPods: true
