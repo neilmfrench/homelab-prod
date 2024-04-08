@@ -68,17 +68,18 @@ spec:
       enabled: true
       metrics:
         enabled:
-          - dns:query;ignoreAAAA
+          - dns:query
           - drop
           - tcp
           - flow
+          - port-distribution
           - icmp
           - http
       tls:
         enabled: true
         auto:
           enabled: true
-          method: cronJob
+          method: certmanager
       relay:
         enabled: true
       ui:

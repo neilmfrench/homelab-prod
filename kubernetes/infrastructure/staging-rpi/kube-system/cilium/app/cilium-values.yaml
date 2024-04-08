@@ -107,6 +107,11 @@ spec:
           - http
         serviceMonitor:
           enabled: false
+      tls:
+        enabled: true
+        auto:
+          enabled: true
+          method: certmanager
       relay:
         enabled: true
         rollOutPods: true
