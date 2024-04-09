@@ -49,7 +49,9 @@ spec:
       requireIPv6PodCIDR: false
 
     bpf:
-      masquerade: false
+      masquerade: true
+    bgp:
+      enabled: false
     ipv4:
       enabled: true
     ipv6:
