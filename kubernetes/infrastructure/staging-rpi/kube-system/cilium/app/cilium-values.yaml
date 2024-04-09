@@ -212,3 +212,6 @@ spec:
               group: cert-manager.io
               kind: ClusterIssuer
               name: cilium
+          server:
+            extraDnsNames:
+              - "*.${SECRET_DOMAIN}"
