@@ -156,6 +156,19 @@ spec:
     ingressController:
       enabled: false
 
+    tls:
+      # -- Base64 encoded PEM values for the CA certificate and private key.
+      # This can be used as common CA to generate certificates used by hubble and clustermesh components.
+      # It is neither required nor used when cert-manager is used to generate the certificates.
+      ca:
+        # -- Optional CA cert. If it is provided, it will be used by cilium to
+        # generate all other certificates. Otherwise, an ephemeral CA is generated.
+        cert: "${SECRET_CILIUM_CA_CERT}"
+
+        # -- Optional CA private key. If it is provided, it will be used by cilium to
+        # generate all other certificates. Otherwise, an ephemeral CA is generated.
+        key: "${SECRET_CILIUM_CA_KEY}"
+
     clustermesh:
       useAPIServer: true
       # -- Clustermesh explicit configuration.
@@ -170,26 +183,16 @@ spec:
         clusters:
           []
           # -- Name of the cluster
-          # - name: staging-sj
-          #   # -- Address of the cluster, use this if you created DNS records for
-          #   # the cluster Clustermesh API server.
-          #   # address: cluster1.mesh.cilium.io
-          #   # -- Port of the cluster Clustermesh API server.
-          #   port: 2379
-          #   # -- IPs of the cluster Clustermesh API server, use multiple ones when
-          #   # you have multiple IPs to access the Clustermesh API server.
-          #   ips:
-          #     - 10.0.0.11
-          #     - 10.0.0.12
-          #     - 10.0.0.13
-          #     - 10.0.0.23
-        # # -- base64 encoded PEM values for the cluster client certificate, private key and certificate authority.
-        # # These fields can (and should) be omitted in case the CA is shared across clusters. In that case, the
-        # # "remote" private key and certificate available in the local cluster are automatically used instead.
-        #   tls:
-        #     cert: ""
-        #     key: ""
-        #     caCert: ""
+          #- name: staging-sj
+          #  address: cluster-sj.mesh.${SECRET_DOMAIN}
+          #  port: 32379
+          # -- base64 encoded PEM values for the cluster client certificate, private key and certificate authority.
+          # These fields can (and should) be omitted in case the CA is shared across clusters. In that case, the
+          # "remote" private key and certificate available in the local cluster are automatically used instead.
+          # tls:
+          #   cert: ""
+          #   key: ""
+          #   caCert: "${}"
       apiserver:
         replicas: 2
         kvstoremesh:
