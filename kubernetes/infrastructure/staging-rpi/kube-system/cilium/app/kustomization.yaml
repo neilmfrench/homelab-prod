@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ../../../../base/cilium
-  - ./cilium.yaml
+  # - ./cilium.yaml
   - ./cilium-l2-lb.yaml
 patchesStrategicMerge:
   - ./cilium-values.yaml

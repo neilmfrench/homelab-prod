@@ -111,11 +111,7 @@ spec:
         enabled: true
         auto:
           enabled: true
-          method: certmanager
-          certManagerIssuerRef:
-            group: cert-manager.io
-            kind: ClusterIssuer
-            name: cilium
+          method: helm
       relay:
         enabled: true
         rollOutPods: true
