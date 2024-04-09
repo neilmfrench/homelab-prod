@@ -131,38 +131,14 @@ spec:
 
     clustermesh:
       useAPIServer: true
-      # -- Clustermesh explicit configuration.
       config:
-        # -- Enable the Clustermesh explicit configuration.
         enabled: true
-        # -- Default dns domain for the Clustermesh API servers
-        # This is used in the case cluster addresses are not provided
-        # and IPs are used.
         domain: ${SECRET_DOMAIN}
-        # -- List of clusters to be peered in the mesh.
         clusters:
           []
-          # -- Name of the cluster
-          # - name: staging-sj
-          #   # -- Address of the cluster, use this if you created DNS records for
-          #   # the cluster Clustermesh API server.
-          #   # address: cluster1.mesh.cilium.io
-          #   # -- Port of the cluster Clustermesh API server.
+          # - name: staging-rpi
+          #   address: cluster-rpi.mesh.${SECRET_DOMAIN}
           #   port: 2379
-          #   # -- IPs of the cluster Clustermesh API server, use multiple ones when
-          #   # you have multiple IPs to access the Clustermesh API server.
-          #   ips:
-          #     - 10.0.0.11
-          #     - 10.0.0.12
-          #     - 10.0.0.13
-          #     - 10.0.0.23
-        # # -- base64 encoded PEM values for the cluster client certificate, private key and certificate authority.
-        # # These fields can (and should) be omitted in case the CA is shared across clusters. In that case, the
-        # # "remote" private key and certificate available in the local cluster are automatically used instead.
-        #   tls:
-        #     cert: ""
-        #     key: ""
-        #     caCert: ""
       apiserver:
         replicas: 2
         kvstoremesh:
@@ -180,3 +156,8 @@ spec:
           server:
             extraDnsNames:
               - "*.${SECRET_DOMAIN}"
+            extraIpAddresses:
+              - 10.0.0.11
+              - 10.0.0.12
+              - 10.0.0.13
+              - 10.0.0.23

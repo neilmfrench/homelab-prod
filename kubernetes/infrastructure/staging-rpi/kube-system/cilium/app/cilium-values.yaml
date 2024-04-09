@@ -163,28 +163,18 @@ spec:
 
     clustermesh:
       useAPIServer: true
-      # -- Clustermesh explicit configuration.
       config:
-        # -- Enable the Clustermesh explicit configuration.
         enabled: true
-        # -- Default dns domain for the Clustermesh API servers
-        # This is used in the case cluster addresses are not provided
-        # and IPs are used.
         domain: ${SECRET_DOMAIN}
-        # -- List of clusters to be peered in the mesh.
         clusters:
           []
-          # -- Name of the cluster
-          #- name: staging-sj
-          #  address: cluster-sj.mesh.${SECRET_DOMAIN}
-          #  port: 32379
-          # -- base64 encoded PEM values for the cluster client certificate, private key and certificate authority.
-          # These fields can (and should) be omitted in case the CA is shared across clusters. In that case, the
-          # "remote" private key and certificate available in the local cluster are automatically used instead.
-          # tls:
-          #   cert: ""
-          #   key: ""
-          #   caCert: "${}"
+          # - name: staging-sj
+          #   port: 32379
+          #   ips:
+          #     - 10.0.0.11
+          #     - 10.0.0.12
+          #     - 10.0.0.13
+          #     - 10.0.0.23
       apiserver:
         replicas: 2
         kvstoremesh:
@@ -202,3 +192,8 @@ spec:
           server:
             extraDnsNames:
               - "*.${SECRET_DOMAIN}"
+            extraIpAddresses:
+              - 10.0.0.11
+              - 10.0.0.12
+              - 10.0.0.13
+              - 10.0.0.23
