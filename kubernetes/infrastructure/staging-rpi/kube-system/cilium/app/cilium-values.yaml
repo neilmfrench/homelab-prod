@@ -194,7 +194,8 @@ spec:
         #     cert: ""
         #     key: ""
         #     caCert: ""
-
+      apiserver:
+        replicas: 2
         kvstoremesh:
           enabled: false
 
