@@ -124,6 +124,11 @@ spec:
         cpu: 50m
         memory: 128Mi
 
+    tls:
+      ca:
+        cert: "${SECRET_CILIUM_CA_CERT}"
+        key: "${SECRET_CILIUM_CA_KEY}"
+
     clustermesh:
       useAPIServer: true
       # -- Clustermesh explicit configuration.
