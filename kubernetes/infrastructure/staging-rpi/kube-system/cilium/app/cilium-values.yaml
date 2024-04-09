@@ -207,11 +207,7 @@ spec:
           authMode: cluster
           auto:
             enabled: true
-            method: certmanager
-            certManagerIssuerRef:
-              group: cert-manager.io
-              kind: ClusterIssuer
-              name: cilium
+            method: helm
           server:
             extraDnsNames:
               - "*.${SECRET_DOMAIN}"
