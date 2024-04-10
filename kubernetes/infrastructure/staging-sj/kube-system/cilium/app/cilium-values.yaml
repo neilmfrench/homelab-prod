@@ -145,7 +145,7 @@ spec:
 
         service:
           type: NodePort
-          nodePort: 32379
+          nodePort: 32380
 
         tls:
           authMode: cluster
