@@ -182,6 +182,9 @@ spec:
         service:
           type: LoadBalancer
           loadBalancerIP: 172.16.20.75
+          annotations:
+            external-dns.aplpha.kubernetes.io/hostname: "cluster-rpi.mesh.${SECRET_DOMAIN}"
+            external-dns.alpha.kubernetes.io/ttl: "1m"
 
         tls:
           authMode: cluster
