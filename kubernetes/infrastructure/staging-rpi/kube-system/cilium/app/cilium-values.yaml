@@ -170,11 +170,11 @@ spec:
           - name: staging-sj
             address: cluster-sj.mesh.${SECRET_DOMAIN}
             port: 32379
-            ips:
-              - 10.0.0.11
-              - 10.0.0.12
-              - 10.0.0.13
-              - 10.0.0.23
+            # ips:
+            #   - 10.0.0.11
+            #   - 10.0.0.12
+            #   - 10.0.0.13
+            #   - 10.0.0.23
       apiserver:
         replicas: 2
         kvstoremesh:
