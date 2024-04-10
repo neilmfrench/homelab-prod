@@ -168,6 +168,7 @@ spec:
         domain: ${SECRET_DOMAIN}
         clusters:
           - name: staging-sj
+            address: cluster-sj.mesh.${SECRET_DOMAIN}
             port: 32379
             ips:
               - 10.0.0.11
