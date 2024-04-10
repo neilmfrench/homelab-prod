@@ -167,14 +167,13 @@ spec:
         enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
-          []
-          # - name: staging-sj
-          #   port: 32379
-          #   ips:
-          #     - 10.0.0.11
-          #     - 10.0.0.12
-          #     - 10.0.0.13
-          #     - 10.0.0.23
+          - name: staging-sj
+            port: 32379
+            ips:
+              - 10.0.0.11
+              - 10.0.0.12
+              - 10.0.0.13
+              - 10.0.0.23
       apiserver:
         replicas: 2
         kvstoremesh:

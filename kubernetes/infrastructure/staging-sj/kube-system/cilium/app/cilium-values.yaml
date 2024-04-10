@@ -135,10 +135,9 @@ spec:
         enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
-          []
-          # - name: staging-rpi
-          #   address: cluster-rpi.mesh.${SECRET_DOMAIN}
-          #   port: 2379
+          - name: staging-rpi
+            address: cluster-rpi.mesh.${SECRET_DOMAIN}
+            port: 2379
       apiserver:
         replicas: 2
         kvstoremesh:
