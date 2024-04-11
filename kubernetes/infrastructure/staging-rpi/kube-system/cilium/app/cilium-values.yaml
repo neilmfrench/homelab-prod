@@ -167,10 +167,9 @@ spec:
         enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
-          []
-          # - name: staging-sj
-          #   address: cluster-sj.mesh.${SECRET_DOMAIN}
-          #   port: 32380
+          - name: staging-sj
+            address: cluster-sj.mesh.${SECRET_DOMAIN}
+            port: 32380
           #   ips:
           #     - 10.0.0.11
           #     - 10.0.0.12
