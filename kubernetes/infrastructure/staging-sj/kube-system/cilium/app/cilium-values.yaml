@@ -10,6 +10,7 @@ spec:
       version: 1.15.3
   values:
     k8sServiceHost: "api.cluster.local"
+    ipv4NativeRoutingCIDR: "10.0.0.0/8"
     k8sServicePort: "6443"
 
     cluster:
