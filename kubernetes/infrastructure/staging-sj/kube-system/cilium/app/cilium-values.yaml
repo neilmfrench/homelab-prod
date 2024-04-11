@@ -48,6 +48,8 @@ spec:
       requireIPv4PodCIDR: true
       requireIPv6PodCIDR: false
 
+    endpointRoutes:
+      enabled: true
     bpf:
       masquerade: true
     bgp:
