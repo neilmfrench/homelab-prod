@@ -149,7 +149,7 @@ spec:
     clustermesh:
       useAPIServer: true
       config:
-        enabled: true
+        enabled: false
         domain: ${SECRET_DOMAIN}
         clusters:
           []
