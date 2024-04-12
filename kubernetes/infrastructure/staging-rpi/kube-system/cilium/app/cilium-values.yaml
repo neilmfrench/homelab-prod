@@ -145,6 +145,11 @@ spec:
         cert: "${SECRET_CILIUM_CA_CERT}"
         key: "${SECRET_CILIUM_CA_KEY}"
 
+    ipMasqAgent:
+      enabled: true
+      config:
+        nonMasqueradeCIDRs: []
+
     clustermesh:
       useAPIServer: true
       config:
