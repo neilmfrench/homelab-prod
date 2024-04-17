@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - ./secrets
   - ./podinfo/ks.yaml
+  - ./podinfo-lb/ks.yaml
   - ./homepage/ks.yaml
