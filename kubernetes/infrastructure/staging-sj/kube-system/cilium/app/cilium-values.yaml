@@ -151,7 +151,7 @@ spec:
     clustermesh:
       useAPIServer: true
       config:
-        enabled: false
+        enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
           - name: staging-rpi
