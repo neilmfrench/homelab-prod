@@ -6,6 +6,9 @@ spec:
   releaseName: podinfo-lb
   values:
     fullnameOverride: podinfo-lb
+    service:
+      annotations:
+        service.cilium.io/global: "true"
     ingress:
       enabled: true
       className: "nginx"
