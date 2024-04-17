@@ -133,7 +133,7 @@ spec:
         key: "${SECRET_CILIUM_CA_KEY}"
 
     ipMasqAgent:
-      enabled: true
+      enabled: false
       config:
         nonMasqueradeCIDRs:
           - 192.168.0.0/16
