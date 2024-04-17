@@ -3,7 +3,9 @@ kind: HelmRelease
 metadata:
   name: podinfo
 spec:
+  releaseName: podinfo-lb
   values:
+    fullnameOverride: podinfo-lb
     ingress:
       enabled: true
       className: "nginx"
