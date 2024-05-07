@@ -1,0 +1,98 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: keycloak
+spec:
+  values:
+    image:
+      repository: quay.io/keycloak/keycloak
+      tag: 24.0.3-1
+    env:
+      TZ: "${TZ}"
+
+    # resources:
+    #   requests:
+    #     cpu: "500m"
+    #     memory: "1024Mi"
+    # limits:
+    #   cpu: "500m"
+    #   memory: "1024Mi"
+
+    podSecurityContext:
+      fsGroup: 1000
+
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+
+    postgresql:
+      enabled: true
+      postgresqlUsername: ${KEYCLOAK_POSTGRES_USER}
+      postgresqlPassword: ${KEYCLOAK_POSTGRES_PASSWORD}
+      postgresqlDatabase: ${KEYCLOAK_POSTGRES_DB}
+      networkPolicy:
+        enabled: false
+      securityContext:
+        enabled: true
+        fsGroup: 1001
+      containerSecurityContext:
+        enabled: true
+        runAsUser: 1001
+      psp:
+        create: true
+      rbac:
+        create: true
+      persistence:
+        enabled: true
+      volumePermissions:
+        enabled: true
+
+    extraEnv: |
+      - name: PROXY_ADDRESS_FORWARDING
+        value: "true"
+      - name: KEYCLOAK_USER
+        value: ${KEYCLOAK_USER}
+      - name: KEYCLOAK_PASSWORD
+        value: ${KEYCLOAK_PASSWORD}
+
+    # extraInitContainers: |
+    #   - name: theme-provider
+    #     image: ghcr.io/h3mmy/bloopnet_theme
+    #     imagePullPolicy: IfNotPresent
+    #     command:
+    #       - sh
+    #     args:
+    #       - -c
+    #       - |
+    #         echo "Copying theme..."
+    #         cp -R /bloopnet_theme/* /theme
+    #     volumeMounts:
+    #       - name: theme
+    #         mountPath: /theme
+
+    # extraVolumeMounts: |
+    #   - name: theme
+    #     mountPath: /opt/jboss/keycloak/themes/bloopnet_theme
+
+    # extraVolumes: |
+    #   - name: theme
+    #     emptyDir: {}
+
+    ingress:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+      rules:
+        - host: &host "keycloak.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: "keycloak-tls"
