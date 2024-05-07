@@ -7,3 +7,4 @@ resources:
   # - ./vaultwarden/ks.yaml
   - ./crowdsec/ks.yaml
   - ./authentik/ks.yaml
+  # - ./keycloak/ks.yaml

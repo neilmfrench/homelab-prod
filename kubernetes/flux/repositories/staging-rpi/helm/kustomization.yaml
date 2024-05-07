@@ -257,3 +257,14 @@ patches:
       kind: HelmRepository
       name: christianknell
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      kind: HelmRepository
+      metadata:
+        name: codecentric
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: codecentric
+      namespace: flux-system
