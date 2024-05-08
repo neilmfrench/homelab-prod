@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: fake-metrics-generator
+spec:
+  values:
+    image:
+      repository: littleangryclouds/prometheus-data-generator
+      pullPolicy: IfNotPresent
+      tag: "0.2"
+    env:
+      PDG_CONFIG: /pdg/config.yml
+    # env:
+    #   KUBERNETES_API_URL: "https://${KUBE_VIP_ADDR}:6443"
+    #   EXPECTED_API_RESPONSE_BODY: "ok"
+    service:
+      main:
+        enabled: true
+        ports:
+          http:
+            enabled: true
+            port: 9000
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: prometheus-data-generator
+        globalMounts:
+          - path: /pdg/config.yml
+            subPath: config.yml
+            readOnly: true

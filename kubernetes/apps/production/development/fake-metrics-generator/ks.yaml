@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-fake-metrics-generator
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/production/development/fake-metrics-generator/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: fake-metrics-generator
+      namespace: development
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
