@@ -9,33 +9,33 @@ config:
         operation: inc
         labels:
           department: ISCD
-          color: DPAD
+          subdivision: DPAD
       - eval_time: 5
         operation: set
         labels:
           department: ISCD
-          color: DPAD
+          subdivision: DPAD
       - time: 5
         eval_time: 1
         values: 0-15
         operation: inc
         labels:
           department: ISCD
-          color: SES
+          subdivision: SES
       - time: 5
         eval_time: 1
         values: 0-5
         operation: dec
         labels:
           department: ISCD
-          color: SES
+          subdivision: SES
       - time: 5
         eval_time: 1
         value: 3
         operation: inc
         labels:
           department: ISCD
-          color: CAPS
+          subdivision: CAPS
   - name: number_of_fruits
     description: The number of fruits we have.
     type: gauge
