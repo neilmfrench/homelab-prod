@@ -1,4 +1,41 @@
 config:
+  - name: azure_cumulative_spend
+    description: Cumulative Azure spend
+    type: gauge
+    labels: [department, subdivision] #ISCD
+    sequence:
+      - time: 5
+        values: 5-30
+        operation: inc
+        labels:
+          department: ISCD
+          subdivision: DPAD
+      - eval_time: 5
+        operation: set
+        labels:
+          department: ISCD
+          subdivision: DPAD
+      - time: 5
+        eval_time: 1
+        values: 0-20
+        operation: inc
+        labels:
+          department: ISCD
+          subdivision: SES
+      - time: 5
+        eval_time: 1
+        values: 0-10
+        operation: dec
+        labels:
+          department: ISCD
+          subdivision: SES
+      - time: 5
+        eval_time: 1
+        value: 3
+        operation: inc
+        labels:
+          department: ISCD
+          subdivision: CAPS
   - name: cumulative_spend
     description: Cumulative AWS spend
     type: gauge
