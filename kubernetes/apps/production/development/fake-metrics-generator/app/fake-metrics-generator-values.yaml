@@ -5,12 +5,32 @@ metadata:
   name: fake-metrics-generator
 spec:
   values:
-    image:
-      repository: littleangryclouds/prometheus-data-generator
-      pullPolicy: IfNotPresent
-      tag: "0.2"
-    env:
-      PDG_CONFIG: /pdg/config.yml
+    # image:
+    #   repository: littleangryclouds/prometheus-data-generator
+    #   pullPolicy: IfNotPresent
+    #   tag: "0.2"
+    controllers:
+      main:
+        enabled: true
+        annotations:
+          configmap.reloader.stakater.com/reload: "prometheus-data-generator"
+        containers:
+          main:
+            image:
+              repository: littleangryclouds/prometheus-data-generator
+              tag: "0.2"
+              pullPolicy: IfNotPresent
+            env:
+              PDG_CONFIG: /pdg/config.yml
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+    # env:
+    #   PDG_CONFIG: /pdg/config.yml
     # env:
     #   KUBERNETES_API_URL: "https://${KUBE_VIP_ADDR}:6443"
     #   EXPECTED_API_RESPONSE_BODY: "ok"
