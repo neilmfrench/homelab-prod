@@ -5,6 +5,8 @@ metadata:
   name: labels
 labels:
   app.kubernetes.io/managed-by: Helm
+  helm.toolkit.fluxcd.io/name: cilium
+  helm.toolkit.fluxcd.io/namespace: kube-system
 fieldSpecs:
   - path: metadata/labels
     create: true
