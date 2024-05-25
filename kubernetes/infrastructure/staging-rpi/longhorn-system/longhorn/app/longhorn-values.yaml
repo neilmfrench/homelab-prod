@@ -16,12 +16,13 @@ spec:
       # backupTarget: "s3://homelab-backup@us-phoenix-1/longhorn"
       # backupTargetCredentialSecret: oci-object-storage-secret
       defaultLonghornStaticStorageClass: longhorn
+      orphanAutoDeletion: true
     ingress:
       enabled: true
       ingressClassName: nginx
       tls: true
       host: "longhorn.staging.${SECRET_DOMAIN}"
-      tlsSecret: "longhorn-phx-dashboard-tls"
+      tlsSecret: "longhorn-dashboard-tls"
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         # external-dns/is-public: "true"

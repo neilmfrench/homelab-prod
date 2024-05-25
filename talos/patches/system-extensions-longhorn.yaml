@@ -1,0 +1,8 @@
+metadata:
+  namespace: default
+  type: ExtensionsConfigurations.omni.sidero.dev
+  id:
+spec:
+  extensions:
+    - siderolabs/iscsi-tools
+    - siderolabs/util-linux-tools
