@@ -2,14 +2,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 helmCharts:
-  - name: cilium
+  - name: coredns
     includeCRDs: true
-    releaseName: cilium
+    releaseName: coredns
     namespace: kube-system
     valuesFile: ./values.yaml
     skipTests: true
-    version: 1.15.5
-    repo: https://helm.cilium.io/
+    version: 1.28.1
+    repo: https://coredns.github.io/helm/
 # REQUIRED: Use transformers to avoid creating the labels & annotations on all references rather than only metadata/annotations or metadata/labels respectively
 transformers:
   - ./transformers.yaml
