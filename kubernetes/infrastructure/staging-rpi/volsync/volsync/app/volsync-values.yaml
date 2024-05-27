@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: volsync
+spec:
+  values:
+    image:
+      repository: neilmfrench2/volsync-operator
+      pullPolicy: IfNotPresent
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
+    rclone:
+      repository: neilmfrench2/volsync-operator
+      pullPolicy: IfNotPresent
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
+    restic:
+      repository: neilmfrench2/volsync-operator
+      pullPolicy: IfNotPresent
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
+    rsync:
+      repository: neilmfrench2/volsync-operator
+      pullPolicy: IfNotPresent
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
+    rsync-tls:
+      repository: neilmfrench2/volsync-operator
+      pullPolicy: IfNotPresent
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
+    syncthing:
+      repository: neilmfrench2/volsync-operator
+      pullPolicy: IfNotPresent
+      tag: "0.8.0-arm64"
+      image: "neilmfrench2/volsync-operator@sha256:feed3a5e1e688c34e0a779ab34f08e224bf6d48452de29f906a50aa2f0bd82a8"
+    manageCRDs: true
+    metrics:
+      disableAuth: true

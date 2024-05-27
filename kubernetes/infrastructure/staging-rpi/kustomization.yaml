@@ -8,3 +8,4 @@ resources:
   - ./kubelet-serving-cert-approver
   - ./cert-manager
   - ./networking
+  # - ./volsync

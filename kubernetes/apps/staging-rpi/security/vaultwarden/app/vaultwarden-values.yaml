@@ -1,0 +1,62 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vaultwarden
+spec:
+  values:
+    image:
+      repository: vaultwarden/server
+      tag: 1.30.5
+    env:
+      TZ: "${TIMEZONE}"
+      DATA_FOLDER: "config"
+      SIGNUPS_ALLOWED: false
+      INVITATIONS_ALLOWED: true
+      WEBSOCKET_ENABLED: true
+      WEBSOCKET_ADDRESS: 0.0.0.0
+      # WEBSOCKET_PORT: 80
+      DOMAIN: https://vault.${SECRET_DOMAIN}
+      # ADMIN_TOKEN: ${SECRET_VAULTWARDEN_ADMIN_TOKEN}
+      SMTP_HOST: "${SECRET_VAULTWARDEN_EMAIL_HOST}"
+      SMTP_FROM: "${SECRET_VAULTWARDEN_EMAIL_ADDR}"
+      SMTP_FROM_NAME: "${SECRET_VAULTWARDEN_EMAIL_FROM}"
+      SMTP_SSL: true
+      SMTP_PORT: 587
+      SMTP_USERNAME: "${SECRET_VAULTWARDEN_EMAIL_USER}"
+      SMTP_PASSWORD: "${SECRET_VAULTWARDEN_EMAIL_KEY}"
+    service:
+      main:
+        ports:
+          http:
+            port: &port 80
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "cilium"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4-sj.${SECRET_DOMAIN}"
+          ingress.cilium.io/websocket: "true"
+        hosts:
+          - host: &host "vault.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  port: *port
+        tls:
+          - hosts:
+              - *host
+            secretName: "vaultwarden-tls"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: vaultwarden
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 75m
+      limits:
+        memory: 5000Mi
