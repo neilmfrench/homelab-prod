@@ -2,9 +2,9 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: vaultwarden-dest
+  name: vaultwarden-staging
   namespace: security
 spec:
-  rsync:
+  rsyncTLS:
     copyMethod: Direct
     destinationPVC: vaultwarden
