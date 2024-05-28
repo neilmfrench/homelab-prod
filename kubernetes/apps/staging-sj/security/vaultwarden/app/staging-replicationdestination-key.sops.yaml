@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: volsync-rsync-tls-vaultwarden-staging
+type: Opaque
+stringData:
+    psk.txt: ENC[AES256_GCM,data:n/8EdZIPEplcRsVo/jbXiX3oWyWdpjZQCcRmE76f79kFrYeKcxle8kHVfAM/KQeWgYqolws7kGczw/AZzW7lbdxSPd7yARfox47i9V7RWFZ9DK/ZVrxzwRJvWq6S43EVtsa4708UzlL9EZn//UqoMu0bgYiE4LTDKr3Eufbxm8VNK11HU60Iyg==,iv:mAaYNn/ugI4CUgis6bHPOg2CRTx5X3ho6dw5HEFAv7M=,tag:akSbnLyv0PQ9JVaUkKOdBw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArWFB5R1dYakx6QytKTlFU
+            blFYVFJnYVhpVktkUGk2YlJCMVpmYW80a3pVCmZSQkdoVmNxQUVaQ21CTzluWUo5
+            bWg4VnNCZER2TzNBWXhMNzZrQnE5NFUKLS0tIE92MkRmOGZaTkNPWENDZ1hDNmpY
+            aWtUZXE2bVdkby9xN0RqTVdhc3paVWMK8yCyFFpT99NsoZldqs93JFdAlaCJcNRH
+            /g5oovXwU4iIv8docj9oImVk4LgrDbrmxDuEkHb4wQVo+OiexFMe8w==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-05-28T23:45:00Z"
+    mac: ENC[AES256_GCM,data:Kz7bciIuwVLByP0GLNFW8QmNw/rnv8sa09SJGjg2jRH0vEGLwzhATlhbC+MYGnj5EKcw+FI6Z6jtoIQ4awYiLWPK9yqVGD26ROgjPbkS3qYJfkvFHaJXOZV4OiEPTmHYTfs8Jin1vF5/LUaxxU4bfyVIkxbUrdP3qGnBW7//2vg=,iv:sMvIkdm86DKvoss/ADmtSlA0LJOXxKpCj5j9Jlnd14M=,tag:gdkFd/nODvK1XC1oUPhWNQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1

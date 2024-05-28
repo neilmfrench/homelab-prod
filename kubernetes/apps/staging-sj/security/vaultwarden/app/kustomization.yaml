@@ -6,6 +6,7 @@ resources:
   - ./data-pvc.yaml
   - ./restic-config.sops.yaml
   - ./oci-phx-restic-config.sops.yaml
+  - ./staging-replicationdestination-key.sops.yaml
   - ./volsync.yaml
   - ../../../../base/vaultwarden
 patchesStrategicMerge:
