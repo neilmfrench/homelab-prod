@@ -1,34 +1,10 @@
 ---
 apiVersion: volsync.backube/v1alpha1
-kind: ReplicationSource
+kind: ReplicationDestination
 metadata:
-  name: vaultwarden-data
+  name: vaultwarden-dest
+  namespace: security
 spec:
-  sourcePVC: vaultwarden
-  trigger:
-    schedule: "0 7 * * *"
-  restic:
+  rsync:
     copyMethod: Direct
-    pruneIntervalDays: 7
-    repository: vaultwarden-data-restic-config
-    storageClassName: openebs-jiva-csi-default
-    retain:
-      daily: 7
-      within: 3d
----
-apiVersion: volsync.backube/v1alpha1
-kind: ReplicationSource
-metadata:
-  name: vaultwarden-phx-data
-spec:
-  sourcePVC: vaultwarden
-  trigger:
-    schedule: "0 7 * * *"
-  restic:
-    copyMethod: Direct
-    pruneIntervalDays: 7
-    repository: vaultwarden-phx-data-restic-config
-    storageClassName: openebs-jiva-csi-default
-    retain:
-      daily: 7
-      within: 3d
+    destinationPVC: vaultwarden
