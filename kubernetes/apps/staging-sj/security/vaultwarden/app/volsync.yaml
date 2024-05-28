@@ -45,7 +45,3 @@ spec:
     keySecret: volsync-rsync-tls-vaultwarden-staging
     address: volsync-rsync-tls-dst-vaultwarden-staging.security.svc.cluster.local
     copyMethod: Direct
-  rsync:
-    sshKeys: volsync-rsync-dst-src-vaultwarden-dest
-    address: volsync-rsync-dst-vaultwarden-dest.security.svc.cluster.local
-    copyMethod: Direct
