@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: security
 resources:
   - ./data-pvc.yaml
-#   - ./volsync.yaml
-#   - ../../../../base/vaultwarden
-# patchesStrategicMerge:
-#   - ./vaultwarden-values.yaml
+  #   - ./volsync.yaml
+  - ../../../../base/vaultwarden
+patchesStrategicMerge:
+  - ./vaultwarden-values.yaml
