@@ -33,14 +33,14 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "cilium"
+        ingressClassName: "nginx"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          external-dns/is-public: "true"
-          external-dns.alpha.kubernetes.io/target: "ipv4-sj.${SECRET_DOMAIN}"
-          ingress.cilium.io/websocket: "true"
+          # external-dns/is-public: "true"
+          # external-dns.alpha.kubernetes.io/target: "ipv4-sj.${SECRET_DOMAIN}"
+          # ingress.cilium.io/websocket: "true"
         hosts:
-          - host: &host "vault.${SECRET_DOMAIN}"
+          - host: &host "vault.staging.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -59,4 +59,4 @@ spec:
         memory: 100Mi
         cpu: 75m
       limits:
-        memory: 5000Mi
+        memory: 500Mi
