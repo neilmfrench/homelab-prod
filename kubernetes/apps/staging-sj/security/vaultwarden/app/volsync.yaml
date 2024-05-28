@@ -32,3 +32,20 @@ spec:
     retain:
       daily: 7
       within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: vaultwarden-source
+spec:
+  sourcePVC: vaultwarden
+  trigger:
+    schedule: 30 */6 * * *
+  rsyncTLS:
+    keySecret: volsync-rsync-tls-vaultwarden-staging
+    address: volsync-rsync-tls-dst-vaultwarden-staging.security.svc.cluster.local
+    copyMethod: Direct
+  rsync:
+    sshKeys: volsync-rsync-dst-src-vaultwarden-dest
+    address: volsync-rsync-dst-vaultwarden-dest.security.svc.cluster.local
+    copyMethod: Direct

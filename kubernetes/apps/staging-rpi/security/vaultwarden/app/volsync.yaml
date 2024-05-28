@@ -1,4 +1,5 @@
 ---
+# MUST MANUALLY ADD CILIUM GLOBAL ANNOTATION TO SERVICE CREATED!
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
