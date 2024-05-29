@@ -17,6 +17,10 @@ spec:
         APP_PASSWORD: "${SECRET_FIREFLY_APP_KEY}"
         DB_PASSWORD: "${SECRET_FIRELY_MARIADB_PASSWORD}"
       appKey: ${SECRET_FIREFLY_APP_KEY}
+    cronjob:
+      enabled: true
+      auth:
+        token: "${SECRET_FIREFLY_COMMAND_LINE_TOKEN}"
     config:
       env:
         SITE_OWNER: "${SECRET_FIREFLY_SITE_OWNER}"
