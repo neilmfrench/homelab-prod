@@ -9,7 +9,7 @@ spec:
   url: https://github.com/tektoncd/operator.git
   ref:
     # branch: main
-    tag: "v0.70.0"
+    tag: "v0.71.0"
   ignore: |-
     # exclude all
     /*
