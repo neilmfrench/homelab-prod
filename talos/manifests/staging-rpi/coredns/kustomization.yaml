@@ -8,7 +8,7 @@ helmCharts:
     namespace: kube-system
     valuesFile: ./values.yaml
     skipTests: true
-    version: 1.28.1
+    version: 1.31.0
     repo: https://coredns.github.io/helm/
 # REQUIRED: Use transformers to avoid creating the labels & annotations on all references rather than only metadata/annotations or metadata/labels respectively
 transformers:
