@@ -10,5 +10,5 @@ spec:
       enabled: false
     master:
       persistence:
-        storageClass: longhorn
-        size: 4Gi
+        storageClass: ceph-block
+        size: 12Gi

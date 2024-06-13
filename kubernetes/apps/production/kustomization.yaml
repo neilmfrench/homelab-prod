@@ -14,4 +14,4 @@ resources:
   - ./home
   - ./magazine
   - ./flux-system
-  # - ./campsearch
+  - ./campsearch
