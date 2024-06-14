@@ -31,6 +31,6 @@ repos:
         exclude: |
           (?x)^(talos\/manifests\/production\/cilium\/install.yaml)|(talos\/manifests\/staging-rpi\/cilium\/install.yaml)$
   - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.18.2
+    rev: v8.18.4
     hooks:
       - id: gitleaks
