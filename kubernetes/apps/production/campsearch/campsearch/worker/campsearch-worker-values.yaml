@@ -8,7 +8,7 @@ spec:
     image:
       repository: harbor.${SECRET_DOMAIN}/campsearch/worker
       pullPolicy: IfNotPresent
-      tag: "0.0.5"
+      tag: "0.0.6"
     imagePullSecrets:
       - name: harbor-neilfrench-regcred
     controller:
@@ -17,6 +17,10 @@ spec:
       PB_ADDR: "http://pocketbase.development.svc.cluster.local:8090"
       PB_USERNAME: "campsite_bot"
       REDIS_ADDR: "campsearch-redis-master:6379"
+      POD_NAME:
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
     envFrom:
       - secretRef:
           name: campsearch-worker-secrets

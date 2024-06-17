@@ -8,7 +8,7 @@ spec:
     image:
       repository: harbor.${SECRET_DOMAIN}/campsearch/scheduler
       pullPolicy: IfNotPresent
-      tag: "0.0.5"
+      tag: "0.0.6"
     imagePullSecrets:
       - name: harbor-neilfrench-regcred
     controller:
