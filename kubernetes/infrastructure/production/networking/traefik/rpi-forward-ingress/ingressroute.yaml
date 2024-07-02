@@ -8,7 +8,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostSNIRegexp(`^.+\.staging\.${SECRET_DOMAIN}$`))
+    - match: HostSNIRegexp(`^.+\.staging\.${SECRET_DOMAIN}$`)
       priority: 1
       services:
         - name: rpi-cluster-service
