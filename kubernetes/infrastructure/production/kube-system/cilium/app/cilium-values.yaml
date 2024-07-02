@@ -91,7 +91,7 @@ spec:
 
     loadBalancer:
       algorithm: maglev
-      mode: dsr
+      mode: snat
 
     hubble:
       enabled: true
