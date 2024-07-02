@@ -14,7 +14,7 @@ spec:
           main:
             image:
               repository: ghcr.io/analogj/scrutiny
-              tag: "v0.8.0-web"
+              tag: "v0.8.1-web"
             env:
               SCRUTINY_WEB_INFLUXDB_HOST: "scrutiny-influxdb-influxdb2"
               SCRUTINY_WEB_INFLUXDB_PORT: 80
