@@ -16,5 +16,5 @@ spec:
       name: cilium
       namespace: kube-system
   interval: 30m
-  retryInterval: 1m
-  timeout: 3m
+  retryInterval: 5m
+  timeout: 10m
