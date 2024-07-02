@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: mariadb
-      version: 16.3.2
+      version: 18.2.5
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -23,3 +23,8 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  values:
+    primary:
+      resourcesPreset: "none"
+    secondary:
+      resourcesPreset: "none"
