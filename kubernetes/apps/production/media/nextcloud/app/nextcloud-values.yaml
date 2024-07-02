@@ -71,6 +71,13 @@ spec:
         password: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
       architecture: standalone
       primary:
+        resourcesPreset: "none"
+        resources:
+          requests:
+            cpu: 125m
+            memory: 128Mi
+          limits:
+            memory: 1024Mi
         persistence:
           enabled: true
           storageClass: ceph-block
