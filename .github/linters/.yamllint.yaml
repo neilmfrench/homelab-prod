@@ -1,7 +1,10 @@
+---
 ignore: |
   *.sops.*
   gotk-components.yaml
   install.yaml
+  install(.*).yaml
+  talos/manifests/**
 extends: default
 rules:
   truthy:
