@@ -134,7 +134,7 @@ spec:
     ingressController:
       enabled: false
 
-    # tls:
-    #   ca:
-    #     cert: "${SECRET_CILIUM_CA_CERT}"
-    #     key: "${SECRET_CILIUM_CA_KEY}"
+    tls:
+      ca:
+        cert: "${SECRET_CILIUM_CA_CERT}"
+        key: "${SECRET_CILIUM_CA_KEY}"
