@@ -1,0 +1,17 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: rpi-cluster-ingress-route
+  namespace: networking
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: HostSNIRegexp(`{host:.*}.staging.${SECRET_DOMAIN}`)
+      priority: 1
+      services:
+        - name: rpi-cluster-service
+          port: 443
+  tls:
+    passthrough: true
