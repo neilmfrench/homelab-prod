@@ -15,6 +15,7 @@ spec:
         insecure: true
     queryFrontend:
       enabled: true
+      resourcesPreset: "none"
       replicaCount: 3
       ingress:
         enabled: true
@@ -26,6 +27,7 @@ spec:
               - *host
     query:
       enabled: true
+      resourcesPreset: "none"
       replicaCount: 3
       replicaLabel: ["__replica__"]
       dnsDiscovery:
@@ -33,9 +35,11 @@ spec:
         sidecarsNamespace: monitoring
     bucketweb:
       enabled: true
+      resourcesPreset: "none"
       replicaCount: 3
     compactor:
       enabled: true
+      resourcesPreset: "none"
       extraFlags:
         - --compact.concurrency=4
         - --delete-delay=30m
@@ -48,6 +52,7 @@ spec:
         size: 50Gi
     storegateway:
       enabled: true
+      resourcesPreset: "none"
       replicaCount: 3
       persistence:
         enabled: true
@@ -55,6 +60,7 @@ spec:
         size: 20Gi
     ruler:
       enabled: true
+      resourcesPreset: "none"
       replicaCount: 3
       replicaLabel: __replica__
       alertmanagers: ["http://kube-prometheus-stack-alertmanager:9093"]
