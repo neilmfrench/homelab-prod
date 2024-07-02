@@ -4,10 +4,6 @@ kind: HelmRelease
 metadata:
   name: volsync
 spec:
-  chart:
-    spec:
-      chart: volsync
-      version: 0.9.1
   values:
     image:
       repository: neilmfrench2/volsync-operator
