@@ -65,6 +65,7 @@ spec:
           - target:
               kind: Deployment
               name: vaultwarden
+              namespace: security
             patch:
               - op: replace
                 path: /spec/replicas
