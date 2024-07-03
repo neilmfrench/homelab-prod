@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: tekton-operator
@@ -24,11 +24,11 @@ spec:
     keepHistory: false
   postRenderers:
     - kustomize:
-        patchesJson6902:
+        patches:
           - target:
               kind: ClusterRole
               name: tekton-operator
-            patch:
+            patch: |-
               - op: add
                 path: /rules/-
                 value:

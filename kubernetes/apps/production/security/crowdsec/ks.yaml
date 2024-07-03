@@ -11,7 +11,7 @@ spec:
     kind: GitRepository
     name: homelab-source
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: crowdsec
       namespace: security
@@ -33,7 +33,7 @@ spec:
     kind: GitRepository
     name: homelab-source
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: crowdsec-traefik-bouncer
       namespace: security
@@ -55,7 +55,7 @@ spec:
     kind: GitRepository
     name: homelab-source
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: crowdsec-cloudflare-bouncer
       namespace: security

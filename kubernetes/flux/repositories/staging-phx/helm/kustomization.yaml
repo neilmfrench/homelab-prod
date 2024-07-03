@@ -6,7 +6,7 @@ resources:
 patches:
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: argo
@@ -17,7 +17,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: crowdsec
@@ -28,7 +28,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: gitea
@@ -39,7 +39,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: grafana
@@ -50,7 +50,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: harbor
@@ -61,7 +61,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: metallb
@@ -72,7 +72,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: minio
@@ -83,7 +83,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: nextcloud
@@ -94,7 +94,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: pihole
@@ -105,7 +105,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: privatebin
@@ -116,7 +116,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: prometheus
@@ -127,7 +127,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: traefik
@@ -138,7 +138,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: weave-gitops
@@ -149,7 +149,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: influxdb
@@ -160,7 +160,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: cilium
@@ -171,7 +171,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: rook-ceph
@@ -182,7 +182,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: openebs-jiva
@@ -193,7 +193,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: kyverno
@@ -204,7 +204,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: fairwinds
@@ -215,7 +215,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: kubelet-csr-approver
@@ -226,7 +226,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: atlassian
@@ -237,7 +237,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: elastic
@@ -248,7 +248,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: codecentric

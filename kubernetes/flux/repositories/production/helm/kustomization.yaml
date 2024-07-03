@@ -6,7 +6,7 @@ resources:
 patches:
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: ingress-nginx
@@ -17,7 +17,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: calico
@@ -28,7 +28,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: longhorn
@@ -39,7 +39,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: metallb
@@ -50,7 +50,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: pihole
@@ -61,7 +61,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: openebs-jiva
@@ -72,7 +72,7 @@ patches:
       namespace: flux-system
   - patch: |-
       $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
+      apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
         name: christianknell

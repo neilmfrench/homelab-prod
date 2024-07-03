@@ -11,7 +11,7 @@ spec:
     kind: GitRepository
     name: homelab-source
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: vaultwarden
       namespace: security
@@ -31,7 +31,7 @@ spec:
     kind: GitRepository
     name: homelab-source
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: vaultwarden-volsync-cloudflared-access-tunnel
       namespace: security
