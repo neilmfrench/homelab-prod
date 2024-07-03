@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: openebs-jiva
@@ -9,18 +9,18 @@ spec:
       enabled: true
   postRenderers:
     - kustomize:
-        patchesJson6902:
+        patches:
           - target:
               kind: DaemonSet
               name: openebs-jiva-csi-node
-            patch:
+            patch: |-
               - op: add
                 path: /spec/template/spec/hostPID
                 value: true
           - target:
               kind: ConfigMap
               name: openebs-jiva-csi-iscsiadm
-            patch:
+            patch: |-
               - op: replace
                 path: /data/iscsiadm
                 value: |
