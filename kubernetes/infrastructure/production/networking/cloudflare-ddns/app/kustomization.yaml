@@ -5,8 +5,8 @@ namespace: networking
 resources:
   - ./secret.sops.yaml
   - ../../../../base/cloudflare-ddns
-patchesStrategicMerge:
-  - ./cloudflare-ddns-values.yaml
+patches:
+  - path: ./cloudflare-ddns-values.yaml
 configMapGenerator:
   - name: cloudflare-ddns-configmap
     files:

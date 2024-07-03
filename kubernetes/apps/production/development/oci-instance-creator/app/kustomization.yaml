@@ -6,8 +6,8 @@ resources:
   - ./secret.sops.yaml
   - ./cache-pvc.yaml
   - ../../../../base/oci-instance-creator
-patchesStrategicMerge:
-  - ./oci-instance-creator-values.yaml
+patches:
+  - path: ./oci-instance-creator-values.yaml
 configMapGenerator:
   - name: oci-creator-scripts-configmap
     files:

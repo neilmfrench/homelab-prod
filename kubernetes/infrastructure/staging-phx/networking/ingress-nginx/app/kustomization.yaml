@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: networking
 resources:
   - ../../../../base/ingress-nginx
-patchesStrategicMerge:
-  - ./ingress-nginx-values.yaml
+patches:
+  - path: ./ingress-nginx-values.yaml
 configMapGenerator:
   - name: networks
     files:

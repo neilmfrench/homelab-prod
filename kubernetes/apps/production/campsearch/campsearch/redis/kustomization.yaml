@@ -5,5 +5,5 @@ namespace: campsearch
 resources:
   - ../../../../base/redis
 namePrefix: campsearch-
-patchesStrategicMerge:
-  - ./redis-values.yaml
+patches:
+  - path: ./redis-values.yaml

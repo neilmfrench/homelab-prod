@@ -6,5 +6,5 @@ resources:
   - ./ingress.yaml
   - ./ingressroute.yaml
   - ../../../../base/rxresume-client
-patchesStrategicMerge:
-  - ./rxresume-client-values.yaml
+patches:
+  - path: ./rxresume-client-values.yaml

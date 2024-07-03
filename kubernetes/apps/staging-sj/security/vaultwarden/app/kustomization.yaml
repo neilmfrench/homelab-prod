@@ -15,5 +15,5 @@ resources:
   - ./volsync.yaml
   # app
   - ../../../../base/vaultwarden
-patchesStrategicMerge:
-  - ./vaultwarden-values.yaml
+patches:
+  - path: ./vaultwarden-values.yaml

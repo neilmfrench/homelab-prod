@@ -8,8 +8,8 @@ resources:
 images:
   - name: rancher/system-upgrade-controller
     newTag: v0.13.4
-patchesStrategicMerge:
-  - |
+patches:
+  - path: |
     $patch: delete
     apiVersion: v1
     kind: Namespace

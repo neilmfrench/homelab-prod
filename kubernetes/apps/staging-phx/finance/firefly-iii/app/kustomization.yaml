@@ -7,5 +7,5 @@ resources:
   # - ./ingress.yaml
   # - ./ingressroute.yaml
   - ../../../../base/firefly-iii
-patchesStrategicMerge:
-  - ./firefly-iii-values.yaml
+patches:
+  - path: ./firefly-iii-values.yaml

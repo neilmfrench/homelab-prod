@@ -5,5 +5,5 @@ namespace: development
 resources:
   - ./data-pvc.yaml
   - ../../../../base/rsyslog-server
-patchesStrategicMerge:
-  - ./rsyslog-server-values.yaml
+patches:
+  - path: ./rsyslog-server-values.yaml

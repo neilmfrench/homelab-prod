@@ -5,5 +5,5 @@ namespace: longhorn-system
 resources:
   - ./minio-svc-credentials.sops.yaml
   - ../../../../base/longhorn
-patchesStrategicMerge:
-  - ./longhorn-values.yaml
+patches:
+  - path: ./longhorn-values.yaml

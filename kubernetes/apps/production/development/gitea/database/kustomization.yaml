@@ -7,5 +7,5 @@ resources:
   - ./volsync.yaml
   - ../../../../base/postgresql
 namePrefix: gitea-
-patchesStrategicMerge:
-  - ./postgresql-values.yaml
+patches:
+  - path: ./postgresql-values.yaml

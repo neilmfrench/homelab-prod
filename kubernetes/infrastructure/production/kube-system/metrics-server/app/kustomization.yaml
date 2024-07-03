@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ../../../../base/metrics-server
-patchesStrategicMerge:
-  - ./metrics-server-values.yaml
+patches:
+  - path: ./metrics-server-values.yaml

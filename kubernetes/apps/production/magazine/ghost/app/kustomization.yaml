@@ -7,5 +7,5 @@ resources:
   #   - ./dest-ssh.sops.yaml
   - ../../../../base/ghost-magazine
 #   # - ./volsync.yaml
-patchesStrategicMerge:
-  - ./ghost-values.yaml
+patches:
+  - path: ./ghost-values.yaml

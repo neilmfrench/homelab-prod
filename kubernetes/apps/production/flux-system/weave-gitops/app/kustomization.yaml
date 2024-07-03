@@ -5,5 +5,5 @@ namespace: flux-system
 resources:
   - ./admin-secret.sops.yaml
   - ../../../../base/weave-gitops
-patchesStrategicMerge:
-  - ./weave-gitops-values.yaml
+patches:
+  - path: ./weave-gitops-values.yaml

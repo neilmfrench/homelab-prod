@@ -7,5 +7,5 @@ resources:
   - ./ingress.yaml
   - ./ingressroute.yaml
   - ../../../../base/home-assistant
-patchesStrategicMerge:
-  - ./home-assistant-values.yaml
+patches:
+  - path: ./home-assistant-values.yaml

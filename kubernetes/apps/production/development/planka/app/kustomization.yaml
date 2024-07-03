@@ -9,5 +9,5 @@ resources:
   - ./restic-config-project-background-images.sops.yaml
   - ./volsync.yaml
   - ../../../../base/planka
-patchesStrategicMerge:
-  - ./planka-values.yaml
+patches:
+  - path: ./planka-values.yaml

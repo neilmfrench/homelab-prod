@@ -6,8 +6,8 @@ resources:
   - ./config-pvc.yaml
   - ./resource-quota.yaml
   - ../../../../base/pihole-hue-bridge
-patchesStrategicMerge:
-  - ./pihole-hue-bridge-values.yaml
+patches:
+  - path: ./pihole-hue-bridge-values.yaml
 configMapGenerator:
   - name: ha-bridge-config
     files:

@@ -5,5 +5,5 @@ namespace: security
 resources:
   # - ./harbor-secret.sops.yaml
   - ../../../../base/crowdsec-traefik-bouncer
-patchesStrategicMerge:
-  - ./traefik-bouncer-values.yaml
+patches:
+  - path: ./traefik-bouncer-values.yaml

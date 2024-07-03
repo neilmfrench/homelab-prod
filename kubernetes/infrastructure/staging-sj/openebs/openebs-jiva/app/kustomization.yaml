@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: openebs
 resources:
   - ../../../../base/openebs-jiva
-patchesStrategicMerge:
-  - ./openebs-jiva-values.yaml
+patches:
+  - path: ./openebs-jiva-values.yaml

@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: development
 resources:
   - ../../../../base/cluster-status-api
-patchesStrategicMerge:
-  - ./cluster-status-api-values.yaml
+patches:
+  - path: ./cluster-status-api-values.yaml

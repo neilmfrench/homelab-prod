@@ -9,5 +9,5 @@ resources:
   - ./restic-config-trivy.sops.yaml
   - ./volsync.yaml
   - ../../../../base/harbor
-patchesStrategicMerge:
-  - ./harbor-values.yaml
+patches:
+  - path: ./harbor-values.yaml

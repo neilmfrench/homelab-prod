@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: argocd
 resources:
   - ../../../../base/argocd
-patchesStrategicMerge:
-  - ./argocd-values.yaml
+patches:
+  - path: ./argocd-values.yaml

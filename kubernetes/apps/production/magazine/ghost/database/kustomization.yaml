@@ -8,5 +8,5 @@ resources:
   - ../../../../base/mysql
 #   # - ./volsync.yaml
 namePrefix: ghost-
-patchesStrategicMerge:
-  - ./mysql-values.yaml
+patches:
+  - path: ./mysql-values.yaml

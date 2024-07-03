@@ -5,5 +5,5 @@ namespace: default
 resources:
   - ./gslb.yaml
   - ../../../../base/podinfo
-patchesStrategicMerge:
-  - ./podinfo-values.yaml
+patches:
+  - path: ./podinfo-values.yaml

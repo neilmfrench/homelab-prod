@@ -5,5 +5,5 @@ namespace: monitoring
 resources:
   - ./etcd-certs.sops.yaml
   - ../../../../base/kube-prometheus-stack
-patchesStrategicMerge:
-  - ./kube-prometheus-stack-values.yaml
+patches:
+  - path: ./kube-prometheus-stack-values.yaml

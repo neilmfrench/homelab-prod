@@ -6,5 +6,5 @@ resources:
   - ./radarr-api-key.sops.yaml
   - ./config-pvc.yaml
   - ../../../../base/radarr
-patchesStrategicMerge:
-  - ./radarr-values.yaml
+patches:
+  - path: ./radarr-values.yaml

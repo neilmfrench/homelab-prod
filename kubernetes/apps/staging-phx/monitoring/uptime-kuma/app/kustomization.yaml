@@ -7,5 +7,5 @@ resources:
   - ./restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/uptime-kuma
-patchesStrategicMerge:
-  - ./uptime-kuma-values.yaml
+patches:
+  - path: ./uptime-kuma-values.yaml

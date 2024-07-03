@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: tekton-operator
 resources:
   - ../../../../base/tekton-operator
-patchesStrategicMerge:
-  - ./tekton-operator-values.yaml
+patches:
+  - path: ./tekton-operator-values.yaml

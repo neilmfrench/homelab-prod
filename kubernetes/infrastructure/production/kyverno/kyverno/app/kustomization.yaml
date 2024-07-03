@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: kyverno
 resources:
   - ../../../../base/kyverno
-patchesStrategicMerge:
-  - ./kyverno-values.yaml
+patches:
+  - path: ./kyverno-values.yaml

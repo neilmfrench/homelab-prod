@@ -8,5 +8,5 @@ resources:
   - ./volsync.yaml
   - ../../../../base/postgresql
 namePrefix: baserow-
-patchesStrategicMerge:
-  - ./postgresql-values.yaml
+patches:
+  - path: ./postgresql-values.yaml

@@ -5,8 +5,8 @@ namespace: monitoring
 resources:
   - ./config-pvc.yaml
   - ../../../../base/scrutiny-web
-patchesStrategicMerge:
-  - ./scrutiny-web-values.yaml
+patches:
+  - path: ./scrutiny-web-values.yaml
 configMapGenerator:
   - name: scrutiny-config
     files:

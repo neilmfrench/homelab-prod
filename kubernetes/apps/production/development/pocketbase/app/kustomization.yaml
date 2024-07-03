@@ -7,5 +7,5 @@ resources:
   - ./restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/pocketbase
-patchesStrategicMerge:
-  - ./pocketbase-values.yaml
+patches:
+  - path: ./pocketbase-values.yaml

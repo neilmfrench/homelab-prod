@@ -6,5 +6,5 @@ resources:
   - ./gslb.yaml
   - ./ns-record.yaml
   - ../../../../base/homepage
-patchesStrategicMerge:
-  - ./homepage-values.yaml
+patches:
+  - path: ./homepage-values.yaml

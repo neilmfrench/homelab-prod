@@ -6,5 +6,5 @@ resources:
   - ./ingress.yaml
   - ./ingress-route.yaml
   - ../../../../base/shlink-client
-patchesStrategicMerge:
-  - ./shlink-client-values.yaml
+patches:
+  - path: ./shlink-client-values.yaml

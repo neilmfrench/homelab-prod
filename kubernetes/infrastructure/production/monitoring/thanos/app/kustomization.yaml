@@ -5,5 +5,5 @@ namespace: monitoring
 resources:
   - ./bucketclaim.yaml
   - ../../../../base/thanos
-patchesStrategicMerge:
-  - ./thanos-values.yaml
+patches:
+  - path: ./thanos-values.yaml

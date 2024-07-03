@@ -5,5 +5,5 @@ namespace: rook-ceph
 resources:
   - ../../../../base/rook-ceph-operator
   - ./dummy-local-sc.yaml
-patchesStrategicMerge:
-  - ./rook-ceph-operator-values.yaml
+patches:
+  - path: ./rook-ceph-operator-values.yaml

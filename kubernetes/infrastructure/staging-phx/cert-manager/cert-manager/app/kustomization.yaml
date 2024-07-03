@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: cert-manager
 resources:
   - ../../../../base/cert-manager
-patchesStrategicMerge:
-  - ./cert-manager-values.yaml
+patches:
+  - path: ./cert-manager-values.yaml

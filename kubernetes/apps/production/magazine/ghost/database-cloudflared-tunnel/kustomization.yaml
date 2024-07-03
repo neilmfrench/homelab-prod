@@ -5,5 +5,5 @@ namespace: magazine
 resources:
   - ../../../../base/cloudflared-access-tunnel
 namePrefix: vs-ghost-magazine-db-
-patchesStrategicMerge:
-  - ./cloudflared-access-tunnel-values.yaml
+patches:
+  - path: ./cloudflared-access-tunnel-values.yaml

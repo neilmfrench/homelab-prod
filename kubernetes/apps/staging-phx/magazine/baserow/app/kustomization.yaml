@@ -7,5 +7,5 @@ resources:
   - ./restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/baserow
-patchesStrategicMerge:
-  - ./baserow-values.yaml
+patches:
+  - path: ./baserow-values.yaml

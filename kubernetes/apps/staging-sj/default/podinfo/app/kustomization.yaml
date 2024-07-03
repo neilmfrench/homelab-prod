@@ -6,5 +6,5 @@ resources:
   - ./gslb.yaml
   - ../../../../base/podinfo
   # - ./networkpolicy.yaml
-patchesStrategicMerge:
-  - ./podinfo-values.yaml
+patches:
+  - path: ./podinfo-values.yaml

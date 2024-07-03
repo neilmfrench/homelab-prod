@@ -8,5 +8,5 @@ resources:
   - ./volsync.yaml
   - ../../../../base/mariadb
 namePrefix: firefly-iii-
-patchesStrategicMerge:
-  - ./mariadb-values.yaml
+patches:
+  - path: ./mariadb-values.yaml

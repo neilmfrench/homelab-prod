@@ -5,5 +5,5 @@ namespace: longhorn-system
 resources:
   - ./oci-object-storage-secret.sops.yaml
   - ../../../../base/longhorn
-patchesStrategicMerge:
-  - ./longhorn-values.yaml
+patches:
+  - path: ./longhorn-values.yaml

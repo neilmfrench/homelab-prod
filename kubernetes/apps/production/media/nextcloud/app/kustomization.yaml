@@ -8,5 +8,5 @@ resources:
   - ./mariadb-restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/nextcloud
-patchesStrategicMerge:
-  - ./nextcloud-values.yaml
+patches:
+  - path: ./nextcloud-values.yaml

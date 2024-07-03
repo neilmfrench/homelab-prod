@@ -7,5 +7,5 @@ resources:
   - ./volsync.yaml
   - ../../../../base/mariadb
 namePrefix: shlink-
-patchesStrategicMerge:
-  - ./mariadb-values.yaml
+patches:
+  - path: ./mariadb-values.yaml

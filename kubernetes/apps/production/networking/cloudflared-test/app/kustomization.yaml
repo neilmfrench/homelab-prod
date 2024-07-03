@@ -5,5 +5,5 @@ namespace: networking
 namePrefix: cloudflared-test-
 resources:
   - ../../../../base/nginx
-patchesStrategicMerge:
-  - ./cloudflared-test-values.yaml
+patches:
+  - path: ./cloudflared-test-values.yaml

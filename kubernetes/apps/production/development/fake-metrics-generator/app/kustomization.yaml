@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: development
 resources:
   - ../../../../base/fake-metrics-generator
-patchesStrategicMerge:
-  - ./fake-metrics-generator-values.yaml
+patches:
+  - path: ./fake-metrics-generator-values.yaml
 configMapGenerator:
   - name: prometheus-data-generator
     files:

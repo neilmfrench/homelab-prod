@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: networking
 resources:
   - ../../../../base/external-dns
-patchesStrategicMerge:
-  - ./external-dns-values.yaml
+patches:
+  - path: ./external-dns-values.yaml

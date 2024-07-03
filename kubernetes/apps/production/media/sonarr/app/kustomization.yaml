@@ -6,5 +6,5 @@ resources:
   - ./sonarr-api-key.sops.yaml
   - ./config-pvc.yaml
   - ../../../../base/sonarr
-patchesStrategicMerge:
-  - ./sonarr-values.yaml
+patches:
+  - path: ./sonarr-values.yaml

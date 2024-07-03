@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: security
 resources:
   - ../../../../base/crowdsec
-patchesStrategicMerge:
-  - ./crowdsec-values.yaml
+patches:
+  - path: ./crowdsec-values.yaml

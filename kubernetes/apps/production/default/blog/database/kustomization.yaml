@@ -8,5 +8,5 @@ resources:
   - ./data-pvc.yaml
   - ../../../../base/mysql
 namePrefix: blog-
-patchesStrategicMerge:
-  - ./mysql-values.yaml
+patches:
+  - path: ./mysql-values.yaml

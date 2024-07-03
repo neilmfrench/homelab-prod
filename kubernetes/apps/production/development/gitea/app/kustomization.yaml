@@ -7,5 +7,5 @@ resources:
   - ./restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/gitea
-patchesStrategicMerge:
-  - ./gitea-values.yaml
+patches:
+  - path: ./gitea-values.yaml

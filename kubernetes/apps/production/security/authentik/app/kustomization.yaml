@@ -6,5 +6,5 @@ resources:
   - ./restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/authentik
-patchesStrategicMerge:
-  - ./authentik-values.yaml
+patches:
+  - path: ./authentik-values.yaml

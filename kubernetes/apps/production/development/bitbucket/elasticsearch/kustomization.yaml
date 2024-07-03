@@ -5,5 +5,5 @@ namespace: development
 resources:
   - ../../../../base/elasticsearch
 namePrefix: bitbucket-
-patchesStrategicMerge:
-  - ./elasticsearch-values.yaml
+patches:
+  - path: ./elasticsearch-values.yaml

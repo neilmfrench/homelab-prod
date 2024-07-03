@@ -7,5 +7,5 @@ resources:
   - ./restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/rxresume
-patchesStrategicMerge:
-  - ./rxresume-values.yaml
+patches:
+  - path: ./rxresume-values.yaml

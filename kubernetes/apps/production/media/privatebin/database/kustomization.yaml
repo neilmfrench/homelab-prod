@@ -5,5 +5,5 @@ namespace: media
 resources:
   - ../../../../base/mariadb
 namePrefix: privatebin-
-patchesStrategicMerge:
-  - ./mariadb-values.yaml
+patches:
+  - path: ./mariadb-values.yaml

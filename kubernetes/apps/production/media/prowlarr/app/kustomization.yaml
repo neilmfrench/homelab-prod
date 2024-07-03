@@ -6,5 +6,5 @@ resources:
   - ./prowlarr-api-key.sops.yaml
   - ./config-pvc.yaml
   - ../../../../base/prowlarr
-patchesStrategicMerge:
-  - ./prowlarr-values.yaml
+patches:
+  - path: ./prowlarr-values.yaml

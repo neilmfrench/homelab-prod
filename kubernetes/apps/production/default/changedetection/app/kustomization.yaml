@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: default
 resources:
   - ../../../../base/changedetection
-patchesStrategicMerge:
-  - ./changedetection-values.yaml
+patches:
+  - path: ./changedetection-values.yaml

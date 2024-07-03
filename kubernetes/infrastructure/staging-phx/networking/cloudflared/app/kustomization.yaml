@@ -5,8 +5,8 @@ namespace: networking
 resources:
   - ./tunnel-secret.sops.yaml
   - ../../../../base/cloudflared
-patchesStrategicMerge:
-  - ./cloudflared-values.yaml
+patches:
+  - path: ./cloudflared-values.yaml
 configMapGenerator:
   - name: cloudflared-configmap
     files:

@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: media
 resources:
   - ../../../../base/privatebin
-patchesStrategicMerge:
-  - ./privatebin-values.yaml
+patches:
+  - path: ./privatebin-values.yaml

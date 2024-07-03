@@ -5,5 +5,5 @@ namespace: networking
 resources:
   - ./config-pvc.yaml
   - ../../../../base/pihole
-patchesStrategicMerge:
-  - ./pihole-values.yaml
+patches:
+  - path: ./pihole-values.yaml

@@ -5,5 +5,5 @@ namespace: magazine
 resources:
   - ./config-pvc.yaml
   - ../../../../base/ghost-magazine
-patchesStrategicMerge:
-  - ./ghost-values.yaml
+patches:
+  - path: ./ghost-values.yaml

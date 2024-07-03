@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: development
 resources:
   - ../../../../base/fifa-openapi
-patchesStrategicMerge:
-  - ./fifa-openapi-values.yaml
+patches:
+  - path: ./fifa-openapi-values.yaml
 configMapGenerator:
   - name: fifa-openapi-configmap
     files:

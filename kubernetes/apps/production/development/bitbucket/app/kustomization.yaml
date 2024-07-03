@@ -10,5 +10,5 @@ resources:
   # - ./restic-config.sops.yaml
   # - ./volsync.yaml
   - ../../../../base/bitbucket
-patchesStrategicMerge:
-  - ./bitbucket-values.yaml
+patches:
+  - path: ./bitbucket-values.yaml

@@ -5,5 +5,5 @@ namespace: kube-system
 resources:
   - ../../../../base/cilium
   - ./cilium-l2-lb.yaml
-patchesStrategicMerge:
-  - ./cilium-values.yaml
+patches:
+  - path: ./cilium-values.yaml

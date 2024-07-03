@@ -7,5 +7,5 @@ resources:
   - ./restic-config.sops.yaml
   - ./volsync.yaml
   - ../../../../base/bookstack
-patchesStrategicMerge:
-  - ./bookstack-values.yaml
+patches:
+  - path: ./bookstack-values.yaml

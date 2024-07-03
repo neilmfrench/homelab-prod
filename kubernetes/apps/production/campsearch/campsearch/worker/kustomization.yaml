@@ -5,5 +5,5 @@ namespace: campsearch
 resources:
   - ./secret.sops.yaml
   - ../../../../base/campsearch-worker
-patchesStrategicMerge:
-  - ./campsearch-worker-values.yaml
+patches:
+  - path: ./campsearch-worker-values.yaml

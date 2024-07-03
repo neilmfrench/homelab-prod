@@ -6,5 +6,5 @@ resources:
   - ./data-pvc.yaml
   - ../../../../base/influxdb
 namePrefix: scrutiny-
-patchesStrategicMerge:
-  - ./influxdb-values.yaml
+patches:
+  - path: ./influxdb-values.yaml
