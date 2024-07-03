@@ -9,9 +9,11 @@ images:
   - name: rancher/system-upgrade-controller
     newTag: v0.13.4
 patches:
-  - path: |
-    $patch: delete
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: system-upgrade
+  - patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: system-upgrade
+    target:
+      kind: Namespace
