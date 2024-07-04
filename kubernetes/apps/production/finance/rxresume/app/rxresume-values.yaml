@@ -41,7 +41,7 @@ spec:
 
               # Printer
               CHROME_TOKEN: chrome_token
-              CHROME_URL: ws://chrome:3000
+              CHROME_URL: ws://localhost:3000
             probes:
               liveness:
                 enabled: false
