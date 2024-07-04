@@ -5,6 +5,9 @@ metadata:
   name: minio
 spec:
   values:
+    image:
+      repository: quay.io/minio/minio
+      tag: RELEASE.2024-07-04T14-25-45Z
     mode: standalone
     ignoreChartChecksums: true
     rootUser: admin
