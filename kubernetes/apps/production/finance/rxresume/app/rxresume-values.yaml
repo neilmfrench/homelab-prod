@@ -57,7 +57,7 @@ spec:
                 memory: 1024Mi
           chrome:
             image:
-              repository: ghcr.io/browserless/chromium:latest
+              repository: ghcr.io/browserless/chromium
               tag: "v2.15.0"
             env:
               TIMEOUT: 10000
