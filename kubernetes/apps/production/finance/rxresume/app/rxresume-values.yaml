@@ -87,8 +87,12 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         className: traefik
         hosts:
-          name: &host "resume.${SECRET_DOMAIN}"
-          path: /
+          - host: &host "resume.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: rxresume
         tls:
           - hosts:
               - *host
