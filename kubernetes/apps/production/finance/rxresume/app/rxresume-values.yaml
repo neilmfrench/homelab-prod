@@ -6,32 +6,42 @@ metadata:
 spec:
   values:
     controllers:
-      main:
-        enabled: true
+      rxresume:
         containers:
-          main:
+          app:
             image:
               repository: amruthpillai/reactive-resume
-              tag: "server-3.8.4"
+              tag: "v4.1.8"
             env:
-              TZ: ${TIMEZONE}
+              # Basic config
+              PORT: 3000
+              NODE_ENV: production
               PUBLIC_URL: https://resume.${SECRET_DOMAIN}
-              PUBLIC_SERVER_URL: https://resume.${SECRET_DOMAIN}/api
-              POSTGRES_DB: rxresume-postgres
-              POSTGRES_USER: rxresume-postgres
-              POSTGRES_PASSWORD: "${SECRET_RXRESUME_POSTGRES_PASSWORD}"
-              SECRET_KEY: "${SECRET_RXRESUME_KEY}"
-              POSTGRES_HOST: rxresume-postgresql
-              POSTGRES_PORT: "5432"
-              JWT_SECRET: "${SECRET_RXRESUME_JWT_KEY}"
-              JWT_EXPIRY_TIME: "604800"
-              STORAGE_S3_ENABLED: "false"
-              MAIL_FROM_NAME: "${SECRET_RXRESUME_MAIL_FROM_NAME}"
-              MAIL_FROM_EMAIL: "${SECRET_RXRESUME_MAIL_FROM_EMAIL}"
-              MAIL_HOST: "${SECRET_RXRESUME_MAIL_HOST}"
-              MAIL_PORT: "587"
-              MAIL_USERNAME: "${SECRET_RXRESUME_MAIL_USERNAME}"
-              MAIL_PASSWORD: "${SECRET_RXRESUME_MAIL_PASSWORD}"
+              STORAGE_URL: https://s3.${SECRET_DOMAIN}/rxresume
+
+              # Database
+              DATABASE_URL: "postgresql://rxresume-postgres:${SECRET_RXRESUME_POSTGRES_PASSWORD}@rxresume-postgresql:5432/rxresume-postgres"
+
+              # Auth
+              ACCESS_TOKEN_SECRET: "${SECRET_RXRESUME_JWT_KEY}"
+              REFRESH_TOKEN_SECRET: "${SECRET_RXRESUME_JWT_KEY}"
+
+              # Storage
+              STORAGE_ENDPOINT: minio.media.svc.cluster.local
+              STORAGE_PORT: 9000
+              STORAGE_BUCKET: rxresume
+              STORAGE_ACCESS_KEY: "${SECRET_RXRESUME_AWS_ACCESS_KEY_ID}"
+              STORAGE_SECRET_KEY: "${SECRET_RXRESUME_AWS_SECRET_ACCESS_KEY}"
+              STORAGE_USE_SSL: "false"
+              STORAGE_SKIP_BUCKET_CHECK: "false"
+
+              # Email
+              MAIL_FROM: "${SECRET_RXRESUME_MAIL_FROM_EMAIL}"
+              SMTP_URL: "smtp://${SECRET_RXRESUME_MAIL_USERNAME}:${SECRET_RXRESUME_MAIL_PASSWORD}@${SECRET_RXRESUME_MAIL_HOST}:587"
+
+              # Printer
+              CHROME_TOKEN: chrome_token
+              CHROME_URL: ws://chrome:3000
             probes:
               liveness:
                 enabled: false
@@ -45,16 +55,26 @@ spec:
                 memory: 128Mi
               limits:
                 memory: 1024Mi
+          chrome:
+            image:
+              repository: ghcr.io/browserless/chromium:latest
+              tag: "v2.15.0"
+            env:
+              TIMEOUT: 10000
+              CONCURRENT: 10
+              TOKEN: chrome_token
+              EXIT_ON_HEALTH_FAILURE: true
+              PRE_REQUEST_HEALTH_CHECK: true
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
     service:
-      main:
-        enabled: true
+      rxresume:
+        controller: rxresume
         ports:
           http:
-            enabled: true
-            port: 3100
-    persistence:
-      data:
-        enabled: true
-        existingClaim: rxresume-server-data
-        globalMounts:
-          - path: /app/server/dist/assets/uploads
+            port: 3000
