@@ -14,7 +14,7 @@ spec:
               tag: "v4.1.8"
             env:
               # Basic config
-              PORT: 3000
+              PORT: 3010
               NODE_ENV: production
               PUBLIC_URL: https://resume.${SECRET_DOMAIN}
               STORAGE_URL: https://s3.${SECRET_DOMAIN}/rxresume
@@ -77,4 +77,4 @@ spec:
         controller: rxresume
         ports:
           http:
-            port: 3000
+            port: 3010
