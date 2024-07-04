@@ -92,7 +92,8 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: rxresume
+                  identifier: rxresume
+                  port: http
         tls:
           - hosts:
               - *host
