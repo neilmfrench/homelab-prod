@@ -24,9 +24,7 @@ spec:
       database__connection__database: ghost
       mail__transport: "SMTP"
       mail__from: "no-reply@${SECRET_MAGAZINE_DOMAIN}"
-      mail__options__service: "Google"
-      mail__options__host: "smtp.gmail.com"
-      mail__options__port: 587
+      mail__options__service: "Mailgun"
       mail__options__auth__user: "${SECRET_GHOST_EMAIL_USER}"
       mail__options__auth__pass: "${SECRET_GHOST_EMAIL_PASSWORD}"
       NODE_ENV: production
