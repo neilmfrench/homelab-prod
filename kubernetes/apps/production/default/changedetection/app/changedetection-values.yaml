@@ -2,30 +2,62 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: changedetection
+  name: &app changedetection
 spec:
   values:
-    controller:
-      type: statefulset
-    image:
-      repository: ghcr.io/dgtlmoon/changedetection.io
-      tag: 0.45.25
-    env:
-      TZ: ${TIMEZONE}
-      PORT: &port 5000
-      USE_X_SETTINGS: 1
-      PLAYWRIGHT_DRIVER_URL: ws://localhost:3000/?stealth=1&--disable-web-security=true&--user-data-dir=~/browserless-cache-123
-      PUID: 1000
-      PGID: 1000
+    controllers:
+      changedetection:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/dgtlmoon/changedetection.io
+              tag: 0.46.02@sha256:1a7e703c07acfa2eb642be24b3ef7b8a1edb341119f1811b4e1f5afbf883f103
+            env:
+              TZ: ${TIMEZONE}
+              BASE_URL: changedetection.${SECRET_DOMAIN}
+              PORT: &port 5000
+              USE_X_SETTINGS: 1
+              # PLAYWRIGHT_DRIVER_URL: ws://changedetection-browser.default.svc.cluster.local:3000/?stealth=1&--disable-web-security=true
+              PLAYWRIGHT_DRIVER_URL: ws://localhost:3000/?stealth=1&--disable-web-security=true&--user-data-dir=~/tmp/cache
+            resources:
+              requests:
+                cpu: 25m
+                memory: 145M
+              limits:
+                memory: 512M
+          browser:
+            image:
+              repository: docker.io/browserless/chrome
+              tag: latest
+              pullPolicy: IfNotPresent
+            env:
+              - { name: SCREEN_WIDTH, value: "1920" }
+              - { name: SCREEN_HEIGHT, value: "1024" }
+              - { name: SCREEN_DEPTH, value: "16" }
+              - { name: ENABLE_DEBUGGER, value: "false" }
+              - { name: PREBOOT_CHROME, value: "true" }
+              - { name: CONNECTION_TIMEOUT, value: "300000" }
+              - { name: MAX_CONCURRENT_SESSIONS, value: "10" }
+              - { name: CHROME_REFRESH_TIME, value: "600000" }
+              - { name: DEFAULT_BLOCK_ADS, value: "true" }
+              - { name: DEFAULT_STEALTH, value: "true" }
+            resources:
+              requests:
+                cpu: 25m
+                memory: 979M
+              limits:
+                memory: 1G
     service:
-      main:
+      app:
+        controller: *app
         ports:
           http:
             port: *port
+
     ingress:
-      main:
+      app:
         enabled: true
-        ingressClassName: traefik
+        className: traefik
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -34,39 +66,14 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
         tls:
           - hosts:
               - *host
-            secretName: "changedetection-tls"
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /datastore
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: longhorn
-    resources:
-      requests:
-        cpu: 10m
-        memory: 100Mi
-      limits:
-        memory: 250Mi
-    sidecars:
-      browser:
-        image: docker.io/browserless/chrome:latest
-        imagePullPolicy: IfNotPresent
-        env:
-          - { name: SCREEN_WIDTH, value: "1920" }
-          - { name: SCREEN_HEIGHT, value: "1024" }
-          - { name: SCREEN_DEPTH, value: "16" }
-          - { name: ENABLE_DEBUGGER, value: "false" }
-          - { name: PREBOOT_CHROME, value: "true" }
-          - { name: CONNECTION_TIMEOUT, value: "300000" }
-          - { name: MAX_CONCURRENT_SESSIONS, value: "10" }
-          - { name: CHROME_REFRESH_TIME, value: "600000" }
-          - { name: DEFAULT_BLOCK_ADS, value: "true" }
-          - { name: DEFAULT_STEALTH, value: "true" }
+
+    persistence:
+      datastore:
+        enabled: true
+        existingClaim: changedetection-data
