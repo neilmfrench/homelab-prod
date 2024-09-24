@@ -1,0 +1,35 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: trivy-operator
+spec:
+  values:
+    excludeNamespaces: "{{ .Release.Namespace }},rook-ceph"
+
+    operator:
+      replicas: 1
+      scanJobsConcurrentLimit: 1
+      scanJobTTL: 10s
+      builtInTrivyServer: true
+      vulnerabilityScannerScanOnlyCurrentRevisions: true
+      configAuditScannerScanOnlyCurrentRevisions: true
+      # webhookBroadcastURL: ""
+
+    trivy:
+      ignoreUnfixed: true
+      mode: Standalone
+      storageClassName: ceph-block
+      storageSize: "5Gi"
+
+      slow: true
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100M
+        limits:
+          cpu: 500m
+          memory: 500M
+
+    serviceMonitor:
+      enabled: false
