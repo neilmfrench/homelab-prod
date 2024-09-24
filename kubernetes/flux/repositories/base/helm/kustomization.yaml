@@ -42,3 +42,4 @@ resources:
   - ./elastic.yaml
   - ./christianknell.yaml
   - ./codecentric.yaml
+  - ./aqua.yaml

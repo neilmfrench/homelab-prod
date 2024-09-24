@@ -268,3 +268,14 @@ patches:
       kind: HelmRepository
       name: codecentric
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: aqua
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: aqua
+      namespace: flux-system
