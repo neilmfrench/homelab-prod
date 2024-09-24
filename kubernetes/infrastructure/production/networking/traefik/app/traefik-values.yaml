@@ -65,7 +65,7 @@ spec:
           default: true
       web:
         redirectTo:
-          to: websecure
+          port: websecure
       websecure:
         # asDefault: true
         tls:
