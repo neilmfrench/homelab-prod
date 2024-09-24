@@ -8,3 +8,4 @@ resources:
   - ./crowdsec/ks.yaml
   - ./authentik/ks.yaml
   # - ./keycloak/ks.yaml
+  - ./trivy-operator/ks.yaml
