@@ -6,5 +6,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://firefly-iii.github.io/homelab-charts
+  url: https://neilmfrench.github.io/homelab-charts
   timeout: 3m
