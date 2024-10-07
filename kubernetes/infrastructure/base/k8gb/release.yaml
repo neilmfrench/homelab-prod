@@ -8,10 +8,10 @@ spec:
   releaseName: k8gb
   chart:
     spec:
-      chart: chart/k8gb
+      chart: k8gb
       sourceRef:
-        kind: GitRepository
-        name: k8gb-chart
+        kind: HelmRepository
+        name: homelab
         namespace: flux-system
   maxHistory: 3
   install:
