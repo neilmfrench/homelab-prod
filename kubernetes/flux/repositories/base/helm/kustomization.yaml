@@ -43,3 +43,4 @@ resources:
   - ./christianknell.yaml
   - ./codecentric.yaml
   - ./aqua.yaml
+  - ./homelab.yaml
