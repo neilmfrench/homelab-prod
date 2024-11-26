@@ -10,7 +10,7 @@ spec:
         configmap.reloader.stakater.com/reload: "cloudflare-bouncer-configmap"
     image:
       repository: crowdsecurity/cloudflare-bouncer
-      tag: "v0.2.1"
+      tag: "v0.3.0"
     command: ["/bin/sh", "-c"]
     args:
       - cat /tmp/crowdsec-lapi/ca.crt >> /etc/ssl/certs/ca-certificates.crt;
