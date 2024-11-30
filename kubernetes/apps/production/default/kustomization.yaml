@@ -8,3 +8,4 @@ resources:
   # - ./podinfo-ext/ks.yaml
   - ./changedetection/ks.yaml
   - ./blog/ks.yaml
+  - ./littlelink/ks.yaml
