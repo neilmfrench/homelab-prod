@@ -20,12 +20,12 @@ spec:
               LANG: en
               META_INDEX_STATUS: "noindex"
               THEME: "Dark"
-              FAVICON_URL: "https://media.licdn.com/dms/image/v2/D5603AQF6gx_Sjs6X5g/profile-displayphoto-shrink_400_400/B56ZN.37LlG4Ag-/0/1733000410688?e=1738195200&v=beta&t=n_e4-YrSxdvDmqrFOSZIrz8VwnX-XlRKK3cWqUPSWM4"
-              AVATAR_URL: "https://media.licdn.com/dms/image/v2/D5603AQF6gx_Sjs6X5g/profile-displayphoto-shrink_400_400/B56ZN.37LlG4Ag-/0/1733000410688?e=1738195200&v=beta&t=n_e4-YrSxdvDmqrFOSZIrz8VwnX-XlRKK3cWqUPSWM4"
-              AVATAR_2X_URL: "https://media.licdn.com/dms/image/v2/D5603AQF6gx_Sjs6X5g/profile-displayphoto-shrink_400_400/B56ZN.37LlG4Ag-/0/1733000410688?e=1738195200&v=beta&t=n_e4-YrSxdvDmqrFOSZIrz8VwnX-XlRKK3cWqUPSWM4"
+              FAVICON_URL: "https://cloud.${SECRET_DOMAIN}/s/TX2Y8PtkHYCXMk6/preview"
+              AVATAR_URL: "https://cloud.${SECRET_DOMAIN}/s/TX2Y8PtkHYCXMk6/preview"
+              AVATAR_2X_URL: "https://cloud.${SECRET_DOMAIN}/s/TX2Y8PtkHYCXMk6/preview"
               AVATAR_ALT: "Neil French Profile Pic"
               NAME: "Neil French"
-              BIO: "Cloud Engineer | HomeLab Enthusiast | Twitch Streamer | Content Creator on YouTube | Homelab | 🇺🇸 🇯🇵 | Full Nerd"
+              BIO: "Cloud Engineer | HomeLab/Kubernetes/DevSecOps Enthusiast"
               GITHUB: "https://github.com/neilmfrench"
               LINKED_IN: "https://www.linkedin.com/in/neil-french-623bb0188/"
               FOOTER: Neil French © 2024 | All Rights Reserved
