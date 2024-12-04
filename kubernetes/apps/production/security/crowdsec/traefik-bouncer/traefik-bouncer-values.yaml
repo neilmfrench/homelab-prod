@@ -74,3 +74,14 @@ spec:
         requests:
           cpu: 100m
           memory: 128Mi
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: crowdsec-traefik-bouncer
+              namespace: security
+            patch: |-
+              - op: replace
+                path: /spec/replicas
+                value: 0

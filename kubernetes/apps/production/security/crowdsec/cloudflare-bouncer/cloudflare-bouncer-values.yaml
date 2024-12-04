@@ -44,3 +44,14 @@ spec:
         enabled: false
       startup:
         enabled: false
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: crowdsec-cloudflare-bouncer
+              namespace: security
+            patch: |-
+              - op: replace
+                path: /spec/replicas
+                value: 0
