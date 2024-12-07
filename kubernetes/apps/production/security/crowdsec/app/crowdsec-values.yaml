@@ -104,14 +104,3 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
-  postRenderers:
-    - kustomize:
-        patches:
-          - target:
-              kind: Deployment
-              name: crowdsec-lapi
-              namespace: security
-            patch: |-
-              - op: replace
-                path: /spec/replicas
-                value: 1
