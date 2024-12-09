@@ -58,6 +58,10 @@ spec:
               match_re:
                 severity: critical|warning|error
               continue: true
+            - receiver: "pushover"
+              match_re:
+                severity: critical|warning|error
+              continue: true
         inhibit_rules:
           - source_match:
               severity: "critical"
