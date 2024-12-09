@@ -12,6 +12,21 @@ spec:
           resolve_timeout: 5m
         receivers:
           - name: "null"
+          - name: "pushover"
+            pushover_configs:
+              - send_resolved: true
+                user_key: "${SECRET_PUSHOVER_USER_KEY}"
+                token: "${SECRET_ALERTMANAGER_PUSHOVER_TOKEN}"
+                title: |-
+                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
+                text: >-
+                  {{ range .Alerts -}}
+                    **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+                  **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
+                  **Details:**
+                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
           - name: "discord"
             slack_configs:
               - channel: "#prometheus-alerts"
