@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: volsync
 resources:
   - ../../../../base/volsync
+  - ./prometheus-rule.yaml
 patches:
   - path: ./volsync-values.yaml
