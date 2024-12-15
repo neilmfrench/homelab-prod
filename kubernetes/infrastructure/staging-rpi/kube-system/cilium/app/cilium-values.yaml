@@ -46,10 +46,6 @@ spec:
     cni:
       install: true
 
-    containerRuntime:
-      integration: containerd
-      socketPath: /system/run/containerd/containerd.sock
-
     ipam:
       mode: "kubernetes"
     k8s:
