@@ -34,7 +34,8 @@ spec:
     enableK8sEndpointSlice: true
     localRedirectPolicy: true
 
-    tunnel: "vxlan"
+    routingMode: tunnel
+    tunnelProtocol: vxlan
     autoDirectNodeRoutes: false
     # devices: [eth+]
 
