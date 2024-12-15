@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.15.6
+      version: 1.16.4
   values:
     k8sServiceHost: "api.cluster.local"
     # ipv4NativeRoutingCIDR: "10.0.0.0/8"
@@ -159,8 +159,6 @@ spec:
             port: 2379
       apiserver:
         replicas: 2
-        kvstoremesh:
-          enabled: false
 
         service:
           type: NodePort
