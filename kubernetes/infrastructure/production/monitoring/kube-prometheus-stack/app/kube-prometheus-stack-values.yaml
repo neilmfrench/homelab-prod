@@ -209,10 +209,18 @@ spec:
       prometheusSpec:
         replicas: 3
         replicaExternalLabelName: __replica__
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
+        # ruleSelectorNilUsesHelmValues: false
+        # serviceMonitorSelectorNilUsesHelmValues: false
+        # podMonitorSelectorNilUsesHelmValues: false
+        # probeSelectorNilUsesHelmValues: false
+        ruleSelector:
+          matchLabels: null
+        serviceMonitorSelector:
+          matchLabels: null
+        podMonitorSelector:
+          matchLabels: null
+        probeSelector:
+          matchLabels: null
         retention: 2d
         retentionSize: 40GB
         enableAdminAPI: true
