@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ../../../../base/cilium
+  - ./clustermesh-health-svc.yaml
 patches:
   - path: ./cilium-values.yaml
