@@ -15,9 +15,9 @@ spec:
       INVITATIONS_ALLOWED: true
       WEBSOCKET_ENABLED: true
       WEBSOCKET_ADDRESS: 0.0.0.0
-      WEBSOCKET_PORT: 3012
+      # WEBSOCKET_PORT: 80
       DOMAIN: https://vault.${SECRET_DOMAIN}
-      ADMIN_TOKEN: ${SECRET_VAULTWARDEN_ADMIN_TOKEN}
+      # ADMIN_TOKEN: ${SECRET_VAULTWARDEN_ADMIN_TOKEN}
       SMTP_HOST: "${SECRET_VAULTWARDEN_EMAIL_HOST}"
       SMTP_FROM: "${SECRET_VAULTWARDEN_EMAIL_ADDR}"
       SMTP_FROM_NAME: "${SECRET_VAULTWARDEN_EMAIL_FROM}"
@@ -30,9 +30,6 @@ spec:
         ports:
           http:
             port: &port 80
-          websocket:
-            enabled: true
-            port: &websocket-port 3012
     ingress:
       main:
         enabled: false
@@ -41,7 +38,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns/is-public: "true"
-          external-dns.alpha.kubernetes.io/target: "ha.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
           - host: &host "vault.${SECRET_DOMAIN}"
             paths:
@@ -49,14 +46,6 @@ spec:
                 pathType: Prefix
                 service:
                   port: *port
-              - path: /notifications/hub/negotiate
-                pathType: Prefix
-                service:
-                  port: *port
-              - path: /notifications/hub
-                pathType: Prefix
-                service:
-                  port: *websocket-port
         tls:
           - hosts:
               - *host
@@ -67,7 +56,7 @@ spec:
         existingClaim: vaultwarden
     resources:
       requests:
-        memory: 500Mi
-        cpu: 200m
+        memory: 100Mi
+        cpu: 75m
       limits:
-        memory: 1000Mi
+        memory: 5000Mi

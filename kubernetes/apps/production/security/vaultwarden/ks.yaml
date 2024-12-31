@@ -10,11 +10,11 @@ spec:
   sourceRef:
     kind: GitRepository
     name: homelab-source
-  # healthChecks:
-  #   - apiVersion: helm.toolkit.fluxcd.io/v2
-  #     kind: HelmRelease
-  #     name: vaultwarden
-  #     namespace: security
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: vaultwarden
+      namespace: security
   interval: 30m
   retryInterval: 1m
   timeout: 3m
