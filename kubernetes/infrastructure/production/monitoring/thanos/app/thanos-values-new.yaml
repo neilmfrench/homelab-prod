@@ -1,0 +1,1169 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: thanos
+spec:
+  values:
+    image:
+      repository: quay.io/thanos/thanos
+      tag: v0.37.2
+
+    objstoreConfig:
+      create: true
+      name: thanos-objstore-secret
+      key: config
+      value:
+        type: s3
+        config:
+          # populated via replacement
+          insecure: true
+
+    # TODO
+    serviceMonitor:
+      # -- If `true`, create `ServiceMonitor` resources to support collecting metrics via the _Prometheus Operator_.
+      enabled: true
+      # -- Additional labels for the service monitor.
+      additionalLabels: {}
+      # -- Additional endpoint configuration for the service monitor endpoint.
+      endpointConfig: {}
+      # -- (int) **DEPRECATED** - _Prometheus_ scrape interval for the service monitor endpoint.
+      interval:
+
+    # -- Log level for _Thanos_ components.
+    logLevel: info
+
+    # -- Log format for _Thanos_ components.
+    logFormat: logfmt
+
+    # -- If `true`, configure the store endpoints with `--endpoint-group` so they're queried round-robin rather than fanout. (**EXPERIMENTAL**).
+    storeEndpointGroup: false
+
+    # -- Additional endpoints external to the chart to be configured with `--endpoint`.
+    additionalEndpoints: []
+
+    # -- Additional endpoint groups external to the chart to be configured with `--endpoint-group` (**EXPERIMENTAL**).
+    additionalEndpointGroups: []
+
+    # -- Additional replica labels external to the chart.
+    additionalReplicaLabels: []
+
+    # -- _Kubernetes_ cluster domain.
+    clusterDomain: cluster.local
+
+    compact:
+      # -- If `true`, create the _Thanos Compact_ component.
+      enabled: false
+
+      deduplication:
+        # -- If `true`, enable deduplication via the _Compact_ component.
+        enabled: true
+        # -- (string) If specified override the default deduplication function.
+        func:
+
+      # -- **DEPRECATED** - If `true`, use the `penalty` deduplication function optimized for HA Prometheus replicas.
+      replicaDeduplication: false
+
+      serviceAccount:
+        # -- If `true`, create a new `ServiceAccount` for the _Compact_ component.
+        create: true
+        # -- (string) If this is set and `compact.serviceAccount.create` is `true` this will be used for the created _Compact_ component service account name, if this is set and `compact.serviceAccount.create` is `false` then this will define an existing service account to use for the _Compact_ component.
+        name:
+        # -- Labels to add to the _Compact_ service account.
+        labels: {}
+        # -- Annotations to add to the _Compact_ service account.
+        annotations: {}
+        # -- Automount API credentials for the _Compact_ service account.
+        automountToken: false
+
+      service:
+        # -- Annotations to add to the _Compact_ service.
+        annotations: {}
+
+      # -- Update strategy for the _Compact_ stateful set.
+      updateStrategy: {}
+
+      # -- Labels to add to the _Compact_ pod.
+      podLabels: {}
+
+      # -- Annotations to add to the _Compact_ pod.
+      podAnnotations: {}
+
+      # -- Security context for the _Compact_ pod.
+      # @default -- See _values.yaml_
+      podSecurityContext:
+        fsGroup: 65534
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- (string) Priority class name for the _Compact_ pod.
+      priorityClassName:
+
+      # -- (int) Termination grace period for the _Compact_ pod; in seconds.
+      terminationGracePeriodSeconds:
+
+      # -- Security context for the _Compact_ pod default container.
+      # @default -- See _values.yaml_
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- Additional environment variables for the _Compact_ pod default container.
+      extraEnv: []
+
+      # -- Additional args for the _Compact_ pod default container.
+      extraArgs: []
+
+      # -- Liveness probe configuration for the _Compact_ pod default container.
+      # @default -- See _values.yaml_
+      livenessProbe:
+        httpGet:
+          path: /-/healthy
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 30
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 4
+
+      # -- Readiness probe configuration for the _Compact_ pod default container.
+      # @default -- See _values.yaml_
+      readinessProbe:
+        httpGet:
+          path: /-/ready
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 5
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 20
+
+      # -- Resources for the _Compact_ pod default container.
+      resources: {}
+
+      persistence:
+        # -- If `true`, either use an existing `PersistentVolumeClaim` via `compact.persistence.existingClaim` or create a `PersistentVolumeClaim` for the _Compact_ pod data.
+        enabled: false
+        # -- (string) If this is set and `compact.persistence.enabled` is `true` the existing PVC defined will be used instead of a new one being created.
+        existingClaim:
+        # -- Annotations to add to the _Compact_ pod PVC.
+        annotations: {}
+        # -- Access mode for the _Compact_ pod PVC.
+        accessMode: ReadWriteOnce
+        # -- Storage class for the _Compact_ pod PVC.
+        storageClass: standard
+        # -- Size for the _Compact_ pod PVC.
+        size: 8Gi
+        # -- If `true`, retain the _Compact_ PVC after the pod is deleted.
+        retainDeleted: true
+        # -- If `true`, retain the _Compact_ PVC after the pod is scaled down.
+        retainScaled: true
+
+      # -- Extra volumes for the _Compact_ pod.
+      extraVolumes: []
+
+      # -- Extra volume mounts for the _Compact_ pod default container.
+      extraVolumeMounts: []
+
+      # -- Node selector labels for scheduling the _Compact_ pod.
+      nodeSelector: {}
+
+      # -- Affinity settings for scheduling the _Compact_ pod. If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.
+      affinity: {}
+
+      # -- Topology spread constraints for scheduling for the _Compact_ pod. If an explicit label selector is not provided one will be created from the pod selector labels.
+      topologySpreadConstraints: []
+
+      # -- Node taints the _Compact_ pod will tolerate for scheduling.
+      tolerations: []
+
+    query:
+      serviceAccount:
+        # -- If `true`, create a new `ServiceAccount` for the _Query_ component.
+        create: true
+        # -- (string) If this is set and `compact.serviceAccount.create` is `true` this will be used for the created _Query_ component service account name, if this is set and `compact.serviceAccount.create` is `false` then this will define an existing service account to use for the _Query_ component.
+        name:
+        # -- Labels to add to the _Query_ service account.
+        labels: {}
+        # -- Annotations to add to the _Query_ service account.
+        annotations: {}
+        # -- Automount API credentials for the _Query_ service account.
+        automountToken: false
+
+      service:
+        # -- Annotations to add to the _Query_ service.
+        annotations: {}
+        # -- (string) Traffic distribution for the _Query_ service.
+        trafficDistribution:
+
+      ingress:
+        # -- If `true`, create an `Ingress` for the _Query_ service.
+        enabled: false
+        # -- Annotations to add to the _Query_ service ingress.
+        annotations: {}
+        # -- Ingress class name for the _Query_ service ingress.
+        ingressClassName:
+        # -- Path for the _Query_ service ingress.
+        path: /
+        # -- Hosts for the _Query_ service ingress.
+        # @default -- See _values.yaml_
+        hosts: []
+        #   - chart-example.local
+        # -- TLS configuration for the _Query_ service ingress.
+        # @default -- See _values.yaml_
+        tls: []
+        #   - hosts:
+        #       - chart-example.local
+        #     secretName: chart-example-tls
+
+      # -- Number of _Query_ replicas to create.
+      replicas: 1
+
+      # -- Update strategy for the _Query_ deployment.
+      updateStrategy: {}
+
+      autoscaling:
+        # -- If `true`, create a `HorizontalPodAutoscaler` for the _Query_ deployment.
+        enabled: false
+        # -- Minimum number of _Query_ replicas that the HPA should maintain.
+        minReplicas: 1
+        # -- Maximum number of _Query_ replicas that the HPA should create.
+        maxReplicas: 3
+        # -- Target CPU utilisation percentage for the _Query_ pod.
+        targetCPUUtilizationPercentage: 80
+        # -- (int) Target memory utilisation percentage for the _Query_ pod.
+        targetMemoryUtilizationPercentage:
+
+      podDisruptionBudget:
+        # -- If `true`, create a `PodDisruptionBudget` for the _Query_ deployment.
+        enabled: false
+        # -- (string) Minimum number of _Query_ replicas that the PDB should require to be available.
+        minAvailable:
+        # -- (string) Maximum number of _Query_ replicas that the PDB should allow to be unavailable.
+        maxUnavailable:
+        # -- (string) Unhealthy pod eviction policy for the _Query_ PDB.
+        unhealthyPodEvictionPolicy:
+
+      # -- Labels to add to the _Query_ pod.
+      podLabels: {}
+
+      # -- Annotations to add to the _Query_ pod.
+      podAnnotations: {}
+
+      # -- Security context for the _Query_ pod.
+      # @default -- See _values.yaml_
+      podSecurityContext:
+        fsGroup: 65534
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- (string) Priority class name for the _Query_ pod.
+      priorityClassName:
+
+      # -- (int) Termination grace period for the _Query_ pod; in seconds.
+      terminationGracePeriodSeconds:
+
+      # -- Security context for the _Query_ pod default container.
+      # @default -- See _values.yaml_
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- Additional environment variables for the _Query_ pod default container.
+      extraEnv: []
+
+      # -- Additional args for the _Query_ pod default container.
+      extraArgs: []
+
+      # -- Liveness probe configuration for the _Query_ pod default container.
+      # @default -- See _values.yaml_
+      livenessProbe:
+        httpGet:
+          path: /-/healthy
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 30
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 4
+
+      # -- Readiness probe configuration for the _Query_ pod default container.
+      # @default -- See _values.yaml_
+      readinessProbe:
+        httpGet:
+          path: /-/ready
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 5
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 20
+
+      # -- Resources for the _Query_ pod default container.
+      resources: {}
+
+      # -- Extra volumes for the _Query_ pod.
+      extraVolumes: []
+
+      # -- Extra volume mounts for the _Query_ pod default container.
+      extraVolumeMounts: []
+
+      # -- Node selector labels for scheduling the _Query_ pod.
+      nodeSelector: {}
+
+      # -- Affinity settings for scheduling the _Query_ pod. If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.
+      affinity: {}
+
+      # -- Topology spread constraints for scheduling for the _Query_ pod. If an explicit label selector is not provided one will be created from the pod selector labels.
+      topologySpreadConstraints: []
+
+      # -- Node taints the _Query_ pod will tolerate for scheduling.
+      tolerations: []
+
+      # -- **DEPRECATED** - Labels added to metrics to show the replica recording the data (`--query.replica-label`); use `additionalReplicaLabels` instead.
+      replicaLabels: []
+
+      # -- **DEPRECATED** - Additional stores to configure query with (`--store`); use `additionalEndpoints` instead.
+      additionalStores: []
+
+    queryFrontend:
+      # -- If `true`, create the _Thanos Query Frontend_ component.
+      enabled: false
+
+      serviceAccount:
+        # -- If `true`, create a new `ServiceAccount` for the _Query Frontend_ component.
+        create: true
+        # -- (string) If this is set and `compact.serviceAccount.create` is `true` this will be used for the created _Query Frontend_ component service account name, if this is set and `compact.serviceAccount.create` is `false` then this will define an existing service account to use for the _Query Frontend_ component.
+        name:
+        # -- Labels to add to the _Query Frontend_ service account.
+        labels: {}
+        # -- Annotations to add to the _Query Frontend_ service account.
+        annotations: {}
+        # -- Automount API credentials for the _Query Frontend_ service account.
+        automountToken: false
+
+      service:
+        # -- Annotations to add to the _Query Frontend_ service.
+        annotations: {}
+        # -- (string) Traffic distribution for the _Query Frontend_ service.
+        trafficDistribution:
+
+      ingress:
+        # -- If `true`, create an `Ingress` for the _Query Frontend_ service.
+        enabled: false
+        # -- Annotations to add to the _Query Frontend_ service ingress.
+        annotations: {}
+        # -- Ingress class name for the _Query Frontend_ service ingress.
+        ingressClassName:
+        # -- Path for the _Query Frontend_ service ingress.
+        path: /
+        # -- Hosts for the _Query Frontend_ service ingress.
+        # @default -- See _values.yaml_
+        hosts: []
+        #   - chart-example.local
+        # -- TLS configuration for the _Query Frontend_ service ingress.
+        # @default -- See _values.yaml_
+        tls: []
+        #   - hosts:
+        #       - chart-example.local
+        #     secretName: chart-example-tls
+
+      # -- Number of _Query Frontend_ replicas to create.
+      replicas: 1
+
+      # -- Update strategy for the _Query Frontend_ deployment.
+      updateStrategy: {}
+
+      autoscaling:
+        # -- If `true`, create a `HorizontalPodAutoscaler` for the _Query Frontend_ deployment.
+        enabled: false
+        # -- Minimum number of _Query Frontend_ replicas that the HPA should maintain.
+        minReplicas: 1
+        # -- Maximum number of _Query Frontend_ replicas that the HPA should create.
+        maxReplicas: 3
+        # -- Target CPU utilisation percentage for the _Query Frontend_ pod.
+        targetCPUUtilizationPercentage: 80
+        # -- (int) Target memory utilisation percentage for the _Query Frontend_ pod.
+        targetMemoryUtilizationPercentage:
+
+      podDisruptionBudget:
+        # -- If `true`, create a `PodDisruptionBudget` for the _Query Frontend_ deployment.
+        enabled: false
+        # -- (string) Minimum number of _Query Frontend_ replicas that the PDB should require to be available.
+        minAvailable:
+        # -- (string) Maximum number of _Query Frontend_ replicas that the PDB should allow to be unavailable.
+        maxUnavailable:
+        # -- (string) Unhealthy pod eviction policy for the _Query Frontend_ PDB.
+        unhealthyPodEvictionPolicy:
+
+      # -- Labels to add to the _Query Frontend_ pod.
+      podLabels: {}
+
+      # -- Annotations to add to the _Query Frontend_ pod.
+      podAnnotations: {}
+
+      # -- Security context for the _Query Frontend_ pod.
+      # @default -- See _values.yaml_
+      podSecurityContext:
+        fsGroup: 65534
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- (string) Priority class name for the _Query Frontend_ pod.
+      priorityClassName:
+
+      # -- (int) Termination grace period for the _Query Frontend_ pod; in seconds.
+      terminationGracePeriodSeconds:
+
+      # -- Security context for the _Query Frontend_ pod default container.
+      # @default -- See _values.yaml_
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- Additional environment variables for the _Query Frontend_ pod default container.
+      extraEnv: []
+
+      # -- Additional args for the _Query Frontend_ pod default container.
+      extraArgs: []
+
+      # -- Liveness probe configuration for the _Query Frontend_ pod default container.
+      # @default -- See _values.yaml_
+      livenessProbe:
+        httpGet:
+          path: /-/healthy
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 30
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 4
+
+      # -- Readiness probe configuration for the _Query Frontend_ pod default container.
+      # @default -- See _values.yaml_
+      readinessProbe:
+        httpGet:
+          path: /-/ready
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 5
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 20
+
+      # -- Resources for the _Query Frontend_ pod default container.
+      resources: {}
+
+      # -- Extra volumes for the _Query Frontend_ pod.
+      extraVolumes: []
+
+      # -- Extra volume mounts for the _Query Frontend_ pod default container.
+      extraVolumeMounts: []
+
+      # -- Node selector labels for scheduling the _Query Frontend_ pod.
+      nodeSelector: {}
+
+      # -- Affinity settings for scheduling the _Query Frontend_ pod. If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.
+      affinity: {}
+
+      # -- Topology spread constraints for scheduling for the _Query Frontend_ pod. If an explicit label selector is not provided one will be created from the pod selector labels.
+      topologySpreadConstraints: []
+
+      # -- Node taints the _Query Frontend_ pod will tolerate for scheduling.
+      tolerations: []
+
+    receive:
+      # -- If `true`, create the _Thanos Receive Ingestor_ & _Thanos Receive Router_ components.
+      enabled: false
+
+      # -- Replication factor for the _Receive_ components.
+      replicationFactor: 1
+
+      # -- Retention for the _Receive_ components.
+      retention: 48h
+
+      ingestor:
+        serviceAccount:
+          # -- If `true`, create a new `ServiceAccount` for the _Receive Ingestor_ component.
+          create: true
+          # -- (string) If this is set and `compact.serviceAccount.create` is `true` this will be used for the created _Receive Ingestor_ component service account name, if this is set and `compact.serviceAccount.create` is `false` then this will define an existing service account to use for the _Receive Ingestor_ component.
+          name:
+          # -- Labels to add to the _Receive Ingestor_ service account.
+          labels: {}
+          # -- Annotations to add to the _Receive Ingestor_ service account.
+          annotations: {}
+          # -- Automount API credentials for the _Receive Ingestor_ service account.
+          automountToken: false
+
+        service:
+          # -- Annotations to add to the _Receive Ingestor_ service.
+          annotations: {}
+
+        # -- Number of _Receive Ingestor_ replicas to create.
+        replicas: 1
+
+        # -- Update strategy for the _Receive Ingestor_ stateful set.
+        updateStrategy: {}
+
+        podDisruptionBudget:
+          # -- If `true`, create a `PodDisruptionBudget` for the _Receive Ingestor_ stateful set.
+          enabled: false
+          # -- (string) Minimum number of _Receive Ingestor_ replicas that the PDB should require to be available.
+          minAvailable:
+          # -- (string) Maximum number of _Receive Ingestor_ replicas that the PDB should allow to be unavailable.
+          maxUnavailable:
+          # -- (string) Unhealthy pod eviction policy for the _Receive Ingestor_ PDB.
+          unhealthyPodEvictionPolicy:
+
+        # -- Labels to add to the _Receive Ingestor_ pod.
+        podLabels: {}
+
+        # -- Annotations to add to the _Receive Ingestor_ pod.
+        podAnnotations: {}
+
+        # -- Security context for the _Receive Ingestor_ pod.
+        # @default -- See _values.yaml_
+        podSecurityContext:
+          fsGroup: 65534
+          runAsGroup: 65532
+          runAsNonRoot: true
+          runAsUser: 65534
+          seccompProfile:
+            type: RuntimeDefault
+
+        # -- (string) Priority class name for the _Receive Ingestor_ pod.
+        priorityClassName:
+
+        # -- (int) Termination grace period for the _Receive Ingestor_ pod; in seconds.
+        terminationGracePeriodSeconds:
+
+        # -- Security context for the _Receive Ingestor_ pod default container.
+        # @default -- See _values.yaml_
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 65532
+          runAsNonRoot: true
+          runAsUser: 65534
+          seccompProfile:
+            type: RuntimeDefault
+
+        # -- Additional environment variables for the _Receive Ingestor_ pod default container.
+        extraEnv: []
+
+        # -- Additional args for the _Receive Ingestor_ pod default container.
+        extraArgs: []
+
+        # -- Liveness probe configuration for the _Receive Ingestor_ pod default container.
+        # @default -- See _values.yaml_
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 30
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 4
+
+        # -- Readiness probe configuration for the _Receive Ingestor_ pod default container.
+        # @default -- See _values.yaml_
+        readinessProbe:
+          httpGet:
+            path: /-/ready
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 20
+
+        # -- Resources for the _Receive Ingestor_ pod default container.
+        resources: {}
+
+        persistence:
+          # -- If `true`, either use an existing `PersistentVolumeClaim` via `compact.persistence.existingClaim` or create a `PersistentVolumeClaim` for the _Receive Ingestor_ pod data.
+          enabled: false
+          # -- (string) If this is set and `compact.persistence.enabled` is `true` the existing PVC defined will be used instead of a new one being created.
+          existingClaim:
+          # -- Annotations to add to the _Receive Ingestor_ pod PVC.
+          annotations: {}
+          # -- Access mode for the _Receive Ingestor_ pod PVC.
+          accessMode: ReadWriteOnce
+          # -- Storage class for the _Receive Ingestor_ pod PVC.
+          storageClass: standard
+          # -- Size for the _Receive Ingestor_ pod PVC.
+          size: 8Gi
+          # -- If `true`, retain the _Receive Ingestor_ PVC after the pod is deleted.
+          retainDeleted: true
+          # -- If `true`, retain the _Receive Ingestor_ PVC after the pod is scaled down.
+          retainScaled: true
+
+        # -- Extra volumes for the _Receive Ingestor_ pod.
+        extraVolumes: []
+
+        # -- Extra volume mounts for the _Receive Ingestor_ pod default container.
+        extraVolumeMounts: []
+
+        # -- Node selector labels for scheduling the _Receive Ingestor_ pod.
+        nodeSelector: {}
+
+        # -- Affinity settings for scheduling the _Receive Ingestor_ pod. If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.
+        affinity: {}
+
+        # -- Topology spread constraints for scheduling for the _Receive Ingestor_ pod. If an explicit label selector is not provided one will be created from the pod selector labels.
+        topologySpreadConstraints: []
+
+        # -- Node taints the _Receive Ingestor_ pod will tolerate for scheduling.
+        tolerations: []
+
+      router:
+        serviceAccount:
+          # -- If `true`, create a new `ServiceAccount` for the _Receive Router_ component.
+          create: true
+          # -- (string) If this is set and `compact.serviceAccount.create` is `true` this will be used for the created _Receive Router_ component service account name, if this is set and `compact.serviceAccount.create` is `false` then this will define an existing service account to use for the _Receive Router_ component.
+          name:
+          # -- Labels to add to the _Receive Router_ service account.
+          labels: {}
+          # -- Annotations to add to the _Receive Router_ service account.
+          annotations: {}
+          # -- Automount API credentials for the _Receive Router_ service account.
+          automountToken: false
+
+        service:
+          # -- Annotations to add to the _Receive Router_ service.
+          annotations: {}
+
+        ingress:
+          # -- If `true`, create an `Ingress` for the _Receive Router_ service.
+          enabled: false
+          # -- Annotations to add to the _Receive Router_ service ingress.
+          annotations: {}
+          # -- Ingress class name for the _Receive Router_ service ingress.
+          ingressClassName:
+          # -- Path for the _Receive Router_ service ingress.
+          path: /
+          # -- Hosts for the _Receive Router_ service ingress.
+          # @default -- See _values.yaml_
+          hosts: []
+          #   - chart-example.local
+          # -- TLS configuration for the _Receive Router_ service ingress.
+          # @default -- See _values.yaml_
+          tls: []
+          #   - hosts:
+          #       - chart-example.local
+          #     secretName: chart-example-tls
+
+        # -- Number of _Receive Router_ replicas to create.
+        replicas: 1
+
+        # -- Update strategy for the _Receive Router_ deployment.
+        updateStrategy: {}
+
+        autoscaling:
+          # -- If `true`, create a `HorizontalPodAutoscaler` for the _Receive Router_ deployment.
+          enabled: false
+          # -- Minimum number of _Receive Router_ replicas that the HPA should maintain.
+          minReplicas: 1
+          # -- Maximum number of _Receive Router_ replicas that the HPA should create.
+          maxReplicas: 3
+          # -- Target CPU utilisation percentage for the _Receive Router_ pod.
+          targetCPUUtilizationPercentage: 80
+          # -- (int) Target memory utilisation percentage for the _Receive Router_ pod.
+          targetMemoryUtilizationPercentage:
+
+        podDisruptionBudget:
+          # -- If `true`, create a `PodDisruptionBudget` for the _Receive Router_ deployment.
+          enabled: false
+          # -- (string) Minimum number of _Receive Router_ replicas that the PDB should require to be available.
+          minAvailable:
+          # -- (string) Maximum number of _Receive Router_ replicas that the PDB should allow to be unavailable.
+          maxUnavailable:
+          # -- (string) Unhealthy pod eviction policy for the _Receive Router_ PDB.
+          unhealthyPodEvictionPolicy:
+
+        # -- Labels to add to the _Receive Router_ pod.
+        podLabels: {}
+
+        # -- Annotations to add to the _Receive Router_ pod.
+        podAnnotations: {}
+
+        # -- Security context for the _Receive Router_ pod.
+        # @default -- See _values.yaml_
+        podSecurityContext:
+          fsGroup: 65534
+          runAsGroup: 65532
+          runAsNonRoot: true
+          runAsUser: 65534
+          seccompProfile:
+            type: RuntimeDefault
+
+        # -- (string) Priority class name for the _Receive Router_ pod.
+        priorityClassName:
+
+        # -- (int) Termination grace period for the _Receive Router_ pod; in seconds.
+        terminationGracePeriodSeconds:
+
+        # -- Security context for the _Receive Router_ pod default container.
+        # @default -- See _values.yaml_
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 65532
+          runAsNonRoot: true
+          runAsUser: 65534
+          seccompProfile:
+            type: RuntimeDefault
+
+        # -- Additional environment variables for the _Receive Router_ pod default container.
+        extraEnv: []
+
+        # -- Additional args for the _Receive Router_ pod default container.
+        extraArgs: []
+
+        # -- Liveness probe configuration for the _Receive Router_ pod default container.
+        # @default -- See _values.yaml_
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 30
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 4
+
+        # -- Readiness probe configuration for the _Receive Router_ pod default container.
+        # @default -- See _values.yaml_
+        readinessProbe:
+          httpGet:
+            path: /-/ready
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 20
+
+        # -- Resources for the _Receive Router_ pod default container.
+        resources: {}
+
+        # -- Extra volumes for the _Receive Router_ pod.
+        extraVolumes: []
+
+        # -- Extra volume mounts for the _Receive Router_ pod default container.
+        extraVolumeMounts: []
+
+        # -- Node selector labels for scheduling the _Receive Router_ pod.
+        nodeSelector: {}
+
+        # -- Affinity settings for scheduling the _Receive Router_ pod. If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.
+        affinity: {}
+
+        # -- Topology spread constraints for scheduling for the _Receive Router_ pod. If an explicit label selector is not provided one will be created from the pod selector labels.
+        topologySpreadConstraints: []
+
+        # -- Node taints the _Receive Router_ pod will tolerate for scheduling.
+        tolerations: []
+
+    rule:
+      # -- If `true`, create the _Thanos Rule_ component.
+      enabled: false
+
+      # -- If `true`, add a `thanos_rule` label to `<NAMESPACE>/<RULE_FULLNAME>` on a `Rule` metrics.
+      instanceLabel: false
+
+      # -- Local disk block retention period for the _Rule_ component (`--tsdb.retention`).
+      retention: 48h
+
+      # -- Block duration for the _Rule_ component (`--tsdb.block-duration`).
+      blockDuration: 2h
+
+      # -- Rule eval interval for the _Rule_ component (`--eval-interval`).
+      evalInterval: 1m
+
+      serviceAccount:
+        # -- If `true`, create a new `ServiceAccount` for the _Rule_ component.
+        create: true
+        # -- (string) If this is set and `compact.serviceAccount.create` is `true` this will be used for the created _Rule_ component service account name, if this is set and `compact.serviceAccount.create` is `false` then this will define an existing service account to use for the _Rule_ component.
+        name:
+        # -- Labels to add to the _Rule_ service account.
+        labels: {}
+        # -- Annotations to add to the _Rule_ service account.
+        annotations: {}
+        # -- Automount API credentials for the _Rule_ service account.
+        automountToken: false
+
+      service:
+        # -- Annotations to add to the _Rule_ service.
+        annotations: {}
+
+      ingress:
+        # -- If `true`, create an `Ingress` for the _Rule_ service.
+        enabled: false
+        # -- Annotations to add to the _Rule_ service ingress.
+        annotations: {}
+        # -- Ingress class name for the _Rule_ service ingress.
+        ingressClassName:
+        # -- Path for the _Rule_ service ingress.
+        path: /
+        # -- Hosts for the _Rule_ service ingress.
+        # @default -- See _values.yaml_
+        hosts: []
+        #   - chart-example.local
+        # -- TLS configuration for the _Rule_ service ingress.
+        # @default -- See _values.yaml_
+        tls: []
+        #   - hosts:
+        #       - chart-example.local
+        #     secretName: chart-example-tls
+
+      # -- Number of _Rule_ replicas to create.
+      replicas: 1
+
+      # -- Update strategy for the _Rule_ stateful set.
+      updateStrategy: {}
+
+      podDisruptionBudget:
+        # -- If `true`, create a `PodDisruptionBudget` for the _Rule_ stateful set.
+        enabled: false
+        # -- (string) Minimum number of _Rule_ replicas that the PDB should require to be available.
+        minAvailable:
+        # -- (string) Maximum number of _Rule_ replicas that the PDB should allow to be unavailable.
+        maxUnavailable:
+        # -- (string) Unhealthy pod eviction policy for the _Rule_ PDB.
+        unhealthyPodEvictionPolicy:
+
+      # -- Labels to add to the _Rule_ pod.
+      podLabels: {}
+
+      # -- Annotations to add to the _Rule_ pod.
+      podAnnotations: {}
+
+      # -- Security context for the _Rule_ pod.
+      # @default -- See _values.yaml_
+      podSecurityContext:
+        fsGroup: 65534
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- (string) Priority class name for the _Rule_ pod.
+      priorityClassName:
+
+      # -- (int) Termination grace period for the _Rule_ pod; in seconds.
+      terminationGracePeriodSeconds:
+
+      # -- Security context for the _Rule_ pod default container.
+      # @default -- See _values.yaml_
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- Additional environment variables for the _Rule_ pod default container.
+      extraEnv: []
+
+      # -- Additional args for the _Rule_ pod default container.
+      extraArgs: []
+
+      # -- Liveness probe configuration for the _Rule_ pod default container.
+      # @default -- See _values.yaml_
+      livenessProbe:
+        httpGet:
+          path: /-/healthy
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 30
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 4
+
+      # -- Readiness probe configuration for the _Rule_ pod default container.
+      # @default -- See _values.yaml_
+      readinessProbe:
+        httpGet:
+          path: /-/ready
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 5
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 20
+
+      # -- Resources for the _Rule_ pod default container.
+      resources: {}
+
+      persistence:
+        # -- If `true`, either use an existing `PersistentVolumeClaim` via `compact.persistence.existingClaim` or create a `PersistentVolumeClaim` for the _Rule_ pod data.
+        enabled: false
+        # -- (string) If this is set and `compact.persistence.enabled` is `true` the existing PVC defined will be used instead of a new one being created.
+        existingClaim:
+        # -- Annotations to add to the _Rule_ pod PVC.
+        annotations: {}
+        # -- Access mode for the _Rule_ pod PVC.
+        accessMode: ReadWriteOnce
+        # -- Storage class for the _Rule_ pod PVC.
+        storageClass: standard
+        # -- Size for the _Rule_ pod PVC.
+        size: 8Gi
+        # -- If `true`, retain the _Rule_ PVC after the pod is deleted.
+        retainDeleted: true
+        # -- If `true`, retain the _Rule_ PVC after the pod is scaled down.
+        retainScaled: true
+
+      # -- Extra volumes for the _Rule_ pod.
+      extraVolumes: []
+
+      # -- Extra volume mounts for the _Rule_ pod default container.
+      extraVolumeMounts: []
+
+      configReloader:
+        # -- If `true`, create the _Rule_ pod config reloader sidecar container.
+        enabled: true
+        image:
+          # -- Image repository for the _Rule_ pod config reloader sidecar container.
+          repository: ghcr.io/jimmidyson/configmap-reload
+          # -- Image tag for the _Rule_ pod config reloader sidecar container.
+          tag: v0.14.0
+          # -- Image digest for the _Rule_ pod config reloader sidecar container.
+          digest:
+          # -- Image pull policy for the _Rule_ pod config reloader sidecar container.
+          pullPolicy: IfNotPresent
+        # -- Resources for the _Rule_ pod config reloader sidecar container.
+        resources: {}
+        # -- Extra volume mounts for the _Rule_ pod config reloader sidecar container.
+        extraVolumeMounts: []
+
+      # -- Node selector labels for scheduling the _Rule_ pod.
+      nodeSelector: {}
+
+      # -- Affinity settings for scheduling the _Rule_ pod. If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.
+      affinity: {}
+
+      # -- Topology spread constraints for scheduling for the _Rule_ pod. If an explicit label selector is not provided one will be created from the pod selector labels.
+      topologySpreadConstraints: []
+
+      # -- Node taints the _Rule_ pod will tolerate for scheduling.
+      tolerations: []
+
+      alertmanagersConfig:
+        # -- If `true`, create a `Secret` for the _Rule_ component alertmanagers configuration.
+        create: true
+        # -- (string) If this is set and `rule.alertmanagersConfig.create` is `true` this will be used for the created secret name, if this is set and `rule.alertmanagersConfig.create` is `false` then this will define an existing secret to use.
+        name:
+        # -- Secret key for the _Rule_ component alertmanagers configuration.
+        key: config
+        # -- Alert managers configuration for the _Rule_ component.
+        value: |-
+          alertmanagers: []
+
+      rules:
+        # -- If `true`, create a `ConfigMap` for the _Rule_ component rules.
+        create: true
+        # -- (string) If this is set and `rule.rules.create` is `true` this will be used for the created config map name, if this is set and `rule.rules.create` is `false` then this will define an existing config map to use.
+        name:
+        # Rules for the _Rule_ component.
+        value: |-
+
+    storeGateway:
+      serviceAccount:
+        # -- If `true`, create a new `ServiceAccount` for the _Store Gateway_ component.
+        create: true
+        # -- (string) If this is set and `compact.serviceAccount.create` is `true` this will be used for the created _Store Gateway_ component service account name, if this is set and `compact.serviceAccount.create` is `false` then this will define an existing service account to use for the _Store Gateway_ component.
+        name:
+        # -- Labels to add to the _Store Gateway_ service account.
+        labels: {}
+        # -- Annotations to add to the _Store Gateway_ service account.
+        annotations: {}
+        # -- Automount API credentials for the _Store Gateway_ service account.
+        automountToken: false
+
+      service:
+        # -- Annotations to add to the _Store Gateway_ service.
+        annotations: {}
+        # -- (string) Traffic distribution for the _Store Gateway_ service.
+        trafficDistribution:
+
+      # -- Number of _Store Gateway_ replicas to create.
+      replicas: 1
+
+      # -- Update strategy for the _Store Gateway_ stateful set.
+      updateStrategy: {}
+
+      podDisruptionBudget:
+        # -- If `true`, create a `PodDisruptionBudget` for the _Store Gateway_ stateful set.
+        enabled: false
+        # -- (string) Minimum number of _Store Gateway_ replicas that the PDB should require to be available.
+        minAvailable:
+        # -- (string) Maximum number of _Store Gateway_ replicas that the PDB should allow to be unavailable.
+        maxUnavailable:
+        # -- (string) Unhealthy pod eviction policy for the _Store Gateway_ PDB.
+        unhealthyPodEvictionPolicy:
+
+      # -- Labels to add to the _Store Gateway_ pod.
+      podLabels: {}
+
+      # -- Annotations to add to the _Store Gateway_ pod.
+      podAnnotations: {}
+
+      # -- Security context for the _Store Gateway_ pod.
+      # @default -- See _values.yaml_
+      podSecurityContext:
+        fsGroup: 65534
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- (string) Priority class name for the _Store Gateway_ pod.
+      priorityClassName:
+
+      # -- (int) Termination grace period for the _Store Gateway_ pod; in seconds.
+      terminationGracePeriodSeconds:
+
+      # -- Security context for the _Store Gateway_ pod default container.
+      # @default -- See _values.yaml_
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+      # -- Additional environment variables for the _Store Gateway_ pod default container.
+      extraEnv: []
+
+      # -- Additional args for the _Store Gateway_ pod default container.
+      extraArgs: []
+
+      # -- Liveness probe configuration for the _Store Gateway_ pod default container.
+      # @default -- See _values.yaml_
+      livenessProbe:
+        httpGet:
+          path: /-/healthy
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 30
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 4
+
+      # -- Readiness probe configuration for the _Store Gateway_ pod default container.
+      # @default -- See _values.yaml_
+      readinessProbe:
+        httpGet:
+          path: /-/ready
+          port: http
+          scheme: HTTP
+        initialDelaySeconds: 0
+        periodSeconds: 5
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 20
+
+      # -- Resources for the _Store Gateway_ pod default container.
+      resources: {}
+
+      # -- Extra volumes for the _Store Gateway_ pod.
+      extraVolumes: []
+
+      # -- Extra volume mounts for the _Store Gateway_ pod default container.
+      extraVolumeMounts: []
+
+      persistence:
+        # -- If `true`, either use an existing `PersistentVolumeClaim` via `compact.persistence.existingClaim` or create a `PersistentVolumeClaim` for the _Store Gateway_ pod data.
+        enabled: false
+        # -- (string) If this is set and `compact.persistence.enabled` is `true` the existing PVC defined will be used instead of a new one being created.
+        existingClaim:
+        # -- Annotations to add to the _Store Gateway_ pod PVC.
+        annotations: {}
+        # -- Access mode for the _Store Gateway_ pod PVC.
+        accessMode: ReadWriteOnce
+        # -- Storage class for the _Store Gateway_ pod PVC.
+        storageClass: standard
+        # -- Size for the _Store Gateway_ pod PVC.
+        size: 8Gi
+        # -- If `true`, retain the _Store Gateway_ PVC after the pod is deleted.
+        retainDeleted: true
+        # -- If `true`, retain the _Store Gateway_ PVC after the pod is scaled down.
+        retainScaled: true
+
+      # -- Node selector labels for scheduling the _Store Gateway_ pod.
+      nodeSelector: {}
+
+      # -- Affinity settings for scheduling the _Store Gateway_ pod. If an explicit label selector is not provided for pod affinity or pod anti-affinity one will be created from the pod selector labels.
+      affinity: {}
+
+      # -- Topology spread constraints for scheduling for the _Store Gateway_ pod. If an explicit label selector is not provided one will be created from the pod selector labels.
+      topologySpreadConstraints: []
+
+      # -- Node taints the _Store Gateway_ pod will tolerate for scheduling.
+      tolerations: []
