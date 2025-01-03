@@ -112,7 +112,7 @@ spec:
       defaultSecretNamespace: networking
       defaultSecretName: neilfren-ch-production-tls
       service:
-        externalTrafficPolicy: null
+        externalTrafficPolicy: "~"
         type: ClusterIP
       secretsNamespace:
         create: true
