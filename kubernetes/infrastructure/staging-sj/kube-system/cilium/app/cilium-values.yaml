@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.16.4
+      version: 1.16.5
   values:
     k8sServiceHost: "localhost"
     k8sServicePort: "7445"
