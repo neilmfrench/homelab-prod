@@ -30,11 +30,7 @@ spec:
               lameduck 5s
           - name: hosts
             configBlock: |-
-              172.16.20.75 cluster-rpi.mesh.${SECRET_DOMAIN}
-              10.0.0.156 cluster-sj.mesh.${SECRET_DOMAIN}
-              ${SECRET_PHX_EXTERNAL_IP} gslb-ns-phx-neilfren-ch.${SECRET_DOMAIN}
-              ${SECRET_SJ_EXTERNAL_IP} gslb-ns-sj-neilfren-ch.${SECRET_DOMAIN}
-              ${SECRET_EXTERNAL_IP} gslb-ns-hb-neilfren-ch.${SECRET_DOMAIN}
+              172.16.20.75 cluster-rpi.mesh.neilfren.ch
               fallthrough
           - name: ready
           - name: kubernetes

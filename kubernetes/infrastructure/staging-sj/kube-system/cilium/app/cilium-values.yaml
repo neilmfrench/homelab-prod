@@ -9,13 +9,12 @@ spec:
       chart: cilium
       version: 1.16.4
   values:
-    k8sServiceHost: "api.cluster.local"
-    # ipv4NativeRoutingCIDR: "10.0.0.0/8"
-    k8sServicePort: "6443"
+    k8sServiceHost: "localhost"
+    k8sServicePort: "7445"
 
     cluster:
-      name: staging-sj
-      id: 3
+      name: dev-sj
+      id: 10
 
     operator:
       enabled: true
@@ -30,14 +29,14 @@ spec:
           effect: NoSchedule
 
     identityAllocationMode: crd
-    kubeProxyReplacement: true
+    kubeProxyReplacement: "true"
     enableK8sEndpointSlice: true
     localRedirectPolicy: true
 
     routingMode: tunnel
     tunnelProtocol: vxlan
     autoDirectNodeRoutes: false
-    # devices: [eth+]
+    devices: [eth0]
 
     healthChecking: true
 
@@ -54,6 +53,8 @@ spec:
       enabled: true
     bpf:
       masquerade: true
+      # https://github.com/cilium/cilium/issues/36737#issuecomment-2556565144
+      hostLegacyRouting: true
     bgp:
       enabled: false
     ipv4:
@@ -110,19 +111,19 @@ spec:
       enforceHttps: true
       defaultSecretNamespace: networking
       defaultSecretName: neilfren-ch-production-tls
+      service:
+        externalTrafficPolicy: null
+        type: ClusterIP
       secretsNamespace:
         create: true
         name: cilium-secrets
         sync: true
-      service:
-        name: cilium-ingress
-        type: NodePort
-        insecureNodePort: 30080
-        secureNodePort: 30443
+      hostNetwork:
+        enabled: true
+        sharedListenerPort: 8080
 
     resources:
       limits:
-        cpu: 125m
         memory: 512Mi
       requests:
         cpu: 50m
@@ -130,55 +131,41 @@ spec:
 
     tls:
       ca:
-        cert: "${SECRET_CILIUM_CA_CERT}"
-        key: "${SECRET_CILIUM_CA_KEY}"
+        cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURGRENDQWZ5Z0F3SUJBZ0lSQUxWSGwyY1R6bTBUSGE2NHZtRW1uV013RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEkwTURRd09USXlOVGd6T1ZvWERUSTNNRFF3T1RJeQpOVGd6T1Zvd0ZERVNNQkFHQTFVRUF4TUpRMmxzYVhWdElFTkJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUFyMUhRQkViZnZvdCtzbVYxNjFOcWJ3eUZYcXczY3dwQlgxYmRhSWVFRmlxd2tLNGYKZUxxUVRRampMK1E0eHJrM2hKaXFtNlovSWhNMVdWWlVnVjliWXE1UWlmZUx1RmJpc3RaSk1jaGZoMkx0Z2hFQwpua0ZMZ2YwSklJUlRxRjk4RDkvZTh3Kyt4ejBBazNvakY1THV4UUlTT08yWllEWGVobENQUWl5dG5uR3dHNHpUCmRNV0lIaytibHFuNGt0alNIQmtxV1J4UkFJWFpnS2IrcWg4RFNMdnRPNWF6b1FLUjVMN2VIa2NRcFBxR2NqUkEKMmltaERyeWQ2VzdRS2Z2aTBvYUM1Uit3OXZRTTZqNUhMQjd4S2ZMaXRnakhkTGtlWSttU3hYMld4Y1ZsaTArSApqdTdRVlBWN29hNW9yNFFxQU9Nc2s5WlJFcVVyRXU0U2U5elhFd0lEQVFBQm8yRXdYekFPQmdOVkhROEJBZjhFCkJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUYKTUFNQkFmOHdIUVlEVlIwT0JCWUVGUGFWWTNaY2xsWFlhQTFicTV3L2JaVE0vd29tTUEwR0NTcUdTSWIzRFFFQgpDd1VBQTRJQkFRQlZoUHhBMTlhMm5tN0JlTXlBdTRXR1BaTEZSOHR6ZU9mZkxkUko3U0ZMSFdWSk9ZUHFtVzlBCmFKVk9MUkdlSzV1cGYxYW9mVEV3UEFwQkhoSGlxVmpVaEUvc2thM3pZRTJJQ0ppUkZoRkVXVHF1b2U0WkJmNFIKMURTaU80Z3RBZUJJenJJdERCdlpYRGxOa1pNd2hrMmFTcDcrVENsVm5DbFZMTGFPbXdBK2RETXhRWDFRZ20yTwpSZzM1SEEra04wcVp2aFl1cXFwNElyWHRGWHUxUFRWMTUxVkE1UVg5VlZKRWFMRkFDdXhFaXJ1bktoTHNGUVd3CmFWcEYxQTZRandGbWY5a2cyZDQzclZuL1cxN0R5a0N0TDVpTkFlNFpGMFduZkt6ZDRucW1hcVlTaFBFbEVocWUKNFRPM2ZheW5tdHZ6UWFSSG1xMDJWa09xTlJ3ZW02bmkKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+        key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBcjFIUUJFYmZ2b3Qrc21WMTYxTnFid3lGWHF3M2N3cEJYMWJkYUllRUZpcXdrSzRmCmVMcVFUUWpqTCtRNHhyazNoSmlxbTZaL0loTTFXVlpVZ1Y5YllxNVFpZmVMdUZiaXN0WkpNY2hmaDJMdGdoRUMKbmtGTGdmMEpJSVJUcUY5OEQ5L2U4dysreHowQWszb2pGNUx1eFFJU09PMlpZRFhlaGxDUFFpeXRubkd3RzR6VApkTVdJSGsrYmxxbjRrdGpTSEJrcVdSeFJBSVhaZ0tiK3FoOERTTHZ0TzVhem9RS1I1TDdlSGtjUXBQcUdjalJBCjJpbWhEcnlkNlc3UUtmdmkwb2FDNVIrdzl2UU02ajVITEI3eEtmTGl0Z2pIZExrZVkrbVN4WDJXeGNWbGkwK0gKanU3UVZQVjdvYTVvcjRRcUFPTXNrOVpSRXFVckV1NFNlOXpYRXdJREFRQUJBb0lCQUFlWTdBTERiMzY2WE1zdQpTbVhnUDRTQWJtY2ozMk5FMW9CakswVVVXa3o3bkpzb2NJU3kwUDRGbkpLK3VSY2pmNXhuWVQxTmdjVGdRRGVXCjNpS2RGMEMzZlJYOWZEaUl5MW9rbnhkaEw0S1didVJzQ0VrRFcxcE90TTZMN1hRbWJ5SGcrYkJleGsyci94SmwKQUpCTTlidmoweFpVZFlrTnpJN1ZmdC9IUDk3VnkvOTNXUWpITlhRbGV1ME84b1p0c1dhSVh2cnZ1N2hVK2xpeAphUzEzNkZQYlplWlVyYk9OVVk3T2tGbEptZjBqV2txZG82YzhEM2M2SkFNSENSWmhaNUZlOG1mTkJwbkdKQmJaCkVxOVczS1dmZVI5VFUrQnEvdTN1RDR3RmZKNHNUWEJpT25CQWUwMXo5b2xBL0FkZ1JPdnJBNjFMN29jZUJ5cEwKWUxtUVVrRUNnWUVBNEliaFUrbEdreitqUW5jWC9Nc3NyLzJIbnI5b3cvdFRHMTFiRVlLRytJSFYybi9MSlBzbgpEZWd0RW1wL0VLREpCK0F0c1h4MzBmNWZ3OFBFa09KbTMrbHhmdlNRbVJ0cmI2L3lzN1VqRnVoTUxQS3lVRGI0CkNwNExCTythODRoOGFvSUVxc0tTV28vQUJjbkR4MXRNY1J3cGRLUCt5YUt0MjU4d2Q1Qk80S1VDZ1lFQXgrVWkKY0dQUDRkRnRzWmZVWFY1ZVJGcERLcXZZY3czSjhCc0doNU9xUk5sUDY2TUxYOEQ4OHFzU08zMkZYRzhvNUc2eQpXQjc3ZXgzclYrRGlIOGh3YXpsQzA3eXdhTHRnYkhabmo5SnRibWQvNGR3dEVxcSsrUUgrZ3RTMTNzTlU2Z2NvCnR4TjlUN3lmR3p0NXFJSDdlemhoeHcxeGdXUzlEY3p1WHA4RlUxY0NnWUFJUGl0cmp6YmVGUW9EV0tmeXllcTgKRTB5MVVVV2hYRXF5eUh5ZGFmTldrRDJ2cGQxcFlDY1E1YU14OStMdVUxak9CemJtT3pHUzdnbktBQmZwVWNhQgpGZXJxeEVQQ3V6VDRocmNjVGR3WjdURk92U0k2dTZuamllWFJxcEkvdXBVR3Uvczc0YVRKMmxrc1hUbm95YnRHCnM4ZjUxa04yVjVpV1pZTzcvL3BGV1FLQmdCVkQ3eEg5ekZPOXIrbkF1VHJsbXlteVlJcmRsVDFJTGo5NDRJenoKekoxZWNQNGtia1ZWaHBOYVY2bzBoRWQ5RytDUlZpL0J2QWN3KzZSeHJCeXRlaWd1QTBuN1BOa25kZTZUK2hoMgp6bVY4WlVKbDVmV2liSWFaQzdabllxRzhMZ0JubXBFL1pZbGlDNXNlREtjOGpNQmpFeVBWN2tsUnFqc1puaEk2CjRKb3BBb0dCQUtrZVNtU0pQa01iVkZyY1lMaTcrQWxodlREK0d5SGlzTjBhUkFEVEQ1ZC82aVVEdXc0cDJMT0QKTnp2RzVuY0dmNStHNVgrcjVQOUFaRHIyY2VlbmxyNmxRbGZGcndWZVRCMzVMaGxrd0N5SC8zQlQ5TUlBMnU3VwpGdVV4UTFTRVNNNmU5dEpHdWpkeTVvNU8wT29Ia2Zzc3pmTXJ4MXl3SExJaVRidGtndmlJCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
 
     ipMasqAgent:
       enabled: false
-      config:
-        nonMasqueradeCIDRs:
-          - 192.168.0.0/16
-          - 100.64.0.0/10
-          - 192.0.0.0/24
-          - 192.0.2.0/24
-          - 192.88.99.0/24
-          - 198.18.0.0/15
-          - 198.51.100.0/24
-          - 203.0.113.0/24
-          - 240.0.0.0/4
-          - 10.244.0.0/16
-          - 10.96.0.0/12
+    # clustermesh:
+    #   useAPIServer: true
+    #   config:
+    #     enabled: true
+    #     domain: ${SECRET_DOMAIN}
+    #     clusters:
+    #       - name: staging-rpi
+    #         address: cluster-rpi.mesh.${SECRET_DOMAIN}
+    #         port: 2379
+    #   apiserver:
+    #     replicas: 2
 
-    clustermesh:
-      useAPIServer: true
-      config:
-        enabled: true
-        domain: ${SECRET_DOMAIN}
-        clusters:
-          - name: staging-rpi
-            address: cluster-rpi.mesh.${SECRET_DOMAIN}
-            port: 2379
-      apiserver:
-        replicas: 2
+    #     service:
+    #       type: NodePort
+    #       nodePort: 32380
 
-        service:
-          type: NodePort
-          nodePort: 32380
-
-        tls:
-          authMode: cluster
-          auto:
-            enabled: true
-            method: helm
-          server:
-            extraDnsNames:
-              - "*.${SECRET_DOMAIN}"
-              - "*.mesh.${SECRET_DOMAIN}"
-            extraIpAddresses:
-              - 10.0.0.11
-              - 10.0.0.12
-              - 10.0.0.13
-              - 10.0.0.23
-              - 172.16.20.111
-              - 172.16.20.112
-              - 172.16.20.113
+    #     tls:
+    #       authMode: cluster
+    #       auto:
+    #         enabled: true
+    #         method: helm
+    #       server:
+    #         extraDnsNames:
+    #           - '*.${SECRET_DOMAIN}'
+    #           - '*.mesh.${SECRET_DOMAIN}'
+    #         extraIpAddresses:
+    #           - 10.0.0.11
+    #           - 10.0.0.12
+    #           - 10.0.0.13
+    #           - 10.0.0.23
+    #           - 172.16.20.111
+    #           - 172.16.20.112
+    #           - 172.16.20.113
