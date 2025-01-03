@@ -53,15 +53,15 @@ patches:
         path: /spec/dependsOn/0/name
         value: staging-sj-cluster-repositories
 
-# # Top-level app configuration
-# - path: ./staging-sj-apps.yaml
-# - target:
-#     kind: Kustomization
-#     name: apps-not-used
-#   patch: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: staging-sj-cluster-apps
-#     - op: replace
-#       path: /spec/dependsOn/0/name
-#       value: staging-sj-cluster-infrastructure
+  # Top-level app configuration
+  - path: ./staging-sj-apps.yaml
+  - target:
+      kind: Kustomization
+      name: apps-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-apps
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-sj-cluster-infrastructure
