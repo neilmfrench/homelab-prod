@@ -207,17 +207,6 @@ patches:
       apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
-        name: longhorn
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: longhorn
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1
-      kind: HelmRepository
-      metadata:
         name: kyverno
         namespace: flux-system
     target:
@@ -300,4 +289,15 @@ patches:
     target:
       kind: HelmRepository
       name: aqua
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: openebs-jiva
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: openebs-jiva
       namespace: flux-system

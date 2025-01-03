@@ -27,18 +27,18 @@ patches:
         path: /spec/dependsOn/0/name
         value: staging-sj-cluster-flux
 
-# # Top-level repository configuration
-# - path: ./staging-sj-repositories.yaml
-# - target:
-#     kind: Kustomization
-#     name: repositories-not-used
-#   patch: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: staging-sj-cluster-repositories
-#     - op: replace
-#       path: /spec/dependsOn/0/name
-#       value: staging-sj-cluster-vars
+  # Top-level repository configuration
+  - path: ./staging-sj-repositories.yaml
+  - target:
+      kind: Kustomization
+      name: repositories-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-repositories
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-sj-cluster-vars
 
 # # Top-level infrastructure configuration
 # - path: ./staging-sj-infrastructure.yaml
