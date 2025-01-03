@@ -7,5 +7,5 @@ resources:
   - ./longhorn-system
   - ./kubelet-serving-cert-approver
   - ./cert-manager
-  # - ./networking
-  # - ./volsync
+  - ./networking
+  - ./volsync
