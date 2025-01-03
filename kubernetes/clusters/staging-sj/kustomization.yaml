@@ -40,18 +40,18 @@ patches:
         path: /spec/dependsOn/0/name
         value: staging-sj-cluster-vars
 
-#   # Top-level infrastructure configuration
-#   - path: ./staging-sj-infrastructure.yaml
-#   - target:
-#       kind: Kustomization
-#       name: infrastructure-not-used
-#     patch: |-
-#       - op: replace
-#         path: /metadata/name
-#         value: staging-sj-cluster-infrastructure
-#       - op: replace
-#         path: /spec/dependsOn/0/name
-#         value: staging-sj-cluster-repositories
+  # Top-level infrastructure configuration
+  - path: ./staging-sj-infrastructure.yaml
+  - target:
+      kind: Kustomization
+      name: infrastructure-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-sj-cluster-infrastructure
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-sj-cluster-repositories
 
 # # Top-level app configuration
 # - path: ./staging-sj-apps.yaml

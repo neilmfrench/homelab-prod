@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ./kube-system
   # - ./openebs
-  - ./longhorn-system
-  - ./kubelet-serving-cert-approver
-  - ./cert-manager
-  - ./networking
-  - ./volsync
+  # - ./longhorn-system
+  # - ./kubelet-serving-cert-approver
+  # - ./cert-manager
+  # - ./networking
+  # - ./volsync
