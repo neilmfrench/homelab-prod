@@ -5,7 +5,7 @@ resources:
   - ./kube-system
   # - ./openebs
   # - ./longhorn-system
-  # - ./kubelet-serving-cert-approver
-  # - ./cert-manager
+  - ./kubelet-serving-cert-approver
+  - ./cert-manager
   # - ./networking
   # - ./volsync
