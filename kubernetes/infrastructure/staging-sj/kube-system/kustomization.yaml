@@ -5,5 +5,5 @@ resources:
   - ./cilium/ks.yaml
   # - ./metrics-server/ks.yaml
   # - ./snapshot-controller/ks.yaml
-  # - ./coredns/ks.yaml
+  - ./coredns/ks.yaml
   # - ./reloader/ks.yaml
