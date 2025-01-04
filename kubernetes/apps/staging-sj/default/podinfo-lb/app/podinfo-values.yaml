@@ -1,11 +1,11 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: podinfo-2
+  name: podinfo-lb
 spec:
-  releaseName: podinfo-2
+  releaseName: podinfo-lb
   values:
-    fullnameOverride: podinfo-2
+    fullnameOverride: podinfo-lb
     ingress:
       enabled: true
       className: "cilium"
