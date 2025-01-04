@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ./default
   # - ./monitoring
-  # - ./flux-system
+  - ./flux-system
   # - ./magazine
   # - ./security
