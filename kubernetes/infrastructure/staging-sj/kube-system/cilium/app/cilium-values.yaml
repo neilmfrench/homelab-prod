@@ -106,6 +106,7 @@ spec:
 
     ingressController:
       enabled: true
+      enableProxyProtocol: true
       default: true
       loadbalancerMode: shared
       enforceHttps: true
