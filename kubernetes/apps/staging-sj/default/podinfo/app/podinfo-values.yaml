@@ -8,7 +8,7 @@ spec:
       version: "6.3.6"
   values:
     ingress:
-      enabled: false
+      enabled: true
       className: "cilium"
       annotations:
         # cert-manager.io/cluster-issuer: "letsencrypt-production"
