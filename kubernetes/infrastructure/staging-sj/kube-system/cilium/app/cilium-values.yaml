@@ -173,6 +173,9 @@ spec:
             extraDnsNames:
               - "*.${SECRET_DOMAIN}"
               - "*.mesh.${SECRET_DOMAIN}"
+            extraIpAddresses:
+              - 10.0.1.150
+              - 172.16.20.75
         metrics:
           enabled: false
       # apiserver:

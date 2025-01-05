@@ -187,7 +187,9 @@ spec:
             extraDnsNames:
               - "*.${SECRET_DOMAIN}"
               - "*.mesh.${SECRET_DOMAIN}"
-            # extraIpAddresses:
+            extraIpAddresses:
+              - 10.0.1.150
+              - 172.16.20.75
             #   - 10.0.0.11
             #   - 10.0.0.12
             #   - 10.0.0.13
