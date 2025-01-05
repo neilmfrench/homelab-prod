@@ -7,8 +7,8 @@ spec:
   values:
     metrics:
       enabled: true
-    args:
-      - --kubelet-insecure-tls
+    # args:
+    #   - --kubelet-insecure-tls
     serviceMonitor:
       enabled: false
     apiService:
