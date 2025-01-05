@@ -161,26 +161,22 @@ spec:
         enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
-          - name: staging-sj
+          - name: dev-sj
             address: cluster-sj.mesh.${SECRET_DOMAIN}
             port: 2379
-          #   ips:
-          #     - 10.0.0.11
-          #     - 10.0.0.12
-          #     - 10.0.0.13
-          #     - 10.0.0.23
       apiserver:
         replicas: 2
-        # kvstoremesh:
-        #   enabled: false
+        kvstoremesh:
+          enabled: true
+          healthPort: 9881
 
         service:
           type: LoadBalancer
           loadBalancerIP: 172.16.20.75
-          annotations:
-            external-dns/is-public: "true"
-            external-dns.aplpha.kubernetes.io/hostname: "cluster-rpi.mesh.${SECRET_DOMAIN}"
-            external-dns.alpha.kubernetes.io/ttl: "1m"
+          # annotations:
+          #   external-dns/is-public: "true"
+          #   external-dns.aplpha.kubernetes.io/hostname: "cluster-rpi.mesh.${SECRET_DOMAIN}"
+          #   external-dns.alpha.kubernetes.io/ttl: "1m"
 
         tls:
           authMode: cluster
@@ -191,11 +187,11 @@ spec:
             extraDnsNames:
               - "*.${SECRET_DOMAIN}"
               - "*.mesh.${SECRET_DOMAIN}"
-            extraIpAddresses:
-              - 10.0.0.11
-              - 10.0.0.12
-              - 10.0.0.13
-              - 10.0.0.23
-              - 172.16.20.111
-              - 172.16.20.112
-              - 172.16.20.113
+            # extraIpAddresses:
+            #   - 10.0.0.11
+            #   - 10.0.0.12
+            #   - 10.0.0.13
+            #   - 10.0.0.23
+            #   - 172.16.20.111
+            #   - 172.16.20.112
+            #   - 172.16.20.113
