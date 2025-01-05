@@ -163,7 +163,7 @@ spec:
         clusters:
           - name: dev-sj
             address: cluster-sj.mesh.${SECRET_DOMAIN}
-            port: 2379
+            port: 32380
       apiserver:
         replicas: 2
         kvstoremesh:
@@ -190,6 +190,7 @@ spec:
             extraIpAddresses:
               - 10.0.1.150
               - 172.16.20.75
+              - 10.0.0.8
             #   - 10.0.0.11
             #   - 10.0.0.12
             #   - 10.0.0.13
