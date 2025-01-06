@@ -162,6 +162,7 @@ spec:
           # NodePort will be redirected to a local backend, regardless of whether the
           # destination node belongs to the local or the remote cluster.
           nodePort: 32380
+          enableSessionAffinity: Never
         replicas: 2
         tls:
           authMode: cluster
