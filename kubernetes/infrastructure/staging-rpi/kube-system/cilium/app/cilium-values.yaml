@@ -41,6 +41,8 @@ spec:
     autoDirectNodeRoutes: false
     devices: [eth0]
 
+    pmtuDiscovery: true
+
     healthChecking: true
 
     cni:
