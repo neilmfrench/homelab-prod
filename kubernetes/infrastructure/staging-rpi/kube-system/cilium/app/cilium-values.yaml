@@ -41,7 +41,8 @@ spec:
     autoDirectNodeRoutes: false
     devices: [eth0]
 
-    pmtuDiscovery: true
+    pmtuDiscovery:
+      enabled: true
 
     healthChecking: true
 
