@@ -31,7 +31,7 @@ spec:
           effect: NoSchedule
 
     identityAllocationMode: crd
-    kubeProxyReplacement: true
+    kubeProxyReplacement: "true"
     enableK8sEndpointSlice: true
     localRedirectPolicy: true
 
