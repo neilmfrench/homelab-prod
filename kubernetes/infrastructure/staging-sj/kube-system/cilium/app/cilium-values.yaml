@@ -38,7 +38,7 @@ spec:
     autoDirectNodeRoutes: false
     devices: [eth0]
 
-    MTU: 1400
+    MTU: 1450
     # pmtuDiscovery:
     #   enabled: true
 
