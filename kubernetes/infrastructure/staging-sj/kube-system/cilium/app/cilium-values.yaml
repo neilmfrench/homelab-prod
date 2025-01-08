@@ -39,8 +39,8 @@ spec:
     devices: [eth0]
 
     # MTU: 1500
-    pmtuDiscovery:
-      enabled: true
+    # pmtuDiscovery:
+    #   enabled: true
 
     healthChecking: true
 
