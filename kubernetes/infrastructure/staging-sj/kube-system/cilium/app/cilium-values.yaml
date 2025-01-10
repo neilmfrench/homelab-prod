@@ -38,6 +38,7 @@ spec:
     autoDirectNodeRoutes: false
     devices: [eth0]
 
+    # required for homelab mtu differences on oracle
     MTU: 1450
     # pmtuDiscovery:
     #   enabled: true
@@ -166,7 +167,6 @@ spec:
           # NodePort will be redirected to a local backend, regardless of whether the
           # destination node belongs to the local or the remote cluster.
           nodePort: 32380
-          enableSessionAffinity: Never
         replicas: 2
         tls:
           authMode: cluster
@@ -176,41 +176,16 @@ spec:
             certValidityDuration: 1095
           server:
             extraDnsNames:
-              - "*.${SECRET_DOMAIN}"
               - "*.mesh.${SECRET_DOMAIN}"
-            extraIpAddresses:
-              - 10.0.1.150
-              - 172.16.20.75
-              - 172.16.20.111
-              - 172.16.20.112
-              - 172.16.20.113
-              - 10.0.0.162
-              - 10.0.0.86
-              - 10.0.0.8
-              - 10.0.0.202
+            # extraIpAddresses:
+            #   - 10.0.1.150
+            #   - 172.16.20.75
+            #   - 172.16.20.111
+            #   - 172.16.20.112
+            #   - 172.16.20.113
+            #   - 10.0.0.162
+            #   - 10.0.0.86
+            #   - 10.0.0.8
+            #   - 10.0.0.202
         metrics:
           enabled: false
-      # apiserver:
-      #   replicas: 2
-
-      #   service:
-      #     type: NodePort
-      #     nodePort: 32379
-
-      #   tls:
-      #     authMode: cluster
-      #     auto:
-      #       enabled: true
-      #       method: helm
-      #     server:
-      #       extraDnsNames:
-      #         - "*.${SECRET_DOMAIN}"
-      #         - "*.mesh.${SECRET_DOMAIN}"
-      #       # extraIpAddresses:
-      #       #   - 10.0.0.11
-      #       #   - 10.0.0.12
-      #       #   - 10.0.0.13
-      #       #   - 10.0.0.23
-      #       #   - 172.16.20.111
-      #       #   - 172.16.20.112
-      #       #   - 172.16.20.113
