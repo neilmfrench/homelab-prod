@@ -59,7 +59,7 @@ spec:
     bpf:
       masquerade: true
       # https://github.com/cilium/cilium/issues/36737#issuecomment-2556565144
-      hostLegacyRouting: true
+      hostLegacyRouting: false
     bgp:
       enabled: false
     ipv4:
