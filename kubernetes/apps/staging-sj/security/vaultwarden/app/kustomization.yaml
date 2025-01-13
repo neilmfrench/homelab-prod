@@ -14,6 +14,6 @@ resources:
   # volsync
   # - ./volsync.yaml
   # app
-  # - ../../../../base/vaultwarden
-# patches:
-#   - path: ./vaultwarden-values.yaml
+  - ../../../../base/vaultwarden
+patches:
+  - path: ./vaultwarden-values.yaml
