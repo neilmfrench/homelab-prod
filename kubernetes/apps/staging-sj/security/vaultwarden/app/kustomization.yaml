@@ -5,15 +5,15 @@ namespace: security
 resources:
   - ./data-pvc.yaml
   # backup to home
-  - ./restic-config.sops.yaml
+  # - ./restic-config.sops.yaml
   # backup to OCI PHX
-  - ./oci-phx-restic-config.sops.yaml
+  # - ./oci-phx-restic-config.sops.yaml
   # clone to staging
-  - ./dummy-volsync-dest-svc.yaml
-  - ./staging-replicationdestination-key.sops.yaml
+  # - ./dummy-volsync-dest-svc.yaml
+  # - ./staging-replicationdestination-key.sops.yaml
   # volsync
-  - ./volsync.yaml
+  # - ./volsync.yaml
   # app
-  - ../../../../base/vaultwarden
-patches:
-  - path: ./vaultwarden-values.yaml
+  # - ../../../../base/vaultwarden
+# patches:
+#   - path: ./vaultwarden-values.yaml
