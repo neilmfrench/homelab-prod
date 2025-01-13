@@ -9,10 +9,10 @@ resources:
   # backup to OCI PHX
   # - ./oci-phx-restic-config.sops.yaml
   # clone to staging
-  # - ./dummy-volsync-dest-svc.yaml
-  # - ./staging-replicationdestination-key.sops.yaml
+  - ./dummy-volsync-dest-svc.yaml
+  - ./staging-replicationdestination-key.sops.yaml
   # volsync
-  # - ./volsync.yaml
+  - ./volsync.yaml
   # app
   - ../../../../base/vaultwarden
 patches:
