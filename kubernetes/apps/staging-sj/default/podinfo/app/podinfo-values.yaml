@@ -16,7 +16,7 @@ spec:
         external-dns.alpha.kubernetes.io/target: "ipv4-sj.${SECRET_DOMAIN}"
         # nginx.ingress.kubernetes.io/whitelist-source-range: "${SECRET_EXTERNAL_IP}/32"
       hosts:
-        - host: &host podinfo-sj.${SECRET_DOMAIN}
+        - host: &host podinfo-sj.staging.${SECRET_DOMAIN}
           paths:
             - path: /
               pathType: Prefix
