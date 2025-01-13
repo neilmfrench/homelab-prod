@@ -17,8 +17,8 @@ spec:
       allowNodeDrainWithLastHealthyReplica: true
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       defaultDataLocality: best-effort
-      # backupTarget: "s3://homelab-backup@us-phoenix-1/longhorn"
-      # backupTargetCredentialSecret: oci-object-storage-secret
+      backupTarget: "s3://sj-backup@us-sj-1/longhorn"
+      backupTargetCredentialSecret: oci-object-storage-secret
       defaultLonghornStaticStorageClass: longhorn
       orphanAutoDeletion: true
     ingress:
