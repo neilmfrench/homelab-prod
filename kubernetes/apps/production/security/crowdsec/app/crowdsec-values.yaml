@@ -74,7 +74,7 @@ spec:
           accessModes:
             - ReadWriteMany
           storageClassName: ceph-filesystem
-          size: 400Mi
+          size: 500Mi
       env:
         # - name: DISABLE_ONLINE_API
         #   value: "true"
