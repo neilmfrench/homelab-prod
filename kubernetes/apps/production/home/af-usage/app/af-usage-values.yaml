@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: af-usage
+spec:
+  values:
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: harbor-neilfrench-regcred
+    controllers:
+      app:
+        containers:
+          app:
+            image:
+              repository: harbor.${SECRET_DOMAIN}/af-usage/af-usage-checker
+              tag: 1.0.0
+            env:
+              REFRESH_TOKEN: "${SECRET_AF_USAGE_INITIAL_REFRESH_TOKEN}"
+            resources:
+              requests:
+                cpu: 25m
+                memory: 145M
+              limits:
+                memory: 512M
