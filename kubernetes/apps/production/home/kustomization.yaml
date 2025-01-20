@@ -5,6 +5,6 @@ resources:
   - ./secrets
   - ./namespace.yaml
   - ./home-assistant/ks.yaml
-  # - ./af-usage/ks.yaml
+  - ./af-usage/ks.yaml
   # - ./wyze-bridge/ks.yaml
   # - ./pihole-hue-bridge/ks.yaml
