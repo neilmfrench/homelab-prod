@@ -4,19 +4,25 @@ kind: HelmRelease
 metadata:
   name: node-feature-discovery
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       chart: node-feature-discovery
-      version: 0.13.2
+      version: 0.17.1
       sourceRef:
         kind: HelmRepository
         name: node-feature-discovery
         namespace: flux-system
-      interval: 5m
+  maxHistory: 3
   install:
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
     remediation:
+      strategy: rollback
       retries: 3
+  uninstall:
+    keepHistory: false
