@@ -5,6 +5,22 @@ metadata:
   name: wyze-bridge
 spec:
   values:
+    controllers:
+      wyze:
+        containers:
+          app:
+            image:
+              repository: mrlt8/wyze-bridge
+              tag: "2.10.3"
+            env:
+              REFRESH_TOKEN: "${SECRET_AF_USAGE_INITIAL_REFRESH_TOKEN}"
+            resources:
+              requests:
+                cpu: 25m
+                memory: 64M
+              limits:
+                memory: 128M
+
     image:
       repository: mrlt8/wyze-bridge
       tag: "2.9.10"

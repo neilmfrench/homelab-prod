@@ -44,3 +44,4 @@ resources:
   - ./codecentric.yaml
   - ./aqua.yaml
   - ./homelab.yaml
+  - ./node-feature-discovery.yaml

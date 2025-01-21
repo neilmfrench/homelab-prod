@@ -38,33 +38,5 @@ spec:
           name: ak-outpost-authentik-embedded-outpost
           namespace: security
           port: 9000
-
-    # - kind: Rule
-    #   match: Host(`home.${SECRET_DOMAIN}`)
-    #   priority: 10
-    #   middlewares:
-    #     - name: authentik
-    #       namespace: networking
-    #   services:
-    #     - kind: Service
-    #       name: home-assistant
-    #       namespace: home
-    #       port: 8123
-    # - kind: Rule
-    #   match: "Host(`home.${SECRET_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)"
-    #   priority: 15
-    #   services:
-    #     - kind: Service
-    #       name: ak-outpost-authentik-embedded-outpost
-    #       namespace: security
-    #       port: 9000
-    # - kind: Rule
-    #   match: "Host(`home.${SECRET_DOMAIN}`) && PathPrefix(`/api/websocket`)"
-    #   priority: 20
-    #   services:
-    #     - kind: Service
-    #       name: home-assistant
-    #       namespace: home
-    #       port: 8123
   tls:
     secretName: "home-assistant-tls"
