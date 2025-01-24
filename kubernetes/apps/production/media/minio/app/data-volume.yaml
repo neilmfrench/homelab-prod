@@ -17,7 +17,7 @@ spec:
     required:
       nodeSelectorTerms:
         - matchExpressions:
-            - key: kubernetes.io/hostname
+            - key: western-digital.feature.node.kubernetes.io/drive
               operator: In
               values:
-                - talos-4
+                - "true"
