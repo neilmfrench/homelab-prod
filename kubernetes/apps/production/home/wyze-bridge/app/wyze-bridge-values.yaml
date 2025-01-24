@@ -26,6 +26,7 @@ spec:
               WYZE_PASSWORD: "${SECRET_WYZE_PASSWORD}"
               API_ID: "${SECRET_WYZE_API_ID}"
               API_KEY: "${SECRET_WYZE_API_KEY}"
+              WB_AUTH: False
             probes:
               liveness:
                 enabled: true
