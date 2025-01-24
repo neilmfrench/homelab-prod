@@ -19,7 +19,7 @@ spec:
               H264_ENC: h264_qsv
               NET_MODE: LAN
               ON_DEMAND: False
-              SUBSTREAM: True
+              SUBSTREAM: False
               # FFMPEG_LOGLEVEL: debug
               LIBVA_DRIVER_NAME: i965
               WYZE_EMAIL: "${SECRET_WYZE_EMAIL}"
