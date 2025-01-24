@@ -301,3 +301,14 @@ patches:
       kind: HelmRepository
       name: openebs-jiva
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: intel
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: intel
+      namespace: flux-system

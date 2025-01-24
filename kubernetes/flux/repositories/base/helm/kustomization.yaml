@@ -45,3 +45,4 @@ resources:
   - ./aqua.yaml
   - ./homelab.yaml
   - ./node-feature-discovery.yaml
+  - ./intel.yaml
