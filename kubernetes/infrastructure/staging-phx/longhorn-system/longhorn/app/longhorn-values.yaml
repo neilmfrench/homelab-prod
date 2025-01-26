@@ -17,7 +17,7 @@ spec:
       backupTargetCredentialSecret: oci-object-storage-secret
       defaultLonghornStaticStorageClass: longhorn
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: nginx
       tls: true
       host: "longhorn-phx.${SECRET_DOMAIN}"
