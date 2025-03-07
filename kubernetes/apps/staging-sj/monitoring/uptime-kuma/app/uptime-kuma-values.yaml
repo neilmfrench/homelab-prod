@@ -15,21 +15,19 @@ spec:
             port: 3001
     ingress:
       main:
-        enabled: false
+        enabled: true
         ingressClassName: "cilium"
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns/is-public: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4-sj.${SECRET_DOMAIN}"
         hosts:
-          - host: &host "status-sj.${SECRET_DOMAIN}"
+          - host: &host "status.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
-            secretName: "uptime-kuma-tls"
     persistence:
       data:
         enabled: true
