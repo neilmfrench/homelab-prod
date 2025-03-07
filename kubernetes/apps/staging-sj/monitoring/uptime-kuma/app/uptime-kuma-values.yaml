@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: louislam/uptime-kuma
-      tag: "1.23.13-alpine"
+      tag: "1.23.16-alpine"
     service:
       main:
         ports:
