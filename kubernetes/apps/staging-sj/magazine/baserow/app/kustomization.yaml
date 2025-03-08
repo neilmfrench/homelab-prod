@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: magazine
 resources:
   - ./data-pvc.yaml
-#   - ./restic-config.sops.yaml
-#   - ./volsync.yaml
-#   - ../../../../base/baserow
-# patches:
-#   - path: ./baserow-values.yaml
+  #   - ./restic-config.sops.yaml
+  #   - ./volsync.yaml
+  - ../../../../base/baserow
+patches:
+  - path: ./baserow-values.yaml
