@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./data-pvc.yaml
+  - ./data-pvc-with-backup.yaml
   # - ./restic-config.sops.yaml
   # - ./volsync.yaml
   - ../../../../base/uptime-kuma
