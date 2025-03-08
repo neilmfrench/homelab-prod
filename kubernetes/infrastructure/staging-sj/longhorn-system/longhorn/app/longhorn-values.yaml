@@ -7,20 +7,23 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: 1.7.2
+      version: 1.8.1
   values:
     persistence:
       defaultClass: true
       reclaimPolicy: Retain
+      backupTargetName: default
     defaultSettings:
       storageMinimalAvailablePercentage: "10"
-      allowNodeDrainWithLastHealthyReplica: true
+      nodeDrainPolicy: "block-for-eviction-if-contains-last-replica"
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       defaultDataLocality: best-effort
-      backupTarget: "s3://sj-backup@us-sanjose-1/longhorn"
-      backupTargetCredentialSecret: oci-object-storage-secret
       defaultLonghornStaticStorageClass: longhorn
       orphanAutoDeletion: true
+    defaultBackupStore:
+      backupTarget: "s3://sj-backup@us-sanjose-1/longhorn"
+      backupTargetCredentialSecret: oci-object-storage-secret
+      pollInterval: 300
     ingress:
       enabled: false
       ingressClassName: nginx
