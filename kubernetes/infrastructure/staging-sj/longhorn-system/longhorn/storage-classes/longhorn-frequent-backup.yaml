@@ -16,8 +16,7 @@ parameters:
   numberOfReplicas: "3"
   staleReplicaTimeout: "30"
   unmapMarkSnapChainRemoved: ignored
-  recurringJobSelector: |
-    '[
+  recurringJobSelector: '[
       {
         "name":"frequent",
         "isGroup":true
