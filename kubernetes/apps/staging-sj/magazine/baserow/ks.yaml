@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-baserow-database
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/staging-phx/magazine/baserow/database
+  path: ./kubernetes/apps/staging-sj/magazine/baserow/database
   prune: true
   sourceRef:
     kind: GitRepository
@@ -27,7 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-baserow-database
-  path: ./kubernetes/apps/staging-phx/magazine/baserow/app
+  path: ./kubernetes/apps/staging-sj/magazine/baserow/app
   prune: true
   sourceRef:
     kind: GitRepository
