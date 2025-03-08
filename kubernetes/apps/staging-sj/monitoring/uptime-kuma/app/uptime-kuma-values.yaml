@@ -31,5 +31,5 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: uptime-kuma-data
+        existingClaim: uptime-kuma-data-daily-backup
         mountPath: /app/data
