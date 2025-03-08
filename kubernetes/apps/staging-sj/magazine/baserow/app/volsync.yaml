@@ -1,0 +1,18 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: baserow-data
+spec:
+  sourcePVC: baserow-data
+  trigger:
+    schedule: "0 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: baserow-data-restic-config
+    volumeSnapshotClassName: longhorn-snapshot-vsc
+    storageClassName: longhorn-volsync
+    retain:
+      daily: 7
+      within: 3d
