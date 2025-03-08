@@ -54,7 +54,7 @@ spec:
             port: 80
     ingress:
       main:
-        enabled: true
+        enabled: false
         className: "nginx"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
