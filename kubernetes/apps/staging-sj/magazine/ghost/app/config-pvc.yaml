@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
-  storageClassName: openebs-jiva-csi-default
+      storage: 16Gi
+  storageClassName: longhorn-daily-backup

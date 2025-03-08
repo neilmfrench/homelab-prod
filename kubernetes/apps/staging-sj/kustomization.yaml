@@ -5,5 +5,5 @@ resources:
   - ./default
   - ./monitoring
   - ./flux-system
-  # - ./magazine
+  - ./magazine
   - ./security
