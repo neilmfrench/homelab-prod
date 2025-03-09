@@ -14,7 +14,7 @@ spec:
 
     cluster:
       name: dev-phx
-      id: 10
+      id: 20
 
     operator:
       enabled: true
