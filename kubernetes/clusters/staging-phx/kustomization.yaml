@@ -14,54 +14,54 @@ patches:
         path: /metadata/name
         value: staging-phx-cluster-flux
 
-  # # Top-level variable configuration
-  # - path: ./staging-phx-vars.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: vars-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-phx-cluster-vars
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-phx-cluster-flux
+# # Top-level variable configuration
+# - path: ./staging-phx-vars.yaml
+# - target:
+#     kind: Kustomization
+#     name: vars-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-phx-cluster-vars
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-phx-cluster-flux
 
-  # # Top-level repository configuration
-  # - path: ./staging-phx-repositories.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: repositories-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-phx-cluster-repositories
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-phx-cluster-vars
+# # Top-level repository configuration
+# - path: ./staging-phx-repositories.yaml
+# - target:
+#     kind: Kustomization
+#     name: repositories-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-phx-cluster-repositories
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-phx-cluster-vars
 
-  # # Top-level infrastructure configuration
-  # - path: ./staging-phx-infrastructure.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: infrastructure-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-phx-cluster-infrastructure
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-phx-cluster-repositories
+# # Top-level infrastructure configuration
+# - path: ./staging-phx-infrastructure.yaml
+# - target:
+#     kind: Kustomization
+#     name: infrastructure-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-phx-cluster-infrastructure
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-phx-cluster-repositories
 
-  # # Top-level app configuration
-  # - path: ./staging-phx-apps.yaml
-  # - target:
-  #     kind: Kustomization
-  #     name: apps-not-used
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: staging-phx-cluster-apps
-  #     - op: replace
-  #       path: /spec/dependsOn/0/name
-  #       value: staging-phx-cluster-infrastructure
+# # Top-level app configuration
+# - path: ./staging-phx-apps.yaml
+# - target:
+#     kind: Kustomization
+#     name: apps-not-used
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: staging-phx-cluster-apps
+#     - op: replace
+#       path: /spec/dependsOn/0/name
+#       value: staging-phx-cluster-infrastructure
