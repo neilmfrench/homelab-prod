@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./cluster-source.yaml
   - ./base-flux.yaml
-  # - ./base-vars.yaml
+  - ./base-vars.yaml
   # - ./base-repositories.yaml
   # - ./base-infrastructure.yaml
   # - ./base-apps.yaml

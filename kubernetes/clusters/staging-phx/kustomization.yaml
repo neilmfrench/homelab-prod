@@ -14,18 +14,18 @@ patches:
         path: /metadata/name
         value: staging-phx-cluster-flux
 
-# # Top-level variable configuration
-# - path: ./staging-phx-vars.yaml
-# - target:
-#     kind: Kustomization
-#     name: vars-not-used
-#   patch: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: staging-phx-cluster-vars
-#     - op: replace
-#       path: /spec/dependsOn/0/name
-#       value: staging-phx-cluster-flux
+  # Top-level variable configuration
+  - path: ./staging-phx-vars.yaml
+  - target:
+      kind: Kustomization
+      name: vars-not-used
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: staging-phx-cluster-vars
+      - op: replace
+        path: /spec/dependsOn/0/name
+        value: staging-phx-cluster-flux
 
 # # Top-level repository configuration
 # - path: ./staging-phx-repositories.yaml
