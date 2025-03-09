@@ -152,6 +152,9 @@ spec:
           - name: dev-sj
             address: cluster-sj.mesh.${SECRET_DOMAIN}
             port: 2379
+          - name: dev-phx
+            address: cluster-phx.mesh.${SECRET_DOMAIN}
+            port: 2379
       apiserver:
         replicas: 2
         kvstoremesh:
