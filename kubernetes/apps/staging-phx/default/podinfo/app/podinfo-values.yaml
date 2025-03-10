@@ -5,19 +5,18 @@ metadata:
 spec:
   values:
     ingress:
-      enabled: false
-      className: "nginx"
+      enabled: true
+      className: "cilium"
       annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        # cert-manager.io/cluster-issuer: "letsencrypt-production"
         external-dns/is-public: "true"
         external-dns.alpha.kubernetes.io/target: "ipv4-phx.${SECRET_DOMAIN}"
-        nginx.ingress.kubernetes.io/whitelist-source-range: "${SECRET_EXTERNAL_IP}/32"
+        # nginx.ingress.kubernetes.io/whitelist-source-range: "${SECRET_EXTERNAL_IP}/32"
       hosts:
-        - host: &host phx.${SECRET_DOMAIN}
+        - host: &host podinfo-phx.${SECRET_DOMAIN}
           paths:
             - path: /
               pathType: Prefix
       tls:
-        - secretName: pod-info-tls
-          hosts:
+        - hosts:
             - *host
