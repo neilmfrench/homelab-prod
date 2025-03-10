@@ -5,13 +5,20 @@ metadata:
   name: longhorn-daily-backup
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
 parameters:
+  dataEngine: v1
+  dataLocality: disabled
+  disableRevisionCounter: "true"
+  fromBackup: ""
+  fsType: ext4
   numberOfReplicas: "3"
   staleReplicaTimeout: "30"
-  fromBackup: ""
+  unmapMarkSnapChainRemoved: ignored
   recurringJobSelector: '[
       {
         "name":"daily",
-        "isGroup":true,
+        "isGroup":true
       }
     ]'
