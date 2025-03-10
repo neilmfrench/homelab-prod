@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./cilium/ks.yaml
   # - ./kured/ks.yaml
-  # - ./reloader/ks.yaml
-  # - ./metrics-server/ks.yaml
+  - ./reloader/ks.yaml
+  - ./metrics-server/ks.yaml
   # - ./snapshot-controller/ks.yaml
   # - ./coredns/ks.yaml
