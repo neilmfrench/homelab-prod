@@ -149,6 +149,9 @@ spec:
         enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
+          - name: dev-phx
+            address: cluster-phx.mesh.${SECRET_DOMAIN}
+            port: 2379
           - name: staging-rpi
             address: cluster-rpi.mesh.${SECRET_DOMAIN}
             port: 2379
