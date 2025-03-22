@@ -17,6 +17,12 @@ spec:
   secretName: selfsigned-root-secret
   duration: 43800h # 5 years
   renewBefore: 39420h # 4.5 years
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: ""
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: ""
   privateKey:
     algorithm: ECDSA
     size: 256
