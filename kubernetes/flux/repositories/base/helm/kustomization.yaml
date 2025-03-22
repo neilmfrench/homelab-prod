@@ -46,3 +46,4 @@ resources:
   - ./homelab.yaml
   - ./node-feature-discovery.yaml
   - ./intel.yaml
+  - ./emberstack.yaml
