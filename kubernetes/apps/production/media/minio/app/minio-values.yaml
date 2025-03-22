@@ -14,11 +14,11 @@ spec:
     rootPassword: "${SECRET_MINIO_ROOT_PASSWORD}"
     drivesPerNode: 1
     replicas: 1
-    minioAPIPort: 443
     persistence:
       enabled: true
       existingClaim: minio-data
     service:
+      port: 443
       type: LoadBalancer
       loadBalancerIP: 172.16.20.10
     ingress:
