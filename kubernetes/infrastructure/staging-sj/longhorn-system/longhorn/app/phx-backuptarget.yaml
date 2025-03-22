@@ -1,0 +1,11 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: BackupTarget
+metadata:
+  name: default
+  namespace: longhorn-system
+spec:
+  backupTargetURL: s3://phx-backup@us-phoenix-1/longhorn
+  credentialSecret: oci-object-storage-secret
+  pollInterval: 5m0s
+  syncRequestedAt: "2025-03-22T03:41:26Z"
