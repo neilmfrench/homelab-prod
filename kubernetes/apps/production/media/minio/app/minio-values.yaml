@@ -23,7 +23,7 @@ spec:
       enabled: true
       existingClaim: minio-data
     service:
-      port: 443
+      # port: 443
       type: LoadBalancer
       loadBalancerIP: 172.16.20.10
     ingress:
