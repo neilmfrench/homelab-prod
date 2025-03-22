@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: longhorn-system
 resources:
   - ./oci-object-storage-secret.sops.yaml
+  - ./phx-oci-object-storage-secret.sops.yaml
   - ../../../../base/longhorn
+  - ./phx-backuptarget.yaml
 patches:
   - path: ./longhorn-values.yaml
