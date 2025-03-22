@@ -5,6 +5,6 @@ metadata:
   name: hb-backuptarget
   namespace: longhorn-system
 spec:
-  backupTargetURL: s3://sj-backup@us-phoenix-1/longhorn
+  backupTargetURL: s3://sj-backup@us-east-1/longhorn
   credentialSecret: hb-oci-object-storage-secret
   pollInterval: 5m0s
