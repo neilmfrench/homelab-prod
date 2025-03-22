@@ -15,6 +15,8 @@ spec:
   isCA: true
   commonName: selfsigned-ca
   secretName: selfsigned-root-secret
+  duration: 43800h # 5 years
+  renewBefore: 39420h # 4.5 years
   privateKey:
     algorithm: ECDSA
     size: 256

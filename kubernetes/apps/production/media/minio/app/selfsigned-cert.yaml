@@ -12,6 +12,9 @@ spec:
   ipAddresses:
     - 172.16.20.10
 
+  duration: 43800h # 5 years
+  renewBefore: 39420h # 4.5 years
+
   issuerRef:
     name: cluster-selfsigned-issuer
     kind: ClusterIssuer
