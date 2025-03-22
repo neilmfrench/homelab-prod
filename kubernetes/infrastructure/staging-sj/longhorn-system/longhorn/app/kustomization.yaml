@@ -5,7 +5,9 @@ namespace: longhorn-system
 resources:
   - ./oci-object-storage-secret.sops.yaml
   - ./phx-oci-object-storage-secret.sops.yaml
+  - ./hb-oci-object-storage-secret.sops.yaml
   - ../../../../base/longhorn
   - ./phx-backuptarget.yaml
+  - ./hb-backuptarget.yaml
 patches:
   - path: ./longhorn-values.yaml
