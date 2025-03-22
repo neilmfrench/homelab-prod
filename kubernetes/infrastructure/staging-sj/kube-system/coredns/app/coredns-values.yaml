@@ -33,6 +33,8 @@ spec:
               172.16.20.75 cluster-rpi.mesh.${SECRET_DOMAIN}
               10.0.1.150 cluster-sj.mesh.${SECRET_DOMAIN}
               10.1.1.44 cluster-phx.mesh.${SECRET_DOMAIN}
+              10.0.0.200 ${SECRET_OCI_SJ_S3_OBJECTSTORE_ENDPOINT}
+              10.1.0.200 ${SECRET_OCI_PHX_S3_OBJECTSTORE_ENDPOINT}
               fallthrough
           - name: ready
           - name: kubernetes
