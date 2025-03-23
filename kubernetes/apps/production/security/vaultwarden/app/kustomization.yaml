@@ -4,7 +4,9 @@ kind: Kustomization
 namespace: security
 resources:
   - ./data-pvc.yaml
-  # - ./volsync.yaml
+  - ./restic-config.sops.yaml
+  - ./oci-phx-restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/vaultwarden
 patches:
   - path: ./vaultwarden-values.yaml

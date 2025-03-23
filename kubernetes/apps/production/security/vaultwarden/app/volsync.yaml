@@ -1,26 +1,36 @@
 ---
-apiVersion: externaldns.k8s.io/v1alpha1
-kind: DNSEndpoint
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
 metadata:
-  name: vs-vaultwarden-prod
-  annotations:
-    external-dns/is-public: "true"
+  name: vaultwarden-data
 spec:
-  endpoints:
-    - dnsName: vs-vaultwarden-prod.${SECRET_DOMAIN}
-      targets:
-        - "${SECRET_CLOUDFLARE_TUNNEL_TARGET}"
-      recordType: CNAME
+  sourcePVC: vaultwarden
+  trigger:
+    schedule: "0 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: vaultwarden-data-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      within: 3d
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: sync-vaultwarden
+  name: vaultwarden-phx-data
 spec:
   sourcePVC: vaultwarden
-  syncthing:
-    serviceType: ClusterIP
-    peers:
-      - ID: UR744ZE-BPMIJYD-LPWPNDW-KQG62JO-DWAQJTR-B27CRP7-FDTMBUE-AUAJEAX
-        address: tcp://vaultwarden-volsync-cloudflared-access-tunnel:9210
-        introducer: false
+  trigger:
+    schedule: "15 7 * * 3"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: vaultwarden-phx-data-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      within: 3d

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: vaultwarden-phx-data-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:MdjIWUTMVCdBeYffTELRu0R+VUCE8cWdS7XSPaHJpPPKJ9wCpJ3PJ6rwtx7N3CZB0Rmz40aAL5x49xmxaJ6/2lMhwP/c7NyY4Y2kkiHabxEq7quENfTPQ/0EH5sArpl9jNLwxvQNqqyixRM=,iv:9xpgLcUEae0/mHUPa0+TbU/fIQNx2/A3coPhksSr5fs=,tag:xZfMWvYHD10ISXmdCmU32g==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:vxaeVz01A78k4V5M,iv:kopDkzgo8utkNrIbakhhsDv25Qmf2019sTioSF8UOo0=,tag:Qt0ukwxKnCbdgVv4oMPr2Q==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:3hF9bnDbvNGRa28kkthDuCdc0Y5k6+o2LxlYXrCpokumuiCqVPaUeA==,iv:ZVL9uX9bxjc7hBB28Ucw0lkc/HocgHQ+MUKxwoJVgF4=,tag:EyQgjPds9aY3e9MCRlTrjQ==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:PzLFSeTPNEKAqyIGthKEgPNmawSiy8RKz3iav78RADNgKpRG8+uddTFyPxc=,iv:pgPYT9zn9umVKtkSO3nqCDLysTUgKMnnVF9ftp2qXcQ=,tag:HfC1qQx3pa9dM8cT95Wydw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyRVoyV0VHeWlNZjZKbzU1
+            L0lxekZ5MmRrSjJlTkhLTVZ2UGhVaW9tc0FjClBOZGVDMk9WVEJBbzlNWVVGUEhV
+            RU1GOXdjWlY0S0VYMW5nUm1tZzVsSVkKLS0tIEFEbTNRM3BzVDE2cG9WcGdjczUy
+            aGtWcG5jOEo5MjMvMHdvM3N1czJoL3MKvuA/BFK9JbfKyOV6y97t9Q6hJH/xv5Dd
+            pWDGIZ8uGfpulpmoyrcN/z8ZcucAIJ5dyTrerIuOCrt1tYIf97sfkQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-03-23T04:14:46Z"
+    mac: ENC[AES256_GCM,data:gedzWzwl/wn5lGgd4oX/lG22ey4vbFUc20seuvkU3atddhNRKwOUlB5Cq2PnOVrepmflQnz1ej2RKrpV+WH7pmRPCNEsmVCh5Pm1HZpjZlj6182DbjCr3ZZvmom2j7cAQVUOl9scmZxysFp+JJpQWzhq5PMQWZsWnLC1qSXfA/w=,iv:2dzDzn4St+zodhbWpJMcnMr3hyv5UPqXyP2t3rl/364=,tag:QA392AcJ8v+vtXy5OfBbcw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.2

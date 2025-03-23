@@ -1,0 +1,26 @@
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: vs-vaultwarden-prod
+  annotations:
+    external-dns/is-public: "true"
+spec:
+  endpoints:
+    - dnsName: vs-vaultwarden-prod.${SECRET_DOMAIN}
+      targets:
+        - "${SECRET_CLOUDFLARE_TUNNEL_TARGET}"
+      recordType: CNAME
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: sync-vaultwarden
+spec:
+  sourcePVC: vaultwarden
+  syncthing:
+    serviceType: ClusterIP
+    peers:
+      - ID: UR744ZE-BPMIJYD-LPWPNDW-KQG62JO-DWAQJTR-B27CRP7-FDTMBUE-AUAJEAX
+        address: tcp://vaultwarden-volsync-cloudflared-access-tunnel:9210
+        introducer: false
