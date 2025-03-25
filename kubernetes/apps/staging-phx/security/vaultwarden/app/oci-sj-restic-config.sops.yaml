@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: vaultwarden-phx-data-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:l6l+Ilh7C+PLnSwM4Z065IjvSchUbU34qi1Eo4EFzXdSt+iua/jovQSf9mK6pZL8Ym/M6rjBOyOTmk8mRV+o8XDlsH956nHreHJ6lQ1dOAWz3wMlFNjzoGKgx63MUYgtYJZS1zlZ2ZzKVgY=,iv:BnFQpuuWNzRDg7+0miSZFqvU3MRScafCbWC3KOp+xsI=,tag:GD8uxxkM7ccZWqWWrykg9A==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:vxaeVz01A78k4V5M,iv:kopDkzgo8utkNrIbakhhsDv25Qmf2019sTioSF8UOo0=,tag:Qt0ukwxKnCbdgVv4oMPr2Q==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:BO+Rjr9UxRQayhUQnBlCiYefXzec3zr1u4erIbpsHgVLKGab/fEk6Q==,iv:3anXyPqJVRGaCvfbes1f7fx8993rwIg97+GUWX9ImXE=,tag:P0QFKdtaxGeQqI90jdKB/w==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Ki0/TNnEI7H+D5oSR+stVkIcFDyUV31YuvMy0huYhe3UjsToPaNGF8HmCU8=,iv:jUVOh93WEyWxMeUAqJa0Pcg8HZDBIvfJ5qCa7xKUYFI=,tag:TeRAClaS1wyUaMMl1587tA==,type:str]
+    AWS_ENDPOINTS: ENC[AES256_GCM,data:qgm3wOQwfMlNOMTx02bHNtz1Vu9Se2PZsxzyRA8O/26TZSeaKnPx8irtC/t/MtA8bXQ3ZdZNpOY9zRlToaoq7cd4STLOCx67ggvF3M2jWuPQmnEx,iv:H45iAxuYRd5GH7wTL/9izUwATEEginhcmJS7BKsyhy4=,tag:hqjzHe95y+D+vdwmBgrW2g==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyRVoyV0VHeWlNZjZKbzU1
+            L0lxekZ5MmRrSjJlTkhLTVZ2UGhVaW9tc0FjClBOZGVDMk9WVEJBbzlNWVVGUEhV
+            RU1GOXdjWlY0S0VYMW5nUm1tZzVsSVkKLS0tIEFEbTNRM3BzVDE2cG9WcGdjczUy
+            aGtWcG5jOEo5MjMvMHdvM3N1czJoL3MKvuA/BFK9JbfKyOV6y97t9Q6hJH/xv5Dd
+            pWDGIZ8uGfpulpmoyrcN/z8ZcucAIJ5dyTrerIuOCrt1tYIf97sfkQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-03-25T07:04:04Z"
+    mac: ENC[AES256_GCM,data:CEbQaek4VqKiLYk5WWjkqUHP8dMj09d7ks0FC2tXSkjDsEIWI1zz6Z0fYUV84ghY1akG8d/dJezIMv9P+n+qKPkYovw9bt6ktmyQLfGH5HUECR3j26FntnoAn5HSj0KE0Ee+IlITZXcpuAeXo1ozXz7Q5xRYyL+bnx4M8fMDmiE=,iv:WLzFpDZTgU7MaWAtvd+IAjTdYl6xU5IkQTzMH/U/4kw=,tag:Wob6ltoqWVOioYyOSr9zTw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.2
