@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: database-restic-config
+    name: scrutiny-config-restic-config
 type: Opaque
 stringData:
-    RESTIC_REPOSITORY: ENC[AES256_GCM,data:cgZo0ghK+4opVXwk2aiWm6yLCVttmEZ962oaoDz1Dsoj9TDjf6JjabaKBHVPN5c0HIe+f4Zgb6zZZ10S64c5g0O1NycrL1Ak5OHGbiNEwnYi,iv:/F/XpxqvpoL6i2n6+/p523mb3MmywG/4bHldx7gdFGg=,tag:h+sQ8zI6o90cNSGvln9bSg==,type:str]
-    RESTIC_PASSWORD: ENC[AES256_GCM,data:7Q0euU/ihX1ysUTm,iv:AKB3Whwyo3WXr3CKZLoROc5IC9jRnootczuVkrHB59c=,tag:S1j0hmMXcQh8I3KagVqJ5g==,type:str]
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:vn1D1CWYEz7Q99pn+ET7g/QnUXXlczxHow8xRTPzACKIDVnIO14bYAikDU5uoNEFPbsletQ/62t/V5mUXumqXg92l8XrlHliaT/b0VY4iw==,iv:3ZQlnii8+icbUE8w8Rr5PT+EM4uq1cItD8UoNbnZKtk=,tag:w9n9qjhTXeNpj4ztZluUfQ==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:x1CMGl5fcyOCNOAM,iv:RmWL4ERzvAF0MSQXZycao0pv5W7DNJQN9QAzpSpXdbo=,tag:pmevRQHnxXt5FYHwESv0ug==,type:str]
     AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:tdeb2pzyOaWvPpo3snQ3Jg==,iv:4MQcgs6WdcNafCP4Fp80cBPyUjrUBJR9bfeAWE+eRSY=,tag:I+uvcibgeBonF8xN+NRmKg==,type:str]
     AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Ew32cZXCGx6xxStGUQYeHoe2wBQOhho7cvenKtvht40=,iv:qfw7O5ztOIHO37/JQ69Uu7vfZHUbBXT242bM2k/ioyA=,tag:mDJeG06eXlW41pGrTyd2gw==,type:str]
 sops:
@@ -23,8 +23,8 @@ sops:
             Y254M20vdy9BRDdDbWFCVTNOU0FYRzAKGdcGGVGL0KH5kXeaC9JrE1MTpawDRgnt
             46riqTXDyohEfGp5iIZy+1h2z1FyRjQO7zWRJt2/UU8D+Ihho+Lm3A==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-03-25T06:21:35Z"
-    mac: ENC[AES256_GCM,data:M6vu8vLa7KJZ4CHguMoYmjUM/xKX++/lJJLQ8bkfswU2MoJ78j9Zyik/C1uLDI4n/8JVoaabeaMayxbMytGlVMbBwnMhM+vQ+lQtMAaVsxpxIpV8191++ZUfMXnfNydOmCKn3bh28HwdyOHMS0z2M6eIyuXe4X0uvFxnMMxPUSw=,iv:XjoeKsrciGblzTEGA59T0BednB3ax1BjwIdkILcX7/w=,tag:vUhcizbuJZKtZNTa4npQjA==,type:str]
+    lastmodified: "2025-03-25T06:20:30Z"
+    mac: ENC[AES256_GCM,data:dTugBRaCB9ArIVKWYmr4/SuIYrlBDE4lLN1MMkfmz2eSmVCEk3phiScr07HQdgBAEgpvcVvIu45MRV4XQHEvl8WKOmtSiMbEqAO7Kb9bUHO6VpDFxtwXRNG/uzXgPkO8Ejsp5bIHkuwf9quPGQJGRSP4Z/UyjvG3Ryjv8kWIKUw=,iv:2i5dQMsaNhm3KUghc+U7CPkKaIEwAFAiAqvVdJ31nos=,tag:E7/QqdqASNLI503w46WggQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.2

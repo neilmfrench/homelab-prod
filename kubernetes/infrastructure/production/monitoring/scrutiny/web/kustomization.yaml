@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./config-pvc.yaml
+  - ./restic-config.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/scrutiny-web
 patches:
   - path: ./scrutiny-web-values.yaml
