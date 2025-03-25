@@ -32,7 +32,7 @@ spec:
             port: &port 80
     ingress:
       main:
-        enabled: false
+        enabled: true
         ingressClassName: "cilium"
         annotations:
           external-dns/is-public: "true"
