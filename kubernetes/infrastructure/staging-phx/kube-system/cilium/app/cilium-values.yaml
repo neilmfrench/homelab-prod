@@ -11,6 +11,7 @@ spec:
   values:
     debug:
       enabled: true
+      verbose: envoy
 
     k8sServiceHost: "localhost"
     k8sServicePort: "7445"
