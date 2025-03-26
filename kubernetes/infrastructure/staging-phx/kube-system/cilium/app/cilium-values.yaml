@@ -9,9 +9,9 @@ spec:
       chart: cilium
       version: 1.17.1
   values:
-    debug:
-      enabled: true
-      verbose: envoy
+    # debug:
+    #   enabled: true
+    #   verbose: envoy
 
     k8sServiceHost: "localhost"
     k8sServicePort: "7445"
