@@ -5,8 +5,8 @@ resources:
   - ./default
   - ./flux-system
   - ./security
+  - ./media
   # - ./argocd
-  # - ./media
   # - ./development
   # - ./networking
   # - ./tekton-operator
