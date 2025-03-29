@@ -153,6 +153,9 @@ spec:
         enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
+          - name: production
+            address: cluster-prod.mesh.${SECRET_DOMAIN}
+            port: 2379
           - name: dev-sj
             address: cluster-sj.mesh.${SECRET_DOMAIN}
             port: 2379
