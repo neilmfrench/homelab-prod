@@ -4,13 +4,13 @@ kind: Kustomization
 resources:
   - ./default
   - ./flux-system
+  # - ./security
   # - ./argocd
   # - ./media
   # - ./development
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines
-  # - ./security
   # - ./finance
   # - ./home
   # - ./magazine
