@@ -132,3 +132,37 @@ spec:
       ca:
         cert: "${SECRET_CILIUM_CA_CERT}"
         key: "${SECRET_CILIUM_CA_KEY}"
+
+    clustermesh:
+      useAPIServer: true
+      config:
+        enabled: true
+        domain: ${SECRET_DOMAIN}
+        clusters:
+          - name: dev-sj
+            address: cluster-sj.mesh.${SECRET_DOMAIN}
+            port: 2379
+          - name: dev-phx
+            address: cluster-phx.mesh.${SECRET_DOMAIN}
+            port: 2379
+          - name: staging-rpi
+            address: cluster-rpi.mesh.${SECRET_DOMAIN}
+            port: 2379
+      apiserver:
+        replicas: 2
+        kvstoremesh:
+          enabled: true
+          healthPort: 9881
+
+        service:
+          type: LoadBalancer
+          loadBalancerIP: 172.16.20.25
+
+        tls:
+          authMode: cluster
+          auto:
+            enabled: true
+            method: helm
+          server:
+            extraDnsNames:
+              - "*.mesh.${SECRET_DOMAIN}"
