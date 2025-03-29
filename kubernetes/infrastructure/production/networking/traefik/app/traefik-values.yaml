@@ -40,6 +40,8 @@ spec:
         enabled: true
     tlsStore:
       default:
+        certificates:
+          - secretName: "${SECRET_DOMAIN/./-}-production-tls"
         defaultCertificate:
           secretName: "${SECRET_DOMAIN/./-}-production-tls"
     globalArguments:
