@@ -4,14 +4,14 @@ kind: Kustomization
 resources:
   - ./default
   # - ./argocd
-  - ./media
-  - ./development
+  # - ./media
+  # - ./development
   # - ./networking
-  - ./tekton-operator
-  - ./tekton-pipelines
-  - ./security
-  - ./finance
-  - ./home
-  - ./magazine
-  - ./flux-system
-  - ./campsearch
+  # - ./tekton-operator
+  # - ./tekton-pipelines
+  # - ./security
+  # - ./finance
+  # - ./home
+  # - ./magazine
+  # - ./flux-system
+  # - ./campsearch
