@@ -47,8 +47,6 @@ metadata:
   name: cluster-infrastructure-traefik-certificates
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-infrastructure-traefik
   path: ./kubernetes/infrastructure/production/networking/traefik/certificates
   prune: true
   sourceRef:
