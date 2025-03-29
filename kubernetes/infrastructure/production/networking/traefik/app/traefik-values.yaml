@@ -81,11 +81,6 @@ spec:
         minVersion: VersionTLS12
         maxVersion: VersionTLS13
         sniStrict: true
-    experimental:
-      plugins:
-        traefik-get-real-ip:
-          moduleName: github.com/Paxxs/traefik-get-real-ip
-          version: v1.0.2
     resources:
       requests:
         memory: 100Mi

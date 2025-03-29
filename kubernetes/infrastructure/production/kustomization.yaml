@@ -6,6 +6,6 @@ resources:
   - ./cert-manager
   # - ./rook-ceph
   # - ./monitoring
-  # - ./networking
+  - ./networking
   # - ./kyverno
   # - ./volsync

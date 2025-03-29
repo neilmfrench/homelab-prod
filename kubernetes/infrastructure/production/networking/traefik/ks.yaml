@@ -5,49 +5,7 @@ metadata:
   name: cluster-infrastructure-traefik-crds
   namespace: flux-system
 spec:
-  interval: 30m
-  prune: false
-  sourceRef:
-    kind: GitRepository
-    name: traefik-crd-source
-  healthChecks:
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: ingressroutes.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: ingressroutetcps.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: ingressrouteudps.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: middlewares.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: middlewaretcps.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: serverstransports.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: tlsoptions.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: tlsstores.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: traefikservices.traefik.io
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-infrastructure-traefik
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-infrastructure-traefik-crds
-  path: ./kubernetes/infrastructure/production/networking/traefik/app
+  path: ./kubernetes/infrastructure/production/networking/traefik/crds
   prune: true
   sourceRef:
     kind: GitRepository
@@ -55,11 +13,33 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
-      name: traefik
+      name: traefik-crds
       namespace: networking
   interval: 30m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 10m
+---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-infrastructure-traefik
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-infrastructure-traefik-crds
+#   path: ./kubernetes/infrastructure/production/networking/traefik/app
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   healthChecks:
+#     - apiVersion: helm.toolkit.fluxcd.io/v2
+#       kind: HelmRelease
+#       name: traefik
+#       namespace: networking
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -77,54 +57,54 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-infrastructure-traefik-dashboard
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-infrastructure-traefik
-  path: ./kubernetes/infrastructure/production/networking/traefik/dashboard
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 5m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-infrastructure-traefik-middlewares
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-infrastructure-traefik
-  path: ./kubernetes/infrastructure/production/networking/traefik/middlewares
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 5m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-infrastructure-traefik-rpi-forward-ingress
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: cluster-infrastructure-traefik
-  path: ./kubernetes/infrastructure/production/networking/traefik/rpi-forward-ingress
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  interval: 30m
-  retryInterval: 1m
-  timeout: 5m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-infrastructure-traefik-dashboard
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-infrastructure-traefik
+#   path: ./kubernetes/infrastructure/production/networking/traefik/dashboard
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 5m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-infrastructure-traefik-middlewares
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-infrastructure-traefik
+#   path: ./kubernetes/infrastructure/production/networking/traefik/middlewares
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 5m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-infrastructure-traefik-rpi-forward-ingress
+#   namespace: flux-system
+# spec:
+#   dependsOn:
+#     - name: cluster-infrastructure-traefik
+#   path: ./kubernetes/infrastructure/production/networking/traefik/rpi-forward-ingress
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 5m
