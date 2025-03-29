@@ -5,7 +5,7 @@ resources:
   - ./kube-system
   - ./cert-manager
   - ./rook-ceph
-  # - ./monitoring
+  - ./monitoring
   - ./networking
   - ./kyverno
   # - ./volsync
