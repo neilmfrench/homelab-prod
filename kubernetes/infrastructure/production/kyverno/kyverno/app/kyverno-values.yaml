@@ -13,7 +13,7 @@ spec:
         grafana_folder: System
     backgroundController:
       serviceMonitor:
-        enabled: true
+        enabled: false
       rbac:
         clusterRole:
           extraResources:
@@ -30,14 +30,14 @@ spec:
                 - list
     cleanupController:
       serviceMonitor:
-        enabled: true
+        enabled: false
     reportsController:
       serviceMonitor:
-        enabled: true
+        enabled: false
     admissionController:
       replicas: 3
       serviceMonitor:
-        enabled: true
+        enabled: false
       rbac:
         clusterRole:
           extraResources:
