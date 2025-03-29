@@ -39,8 +39,8 @@ spec:
           - name: "talos-4"
             deviceFilter: "sdb"
     monitoring:
-      enabled: true
-      createPrometheusRules: true
+      enabled: false
+      createPrometheusRules: false
     ingress:
       dashboard:
         ingressClassName: traefik
