@@ -7,5 +7,5 @@ resources:
   # - ./rook-ceph
   # - ./monitoring
   - ./networking
-  # - ./kyverno
+  - ./kyverno
   # - ./volsync
