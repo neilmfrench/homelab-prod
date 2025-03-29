@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./kube-system
   - ./cert-manager
-  # - ./rook-ceph
+  - ./rook-ceph
   # - ./monitoring
   - ./networking
   - ./kyverno
