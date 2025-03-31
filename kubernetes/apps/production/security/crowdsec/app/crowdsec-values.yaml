@@ -19,9 +19,9 @@ spec:
           kind: ClusterIssuer
         duration: 43800h
         renewBefore: 43700h
-    secrets:
-      username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
-      password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
+    # secrets:
+    #   username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
+    #   password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
     config:
       parsers:
         s02-enrich:
