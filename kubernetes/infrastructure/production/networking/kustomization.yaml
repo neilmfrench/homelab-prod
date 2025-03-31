@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./traefik/ks.yaml
   - ./external-dns/ks.yaml
-  # - ./k8s-gateway/ks.yaml
+  - ./k8s-gateway/ks.yaml
   # - ./cloudflare-ddns/ks.yaml
   # - ./pihole/ks.yaml
   # - ./cloudflared/ks.yaml
