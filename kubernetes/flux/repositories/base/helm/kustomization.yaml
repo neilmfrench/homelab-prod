@@ -47,3 +47,4 @@ resources:
   - ./node-feature-discovery.yaml
   - ./intel.yaml
   - ./emberstack.yaml
+  - ./k8s-gateway.yaml
