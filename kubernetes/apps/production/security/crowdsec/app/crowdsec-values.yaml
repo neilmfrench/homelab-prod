@@ -68,17 +68,17 @@ spec:
                 - *host
       persistentVolume:
         data:
-          enabled: true
+          enabled: false
           storageClassName: ceph-block
           size: 1Gi
         config:
-          enabled: true
+          enabled: false
           storageClassName: ceph-block
           size: 500Mi
     agent:
       persistentVolume:
         config:
-          enabled: true
+          enabled: false
           accessModes:
             - ReadWriteMany
           storageClassName: ceph-filesystem
