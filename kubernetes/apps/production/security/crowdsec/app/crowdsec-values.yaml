@@ -9,7 +9,16 @@ spec:
     # image:
     #   tag: "v1.4.6"
     tls:
-      enabled: true
+      enabled: false
+      caBundle: true
+      insecureSkipVerify: false
+      certManager:
+        enabled: true
+        issuerRef:
+          name: cluster-selfsigned-issuer
+          kind: ClusterIssuer
+        duration: 43800h
+        renewBefore: 43700h
     secrets:
       username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
       password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
@@ -57,7 +66,6 @@ spec:
           tls:
             - hosts:
                 - *host
-              secretName: "crowdsec-dash-tls"
       persistentVolume:
         data:
           enabled: true
