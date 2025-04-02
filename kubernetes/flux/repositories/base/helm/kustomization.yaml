@@ -49,3 +49,4 @@ resources:
   - ./emberstack.yaml
   - ./k8s-gateway.yaml
   - ./cloudnative-pg.yaml
+  - ./mariadb-operator.yaml
