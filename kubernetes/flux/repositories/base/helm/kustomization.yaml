@@ -48,3 +48,4 @@ resources:
   - ./intel.yaml
   - ./emberstack.yaml
   - ./k8s-gateway.yaml
+  - ./cloudnative-pg.yaml
