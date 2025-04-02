@@ -20,7 +20,7 @@ spec:
       - "AAA"
     extraArgs:
       - --annotation-filter=external-dns/is-internal in (true)
-      - --pihole-server=${SECRET_PIHOLE_SERVER}
+      - --pihole-server=https://${SECRET_PIHOLE_SERVER}
     logLevel: info
     sources:
       - ingress
