@@ -1,0 +1,26 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-dns-pihole
+spec:
+  values:
+    interval: 5m
+    provider:
+      name: pihole
+    env:
+      - name: EXTERNAL_DNS_PIHOLE_PASSWORD
+        value: "${SECRET_PIHOLE_ADMIN_TOKEN}"
+    policy: upsert-only
+    registry: noop
+    domainFilters:
+      - "${SECRET_DOMAIN}"
+    managedRecordTypes:
+      - "A"
+      - "AAA"
+    extraArgs:
+      - --annotation-filter=external-dns/is-internal in (true)
+      - --pihole-server=${SECRET_PIHOLE_SERVER}
+    logLevel: info
+    sources:
+      - ingress
