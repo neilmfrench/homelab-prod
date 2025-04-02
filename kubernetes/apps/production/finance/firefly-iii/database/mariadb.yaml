@@ -4,6 +4,7 @@ kind: MariaDB
 metadata:
   name: mariadb
 spec:
+  image: docker-registry1.mariadb.com/library/mariadb:11.3.2
   rootPasswordSecretKeyRef:
     name: firefly-iii-mariadb-password
     key: PASSWORD
@@ -14,3 +15,4 @@ spec:
   database: fireflydb
   storage:
     size: 12Gi
+    storageClassName: ceph-block
