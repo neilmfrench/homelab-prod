@@ -7,12 +7,12 @@ resources:
   - ./database
   - ./security
   - ./media
+  - ./finance
   # - ./argocd
   # - ./development
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines
-  # - ./finance
   # - ./home
   # - ./magazine
   # - ./campsearch
