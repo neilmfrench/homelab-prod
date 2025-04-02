@@ -9,6 +9,8 @@ spec:
       # renovate: datasource=docker image=fireflyiii/core
       repository: "fireflyiii/core"
       tag: version-6.2.10
+    podSecurityContext:
+      fsGroup: 33
     persistence:
       enabled: true
       existingClaim: firefly-data
