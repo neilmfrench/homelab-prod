@@ -45,7 +45,7 @@ spec:
       dashboard:
         ingressClassName: traefik
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns/is-internal: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         host:
           name: &host "rook.${SECRET_DOMAIN}"
