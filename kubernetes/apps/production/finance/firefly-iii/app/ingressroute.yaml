@@ -5,7 +5,7 @@ metadata:
   name: firefly-authentik-ingress-route
 spec:
   entryPoints:
-    - websecure
+    - websecure-int
   routes:
     - kind: Rule
       match: Host(`firefly.${SECRET_DOMAIN}`)
