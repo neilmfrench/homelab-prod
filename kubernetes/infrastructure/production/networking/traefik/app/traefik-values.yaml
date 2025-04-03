@@ -73,6 +73,10 @@ spec:
             permanent: true
       websecure:
         # asDefault: true
+        port: 8443
+        expose:
+          default: true
+        exposedPort: 8443
         tls:
           enabled: true
           options: "default"
@@ -81,7 +85,7 @@ spec:
         port: 6443
         expose:
           default: true
-        exposedPort: 6443
+        exposedPort: 443
       metrics:
         port: 8082
         expose:
