@@ -76,6 +76,12 @@ spec:
         tls:
           enabled: true
           options: "default"
+      websecure-internal:
+        # asDefault: true
+        port: 6443
+        expose:
+          default: true
+        exposedPort: 6443
       metrics:
         port: 8082
         expose:
