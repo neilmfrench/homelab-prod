@@ -46,7 +46,7 @@ spec:
         ingressClassName: traefik
         annotations:
           external-dns/is-internal: "true"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure-int"
         host:
           name: &host "rook.${SECRET_DOMAIN}"
           path: /
