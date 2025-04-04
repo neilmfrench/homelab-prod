@@ -48,9 +48,6 @@ spec:
         ingress:
           enabled: true
           ingressClassName: "traefik"
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           hosts:
             - host: &host-config "hass-config.${SECRET_DOMAIN}"
               paths:
@@ -59,7 +56,6 @@ spec:
           tls:
             - hosts:
                 - *host-config
-              secretName: "hass-config-tls"
         volumeMounts:
           - name: config
             mountPath: /config

@@ -35,8 +35,6 @@ spec:
         enabled: false
         ingressClassName: "traefik"
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns/is-public: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
@@ -49,7 +47,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: "vaultwarden-tls"
     persistence:
       config:
         enabled: true

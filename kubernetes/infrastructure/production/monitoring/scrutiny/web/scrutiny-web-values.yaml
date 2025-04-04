@@ -45,9 +45,6 @@ spec:
       main:
         enabled: true
         className: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - host: &host "scrutiny.${SECRET_DOMAIN}"
             paths:
@@ -58,7 +55,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: scrutiny-tls
     persistence:
       config:
         enabled: true

@@ -58,9 +58,6 @@ spec:
         assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
         ingress:
           enabled: true
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           ingressClassName: "traefik"
           host: &host "crowdsec-dash.${SECRET_DOMAIN}"
           tls:

@@ -73,11 +73,8 @@ spec:
       proxySendTimeout: 60
       host: bitbucket.${SECRET_DOMAIN}
       path:
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
       https: true
-      tlsSecretName: bitbucket-tls
+      # tlsSecretName: bitbucket-tls
 
     bitbucket:
       useHelmReleaseNameAsContainerName: false

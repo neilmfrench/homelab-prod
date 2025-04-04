@@ -72,15 +72,11 @@ spec:
         enabled: true
         pathType: Prefix
         ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - &host-alert-manager "alert-manager.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host-alert-manager
-            secretName: "alert-manager-tls"
       alertmanagerSpec:
         storage:
           volumeClaimTemplate:
@@ -181,15 +177,11 @@ spec:
         enabled: true
         pathType: Prefix
         ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - &host-prometheus "prometheus.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host-prometheus
-            secretName: "prometheus-tls"
       thanosService:
         enabled: true
       thanosServiceMonitor:
@@ -198,9 +190,6 @@ spec:
         enabled: true
         pathType: Prefix
         ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - &host-thanos-sidecar "thanos-sidecar.${SECRET_DOMAIN}"
         tls:
