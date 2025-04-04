@@ -72,7 +72,7 @@ spec:
             scheme: https
             permanent: true
       websecure:
-        # asDefault: true
+        asDefault: true
         port: 8443
         expose:
           default: true
@@ -81,7 +81,7 @@ spec:
           enabled: true
           options: "default"
       websecure-int:
-        # asDefault: true
+        asDefault: true
         port: 6443
         expose:
           default: true
