@@ -20,7 +20,7 @@ spec:
       - "AAA"
       - "CNAME"
     extraArgs:
-      - --annotation-filter=external-dns/is-internal in (true)
+      # - --annotation-filter=external-dns/is-internal in (true)
       - --pihole-server=http://${SECRET_PIHOLE_SERVER}
     logLevel: debug
     sources:
