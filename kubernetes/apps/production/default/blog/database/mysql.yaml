@@ -12,7 +12,7 @@ spec:
           image: ghcr.io/cybozu-go/moco/mysql:8.4.4
   volumeClaimTemplates:
     - metadata:
-        name: blog-mysql-data
+        name: mysql-data
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: ceph-block
