@@ -6,6 +6,6 @@ resources:
   # - ./restic-config.sops.yaml
   # - ./volsync.yaml
   - ./config-pvc.yaml
-#   - ../../../../base/ghost-magazine
-# patches:
-#   - path: ./ghost-values.yaml
+  - ../../../../base/ghost-magazine
+patches:
+  - path: ./ghost-values.yaml
