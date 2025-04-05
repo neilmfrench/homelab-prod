@@ -5,10 +5,7 @@ namespace: finance
 resources:
   - ./mariadb-secret.sops.yaml
   - ./mariadb.yaml
-  # - ./restic-config.sops.yaml
-  # - ./oci-phx-restic-config.sops.yaml
-  # - ./volsync.yaml
-  # - ../../../../base/mariadb
+  - ./restic-config.sops.yaml
+  - ./oci-phx-restic-config.sops.yaml
+  - ./volsync.yaml
 namePrefix: firefly-iii-
-# patches:
-#   - path: ./mariadb-values.yaml
