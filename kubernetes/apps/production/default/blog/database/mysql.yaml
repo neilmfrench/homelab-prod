@@ -1,0 +1,21 @@
+---
+apiVersion: moco.cybozu.com/v1beta2
+kind: MySQLCluster
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  podTemplate:
+    spec:
+      containers:
+        - name: mysqld
+          image: ghcr.io/cybozu-go/moco/mysql:8.4.4
+  volumeClaimTemplates:
+    - metadata:
+        name: blog-mysql-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: ceph-block
+        resources:
+          requests:
+            storage: 6Gi

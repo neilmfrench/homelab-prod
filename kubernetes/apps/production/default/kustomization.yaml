@@ -5,7 +5,7 @@ resources:
   # - ./secrets
   # - ./homepage/ks.yaml
   - ./podinfo/ks.yaml
+  - ./blog/ks.yaml
   # - ./podinfo-ext/ks.yaml
   # - ./changedetection/ks.yaml
-  # - ./blog/ks.yaml
   # - ./littlelink/ks.yaml
