@@ -6,6 +6,8 @@ metadata:
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/production/database/moco/operator
+  dependsOn:
+    - name: cluster-infrastructure-cert-manager
   prune: true
   sourceRef:
     kind: GitRepository
