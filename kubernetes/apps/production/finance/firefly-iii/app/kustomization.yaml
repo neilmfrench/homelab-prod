@@ -4,9 +4,9 @@ kind: Kustomization
 namespace: finance
 resources:
   - ./data-pvc.yaml
-  # - ./restic-config.sops.yaml
-  # - ./oci-phx-restic-config.sops.yaml
-  # - ./volsync.yaml
+  - ./restic-config.sops.yaml
+  - ./oci-phx-restic-config.sops.yaml
+  - ./volsync.yaml
   - ./ingress.yaml
   - ./ingressroute.yaml
   - ../../../../base/firefly-iii
