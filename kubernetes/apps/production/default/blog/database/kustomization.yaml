@@ -8,7 +8,7 @@ resources:
   # - ./data-pvc.yaml
   # - ../../../../base/mysql
   - ./mysql.yaml
-  - ./mysql-backup
+  - ./mysql-backup.yaml
 namePrefix: blog-
 # patches:
 #   - path: ./mysql-values.yaml
