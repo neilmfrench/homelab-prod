@@ -1,0 +1,32 @@
+---
+apiVersion: moco.cybozu.com/v1beta2
+kind: BackupPolicy
+metadata:
+  namespace: backup
+  name: daily
+spec:
+  # Backup schedule.  Any CRON format is allowed.
+  schedule: "@daily"
+
+  jobConfig:
+    # An existing ServiceAccount name is required.
+    serviceAccountName: backup-owner
+    env:
+      - name: AWS_ACCESS_KEY_ID
+        value: minioadmin
+      - name: AWS_SECRET_ACCESS_KEY
+        value: minioadmin
+    # bucketName is required. Other fields are optional.
+    # If backendType is s3 (default), specify the region of the bucket via region filed or AWS_REGION environment variable.
+    bucketConfig:
+      bucketName: moco
+      region: us-east-1
+      endpointURL: http://minio.default.svc:9000
+      usePathStyle: true
+    # MOCO uses a filesystem volume to store data temporarily.
+    workVolume:
+      # Using emptyDir as a working directory is NOT recommended.
+      # The recommended way is to use generic ephemeral volume with a provisioner
+      # that can provide enough capacity.
+      # https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes
+      emptyDir: {}
