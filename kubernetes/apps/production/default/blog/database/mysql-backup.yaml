@@ -24,3 +24,7 @@ spec:
       usePathStyle: true
     workVolume:
       emptyDir: {}
+    cpu: ~
+    maxCpu: ~
+    memory: ~
+    maxMemory: ~
