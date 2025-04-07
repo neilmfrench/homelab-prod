@@ -1,4 +1,9 @@
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mysql-backup
+---
 apiVersion: moco.cybozu.com/v1beta2
 kind: BackupPolicy
 metadata:
@@ -6,7 +11,7 @@ metadata:
 spec:
   schedule: "30 7 * * *"
   jobConfig:
-    serviceAccountName: default
+    serviceAccountName: blog-mysql-backup
     env:
       - name: AWS_ACCESS_KEY_ID
         value: "${SECRET_AWS_ACCESS_KEY_ID}"

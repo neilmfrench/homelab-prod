@@ -5,6 +5,7 @@ metadata:
   name: mysql
 spec:
   replicas: 1
+  backupPolicyName: blog-daily-mysql-backup
   podTemplate:
     spec:
       containers:
