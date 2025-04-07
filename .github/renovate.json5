@@ -8,7 +8,7 @@
     ":enablePreCommit",
     ":automergeDigest",
     ":automergeBranch",
-    "github>onedr0p/flux-cluster-template//.github/renovate.json5",
+    "github>onedr0p/flux-cluster-template//.renovaterc.json5",
     "helpers:pinGitHubActionDigests"
   ],
   "dependencyDashboard": true,
