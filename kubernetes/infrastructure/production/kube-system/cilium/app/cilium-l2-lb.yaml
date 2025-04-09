@@ -6,7 +6,7 @@ metadata:
   name: policy
 spec:
   loadBalancerIPs: true
-  interaces:
+  interfaces:
     - enp2s0
   nodeSelector:
     matchLabels:
