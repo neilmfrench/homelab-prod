@@ -17,17 +17,17 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-    - host: &host-wildcard "*.ceph-objects.${SECRET_DOMAIN}"
-      http:
-        paths:
-          - backend:
-              service:
-                name: rook-ceph-rgw-ceph-objectstore
-                port:
-                  number: 80
-            path: /
-            pathType: Prefix
+    # - host: &host-wildcard "*.ceph-objects.${SECRET_DOMAIN}"
+    #   http:
+    #     paths:
+    #       - backend:
+    #           service:
+    #             name: rook-ceph-rgw-ceph-objectstore
+    #             port:
+    #               number: 80
+    #         path: /
+    #         pathType: Prefix
   tls:
     - hosts:
         - *host
-        - *host-wildcard
+        # - *host-wildcard
