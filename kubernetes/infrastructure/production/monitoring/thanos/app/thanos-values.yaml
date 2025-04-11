@@ -5,6 +5,9 @@ metadata:
   name: thanos
 spec:
   values:
+    global:
+      security:
+        allowInsecureImages: true
     image:
       registry: quay.io
       repository: thanos/thanos
