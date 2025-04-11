@@ -79,7 +79,7 @@ spec:
       persistence:
         enabled: true
         storageClass: ceph-block
-        size: 5Gi
+        size: 6Gi
     metrics:
       enabled: true
       serviceMonitor:

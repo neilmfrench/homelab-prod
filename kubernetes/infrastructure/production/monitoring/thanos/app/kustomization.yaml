@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./bucketclaim.yaml
-#   - ../../../../base/thanos
-# patches:
-#   - path: ./thanos-values.yaml
+  - ../../../../base/thanos
+patches:
+  - path: ./thanos-values.yaml
