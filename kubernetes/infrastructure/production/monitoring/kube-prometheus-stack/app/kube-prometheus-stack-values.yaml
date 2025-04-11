@@ -217,8 +217,8 @@ spec:
           # renovate: datasource=docker depName=quay.io/thanos/thanos
           version: "v0.38.0"
           # see valuesFrom
-          # secret:
-          #   type: S3
+          secret:
+            type: S3
           #   config:
           #     bucket: ""
           #     endpoint: ""
