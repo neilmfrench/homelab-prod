@@ -1,0 +1,11 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: bitnami-thanos
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: oci://registry-1.docker.io/bitnamicharts/thanos
+  ref:
+    tag: "16.0.3"
