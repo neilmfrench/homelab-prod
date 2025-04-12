@@ -144,7 +144,7 @@ spec:
             secret:
               type: S3
               config:
-                insecure: true
+                insecure: false
             #     bucket: ""
             #     endpoint: ""
             #     region: ""
