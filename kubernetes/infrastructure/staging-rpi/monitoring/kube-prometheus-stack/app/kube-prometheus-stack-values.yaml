@@ -136,9 +136,6 @@ spec:
         retentionSize: 20GB
         enableAdminAPI: true
         walCompression: true
-        ruleSelector:
-          matchLabels:
-            role: some-fake-nonexistent-role
         secrets:
           - etcd-certs
         thanos:
