@@ -5,7 +5,7 @@ metadata:
   name: cluster-infrastructure-prometheus-operator-crds
   namespace: flux-system
 spec:
-  path: ./kubernetes/infrastructure/production/monitoring/kube-prometheus-stack/crds
+  path: ./kubernetes/infrastructure/staging-rpi/monitoring/kube-prometheus-stack/crds
   prune: true
   sourceRef:
     kind: GitRepository
@@ -27,7 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-infrastructure-prometheus-operator-crds
-  path: ./kubernetes/infrastructure/production/monitoring/kube-prometheus-stack/app
+  path: ./kubernetes/infrastructure/staging-rpi/monitoring/kube-prometheus-stack/app
   prune: true
   sourceRef:
     kind: GitRepository
