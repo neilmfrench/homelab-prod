@@ -125,6 +125,8 @@ spec:
               - *host-thanos-sidecar
       prometheusSpec:
         replicas: 1
+        scrapeInterval: 60s
+        evaluationInterval: 60s
         replicaExternalLabelName: __replica__
         externalLabels:
           cluster: rpi
