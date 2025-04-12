@@ -161,7 +161,7 @@ spec:
     kubeProxy:
       enabled: false
     kubeEtcd:
-      enabled: true
+      enabled: false
       endpoints: *cp
       service:
         enabled: true
