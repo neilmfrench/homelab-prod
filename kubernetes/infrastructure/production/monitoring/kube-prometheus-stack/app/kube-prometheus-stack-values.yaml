@@ -256,7 +256,45 @@ spec:
                 expr: (kube_pod_container_status_restarts_total - kube_pod_container_status_restarts_total offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[10m]) == 1
                 labels:
                   severity: critical
+    thanosRuler:
+      enabled: true
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: "traefik"
+        hosts:
+          - &host-thanos-ruler "thanos-ruler.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host-thanos-ruler
+      thanosRulerSpec:
+        replicas: 3
+        image:
+          # renovate: datasource=docker depName=quay.io/thanos/thanos
+          registry: quay.io
+          repository: thanos/thanos
+          tag: v0.38.0
+        alertmanagersConfig:
+          secret:
+            alertmanagers:
+              - api_version: v2
+                static_configs:
+                  - kube-prometheus-stack-alertmanager:9093
+                scheme: http
+                timeout: 10s
+        objectStorageConfig:
+          secret:
+            type: S3
+            config:
+              insecure: true
+          #     bucket: ""
+          #     endpoint: ""
+          #     region: ""
+          #     access_key: ""
+          #     secret_key: ""
+        queryEndpoints: ["dnssrv+_http._tcp.thanos-query.monitoring.svc.local"]
   valuesFrom:
+    # Thanos Sidecar
     - targetPath: prometheus.prometheusSpec.thanos.objectStorageConfig.secret.config.bucket
       kind: ConfigMap
       name: thanos-bucket
@@ -274,6 +312,27 @@ spec:
       name: thanos-bucket
       valuesKey: AWS_ACCESS_KEY_ID
     - targetPath: prometheus.prometheusSpec.thanos.objectStorageConfig.secret.config.secret_key
+      kind: Secret
+      name: thanos-bucket
+      valuesKey: AWS_SECRET_ACCESS_KEY
+    # Thanos Ruler
+    - targetPath: thanosRuler.thanosRulerSpec.objectStorageConfig.secret.config.bucket
+      kind: ConfigMap
+      name: thanos-bucket
+      valuesKey: BUCKET_NAME
+    - targetPath: thanosRuler.thanosRulerSpec.objectStorageConfig.secret.config.endpoint
+      kind: ConfigMap
+      name: thanos-bucket
+      valuesKey: BUCKET_HOST
+    - targetPath: thanosRuler.thanosRulerSpec.objectStorageConfig.secret.config.region
+      kind: ConfigMap
+      name: thanos-bucket
+      valuesKey: BUCKET_REGION
+    - targetPath: thanosRuler.thanosRulerSpec.objectStorageConfig.secret.config.access_key
+      kind: Secret
+      name: thanos-bucket
+      valuesKey: AWS_ACCESS_KEY_ID
+    - targetPath: thanosRuler.thanosRulerSpec.objectStorageConfig.secret.config.secret_key
       kind: Secret
       name: thanos-bucket
       valuesKey: AWS_SECRET_ACCESS_KEY
