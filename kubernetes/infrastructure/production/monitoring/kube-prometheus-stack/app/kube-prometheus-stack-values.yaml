@@ -292,7 +292,15 @@ spec:
           #     region: ""
           #     access_key: ""
           #     secret_key: ""
-        queryEndpoints: ["dnssrv+_http._tcp.thanos-query.monitoring.svc.local"]
+        queryEndpoints:
+          ["dnssrv+_http._tcp.thanos-query.monitoring.svc.cluster.local"]
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "ceph-block"
+              resources:
+                requests:
+                  storage: 6Gi
   valuesFrom:
     # Thanos Sidecar
     - targetPath: prometheus.prometheusSpec.thanos.objectStorageConfig.secret.config.bucket
