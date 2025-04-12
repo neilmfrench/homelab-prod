@@ -100,7 +100,7 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: "cilium"
+        ingressClassName: "nginx"
         hosts:
           - &host-prometheus "prometheus.staging.${SECRET_DOMAIN}"
         tls:
@@ -115,7 +115,7 @@ spec:
       thanosIngress:
         enabled: true
         pathType: Prefix
-        ingressClassName: "cilium"
+        ingressClassName: "nginx"
         hosts:
           - &host-thanos-sidecar "thanos-sidecar.staging.${SECRET_DOMAIN}"
         tls:
