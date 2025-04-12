@@ -62,27 +62,27 @@ spec:
         storageClass: ceph-block
         size: 20Gi
     ruler:
-      enabled: true
-      resourcesPreset: "none"
-      replicaCount: 3
-      replicaLabel: __replica__
-      alertmanagers: ["http://kube-prometheus-stack-alertmanager:9093"]
-      extraFlags: ["--web.prefix-header=X-Forwarded-Prefix"]
-      config: |-
-        groups:
-          - name: PrometheusWatcher
-            rules:
-              - alert: PrometheusDown
-                annotations:
-                  summary: A Prometheus has disappeared from Prometheus target discovery
-                expr: absent(up{job="kube-prometheus-stack-prometheus"})
-                for: 5m
-                labels:
-                  severity: critical
-      persistence:
-        enabled: true
-        storageClass: ceph-block
-        size: 6Gi
+      enabled: false
+      # resourcesPreset: "none"
+      # replicaCount: 3
+      # replicaLabel: __replica__
+      # alertmanagers: ["http://kube-prometheus-stack-alertmanager:9093"]
+      # extraFlags: ["--web.prefix-header=X-Forwarded-Prefix"]
+      # config: |-
+      #   groups:
+      #     - name: PrometheusWatcher
+      #       rules:
+      #         - alert: PrometheusDown
+      #           annotations:
+      #             summary: A Prometheus has disappeared from Prometheus target discovery
+      #           expr: absent(up{job="kube-prometheus-stack-prometheus"})
+      #           for: 5m
+      #           labels:
+      #             severity: critical
+      # persistence:
+      #   enabled: true
+      #   storageClass: ceph-block
+      #   size: 6Gi
     metrics:
       enabled: true
       serviceMonitor:
