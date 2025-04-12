@@ -145,6 +145,7 @@ spec:
 
     clustermesh:
       useAPIServer: true
+      enableEndpointSliceSynchronization: true
       config:
         enabled: true
         domain: ${SECRET_DOMAIN}
