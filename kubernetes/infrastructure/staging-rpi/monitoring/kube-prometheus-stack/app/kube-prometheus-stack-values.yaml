@@ -6,85 +6,7 @@ metadata:
 spec:
   values:
     alertmanager:
-      config:
-        global:
-          slack_api_url: "${SECRET_PROMETHEUS_DISCORD_ALERTS_WEBHOOK}"
-          resolve_timeout: 5m
-        receivers:
-          - name: "null"
-          - name: "pushover"
-            pushover_configs:
-              - send_resolved: true
-                user_key: "${SECRET_PUSHOVER_USER_KEY}"
-                token: "${SECRET_ALERTMANAGER_PUSHOVER_TOKEN}"
-                title: |-
-                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
-                message: >-
-                  {{ range .Alerts -}}
-                    **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
-                  **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
-                  **Details:**
-                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-                    {{ end }}
-                  {{ end }}
-          - name: "discord"
-            slack_configs:
-              - channel: "#prometheus-alerts"
-                icon_url: https://avatars3.githubusercontent.com/u/3380462
-                username: "prom-alert-bot"
-                send_resolved: true
-                title: |-
-                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
-                text: >-
-                  {{ range .Alerts -}}
-                    **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
-                  **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
-                  **Details:**
-                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-                    {{ end }}
-                  {{ end }}
-        route:
-          group_by: ["alertname", "job"]
-          group_wait: 30s
-          group_interval: 5m
-          repeat_interval: 6h
-          receiver: "null"
-          routes:
-            - receiver: "null"
-              matchers:
-                - alertname =~ "InfoInhibitor"
-                - alertname =~ "Watchdog"
-            - receiver: "discord"
-              match_re:
-                severity: critical|warning|error
-              continue: true
-            - receiver: "pushover"
-              match_re:
-                severity: critical|warning|error
-              continue: true
-        inhibit_rules:
-          - source_match:
-              severity: "critical"
-            target_match:
-              severity: "warning"
-            equal: ["alertname", "namespace"]
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: "traefik"
-        hosts:
-          - &host-alert-manager "alert-manager.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - *host-alert-manager
-      alertmanagerSpec:
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: "ceph-block"
-              resources:
-                requests:
-                  storage: 6Gi
+      enabled: false
     nodeExporter:
       enabled: true
     grafana:
@@ -140,9 +62,9 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints: &cp
-        - 172.16.20.105
-        - 172.16.20.106
-        - 172.16.20.107
+        - 172.16.20.111
+        - 172.16.20.112
+        - 172.16.20.113
       serviceMonitor:
         metricRelabelings:
           # Remove duplicate metrics
@@ -178,9 +100,9 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: "traefik"
+        ingressClassName: "cilium"
         hosts:
-          - &host-prometheus "prometheus.${SECRET_DOMAIN}"
+          - &host-prometheus "prometheus.staging.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host-prometheus
@@ -193,23 +115,23 @@ spec:
       thanosIngress:
         enabled: true
         pathType: Prefix
-        ingressClassName: "traefik"
+        ingressClassName: "cilium"
         hosts:
-          - &host-thanos-sidecar "thanos-sidecar.${SECRET_DOMAIN}"
+          - &host-thanos-sidecar "thanos-sidecar.staging.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host-thanos-sidecar
       prometheusSpec:
-        replicas: 3
+        replicas: 1
         replicaExternalLabelName: __replica__
         externalLabels:
-          cluster: prod
+          cluster: rpi
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         retention: 2d
-        retentionSize: 50GB
+        retentionSize: 20GB
         enableAdminAPI: true
         walCompression: true
         secrets:
@@ -231,10 +153,10 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: ceph-block
+              storageClassName: longhorn
               resources:
                 requests:
-                  storage: 60Gi
+                  storage: 20Gi
     additionalPrometheusRulesMap:
       dockerhub-rules:
         groups:
