@@ -2,19 +2,34 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-nextcloud
+  name: cluster-apps-nextcloud-database
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/production/media/nextcloud/app
+  path: ./kubernetes/apps/production/media/nextcloud/database
   prune: true
   sourceRef:
     kind: GitRepository
     name: homelab-source
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: nextcloud
-      namespace: media
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-nextcloud
+#   namespace: flux-system
+# spec:
+#   path: ./kubernetes/apps/production/media/nextcloud/app
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   healthChecks:
+#     - apiVersion: helm.toolkit.fluxcd.io/v2
+#       kind: HelmRelease
+#       name: nextcloud
+#       namespace: media
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m

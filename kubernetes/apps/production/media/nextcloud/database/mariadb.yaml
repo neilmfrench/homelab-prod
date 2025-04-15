@@ -1,0 +1,18 @@
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: mariadb
+spec:
+  image: docker-registry1.mariadb.com/library/mariadb:11.3.2
+  rootPasswordSecretKeyRef:
+    name: nextcloud-mariadb-password
+    key: PASSWORD
+  username: nextcloud
+  passwordSecretKeyRef:
+    name: nextcloud-mariadb-password
+    key: PASSWORD
+  database: nextcloud
+  storage:
+    size: 12Gi
+    storageClassName: ceph-block
