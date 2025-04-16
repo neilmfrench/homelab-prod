@@ -6,18 +6,10 @@ metadata:
 spec:
   values:
     extraEnv:
-      - name: MYSQL_HOST
-        value: nextcloud-mariadb
-      - name: MYSQL_DATABASE
-        value: nextcloud
-      - name: MYSQL_USER
-        value: nextcloud
-      - name: MYSQL_PASSWORD
-        value: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
       - name: REDIS_HOST
         value: nextcloud-redis-master
       - name: REDIS_HOST_PORT
-        value: 6379
+        value: "6379"
     persistence:
       enabled: true
       existingClaim: nextcloud-data
@@ -28,7 +20,7 @@ spec:
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       tls:
         - hosts:
-            - cloud.${SECRET_DOMAIN}
+            - &host cloud.${SECRET_DOMAIN}
     livenessProbe:
       enabled: false
     readinessProbe:
@@ -42,7 +34,7 @@ spec:
       limits:
         memory: "5120M"
     nextcloud:
-      host: cloud.${SECRET_DOMAIN}
+      host: *host
       username: "${SECRET_NEXTCLOUD_ADMIN_USERNAME}"
       password: "${SECRET_NEXTCLOUD_ADMIN_PASSWORD}"
       containerPort: 80
@@ -71,48 +63,17 @@ spec:
     internalDatabase:
       enabled: false
     externalDatabase:
-      enabled: false
+      enabled: true
+      type: mysql
+      host: "nextcloud-mariadb:3306"
+      user: nextcloud
+      password: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
+      database: nextcloud
+      existingSecret:
+        enabled: false
     mariadb:
       enabled: false
-      # auth:
-      #   database: nextcloud
-      #   username: nextcloud
-      #   rootPassword: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
-      #   password: "${SECRET_NEXTCLOUD_MARIADB_PASSWORD}"
-      # architecture: standalone
-      # primary:
-      #   resourcesPreset: "none"
-      #   resources:
-      #     requests:
-      #       cpu: 125m
-      #       memory: 128Mi
-      #     limits:
-      #       memory: 1024Mi
-      #   persistence:
-      #     enabled: true
-      #     storageClass: ceph-block
-      #     accessMode: ReadWriteOnce
-      #     size: 8Gi
     cronjob:
       enabled: true
     redis:
       enabled: false
-      # master:
-      #   persistence:
-      #     storageClass: ceph-block
-      #   resources:
-      #     requests:
-      #       memory: 128Mi
-      #     limits:
-      #       memory: 256Mi
-      #   disableCommands: []
-      # replica:
-      #   replicaCount: 1
-      #   persistence:
-      #     storageClass: ceph-block
-      #   resources:
-      #     requests:
-      #       memory: 128Mi
-      #     limits:
-      #       memory: 256Mi
-      #   disableCommands: []
