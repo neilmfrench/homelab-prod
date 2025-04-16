@@ -4,9 +4,9 @@ kind: Kustomization
 namespace: media
 resources:
   - ./data-pvc.yaml
-  - ./restic-config.sops.yaml
-  - ./mariadb-restic-config.sops.yaml
-  - ./volsync.yaml
-  - ../../../../base/nextcloud
-patches:
-  - path: ./nextcloud-values.yaml
+#   - ./restic-config.sops.yaml
+#   - ./mariadb-restic-config.sops.yaml
+#   - ./volsync.yaml
+#   - ../../../../base/nextcloud
+# patches:
+#   - path: ./nextcloud-values.yaml
