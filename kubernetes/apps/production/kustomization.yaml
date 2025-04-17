@@ -8,8 +8,8 @@ resources:
   - ./security
   - ./media
   - ./finance
+  - ./development
   # - ./argocd
-  # - ./development
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines

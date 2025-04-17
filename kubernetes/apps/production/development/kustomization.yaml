@@ -4,11 +4,11 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./bookstack/ks.yaml
-  - ./fifa-openapi/ks.yaml
-  - ./gitea/ks.yaml
-  - ./harbor/ks.yaml
-  - ./pocketbase/ks.yaml
-  - ./planka/ks.yaml
+  # - ./fifa-openapi/ks.yaml
+  # - ./gitea/ks.yaml
+  # - ./harbor/ks.yaml
+  # - ./pocketbase/ks.yaml
+  # - ./planka/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
   # - ./bitbucket/ks.yaml
   # - ./cluster-status-api/ks.yaml

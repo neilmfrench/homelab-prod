@@ -3,9 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: development
 resources:
-  - ./restic-config.sops.yaml
-  - ./volsync.yaml
-  - ../../../../base/mariadb
+  - ./mariadb-secret.sops.yaml
+  - ./mariadb.yaml
 namePrefix: bookstack-
-patches:
-  - path: ./mariadb-values.yaml
