@@ -27,11 +27,11 @@ spec:
   sourceRef:
     kind: GitRepository
     name: homelab-source
-  # healthChecks:
-  #   - apiVersion: helm.toolkit.fluxcd.io/v2
-  #     kind: HelmRelease
-  #     name: bookstack
-  #     namespace: development
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: bookstack
+      namespace: development
   interval: 30m
   retryInterval: 1m
   timeout: 3m
