@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: database
 resources:
   - ../../../../base/cloudnative-pg
+  - ./cluster-image-catalog.yaml
 patches:
   - path: ./cloudnative-pg-values.yaml
