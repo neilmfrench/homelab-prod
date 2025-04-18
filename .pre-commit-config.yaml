@@ -9,7 +9,7 @@ repos:
           - .github/linters/.yamllint.yaml
         id: yamllint
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
@@ -31,6 +31,6 @@ repos:
         exclude: |
           (?x)^(talos\/manifests\/production\/cilium\/install(.*).yaml)|(talos\/manifests\/staging-rpi\/cilium\/install(.*).yaml)$
   - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.18.4
+    rev: v8.24.3
     hooks:
       - id: gitleaks

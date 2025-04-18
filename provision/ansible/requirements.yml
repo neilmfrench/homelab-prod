@@ -1,11 +1,11 @@
 ---
 collections:
   - name: community.general
-    version: 9.1.0
+    version: 10.5.0
   - name: community.sops
-    version: 1.7.0
+    version: 2.0.4
   - name: ansible.posix
-    version: 1.5.4
+    version: 2.0.0
   - name: community.general.timezone
 roles:
   - src: xanmanning.k3s
