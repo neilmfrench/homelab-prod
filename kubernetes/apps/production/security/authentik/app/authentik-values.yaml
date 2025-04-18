@@ -11,9 +11,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           external-dns/is-public: "true"
-          external-dns/is-internal: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure, websecure-int"
         hosts:
           - &host "id.${SECRET_DOMAIN}"
         paths:
@@ -30,9 +28,12 @@ spec:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       log_level: info
       postgresql:
+        host: authentik-postgresql-rw
         name: authentik
         user: authentik
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+      redis:
+        host: authentik-redis-master
       email:
         host: "${SECRET_AUTHENTIK_EMAIL_HOST}"
         port: 587
@@ -46,7 +47,7 @@ spec:
     redis:
       enabled: false
     postgresql:
-      enabled: true
+      enabled: false
       auth:
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
       primary:
