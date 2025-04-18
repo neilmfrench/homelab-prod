@@ -21,7 +21,7 @@ spec:
               tag: "1.19.1"
               pullPolicy: IfNotPresent
             env:
-              DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql:5432/planka"
+              DATABASE_URL: "postgresql://planka:${SECRET_PLANKA_POSTGRESQL_PASSWORD}@planka-postgresql-rw:5432/planka"
               BASE_URL: "https://tasks.${SECRET_DOMAIN}"
               SECRET_KEY: "${SECRET_PLANKA_KEY}"
               TRUST_PROXY: "0"
