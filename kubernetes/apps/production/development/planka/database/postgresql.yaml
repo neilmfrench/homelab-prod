@@ -7,7 +7,7 @@ spec:
   instances: 1
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
-    kind: ImageCatalog
+    kind: ClusterImageCatalog
     name: postgresql
     major: 16
   storage:
