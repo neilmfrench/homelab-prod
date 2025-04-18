@@ -11,10 +11,6 @@ spec:
     image:
       repository: crowdsecurity/cloudflare-bouncer
       tag: "v0.3.0"
-    command: ["/bin/sh", "-c"]
-    args:
-      - cat /tmp/crowdsec-lapi/ca.crt >> /etc/ssl/certs/ca-certificates.crt;
-        /usr/local/bin/crowdsec-cloudflare-bouncer -c /etc/crowdsec/bouncers/crowdsec-cloudflare-bouncer.yaml
     service:
       main:
         ports:
@@ -26,12 +22,6 @@ spec:
         type: configMap
         name: cloudflare-bouncer-configmap
         mountPath: /etc/crowdsec/bouncers
-        readOnly: true
-      crowdsec-lapi-tls:
-        enabled: true
-        type: secret
-        name: crowdsec-lapi-tls
-        mountPath: /tmp/crowdsec-lapi
         readOnly: true
       cache:
         enabled: true
