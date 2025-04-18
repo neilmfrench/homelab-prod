@@ -1,0 +1,21 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ImageCatalog
+    name: postgresql
+    major: 16
+  storage:
+    storageClass: ceph-block
+    size: 12Gi
+  bootstrap:
+    initdb:
+      database: planka
+      owner: planka
+      secret:
+        name: planka-postgresql-secret
