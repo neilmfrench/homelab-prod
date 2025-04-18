@@ -1,0 +1,191 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cilium
+spec:
+  chart:
+    spec:
+      chart: cilium
+      version: 1.17.2
+  values:
+    # debug:
+    #   enabled: true
+    #   verbose: envoy
+
+    k8sServiceHost: "localhost"
+    k8sServicePort: "7445"
+
+    cluster:
+      name: dev-phx
+      id: 20
+
+    operator:
+      enabled: true
+      rollOutPods: true
+      replicas: 1
+      prometheus:
+        enabled: false
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      tolerations:
+        - operator: Exists
+          effect: NoSchedule
+
+    identityAllocationMode: crd
+    kubeProxyReplacement: "true"
+    enableK8sEndpointSlice: true
+    localRedirectPolicy: true
+
+    routingMode: tunnel
+    tunnelProtocol: vxlan
+    autoDirectNodeRoutes: false
+    devices: [eth0]
+
+    # required for homelab mtu differences on oracle
+    MTU: 1450
+    # pmtuDiscovery:
+    #   enabled: true
+
+    healthChecking: true
+
+    cni:
+      install: true
+
+    ipam:
+      mode: "kubernetes"
+    k8s:
+      requireIPv4PodCIDR: true
+      requireIPv6PodCIDR: false
+
+    endpointRoutes:
+      enabled: true
+    bpf:
+      masquerade: true
+      # https://github.com/cilium/cilium/issues/36737#issuecomment-2556565144
+      hostLegacyRouting: false
+    bgp:
+      enabled: false
+    ipv4:
+      enabled: true
+    ipv6:
+      enabled: false
+    hostServices:
+      enabled: true
+    hostPort:
+      enabled: true
+    nodePort:
+      enabled: true
+    externalIPs:
+      enabled: true
+    hostFirewall:
+      enabled: true
+
+    securityContext:
+      privileged: true
+
+    hubble:
+      enabled: true
+      metrics:
+        enabled:
+          - dns:query
+          - drop
+          - tcp
+          - flow
+          - port-distribution
+          - icmp
+          - http
+      tls:
+        enabled: true
+        auto:
+          enabled: true
+          method: helm
+      relay:
+        enabled: true
+      ui:
+        enabled: true
+
+    prometheus:
+      enabled: false
+
+    cgroup:
+      autoMount:
+        enabled: false
+      hostRoot: /sys/fs/cgroup
+
+    ingressController:
+      enabled: true
+      enableProxyProtocol: false
+      default: true
+      loadbalancerMode: shared
+      enforceHttps: true
+      defaultSecretNamespace: networking
+      defaultSecretName: neilfren-ch-production-tls
+      service:
+        externalTrafficPolicy: "~"
+        type: ClusterIP
+      secretsNamespace:
+        create: true
+        name: cilium-secrets
+        sync: true
+      hostNetwork:
+        enabled: true
+        sharedListenerPort: 8080
+
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+    tls:
+      ca:
+        cert: "${SECRET_CILIUM_CA_CERT}"
+        key: "${SECRET_CILIUM_CA_KEY}"
+
+    ipMasqAgent:
+      enabled: false
+
+    clustermesh:
+      useAPIServer: true
+      config:
+        enabled: true
+        domain: ${SECRET_DOMAIN}
+        clusters:
+          - name: production
+            address: cluster-prod.mesh.${SECRET_DOMAIN}
+            port: 2379
+          - name: dev-sj
+            address: cluster-sj.mesh.${SECRET_DOMAIN}
+            port: 2379
+          - name: staging-rpi
+            address: cluster-rpi.mesh.${SECRET_DOMAIN}
+            port: 2379
+      apiserver:
+        healthPort: 9880
+        kvstoremesh:
+          enabled: true
+          healthPort: 9881
+        service:
+          type: NodePort
+          # WARNING: make sure to configure a different NodePort in each cluster if
+          # kube-proxy replacement is enabled, as Cilium is currently affected by a known
+          # bug (#24692) when NodePorts are handled by the KPR implementation. If a service
+          # with the same NodePort exists both in the local and the remote cluster, all
+          # traffic originating from inside the cluster and targeting the corresponding
+          # NodePort will be redirected to a local backend, regardless of whether the
+          # destination node belongs to the local or the remote cluster.
+          nodePort: 32380
+        replicas: 2
+        tls:
+          authMode: cluster
+          auto:
+            enabled: true
+            method: helm
+            certValidityDuration: 1095
+          server:
+            extraDnsNames:
+              - "*.mesh.${SECRET_DOMAIN}"
+        metrics:
+          enabled: false

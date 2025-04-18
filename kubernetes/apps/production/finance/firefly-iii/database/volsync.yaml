@@ -4,7 +4,7 @@ kind: ReplicationSource
 metadata:
   name: mariadb
 spec:
-  sourcePVC: data-firefly-iii-mariadb-0
+  sourcePVC: storage-firefly-iii-mariadb-0
   trigger:
     schedule: "0 7 * * *"
   restic:
@@ -22,7 +22,7 @@ kind: ReplicationSource
 metadata:
   name: phx-mariadb
 spec:
-  sourcePVC: data-firefly-iii-mariadb-0
+  sourcePVC: storage-firefly-iii-mariadb-0
   trigger:
     schedule: "0 7 * * *"
   restic:

@@ -10,11 +10,11 @@ spec:
   sourceRef:
     kind: GitRepository
     name: homelab-source
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: firefly-iii-mariadb
-      namespace: finance
+  # healthChecks:
+  #   - apiVersion: helm.toolkit.fluxcd.io/v2
+  #     kind: HelmRelease
+  #     name: firefly-iii-mariadb
+  #     namespace: finance
   interval: 30m
   retryInterval: 1m
   timeout: 3m

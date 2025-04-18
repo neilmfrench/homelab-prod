@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: openebs-jiva-csi-default
+  storageClassName: longhorn

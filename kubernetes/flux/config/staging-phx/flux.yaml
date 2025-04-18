@@ -8,7 +8,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/fluxcd/flux-manifests
   ref:
-    tag: v2.3.0
+    tag: v2.5.1
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -24,16 +24,34 @@ spec:
     kind: OCIRepository
     name: flux-manifests
   patches:
+    # Patch allow-ingress NetworkPolicy for cilium
     # - patch: |
-    #     $patch: delete
-    #     apiVersion: networking.k8s.io/v1
-    #     kind: NetworkPolicy
-    #     metadata:
-    #       name: not-used
+    #     - op: add
+    #       path: /spec/ingress/-
+    #       value:
+    #         from:
+    #           - ipBlock:
+    #               cidr: 0.0.0.0/0
+    # - patch: |
+    #     - op: add
+    #       path: /spec/ingress/0/
+    #       value:
+    #         ports:
+    #           - port: 9292
     #   target:
     #     group: networking.k8s.io
-    #     version: v1
     #     kind: NetworkPolicy
+    #     name: allow-webhooks
+    # Remove the network policies that does not work with Cilium
+    - patch: |
+        $patch: delete
+        apiVersion: networking.k8s.io/v1
+        kind: NetworkPolicy
+        metadata:
+          name: not-used
+      target:
+        group: networking.k8s.io
+        kind: NetworkPolicy
     # Enable drift detection for HelmReleases and set the log level to debug
     # https://fluxcd.io/flux/components/helm/helmreleases/#drift-detection
     - patch: |
@@ -60,12 +78,33 @@ spec:
                   resources:
                     limits:
                       memory: 512Mi
+                      cpu: null
                     requests:
                       cpu: 50m
                       memory: 100Mi
       target:
         kind: Deployment
-        name: (kustomize-controller|helm-controller|source-controller|image-automation-controller|image-reflector-controller|notification-controller)
+        name: (kustomize-controller|helm-controller|image-automation-controller|image-reflector-controller|notification-controller)
+    - patch: |
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: not-used
+        spec:
+          template:
+            spec:
+              containers:
+                - name: manager
+                  resources:
+                    limits:
+                      memory: 1024Mi
+                      cpu: null
+                    requests:
+                      cpu: 50m
+                      memory: 100Mi
+      target:
+        kind: Deployment
+        name: source-controller
     # Enable Helm near OOM detection
     # https://fluxcd.io/flux/cheatsheets/bootstrap/#enable-helm-near-oom-detection
     - patch: |

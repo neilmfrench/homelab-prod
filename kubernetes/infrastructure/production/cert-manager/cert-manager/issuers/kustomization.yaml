@@ -6,3 +6,4 @@ resources:
   - ./cloudflare-api-secret.yaml
   - ./letsencrypt-production.yaml
   - ./letsencrypt-staging.yaml
+  - ./self-signed-issuer.yaml

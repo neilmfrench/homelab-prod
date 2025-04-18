@@ -44,3 +44,10 @@ resources:
   - ./codecentric.yaml
   - ./aqua.yaml
   - ./homelab.yaml
+  - ./node-feature-discovery.yaml
+  - ./intel.yaml
+  - ./emberstack.yaml
+  - ./k8s-gateway.yaml
+  - ./cloudnative-pg.yaml
+  - ./mariadb-operator.yaml
+  - ./moco.yaml

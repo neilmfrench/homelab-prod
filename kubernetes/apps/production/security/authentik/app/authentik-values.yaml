@@ -12,17 +12,14 @@ spec:
         annotations:
           external-dns/is-public: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
-          - "id.${SECRET_DOMAIN}"
+          - &host "id.${SECRET_DOMAIN}"
         paths:
           - "/"
         pathType: Prefix
         tls:
           - hosts:
-              - "id.${SECRET_DOMAIN}"
-            secretName: "authentik-tls"
+              - *host
       metrics:
         enabled: true
         serviceMonitor:
@@ -31,9 +28,12 @@ spec:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       log_level: info
       postgresql:
+        host: authentik-postgresql-rw
         name: authentik
         user: authentik
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+      redis:
+        host: authentik-redis-master
       email:
         host: "${SECRET_AUTHENTIK_EMAIL_HOST}"
         port: 587
@@ -45,19 +45,9 @@ spec:
       rules:
         enabled: true
     redis:
-      enabled: true
-      auth:
-        enabled: false
-      master:
-        persistence:
-          storageClass: ceph-block
-          size: 4Gi
-      replica:
-        persistence:
-          storageClass: ceph-block
-          size: 4Gi
+      enabled: false
     postgresql:
-      enabled: true
+      enabled: false
       auth:
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
       primary:

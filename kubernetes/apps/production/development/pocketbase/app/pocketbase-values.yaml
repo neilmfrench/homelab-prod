@@ -33,10 +33,8 @@ spec:
         enabled: true
         className: "traefik"
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns/is-public: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - host: &host "pb.${SECRET_DOMAIN}"
             paths:
@@ -47,7 +45,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: pocketbase-tls
     persistence:
       data:
         enabled: true

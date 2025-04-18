@@ -1,0 +1,11 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: intel-device-plugin-gpu
+spec:
+  values:
+    name: intel-gpu-plugin
+    # number of containers that can use gpu on each node
+    sharedDevNum: 1
+    nodeFeatureRule: true

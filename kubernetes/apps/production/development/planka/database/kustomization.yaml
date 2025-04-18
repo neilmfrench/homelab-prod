@@ -3,9 +3,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: development
 resources:
-  - ./restic-config.sops.yaml
-  - ./volsync.yaml
-  - ../../../../base/postgresql
+  # - ./restic-config.sops.yaml
+  # - ./volsync.yaml
+  # - ../../../../base/postgresql
+  - ./postgresql-secret.sops.yaml
+  - ./postgresql.yaml
 namePrefix: planka-
-patches:
-  - path: ./postgresql-values.yaml
+# patches:
+#   - path: ./postgresql-values.yaml

@@ -40,6 +40,8 @@ spec:
         enabled: true
     tlsStore:
       default:
+        certificates:
+          - secretName: "${SECRET_DOMAIN/./-}-production-tls"
         defaultCertificate:
           secretName: "${SECRET_DOMAIN/./-}-production-tls"
     globalArguments:
@@ -64,10 +66,26 @@ spec:
         expose:
           default: true
       web:
-        redirectTo:
-          port: websecure
+        redirections:
+          entryPoint:
+            to: websecure
+            scheme: https
+            permanent: true
       websecure:
-        # asDefault: true
+        asDefault: true
+        port: 8443
+        expose:
+          default: true
+        exposedPort: 8443
+        tls:
+          enabled: true
+          options: "default"
+      websecure-int:
+        asDefault: true
+        port: 6443
+        expose:
+          default: true
+        exposedPort: 443
         tls:
           enabled: true
           options: "default"

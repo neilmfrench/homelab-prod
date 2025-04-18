@@ -6,20 +6,22 @@ spec:
   releaseName: podinfo-lb
   values:
     fullnameOverride: podinfo-lb
-    service:
-      annotations:
-        service.cilium.io/global: "true"
     ingress:
-      enabled: false
-      # className: "nginx"
-      # annotations:
-      #   external-dns/is-public: "true"
-      #   external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-      # hosts:
-      #   - host: &host "podinfo.staging.${SECRET_DOMAIN}"
-      #     paths:
-      #       - path: /
-      #         pathType: Prefix
-      # tls:
-      #   - hosts:
-      #       - *host
+      enabled: true
+      className: "cilium"
+      annotations:
+        # cert-manager.io/cluster-issuer: "letsencrypt-production"
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4-sj.${SECRET_DOMAIN}"
+        # nginx.ingress.kubernetes.io/whitelist-source-range: "${SECRET_EXTERNAL_IP}/32"
+      hosts:
+        - host: &host podinfo2-sj.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+    service:
+      enabled: true
+      # type: NodePort

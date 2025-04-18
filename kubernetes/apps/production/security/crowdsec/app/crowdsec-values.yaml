@@ -10,9 +10,18 @@ spec:
     #   tag: "v1.4.6"
     tls:
       enabled: true
-    secrets:
-      username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
-      password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
+      caBundle: true
+      insecureSkipVerify: false
+      certManager:
+        enabled: true
+        issuerRef:
+          name: cluster-selfsigned-issuer
+          kind: ClusterIssuer
+        duration: 43800h
+        renewBefore: 43700h
+    # secrets:
+    #   username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
+    #   password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
     config:
       parsers:
         s02-enrich:
@@ -49,32 +58,28 @@ spec:
         assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
         ingress:
           enabled: true
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           ingressClassName: "traefik"
           host: &host "crowdsec-dash.${SECRET_DOMAIN}"
           tls:
             - hosts:
                 - *host
-              secretName: "crowdsec-dash-tls"
       persistentVolume:
         data:
-          enabled: true
+          enabled: false
           storageClassName: ceph-block
           size: 1Gi
         config:
-          enabled: true
+          enabled: false
           storageClassName: ceph-block
           size: 500Mi
     agent:
       persistentVolume:
         config:
-          enabled: true
+          enabled: false
           accessModes:
             - ReadWriteMany
           storageClassName: ceph-filesystem
-          size: 400Mi
+          size: 500Mi
       env:
         # - name: DISABLE_ONLINE_API
         #   value: "true"

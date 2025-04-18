@@ -1,0 +1,20 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: minio-selfsigned-cert
+  namespace: media
+spec:
+  secretName: minio-selfsigned-tls
+
+  dnsNames:
+    - s3.${SECRET_DOMAIN}
+  ipAddresses:
+    - 172.16.20.10
+
+  duration: 43800h # 5 years
+  renewBefore: 39420h # 4.5 years
+
+  issuerRef:
+    name: cluster-selfsigned-issuer
+    kind: ClusterIssuer

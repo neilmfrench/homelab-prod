@@ -1,0 +1,9 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: database
+resources:
+  - ../../../../base/cloudnative-pg
+  - ./cluster-image-catalog.yaml
+patches:
+  - path: ./cloudnative-pg-values.yaml

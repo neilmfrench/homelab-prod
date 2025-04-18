@@ -3,15 +3,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./default
-  # - ./argocd
-  - ./media
-  - ./development
-  # - ./networking
-  - ./tekton-operator
-  - ./tekton-pipelines
-  - ./security
-  - ./finance
-  - ./home
-  - ./magazine
   - ./flux-system
-  - ./campsearch
+  - ./database
+  - ./security
+  - ./media
+  - ./finance
+  - ./development
+  # - ./argocd
+  # - ./networking
+  # - ./tekton-operator
+  # - ./tekton-pipelines
+  # - ./home
+  # - ./magazine
+  # - ./campsearch

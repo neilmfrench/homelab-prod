@@ -14,7 +14,7 @@ spec:
           main:
             image:
               repository: swaggerapi/swagger-ui
-              tag: "v5.17.14"
+              tag: "v5.21.0"
               pullPolicy: IfNotPresent
             env:
               SWAGGER_JSON: /mnt/openapi.json
@@ -37,10 +37,8 @@ spec:
         enabled: true
         className: "traefik"
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns/is-public: "true"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - host: &host "fifa-openapi.${SECRET_DOMAIN}"
             paths:
@@ -51,7 +49,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: fifa-openapi-tls
     persistence:
       config:
         enabled: true

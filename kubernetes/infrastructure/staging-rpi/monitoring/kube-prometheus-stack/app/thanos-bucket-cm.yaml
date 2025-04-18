@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: thanos-bucket
+data:
+  BUCKET_HOST: "ceph-objects.${SECRET_DOMAIN}"
+  BUCKET_NAME: thanos
+  BUCKET_PORT: "80"
+  BUCKET_REGION: ""
+  BUCKET_SUBREGION: ""

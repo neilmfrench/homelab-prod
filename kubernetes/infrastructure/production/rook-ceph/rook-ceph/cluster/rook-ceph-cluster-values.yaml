@@ -39,21 +39,20 @@ spec:
           - name: "talos-4"
             deviceFilter: "sdb"
     monitoring:
-      enabled: true
-      createPrometheusRules: true
+      enabled: false
+      createPrometheusRules: false
     ingress:
       dashboard:
         ingressClassName: traefik
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          external-dns/is-internal: "true"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure-int"
         host:
           name: &host "rook.${SECRET_DOMAIN}"
           path: /
         tls:
           - hosts:
               - *host
-            secretName: rook-dashboard-tls
     toolbox:
       enabled: true
     configOverride: |

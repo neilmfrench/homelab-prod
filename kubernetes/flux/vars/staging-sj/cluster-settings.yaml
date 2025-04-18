@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 data:
   TIMEZONE: "America/Los_Angeles"
-  K8S_API_INTERNAL_LB: "10.0.0.156"
+  K8S_API_INTERNAL_LB: "localhost:7445"

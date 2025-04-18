@@ -36,8 +36,6 @@ spec:
         server.insecure: true
     server:
       ingress:
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
           - "argocd.${SECRET_DOMAIN}"
         tls:

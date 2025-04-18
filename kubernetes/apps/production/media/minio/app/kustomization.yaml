@@ -5,6 +5,7 @@ namespace: media
 resources:
   - ./data-volume.yaml
   - ./data-pvc.yaml
+  - ./selfsigned-cert.yaml
   - ../../../../base/minio
 patches:
   - path: ./minio-values.yaml

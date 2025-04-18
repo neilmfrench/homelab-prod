@@ -4,20 +4,28 @@ kind: HelmRelease
 metadata:
   name: longhorn
 spec:
+  chart:
+    spec:
+      chart: longhorn
+      version: 1.8.1
   values:
     persistence:
       defaultClass: true
       reclaimPolicy: Retain
+      backupTargetName: default
     defaultSettings:
       storageMinimalAvailablePercentage: "10"
-      allowNodeDrainWithLastHealthyReplica: true
+      nodeDrainPolicy: "block-for-eviction-if-contains-last-replica"
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       defaultDataLocality: best-effort
-      backupTarget: "s3://homelab-backup@us-phoenix-1/longhorn"
-      backupTargetCredentialSecret: oci-object-storage-secret
       defaultLonghornStaticStorageClass: longhorn
+      orphanAutoDeletion: true
+    defaultBackupStore:
+      backupTarget: "s3://phx-backup@us-phoenix-1/longhorn"
+      backupTargetCredentialSecret: oci-object-storage-secret
+      pollInterval: 300
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: nginx
       tls: true
       host: "longhorn-phx.${SECRET_DOMAIN}"

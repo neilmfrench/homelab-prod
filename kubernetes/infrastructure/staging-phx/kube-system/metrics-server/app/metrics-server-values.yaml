@@ -5,9 +5,11 @@ metadata:
   name: metrics-server
 spec:
   values:
-    args:
-      - --kubelet-insecure-tls
     metrics:
       enabled: true
+    # args:
+    #   - --kubelet-insecure-tls
     serviceMonitor:
       enabled: false
+    apiService:
+      insecureSkipTLSVerify: true

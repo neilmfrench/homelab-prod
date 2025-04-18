@@ -4,13 +4,29 @@ kind: HelmRelease
 metadata:
   name: snapshot-controller
 spec:
+  chart:
+    spec:
+      chart: snapshot-controller
+      version: 4.0.1
   values:
     controller:
+      image:
+        # Longhorn v1.8.1 uses CSI external-snapshotter v8.2.0
+        tag: "v8.2.0"
       volumeSnapshotClasses:
-        - name: csi-cstor-snapshotclass
-          driver: cstor.csi.openebs.io
+        - name: longhorn-backup-vsc
+          driver: driver.longhorn.io
           annotations:
             snapshot.storage.kubernetes.io/is-default-class: "false"
+          parameters:
+            type: bak
+          deletionPolicy: Delete
+        - name: longhorn-snapshot-vsc
+          driver: driver.longhorn.io
+          annotations:
+            snapshot.storage.kubernetes.io/is-default-class: "true"
+          parameters:
+            type: snap
           deletionPolicy: Delete
       serviceMonitor:
         create: false

@@ -39,6 +39,7 @@ spec:
           real_ip_header X-Forwarded-For;
       service:
         type: LoadBalancer
+        loadBalancerIP: 172.16.20.70
         externalTrafficPolicy: Cluster
       metrics:
         enabled: false

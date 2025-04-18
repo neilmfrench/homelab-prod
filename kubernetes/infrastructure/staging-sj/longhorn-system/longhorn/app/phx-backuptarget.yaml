@@ -1,0 +1,10 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: BackupTarget
+metadata:
+  name: phx-backuptarget
+  namespace: longhorn-system
+spec:
+  backupTargetURL: s3://sj-backup@us-phoenix-1/longhorn
+  credentialSecret: phx-oci-object-storage-secret
+  pollInterval: 5m0s

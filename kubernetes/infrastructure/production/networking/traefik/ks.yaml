@@ -5,39 +5,19 @@ metadata:
   name: cluster-infrastructure-traefik-crds
   namespace: flux-system
 spec:
-  interval: 30m
-  prune: false
+  path: ./kubernetes/infrastructure/production/networking/traefik/crds
+  prune: true
   sourceRef:
     kind: GitRepository
-    name: traefik-crd-source
+    name: homelab-source
   healthChecks:
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: ingressroutes.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: ingressroutetcps.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: ingressrouteudps.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: middlewares.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: middlewaretcps.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: serverstransports.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: tlsoptions.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: tlsstores.traefik.io
-    - apiVersion: apiextensions.k8s.io/v1
-      kind: CustomResourceDefinition
-      name: traefikservices.traefik.io
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: traefik-crds
+      namespace: networking
+  interval: 30m
+  retryInterval: 1m
+  timeout: 10m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -67,8 +47,6 @@ metadata:
   name: cluster-infrastructure-traefik-certificates
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-infrastructure-traefik
   path: ./kubernetes/infrastructure/production/networking/traefik/certificates
   prune: true
   sourceRef:

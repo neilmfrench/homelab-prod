@@ -152,17 +152,6 @@ patches:
       apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
-        name: prometheus
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: prometheus
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1
-      kind: HelmRepository
-      metadata:
         name: traefik
         namespace: flux-system
     target:
@@ -201,17 +190,6 @@ patches:
     target:
       kind: HelmRepository
       name: rook-ceph
-      namespace: flux-system
-  - patch: |-
-      $patch: delete
-      apiVersion: source.toolkit.fluxcd.io/v1
-      kind: HelmRepository
-      metadata:
-        name: longhorn
-        namespace: flux-system
-    target:
-      kind: HelmRepository
-      name: longhorn
       namespace: flux-system
   - patch: |-
       $patch: delete
@@ -300,4 +278,37 @@ patches:
     target:
       kind: HelmRepository
       name: aqua
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: openebs-jiva
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: openebs-jiva
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: intel
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: intel
+      namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: k8s-gateway
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: k8s-gateway
       namespace: flux-system

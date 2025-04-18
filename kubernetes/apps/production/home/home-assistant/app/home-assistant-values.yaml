@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: homeassistant/home-assistant
-      tag: "2024.6.4"
+      tag: "2025.4.2"
     env:
       TZ: "${TIMEZONE}"
     service:
@@ -48,9 +48,6 @@ spec:
         ingress:
           enabled: true
           ingressClassName: "traefik"
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           hosts:
             - host: &host-config "hass-config.${SECRET_DOMAIN}"
               paths:
@@ -59,7 +56,6 @@ spec:
           tls:
             - hosts:
                 - *host-config
-              secretName: "hass-config-tls"
         volumeMounts:
           - name: config
             mountPath: /config

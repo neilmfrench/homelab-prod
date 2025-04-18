@@ -1,0 +1,17 @@
+---
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: wd-external-drive
+spec:
+  rules:
+    - # Western Digital Easystore 8TB drive
+      name: wd.drive
+      labels:
+        western-digital.feature.node.kubernetes.io/drive: "true"
+      matchFeatures:
+        - feature: usb.device
+          matchExpressions:
+            class: { op: In, value: ["08"] }
+            vendor: { op: In, value: ["1058"] }
+            device: { op: In, value: ["264d"] }

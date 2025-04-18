@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.15.6
+      version: 1.17.2
   values:
     k8sServiceHost: "localhost"
     # ipv4NativeRoutingCIDR: "10.0.0.0/8"
@@ -31,24 +31,22 @@ spec:
           effect: NoSchedule
 
     identityAllocationMode: crd
-    kubeProxyReplacement: true
+    kubeProxyReplacement: "true"
     enableK8sEndpointSlice: true
     localRedirectPolicy: true
 
-    # tunnel: "disabled"
     routingMode: tunnel
     tunnelProtocol: vxlan
     autoDirectNodeRoutes: false
     devices: [eth0]
 
+    # pmtuDiscovery:
+    #   enabled: true
+
     healthChecking: true
 
     cni:
       install: true
-
-    containerRuntime:
-      integration: containerd
-      socketPath: /system/run/containerd/containerd.sock
 
     ipam:
       mode: "kubernetes"
@@ -145,46 +143,31 @@ spec:
         cert: "${SECRET_CILIUM_CA_CERT}"
         key: "${SECRET_CILIUM_CA_KEY}"
 
-    ipMasqAgent:
-      enabled: false
-      config:
-        nonMasqueradeCIDRs:
-          - 192.168.0.0/16
-          - 100.64.0.0/10
-          - 192.0.0.0/24
-          - 192.0.2.0/24
-          - 192.88.99.0/24
-          - 198.18.0.0/15
-          - 198.51.100.0/24
-          - 203.0.113.0/24
-          - 240.0.0.0/4
-
     clustermesh:
       useAPIServer: true
+      enableEndpointSliceSynchronization: true
       config:
         enabled: true
         domain: ${SECRET_DOMAIN}
         clusters:
-          - name: staging-sj
+          - name: production
+            address: cluster-prod.mesh.${SECRET_DOMAIN}
+            port: 2379
+          - name: dev-sj
             address: cluster-sj.mesh.${SECRET_DOMAIN}
             port: 2379
-          #   ips:
-          #     - 10.0.0.11
-          #     - 10.0.0.12
-          #     - 10.0.0.13
-          #     - 10.0.0.23
+          - name: dev-phx
+            address: cluster-phx.mesh.${SECRET_DOMAIN}
+            port: 2379
       apiserver:
         replicas: 2
         kvstoremesh:
-          enabled: false
+          enabled: true
+          healthPort: 9881
 
         service:
           type: LoadBalancer
           loadBalancerIP: 172.16.20.75
-          annotations:
-            external-dns/is-public: "true"
-            external-dns.aplpha.kubernetes.io/hostname: "cluster-rpi.mesh.${SECRET_DOMAIN}"
-            external-dns.alpha.kubernetes.io/ttl: "1m"
 
         tls:
           authMode: cluster
@@ -193,10 +176,4 @@ spec:
             method: helm
           server:
             extraDnsNames:
-              - "*.${SECRET_DOMAIN}"
               - "*.mesh.${SECRET_DOMAIN}"
-            extraIpAddresses:
-              - 10.0.0.11
-              - 10.0.0.12
-              - 10.0.0.13
-              - 10.0.0.23

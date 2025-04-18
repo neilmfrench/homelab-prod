@@ -4,10 +4,15 @@ kind: HelmRelease
 metadata:
   name: snapshot-controller
 spec:
+  chart:
+    spec:
+      chart: snapshot-controller
+      version: 4.0.1
   values:
     controller:
       image:
-        tag: "v6.3.2"
+        # Longhorn v1.8.1 uses CSI external-snapshotter v8.2.0
+        tag: "v8.2.0"
       volumeSnapshotClasses:
         - name: longhorn-backup-vsc
           driver: driver.longhorn.io
@@ -25,6 +30,3 @@ spec:
           deletionPolicy: Delete
       serviceMonitor:
         create: false
-    webhook:
-      image:
-        tag: "v6.3.2"

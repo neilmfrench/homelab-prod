@@ -1,0 +1,33 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rook-ceph-object-ingress
+  namespace: rook-ceph
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &host "ceph-objects.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - backend:
+              service:
+                name: rook-ceph-rgw-ceph-objectstore
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+    # - host: &host-wildcard "*.ceph-objects.${SECRET_DOMAIN}"
+    #   http:
+    #     paths:
+    #       - backend:
+    #           service:
+    #             name: rook-ceph-rgw-ceph-objectstore
+    #             port:
+    #               number: 80
+    #         path: /
+    #         pathType: Prefix
+  tls:
+    - hosts:
+        - *host
+        # - *host-wildcard

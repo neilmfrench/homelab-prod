@@ -29,10 +29,13 @@ spec:
             configBlock: |-
               lameduck 5s
           - name: hosts
+            # no need to alias local s3 here, we already do that at the router level
             configBlock: |-
-              ${SECRET_PHX_EXTERNAL_IP} gslb-ns-phx-neilfren-ch.${SECRET_DOMAIN}
-              ${SECRET_SJ_EXTERNAL_IP} gslb-ns-sj-neilfren-ch.${SECRET_DOMAIN}
-              ${SECRET_EXTERNAL_IP} gslb-ns-hb-neilfren-ch.${SECRET_DOMAIN}
+              172.16.20.75 cluster-rpi.mesh.${SECRET_DOMAIN}
+              10.0.1.150 cluster-sj.mesh.${SECRET_DOMAIN}
+              10.1.1.44 cluster-phx.mesh.${SECRET_DOMAIN}
+              10.0.0.200 ${SECRET_OCI_SJ_S3_OBJECTSTORE_ENDPOINT}
+              10.1.0.200 ${SECRET_OCI_PHX_S3_OBJECTSTORE_ENDPOINT}
               fallthrough
           - name: ready
           - name: kubernetes
