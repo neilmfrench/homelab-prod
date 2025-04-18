@@ -1,5 +1,8 @@
 crowdsec_lapi_url: https://crowdsec-service.security:8080/
 crowdsec_update_frequency: 1m
+ca_cert_path: /etc/ssl/certs/ca-certificates.crt
+cert_path: /etc/ssl/certs/tls.crt
+key_path: /etc/ssl/certs/tls.key
 cloudflare_config:
   accounts:
     - id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ACCOUNT_ID}
