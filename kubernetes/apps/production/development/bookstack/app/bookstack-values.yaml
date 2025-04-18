@@ -12,7 +12,7 @@ spec:
           main:
             image:
               repository: ghcr.io/linuxserver/bookstack
-              tag: "24.05.20240520"
+              tag: "25.02.20250309"
               pullPolicy: IfNotPresent
             env:
               TZ: ${TIMEZONE}
