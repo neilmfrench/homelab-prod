@@ -48,10 +48,3 @@ spec:
       enabled: false
     postgresql:
       enabled: false
-      auth:
-        password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
-      primary:
-        persistence:
-          enabled: true
-          storageClass: ceph-block
-          size: 6Gi

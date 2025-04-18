@@ -11,3 +11,7 @@ spec:
     monitoring:
       enabled: true
     enableDiscoveryDaemon: false
+    csi:
+      snapshotter:
+        repository: registry.k8s.io/sig-storage/csi-snapshotter
+        tag: v8.1.0
