@@ -4,10 +4,6 @@ kind: HelmRelease
 metadata:
   name: snapshot-controller
 spec:
-  chart:
-    spec:
-      chart: snapshot-controller
-      version: 4.0.1
   values:
     controller:
       image:
