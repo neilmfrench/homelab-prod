@@ -14,6 +14,8 @@ spec:
     command: ["/bin/sh", "-c"]
     args:
       - cat /tmp/crowdsec-lapi/ca.crt >> /etc/ssl/certs/ca-certificates.crt;
+        cat /tmp/crowdsec-lapi/tls.crt >> /etc/ssl/certs/tls.crt;
+        cat /tmp/crowdsec-lapi/tls.key >> /etc/ssl/certs/tls.key;
         /usr/local/bin/crowdsec-cloudflare-bouncer -c /etc/crowdsec/bouncers/crowdsec-cloudflare-bouncer.yaml
     service:
       main:
