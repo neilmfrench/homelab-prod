@@ -4,6 +4,9 @@ kind: HelmRelease
 metadata:
   name: snapshot-controller
 spec:
+  chart:
+    spec:
+      version: 4.0.2
   values:
     controller:
       volumeSnapshotClasses:
