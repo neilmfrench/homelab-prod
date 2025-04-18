@@ -32,7 +32,7 @@ spec:
       crowdsec-lapi-tls:
         enabled: true
         type: secret
-        name: crowdsec-lapi-tls
+        name: crowdsec-bouncer-tls
         mountPath: /tmp/crowdsec-lapi
         readOnly: true
       cache:
