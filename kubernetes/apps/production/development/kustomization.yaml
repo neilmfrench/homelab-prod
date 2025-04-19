@@ -5,12 +5,12 @@ resources:
   - ./namespace.yaml
   - ./bookstack/ks.yaml
   - ./planka/ks.yaml
-  # - ./fifa-openapi/ks.yaml
-  # - ./gitea/ks.yaml
+  - ./pocketbase/ks.yaml
   # - ./harbor/ks.yaml
-  # - ./pocketbase/ks.yaml
+  # - ./gitea/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
   # - ./bitbucket/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml
   # - ./oci-instance-creator/ks.yaml
+  # - ./fifa-openapi/ks.yaml
