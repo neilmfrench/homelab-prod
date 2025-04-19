@@ -9,7 +9,7 @@ spec:
       repository: harbor.${SECRET_DOMAIN}/homepage/homepage-astro
       tag: "1.0.3"
     imagePullSecrets:
-      - name: harbor-neilfrench-regcred
+      - name: harbor-global-ro
     env:
       POD_NAME:
         valueFrom:
