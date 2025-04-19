@@ -1,0 +1,18 @@
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: mariadb
+spec:
+  image: docker-registry1.mariadb.com/library/mariadb:11.7.2
+  rootPasswordSecretKeyRef:
+    name: shlink-mariadb-password
+    key: PASSWORD
+  username: shlink
+  passwordSecretKeyRef:
+    name: shlink-mariadb-password
+    key: PASSWORD
+  database: shlink
+  storage:
+    size: 12Gi
+    storageClassName: ceph-block

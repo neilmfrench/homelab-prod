@@ -6,7 +6,7 @@ resources:
   # - ./privatebin/ks.yaml
   - ./minio/ks.yaml
   - ./nextcloud/ks.yaml
-  # - ./shlink/ks.yaml
+  - ./shlink/ks.yaml
   # - ./shared-media/ks.yaml
   # - ./sonarr/ks.yaml
   # - ./radarr/ks.yaml
