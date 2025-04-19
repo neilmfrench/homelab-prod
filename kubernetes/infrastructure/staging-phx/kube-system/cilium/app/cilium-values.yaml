@@ -4,10 +4,6 @@ kind: HelmRelease
 metadata:
   name: cilium
 spec:
-  chart:
-    spec:
-      chart: cilium
-      version: 1.17.2
   values:
     # debug:
     #   enabled: true
