@@ -4,11 +4,11 @@ kind: Kustomization
 namespace: development
 resources:
   - ./data-pvc.yaml
-#   - ./restic-config-jobservice.sops.yaml
-#   - ./restic-config-postgresql.sops.yaml
-#   - ./restic-config-registry.sops.yaml
-#   - ./restic-config-trivy.sops.yaml
-#   - ./volsync.yaml
-#   - ../../../../base/harbor
-# patches:
-#   - path: ./harbor-values.yaml
+  #   - ./restic-config-jobservice.sops.yaml
+  #   - ./restic-config-postgresql.sops.yaml
+  #   - ./restic-config-registry.sops.yaml
+  #   - ./restic-config-trivy.sops.yaml
+  #   - ./volsync.yaml
+  - ../../../../base/harbor
+patches:
+  - path: ./harbor-values.yaml
