@@ -9,14 +9,10 @@ spec:
       type: ingress
       tls:
         enabled: true
-        certSource: secret
-        secret:
-          secretName: "harbor-tls"
-          notarySecretName: "harbor-notary-tls"
+        certSource: none
       ingress:
         hosts:
           core: harbor.${SECRET_DOMAIN}
-          notary: harbor-notary.${SECRET_DOMAIN}
         className: "traefik"
         annotations:
           external-dns/is-public: "true"
@@ -27,21 +23,24 @@ spec:
       resourcePolicy: "keep"
       persistentVolumeClaim:
         registry:
-          storageClass: "ceph-block"
-          size: 15Gi
+          existingClaim: harbor-registry-data
+          # storageClass: "ceph-block"
+          # size: 15Gi
         jobservice:
           jobLog:
-            storageClass: "ceph-block"
-            size: 1Gi
-        database:
-          storageClass: "ceph-block"
-          size: 5Gi
-        redis:
-          storageClass: "ceph-block"
-          size: 1Gi
+            existingClaim: harbor-jobservice-joblog-data
+            # storageClass: "ceph-block"
+            # size: 1Gi
+        # database:
+        #   storageClass: "ceph-block"
+        #   size: 5Gi
+        # redis:
+        #   storageClass: "ceph-block"
+        #   size: 1Gi
         trivy:
-          storageClass: "ceph-block"
-          size: 5Gi
+          existingClaim: harbor-trivy-data
+          # storageClass: "ceph-block"
+          # size: 5Gi
       imageChartStorage:
         type: filesystem
         filesystem:
@@ -49,5 +48,47 @@ spec:
     logLevel: info
     harborAdminPassword: "${SECRET_HARBOR_ADMIN_PASSWORD}"
     database:
-      internal:
+      type: external
+      external:
+        host: ""
+        port: "5432"
+        username: "harbor"
         password: "${SECRET_HARBOR_DB_PASSWORD}"
+        coreDatabase: "registry"
+        sslmode: "disable"
+      # internal:
+      #   password: "${SECRET_HARBOR_DB_PASSWORD}"
+    redis:
+      # if external Redis is used, set "type" to "external"
+      # and fill the connection information in "external" section
+      type: external
+      external:
+        # support redis, redis+sentinel
+        # addr for redis: <host_redis>:<port_redis>
+        # addr for redis+sentinel: <host_sentinel1>:<port_sentinel1>,<host_sentinel2>:<port_sentinel2>,<host_sentinel3>:<port_sentinel3>
+        addr: "192.168.0.2:6379"
+        # The name of the set of Redis instances to monitor, it must be set to support redis+sentinel
+        sentinelMasterSet: ""
+        # TLS configuration for redis connection
+        # only server-authentication is supported, mTLS for redis connection is not supported
+        # tls connection will be disable by default
+        # Once `tlsOptions.enable` set as true, tls/ssl connection will be used for redis
+        # Please set the `caBundleSecretName` in this configuration file which conatins redis server rootCA if it is self-signed.
+        # The secret must contain keys named "ca.crt" which will be injected into the trust store
+        tlsOptions:
+          enable: false
+        # The "coreDatabaseIndex" must be "0" as the library Harbor
+        # used doesn't support configuring it
+        # harborDatabaseIndex defaults to "0", but it can be configured to "6", this config is optional
+        # cacheLayerDatabaseIndex defaults to "0", but it can be configured to "7", this config is optional
+        coreDatabaseIndex: "0"
+        jobserviceDatabaseIndex: "1"
+        registryDatabaseIndex: "2"
+        trivyAdapterIndex: "5"
+        # harborDatabaseIndex: "6"
+        # cacheLayerDatabaseIndex: "7"
+        # username field can be an empty string, and it will be authenticated against the default user
+        username: ""
+        password: ""
+        # If using existingSecret, the key must be REDIS_PASSWORD
+        existingSecret: ""

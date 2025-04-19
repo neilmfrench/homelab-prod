@@ -1,0 +1,21 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql
+    major: 16
+  storage:
+    storageClass: ceph-block
+    size: 32Gi
+  bootstrap:
+    initdb:
+      database: registry
+      owner: harbor
+      secret:
+        name: harbor-postgresql-secret
