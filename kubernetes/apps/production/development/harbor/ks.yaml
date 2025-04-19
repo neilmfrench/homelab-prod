@@ -41,6 +41,9 @@ metadata:
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/production/development/harbor/app
+  dependsOn:
+    - name: cluster-apps-harbor-redis
+    - name: cluster-apps-harbor-database
   prune: true
   sourceRef:
     kind: GitRepository
