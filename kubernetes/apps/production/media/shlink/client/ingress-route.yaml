@@ -6,6 +6,7 @@ metadata:
 spec:
   entryPoints:
     - websecure
+    - websecure-int
   routes:
     - kind: Rule
       match: Host(`urls.${SECRET_DOMAIN}`)
