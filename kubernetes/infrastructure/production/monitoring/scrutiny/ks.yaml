@@ -49,6 +49,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-infrastructure-scrutiny-database
+    - name: cluster-infrastructure-scrutiny-web
   path: ./kubernetes/infrastructure/production/monitoring/scrutiny/collector
   prune: true
   sourceRef:
