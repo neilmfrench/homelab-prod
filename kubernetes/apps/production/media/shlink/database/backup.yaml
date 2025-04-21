@@ -6,17 +6,22 @@ metadata:
 spec:
   mariaDbRef:
     name: shlink-mariadb
+  schedule:
+    cron: "0 7 * * *"
+    suspend: false
+  maxRetention: 4320h # 30 days
+  compression: gzip
   storage:
     s3:
-      bucket: backups
-      prefix: mariadb
-      endpoint: minio.minio.svc.cluster.local:9000
+      bucket: hb-hb-production-mariadb-operator
+      prefix: shlink-mariadb
+      endpoint: minio.media.svc.cluster.local:9000
       region: us-east-1
       accessKeyIdSecretKeyRef:
-        name: minio
-        key: access-key-id
+        name: minio-global-rw
+        key: AWS_ACCESS_KEY_ID
       secretAccessKeySecretKeyRef:
-        name: minio
-        key: secret-access-key
+        name: minio-global-rw
+        key: AWS_SECRET_ACCESS_KEY
       tls:
         enabled: false

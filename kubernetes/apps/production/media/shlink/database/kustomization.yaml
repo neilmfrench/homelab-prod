@@ -7,4 +7,5 @@ resources:
   # - ./volsync.yaml
   - ./mariadb-secret.sops.yaml
   - ./mariadb.yaml
+  - ./backup.yaml
 namePrefix: shlink-
