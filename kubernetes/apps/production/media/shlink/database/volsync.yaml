@@ -6,7 +6,7 @@ metadata:
 spec:
   sourcePVC: data-shlink-mariadb-0
   trigger:
-    schedule: "0 7 * * *"
+    schedule: "0 */12 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 7

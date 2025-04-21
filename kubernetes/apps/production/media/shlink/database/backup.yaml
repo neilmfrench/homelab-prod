@@ -2,26 +2,26 @@
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: Backup
 metadata:
-  name: mariadb-backup
+  name: mariadb-hb-backup
 spec:
   mariaDbRef:
     name: shlink-mariadb
   schedule:
     cron: "0 7 * * *"
     suspend: false
-  maxRetention: 4320h # 30 days
+  maxRetention: 720h
   compression: gzip
   storage:
     s3:
-      bucket: hb-production-mariadb-operator
-      prefix: shlink-mariadb
+      bucket: hb-backup
+      prefix: mariadb-operator/shlink
       endpoint: minio.media.svc.cluster.local:9000
       region: us-east-1
       accessKeyIdSecretKeyRef:
-        name: minio-global-rw
+        name: hb-objstore-global-rw
         key: AWS_ACCESS_KEY_ID
       secretAccessKeySecretKeyRef:
-        name: minio-global-rw
+        name: hb-objstore-global-rw
         key: AWS_SECRET_ACCESS_KEY
       tls:
         enabled: false
