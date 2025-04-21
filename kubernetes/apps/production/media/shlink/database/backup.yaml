@@ -13,7 +13,7 @@ spec:
   compression: gzip
   storage:
     s3:
-      bucket: hb-hb-production-mariadb-operator
+      bucket: hb-production-mariadb-operator
       prefix: shlink-mariadb
       endpoint: minio.media.svc.cluster.local:9000
       region: us-east-1
