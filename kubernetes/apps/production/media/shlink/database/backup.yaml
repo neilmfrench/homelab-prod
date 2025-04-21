@@ -34,7 +34,7 @@ spec:
   mariaDbRef:
     name: shlink-mariadb
   schedule:
-    cron: "10 7 * * *"
+    cron: "15 7 * * *"
     suspend: false
   maxRetention: 168h
   compression: gzip
@@ -61,7 +61,7 @@ spec:
   mariaDbRef:
     name: shlink-mariadb
   schedule:
-    cron: "20 7 * * *"
+    cron: "30 7 * * *"
     suspend: false
   maxRetention: 168h
   compression: gzip
