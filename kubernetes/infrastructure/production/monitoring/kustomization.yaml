@@ -6,6 +6,6 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./thanos/ks.yaml
   - ./grafana/ks.yaml
-  # - ./scrutiny/ks.yaml
+  - ./scrutiny/ks.yaml
   # - ./vpa/ks.yaml
   # - ./goldilocks/ks.yaml
