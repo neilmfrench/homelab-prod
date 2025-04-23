@@ -25,6 +25,8 @@ spec:
         key: AWS_SECRET_ACCESS_KEY
       tls:
         enabled: false
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
 ---
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: Backup
@@ -52,6 +54,8 @@ spec:
         key: AWS_SECRET_ACCESS_KEY
       tls:
         enabled: true
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
 ---
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: Backup
@@ -79,3 +83,5 @@ spec:
         key: AWS_SECRET_ACCESS_KEY
       tls:
         enabled: true
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
