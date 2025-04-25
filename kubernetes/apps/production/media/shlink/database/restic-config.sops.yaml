@@ -4,7 +4,7 @@ metadata:
     name: mariadb-restic-config
 type: Opaque
 stringData:
-    RESTIC_REPOSITORY: ENC[AES256_GCM,data:Zfa2DcCU+qBmHP3eH8Mps3JltVoEQ69e0JxTQXZ+bdZBSv2CUVH0W2dlsRQyeKINrz7rF9dv77zbqmfyiMVgzwMXwMUQ8Rt2Si9KxU6y9F8VU0svfyuQ,iv:XId3CuG4NOiGbsf79M8i77En2z76RcVPpcfA4qVOmVY=,tag:ILoHfnpK3YTvsOZMDUJ35w==,type:str]
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:PiKo+X1Hcgt4XnN8DotFFlMLdNq98fzWXVgCCYG2qYKUF/i2rRenEPqS8JYg/4ePDv1xUPROrlKpZoeo0vmDYp0umhANkYMAeDBS54U=,iv:sdZu5fKg4O1GmGlbvrqkE7yBXScxILQOUIgLXP/j6mI=,tag:vrav0A9dtySvCgC71kLEWw==,type:str]
     RESTIC_PASSWORD: ENC[AES256_GCM,data:2gSmrjh37W0Q0gUg,iv:FA4WQAZWgy6BkljAg8WgIsbZpt6kzA9Ln9EBlm5GtnA=,tag:ywW/7727ooTQIwn5f65vnw==,type:str]
     AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:tdeb2pzyOaWvPpo3snQ3Jg==,iv:4MQcgs6WdcNafCP4Fp80cBPyUjrUBJR9bfeAWE+eRSY=,tag:I+uvcibgeBonF8xN+NRmKg==,type:str]
     AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Ew32cZXCGx6xxStGUQYeHoe2wBQOhho7cvenKtvht40=,iv:qfw7O5ztOIHO37/JQ69Uu7vfZHUbBXT242bM2k/ioyA=,tag:mDJeG06eXlW41pGrTyd2gw==,type:str]
@@ -23,8 +23,8 @@ sops:
             Y254M20vdy9BRDdDbWFCVTNOU0FYRzAKGdcGGVGL0KH5kXeaC9JrE1MTpawDRgnt
             46riqTXDyohEfGp5iIZy+1h2z1FyRjQO7zWRJt2/UU8D+Ihho+Lm3A==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-04-21T05:22:58Z"
-    mac: ENC[AES256_GCM,data:9GitIYOgSBILSjOuVuYhX4m/P9GZaVN6UDYCOcpJzaG+lx3kOGmXmwBXH0KqdBcYM9hCQmysy5PXKNhajW1dzEcltX/ydb4opgNAr0B+45AX7kY9tt2fs8HBMoztOevz7bHO79r7yq5CydVQWJrvyuM5GqDLMoebXcuBOIsjJYs=,iv:i6qoOiIjvrmXGh0rlGO2Jv9nrP6q4kbOC6QkNILVjXE=,tag:r8cHAASxzZdMCedCSX/Hsg==,type:str]
+    lastmodified: "2025-04-23T16:15:43Z"
+    mac: ENC[AES256_GCM,data:qslIqnAA2ZNZ8BGcEo/dl81XDk3kX1xVI5TOsN+G2Foi1wQnrXjqKEhrrbnpGg+KNvyP1ugD4cZQoXp/EbxQMZA9QTfRi8K/GVZXRfHEn30QD0NKKozeWozkRn58oGTMs7NLMQyN3GxndHK1GIha4SWZjGc+cNPMT+3sWXiB9fU=,iv:LRk5gzowkLR1FLQ3EgxJ6FupBUPUPny29/60paM92ig=,tag:zk1DbxUQzncVKIGCxDovpg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.2

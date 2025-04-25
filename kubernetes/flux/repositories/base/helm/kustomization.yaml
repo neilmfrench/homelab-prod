@@ -51,3 +51,4 @@ resources:
   - ./cloudnative-pg.yaml
   - ./mariadb-operator.yaml
   - ./moco.yaml
+  - ./crossplane.yaml
