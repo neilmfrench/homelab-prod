@@ -9,10 +9,10 @@ resources:
   - ./media
   - ./finance
   - ./development
+  - ./campsearch
   # - ./argocd
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines
   # - ./home
   # - ./magazine
-  # - ./campsearch

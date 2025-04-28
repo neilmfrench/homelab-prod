@@ -2,22 +2,23 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: campsearch-scheduler
+  name: cloudnative-pg
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
-      chart: app-template
-      version: 1.5.1
+      chart: crossplane
+      version: 0.23.2
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: crossplane
         namespace: flux-system
   maxHistory: 3
   install:
     remediation:
       retries: 3
   upgrade:
+    cleanupOnFail: false
     remediation:
       retries: 3
   uninstall:

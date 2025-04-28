@@ -2,15 +2,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: campsearch-scheduler
+  name: campsearch-server
 spec:
   values:
     image:
-      repository: harbor.${SECRET_DOMAIN}/campsearch/scheduler
+      repository: harbor.${SECRET_DOMAIN}/campsearch/server
       pullPolicy: IfNotPresent
       tag: "0.0.6"
-    imagePullSecrets:
-      - name: harbor-neilfrench-regcred
     controller:
       replicas: 1
     #   type: cronjob
