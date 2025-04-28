@@ -5,25 +5,54 @@ metadata:
   name: campsearch-server
 spec:
   values:
-    image:
-      repository: harbor.${SECRET_DOMAIN}/campsearch/server
-      pullPolicy: IfNotPresent
-      tag: "0.0.6"
-    controller:
-      replicas: 1
-    #   type: cronjob
-    #   cronjob:
-    #     concurrencyPolicy: Forbid
-    #     schedule: "*/5 * * * *"
-    #     successfulJobsHistory: 3
-    #     failedJobsHistory: 3
-    env:
-      PB_ADDR: "http://pocketbase.development.svc.cluster.local:8090"
-      PB_USERNAME: "campsite_bot"
-      REDIS_ADDR: "campsearch-redis-master:6379"
-    envFrom:
-      - secretRef:
-          name: campsearch-worker-secrets
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: harbor-global-ro
+    controllers:
+      main:
+        enabled: true
+        containers:
+          main:
+            image:
+              repository: harbor.${SECRET_DOMAIN}/campsearch/server
+              tag: "1.0.0"
+              pullPolicy: IfNotPresent
+            args: ["serve", "--http=0.0.0.0:8090"]
+            env:
+              ENVIRONMENT: production
+              LOG_LEVEL: INFO
+              REDIS_ADDRESS: campsearch-redis-master:6379
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
     service:
       main:
-        enabled: false
+        enabled: true
+        ports:
+          http:
+            enabled: true
+            port: 8090
+    ingress:
+      main:
+        enabled: true
+        className: "traefik"
+        hosts:
+          - host: &host "campsearch-pb.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: Prefix
+                service:
+                  name: main
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      data:
+        enabled: true
+        existingClaim: campsearch-server-data-data
+        globalMounts:
+          - path: /root/pb_data

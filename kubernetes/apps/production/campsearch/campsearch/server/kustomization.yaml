@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: campsearch
 resources:
   - ./data-pvc.yaml
-#   - ../../../../base/campsearch-server
-# patches:
-#   - path: ./campsearch-server-values.yaml
+  - ../../../../base/campsearch-server
+patches:
+  - path: ./campsearch-server-values.yaml
