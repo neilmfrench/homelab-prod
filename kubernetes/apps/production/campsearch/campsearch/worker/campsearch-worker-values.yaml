@@ -14,7 +14,7 @@ spec:
     controller:
       replicas: 5
     env:
-      REDIS_ADDR: "campsearch-redis-master:6379"
+      REDIS_ADDRESS: "campsearch-redis-master:6379"
     service:
       main:
         enabled: false
