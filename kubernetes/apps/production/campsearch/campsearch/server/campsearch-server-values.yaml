@@ -53,6 +53,6 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: campsearch-server-data-data
+        existingClaim: campsearch-server-data
         globalMounts:
           - path: /root/pb_data
