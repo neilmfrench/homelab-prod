@@ -5,10 +5,30 @@ metadata:
   name: redis
 spec:
   values:
-    architecture: standalone
+    architecture: replication
     auth:
       enabled: false
     master:
+      replicaCount: 1
       persistence:
+        size: 8Gi
         storageClass: ceph-block
-        size: 12Gi
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+    replica:
+      replicaCount: 2
+      persistence:
+        size: 8Gi
+        storageClass: ceph-block
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: 100m
+        limits:
+          memory: 512Mi
+    metrics:
+      enabled: false
