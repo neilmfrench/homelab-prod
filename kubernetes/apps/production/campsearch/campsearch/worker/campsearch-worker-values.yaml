@@ -8,13 +8,23 @@ spec:
     image:
       repository: harbor.${SECRET_DOMAIN}/campsearch/worker
       pullPolicy: IfNotPresent
-      tag: "1.0.0"
+      tag: "1.0.1"
     imagePullSecrets:
       - name: harbor-global-ro
     controller:
       replicas: 5
     env:
+      ENVIRONMENT: production
+      LOG_LEVEL: INFO
       REDIS_ADDRESS: "campsearch-redis-master:6379"
+      POCKETBASE_ADDRESS: "http://campsearch-server:8090"
+      POD_NAME:
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+    envFrom:
+      - secretRef:
+          name: campsearch-worker-secrets
     service:
       main:
         enabled: false

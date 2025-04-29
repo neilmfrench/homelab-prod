@@ -15,7 +15,7 @@ spec:
           main:
             image:
               repository: harbor.${SECRET_DOMAIN}/campsearch/server
-              tag: "1.0.0"
+              tag: "1.0.1"
               pullPolicy: IfNotPresent
             args: ["serve", "--http=0.0.0.0:8090"]
             env:
