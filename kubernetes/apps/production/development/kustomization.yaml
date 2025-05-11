@@ -7,7 +7,7 @@ resources:
   - ./planka/ks.yaml
   - ./pocketbase/ks.yaml
   - ./harbor/ks.yaml
-  # - ./gitea/ks.yaml
+  - ./gitea/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
   # - ./bitbucket/ks.yaml
   # - ./cluster-status-api/ks.yaml

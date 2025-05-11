@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: development
 resources:
   - ./data-pvc.yaml
-  - ./restic-config.sops.yaml
-  - ./volsync.yaml
-  - ../../../../base/gitea
-patches:
-  - path: ./gitea-values.yaml
+#   - ./restic-config.sops.yaml
+#   - ./volsync.yaml
+#   - ../../../../base/gitea
+# patches:
+#   - path: ./gitea-values.yaml
