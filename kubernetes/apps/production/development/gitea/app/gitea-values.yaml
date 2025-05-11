@@ -23,11 +23,11 @@ spec:
           useCustomUrls: false
       config:
         APP_NAME: "Homelab Gitea"
-        webhook:
-          ALLOWED_HOST_LIST: "10.43.0.0/16"
+        # webhook:
+        #   ALLOWED_HOST_LIST: "10.43.0.0/16"
         database:
           DB_TYPE: postgres
-          HOST: gitea-postgresql:5432
+          HOST: gitea-postgresql-rw:5432
           NAME: gitea
           USER: gitea
           PASSWD: ${SECRET_GITEA_POSTGRESQL_PASSWORD}
