@@ -6,6 +6,6 @@ resources:
   - ./data-pvc.yaml
 #   - ./restic-config.sops.yaml
 #   - ./volsync.yaml
-#   - ../../../../base/gitea
-# patches:
-#   - path: ./gitea-values.yaml
+  - ../../../../base/gitea
+patches:
+  - path: ./gitea-values.yaml
