@@ -49,15 +49,15 @@ spec:
           DISABLE_REGISTRATION: true
           REQUIRE_SIGNIN_VIEW: true
         session:
-          PROVIDER: redis-cluster
-          PROVIDER_CONFIG: redis+cluster://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
+          PROVIDER: redis
+          PROVIDER_CONFIG: redis://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
         cache:
           ENABLED: true
-          ADAPTER: redis-cluster
-          HOST: redis+cluster://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
+          ADAPTER: redis
+          HOST: redis://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
         queue:
           TYPE: redis
-          CONN_STR: redis+cluster://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
+          CONN_STR: redis://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
     redis-cluster:
       enabled: false
     valkey-cluster:
