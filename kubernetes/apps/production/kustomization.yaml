@@ -10,6 +10,7 @@ resources:
   - ./finance
   - ./development
   - ./campsearch
+  - ./crossplane-system
   # - ./argocd
   # - ./networking
   # - ./tekton-operator
