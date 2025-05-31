@@ -8,8 +8,8 @@ resources:
   - ./pocketbase/ks.yaml
   - ./harbor/ks.yaml
   - ./gitea/ks.yaml
+  - ./bitbucket/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
-  # - ./bitbucket/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml
   # - ./oci-instance-creator/ks.yaml
