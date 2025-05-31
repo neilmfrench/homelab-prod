@@ -4,12 +4,8 @@ kind: Secret
 metadata:
     name: bitbucket-license
 stringData:
-    license-key: ENC[AES256_GCM,data:NB0YC/Nv8j5IbOKU9pXFtp5Vf/oETwJTLDsLK3KQcTYwyhg0jLurl3x8zAYRSTHEGeP3J2tN9uiK6ybSFr0DW5DIut8WO1zq3KVW1P7wb1Qp15LdmrpvBZrh2sQKXFieda5xlNWCczPaS3lSAVn5jB4SB0u0Z1naZ4TMGEDa1GLenGRaw2ZpmStMmnKtiAiQ/QXxDHZhr4IFoDC/y65CaH35E5zLzyz0eZhvB6Rbo/wi8wRpVnwOpYrURgInQBnDJhaj+kIgQmZ/J2u8Z2g4g7xAz5F/gxoOUna09qn52LD5iAQbTG+pt3RIIoVP2jT2qx7ZMlTBfT0zC02XqDIbZoLKZMukR7CQf9Awl60qbsue87slP6RgPsftz+9vQIQLpR9FN/9DXX/dmvO1/xD13MApkwb3nC2vTZww7ZauZ17NlRuL5rOOXCr5HOgqsgL7sFtVO/8DSaDp2i5W8ZgqhKq8Ap3bUQNXcfn30qz7AuzOaJPB101B3b3umOpi1s0zAEmZMAEdwVrNFPQTNVkUvhKvl4y2S4niq2Q/YRJm4VmdkQT262TLjRoOsrTRBPXPMbbIDBxTlPzHFrQQu+asvXMkSsMu0F6i9S/evGGR61o0XMw4lGJ8cJLAnErjorzJdLg2s/VRAunE4UsoG7M9bLLbimy+yW81e0UY41RIC4BoT4i2vqarAhg7MotAuI7pC+v0/taJTAZ6Cps+H4uRgAHrcwQDc38JmAGhZ80czaFIMOd6H7XMMYeA0wqXfrinajuFtpoLeQ+7fIiqqd3OWJ6sT+nJCzZgbAH3IOg7kaNv/eOnkqUyK04=,iv:IPtRtibUGafigHqpp3vv9vJeHkWiBitI2e2MGsQ05Ec=,tag:VlQ5v12wwt/VsIFb7uUPAA==,type:str]
+    license-key: ENC[AES256_GCM,data:wSlJ4ZuRAEGGXTtebptfb8l/ZUaf8KipjnPjWPIVxGlec1sBJJrU/429/l+121GOaDdfY0YlLcacS/tHAVK79ZFpTR3/JXWtbQXVjBayq+efB8Ee7fkXRVT9m6C1/aT+r3ZPpFA4fULe3WXVukFms6bhTj3qCpAwacKxXUBQUxLTs5c0Fw2MisX6XNvx80pP+qozXxCTgEQw3ibLN878b6q5mXquJJaRn55t1C3JLYg4982tV54Ux1wyhtPB5k7ZUpjejDSyp0TzuDwyTdqtx7io5BNiZ3P/cVDmGqBHCAGWf/zyBZdvZT91JREjSSWkjXCk8PPVJYNkrZRktlp93aaCedvlHnl9vcL1/SAbOyslbfnORHV7dIvZyUKBbUOySatagApyBVed2DR8R/YnL7nPecZJZUqk8hXKracjyjZqL6WnfLOufRpGl1raDDchVEi7y62xLFXhuVB4itl/16DXp4dacuk7cNABETMeBrxzZoZSdsBzBNpzeuggr1bU9R1ctDVUKIboVH2vwlN4I5ae/En6mwEK80UAABYTfNd1oTkNku/cJYj/rvayxVNBeTBtpIbNYsZOL1G++hBZI0Z64cZ9iOSaib3UX/SGHC+H8eWzfD5u7JT6wglfp7cFPkR/dQJZO1vGfrBhiMCVVRlEoQ3n28W2bJcLtyX0SknFWpQW4KZZj4I9UwB/K0ClkDRfk8gjgQ4LBXgtNdeaeLeZAMJYw4RZW/P9bDW2r6QxBrt1dwfMxGitwnZ571DIApZZhycx2xa6qX1w54x5VU/hnESa/xsV46HeujMMgEBccdBoACngFEu8kABSse8Q7pYIw7KlleXXDfumecE=,iv:y09Yp45JKz/b8aPhuOR3FKPaOPedxQV+Rp/10fwJbUA=,tag:x/3KLHijO6LECGXUCinboQ==,type:str]
 sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
     age:
         - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
           enc: |
@@ -20,8 +16,7 @@ sops:
             Q2hlWWVTakhjcDFWV0tYMExBMkRCMTQKeUOGc0Qnfgm2pxsO9mV2lArjauJrNzsL
             kANvTeE8Sjs/XNRQ/EB+Sp6Wzc9rrU+gTCce1nbh9Uk8y+BMVdEBlg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-12-19T21:43:19Z"
-    mac: ENC[AES256_GCM,data:Bfk2lDnq6WlMKy9+CWI7sX4n1szw/17bumolhErzhruHqM+kukwYiBKi2zOxzlf7O37pDk25DwQ+HTUTy6W6+eLKElsCXyyg5YxH+EpywlPG33F8j2rt9wpw1UF7JP15WlkIrq2Q8vcEUTE5p6ym5iyNMO2Eephi3nWwlaV/xDI=,iv:FpjKhRiyl7Lhgz39RxQhRXhn0BqoC7n+m5PyvnqpuhY=,tag:JEgN+YQuU0+WPeh4Io2HfA==,type:str]
-    pgp: []
+    lastmodified: "2025-05-31T18:19:17Z"
+    mac: ENC[AES256_GCM,data:MRk0bJg1TvQXZTVctfYmJUruPW+sV/26HmKAlNaNXKUEKI6VJ354D7mPDnaHo2JGwVKLePI/nQU13X51Vs9ZlynPsL/dIRuiHQtVav4Vm4AE67h2vI9eZ4R+YVLWHkee/QO38ogFDkVm76kIge3kv1avsLH3OrtJ62eBETGjR54=,iv:C/2ERIWc5wqdVCgeyioVT5mxzjDItha2A+r7urj3r6A=,tag:LK94z7XOAPSEg73yiianHA==,type:str]
     encrypted_regex: ^(data|stringData)$
-    version: 3.7.3
+    version: 3.10.2
