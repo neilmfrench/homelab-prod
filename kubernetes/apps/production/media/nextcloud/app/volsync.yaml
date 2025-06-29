@@ -6,7 +6,7 @@ metadata:
 spec:
   sourcePVC: nextcloud-data
   trigger:
-    schedule: "0 7 * * *"
+    schedule: "35 7 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 7
