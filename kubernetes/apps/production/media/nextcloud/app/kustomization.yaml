@@ -4,7 +4,9 @@ kind: Kustomization
 namespace: media
 resources:
   - ./data-pvc.yaml
-  - ./restic-config.sops.yaml
+  - ./restic-config-hb.sops.yaml
+  - ./restic-config-phx.sops.yaml
+  - ./restic-config-sj.sops.yaml
   - ./volsync.yaml
   - ../../../../base/nextcloud
 patches:

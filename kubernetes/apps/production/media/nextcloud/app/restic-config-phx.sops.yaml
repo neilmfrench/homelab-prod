@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: nextcloud-data-phx-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:FNr/7YSYZF07gmQiL1SspcFyX2EDjkHly2YNhgb0l9tlNes6ZyQAJetJqmOgof+Z4Pm2jpzpAhgYXgyHUaPARLpzC/TF8aGAyGhYwJLLXlhyjAv5oJMKJKs1v6+c5qbBU4UNsNKs6Wm7CrYQjvjRtB70DVv1NVTEB1jIaqrj71k=,iv:s9uUX1GCn+PT3KDk+xoAsGfUIh2xnow2nOEpHj6gyCU=,tag:90KTI/KebQBRQhVaz+aWLA==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:e5GUoWEv5uxe9SxCjVk=,iv:yc9xu33DVkjYAyyQev9v82+5fFwGw3apZOih3apBd+Q=,tag:MiUfK2XldBH7IBfxhZL/Jg==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:GEpgrNCeoWpsUHzjY3SQ0UxmmRTCYA7gFMcOUjnDPtRTTZkMBwrpiw==,iv:CDDLEvgGgKikrJd5vNTi6pYdn6gtR8l0VdPe+M42/Y0=,tag:wCGCE1kqthiC3kwYYO+qyw==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Dto9zZir+l/3xSrLp+Z6TkPFjmcLh1jDBaAIqiLs9/0LOYKcYWrfilZnSJ0=,iv:f/stiyDJ7IvAftik/51Kr0n5Pg/ernYmbWzB+Q15ZfE=,tag:2KqKSDPdtwIGanIvl3naBQ==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXYnRiWjBVeUhpYmFjNnRa
+            T1V1cG80cVRaaisrVGx4WGxpclJRSFZBaUVzCmJrQ3F4WHpKN0xCQ0pDRmFyc0NU
+            enJYM2RJcDB2Nk4xZGpyTm5wbHliK0kKLS0tIHhpNldnVW50bmJTak9yS1NGTjFv
+            Y254M20vdy9BRDdDbWFCVTNOU0FYRzAKGdcGGVGL0KH5kXeaC9JrE1MTpawDRgnt
+            46riqTXDyohEfGp5iIZy+1h2z1FyRjQO7zWRJt2/UU8D+Ihho+Lm3A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-06-30T05:34:42Z"
+    mac: ENC[AES256_GCM,data:N8YWitaXMiV2h6Qoyk2fF4oCps8S2DuAr0pvoaxlNPOrfMkgDEjnd4K1x8N9gtizD/u4UOfBpDKi2igIf7NdxKSDhb0ke9FncQs/fhjDPjyl4p70bPo/qlvjq14KEN8Q/evUN7tnMA02VRN/8fTPvO8aGAXSJCzxJaNNH4fnYls=,iv:uE6oA6uOyyQp8A4t0ir+7v1DQ8Og7K8tZrvRqIUKgBc=,tag:LgYiBANzxNi1GmyFpgHoag==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
