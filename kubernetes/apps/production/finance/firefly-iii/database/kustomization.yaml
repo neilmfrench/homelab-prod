@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: finance
 resources:
   - ./mariadb-secret.sops.yaml
-  - ./mariadb.yaml
+  - ./mariadb.yaml 
+  - ./backup.yaml
   - ./restic-config.sops.yaml
   - ./oci-phx-restic-config.sops.yaml
   - ./volsync.yaml
