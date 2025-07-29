@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: blog-data-phx-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:IFYzDRyi8cHURhzPJKHDWqsnBS++vW9qL7wxpM86+YeG2WTi1xh4C1qJ53evDNjDzMfieYAGFI8z+Twcpsduj4jb+QtAvE5zFCZw7BnH+PDdeNhVC7VmkPjYi7CoMFI3A5fk+XKyHi6YtEWTfMYHLrxMbpgSssSf4W6O,iv:Bg0vT40RjumRVHmL0EIkU7CfIurckyP+IRypwJqw/iw=,tag:rgJ+p+ZL6nH1lvmoI3DdQA==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:7DyKPWt/5H/dr2Ni,iv:TAjrwuMZ14c+ZC1+s199XXkbQY4ZpPDZ6vLp3k6HU/w=,tag:LdOSAT+qAiePI7edy85HnA==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:GEpgrNCeoWpsUHzjY3SQ0UxmmRTCYA7gFMcOUjnDPtRTTZkMBwrpiw==,iv:CDDLEvgGgKikrJd5vNTi6pYdn6gtR8l0VdPe+M42/Y0=,tag:wCGCE1kqthiC3kwYYO+qyw==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Dto9zZir+l/3xSrLp+Z6TkPFjmcLh1jDBaAIqiLs9/0LOYKcYWrfilZnSJ0=,iv:f/stiyDJ7IvAftik/51Kr0n5Pg/ernYmbWzB+Q15ZfE=,tag:2KqKSDPdtwIGanIvl3naBQ==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXYnRiWjBVeUhpYmFjNnRa
+            T1V1cG80cVRaaisrVGx4WGxpclJRSFZBaUVzCmJrQ3F4WHpKN0xCQ0pDRmFyc0NU
+            enJYM2RJcDB2Nk4xZGpyTm5wbHliK0kKLS0tIHhpNldnVW50bmJTak9yS1NGTjFv
+            Y254M20vdy9BRDdDbWFCVTNOU0FYRzAKGdcGGVGL0KH5kXeaC9JrE1MTpawDRgnt
+            46riqTXDyohEfGp5iIZy+1h2z1FyRjQO7zWRJt2/UU8D+Ihho+Lm3A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-07-29T04:59:53Z"
+    mac: ENC[AES256_GCM,data:Dm0rlSLRaRuDcVdzJGc18mBnWJjDFbyVdzF0EbZ9HkhyHv9XluzhKLnrmFdjlzjjG/ZQklBJs30NHbsUS0NP3VzekGqZgc/YLSQru39RezmAiPHqMiz8O2MTS2YYAjxcAvJ0OG6L0QBJxMXk3igPftF3J2nIlQAVtE/cwPmSCoI=,iv:2kzlj7pcCZNukToSZHxGM7FTQaQd3bDIhv6bO4ZsJ3A=,tag:6GMWdgMyn3hcIXWsKKmTeQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
