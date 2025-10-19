@@ -271,6 +271,8 @@ spec:
           registry: quay.io
           repository: thanos/thanos
           tag: v0.38.0
+        ruleNamespaceSelector:
+          any: true
         alertmanagersConfig:
           secret:
             alertmanagers:
