@@ -138,6 +138,11 @@ spec:
           gnetId: 14837
           revision: 2
           datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/21356-volsync-dashboard/
+        volsync:
+          gnetId: 21356
+          revision: 3
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13502
         # minio:
         #   gnetId: 13502
