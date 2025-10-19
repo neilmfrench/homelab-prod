@@ -142,7 +142,9 @@ spec:
         volsync:
           gnetId: 21356
           revision: 3
-          datasource: Prometheus
+          datasource:
+            - name: DS_PROMETHEUS
+              value: '${datasource}'
         # Ref: https://grafana.com/grafana/dashboards/13502
         # minio:
         #   gnetId: 13502
