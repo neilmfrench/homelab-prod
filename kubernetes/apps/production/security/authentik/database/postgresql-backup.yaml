@@ -1,0 +1,14 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgresql-vsc-backup
+spec:
+  schedule: "0 7 * * *"
+  backupOwnerReference: self
+  immediate: true
+  cluster:
+    name: authentik-postgresql
+  method: volumeSnapshot
+  pluginConfiguration:
+    className: csi-rbdplugin-snapclass

@@ -5,4 +5,5 @@ namespace: security
 resources:
   - ./postgresql-secret.sops.yaml
   - ./postgresql.yaml
+  - ./postgresql-backup.yaml
 namePrefix: authentik-
