@@ -10,5 +10,3 @@ spec:
   cluster:
     name: authentik-postgresql
   method: volumeSnapshot
-  pluginConfiguration:
-    className: csi-rbdplugin-snapclass
