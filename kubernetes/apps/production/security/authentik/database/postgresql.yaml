@@ -27,5 +27,7 @@ spec:
     topologyKey: kubernetes.io/hostname
   backup:
     target: "prefer-standby"
+    # barmanObjectStore:
+    #   TODO: TODO
     volumeSnapshot:
       className: csi-rbdplugin-snapclass
