@@ -25,3 +25,7 @@ spec:
       number: 1
   affinity:
     topologyKey: kubernetes.io/hostname
+  backup:
+    target: "prefer-standby"
+    volumeSnapshot:
+      className: csi-rbdplugin-snapclass
