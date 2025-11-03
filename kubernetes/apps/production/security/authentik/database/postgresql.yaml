@@ -4,7 +4,7 @@ kind: Cluster
 metadata:
   name: postgresql
 spec:
-  instances: 1
+  instances: 3
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
@@ -19,3 +19,7 @@ spec:
       owner: authentik
       secret:
         name: authentik-postgresql-secret
+  postgresql:
+    synchronous:
+      method: any
+      number: 1
