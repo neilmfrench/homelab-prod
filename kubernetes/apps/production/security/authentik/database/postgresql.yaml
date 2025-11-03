@@ -23,3 +23,5 @@ spec:
     synchronous:
       method: any
       number: 1
+  affinity:
+    topologyKey: kubernetes.io/hostname
