@@ -4,7 +4,7 @@ kind: ScheduledBackup
 metadata:
   name: postgresql-vsc-backup
 spec:
-  schedule: "0 0 7 * * *"
+  schedule: "0 0 7 * * 0"
   backupOwnerReference: self
   immediate: true
   cluster:
