@@ -22,7 +22,6 @@ metadata:
 spec:
   path: ./kubernetes/apps/production/security/authentik/app
   dependsOn:
-    - name: cluster-apps-authentik-redis
     - name: cluster-apps-authentik-database
   prune: true
   sourceRef:
