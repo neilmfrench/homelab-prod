@@ -11,6 +11,7 @@ resources:
   - ./development
   - ./campsearch
   - ./crossplane-system
+  - ./games
   # - ./argocd
   # - ./networking
   # - ./tekton-operator

@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minecraft
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: minecraft
+      version: 5.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: minecraft
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
