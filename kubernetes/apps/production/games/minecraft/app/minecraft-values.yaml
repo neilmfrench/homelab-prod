@@ -298,7 +298,7 @@ spec:
       overrideServerProperties: default
       # DEPRECATED: use top-level rconServiceAnnotations instead
       serviceAnnotations: {}
-      serviceType: ClusterIP
+      serviceType: LoadBalancer
       ## Set the port used if the serviceType is NodePort
       nodePort:
       # Set the external port of the service, usefull when using the LoadBalancer service type
