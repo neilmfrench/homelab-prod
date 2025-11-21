@@ -52,3 +52,4 @@ resources:
   - ./mariadb-operator.yaml
   - ./moco.yaml
   - ./crossplane.yaml
+  - ./minecraft.yaml

@@ -290,3 +290,14 @@ patches:
       kind: HelmRepository
       name: crossplane
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: minecraft
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: minecraft
+      namespace: flux-system
