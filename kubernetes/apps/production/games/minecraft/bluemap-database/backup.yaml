@@ -1,0 +1,87 @@
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Backup
+metadata:
+  name: mariadb-hb-backup
+spec:
+  mariaDbRef:
+    name: firefly-iii-mariadb
+  schedule:
+    cron: "10 7 * * *"
+    suspend: false
+  maxRetention: 720h
+  compression: gzip
+  storage:
+    s3:
+      bucket: hb-backup
+      prefix: mariadb-operator/firefly-iii
+      endpoint: minio.media.svc.cluster.local:9000
+      region: us-east-1
+      accessKeyIdSecretKeyRef:
+        name: hb-objstore-global-rw
+        key: AWS_ACCESS_KEY_ID
+      secretAccessKeySecretKeyRef:
+        name: hb-objstore-global-rw
+        key: AWS_SECRET_ACCESS_KEY
+      tls:
+        enabled: false
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Backup
+metadata:
+  name: mariadb-phx-backup
+spec:
+  mariaDbRef:
+    name: firefly-iii-mariadb
+  schedule:
+    cron: "15 7 * * *"
+    suspend: false
+  maxRetention: 168h
+  compression: gzip
+  storage:
+    s3:
+      bucket: hb-backup
+      prefix: mariadb-operator/firefly-iii
+      endpoint: objstore-axyzurwztn5h.private.compat.objectstorage.us-phoenix-1.oci.customer-oci.com
+      region: us-east-1
+      accessKeyIdSecretKeyRef:
+        name: phx-objstore-global-rw
+        key: AWS_ACCESS_KEY_ID
+      secretAccessKeySecretKeyRef:
+        name: phx-objstore-global-rw
+        key: AWS_SECRET_ACCESS_KEY
+      tls:
+        enabled: true
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: Backup
+metadata:
+  name: mariadb-sj-backup
+spec:
+  mariaDbRef:
+    name: firefly-iii-mariadb
+  schedule:
+    cron: "20 7 * * *"
+    suspend: false
+  maxRetention: 168h
+  compression: gzip
+  storage:
+    s3:
+      bucket: hb-backup
+      prefix: mariadb-operator/firefly-iii
+      endpoint: objstore-axvrsr22ymqo.private.compat.objectstorage.us-sanjose-1.oci.customer-oci.com
+      region: us-east-1
+      accessKeyIdSecretKeyRef:
+        name: sj-objstore-global-rw
+        key: AWS_ACCESS_KEY_ID
+      secretAccessKeySecretKeyRef:
+        name: sj-objstore-global-rw
+        key: AWS_SECRET_ACCESS_KEY
+      tls:
+        enabled: true
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3

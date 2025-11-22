@@ -2,6 +2,21 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: cluster-apps-minecraft-bluemap-database
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/production/games/minecraft/bluemap-database
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: cluster-apps-minecraft
   namespace: flux-system
 spec:
