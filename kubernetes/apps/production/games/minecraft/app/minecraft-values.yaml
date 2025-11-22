@@ -80,7 +80,7 @@ spec:
     readinessProbe:
       command:
         - mc-health
-      initialDelaySeconds: 600
+      initialDelaySeconds: 60
       periodSeconds: 5
       failureThreshold: 20
       successThreshold: 1
