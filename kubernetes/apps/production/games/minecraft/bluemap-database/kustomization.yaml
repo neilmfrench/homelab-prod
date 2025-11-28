@@ -5,8 +5,5 @@ namespace: games
 resources:
   - ./mariadb-secret.sops.yaml
   - ./mariadb.yaml 
-  # - ./backup.yaml
-  # - ./restic-config.sops.yaml
-  # - ./oci-phx-restic-config.sops.yaml
-  # - ./volsync.yaml
+  - ./backup.yaml
 namePrefix: bluemap-
