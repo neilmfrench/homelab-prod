@@ -3,6 +3,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: games
 resources:
+  - ./restic-config-hb.sops.yaml
+  - ./restic-config-phx.sops.yaml
+  - ./restic-config-sj.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/minecraft
 patches:
   - path: ./minecraft-values.yaml

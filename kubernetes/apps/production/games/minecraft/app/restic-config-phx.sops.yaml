@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: minecraft-data-phx-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:7DR2HP2bqJlXmAOlCcCyY1XCr3x/WjHkER+OqrRPtqnhkWeq97KbuNt6LW/nEbrMWKrZFix85Rj6o22gc/IzqULw2BU06v6lGJIoz0Tdk1h1N9f6fMUSeujUsFwHJegO8mUX5oIBOmh80B7lGpqTUI0/Oyx8phHktuDCzF+kSeM=,iv:S31wIInwqExTxCkX3bWYJ2AQNtvfaZzy9vJM1TzDUto=,tag:dXrxZbFUqWVdlYkzHFkJ+g==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:uM6RYgiekF/wFoqzkAw=,iv:CNpe41bNqrtvClCLfqRx9ubA8EBk21g+0MwSkOEoZB4=,tag:dH9FmGdS2SEn9+U5B/9lOw==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:GEpgrNCeoWpsUHzjY3SQ0UxmmRTCYA7gFMcOUjnDPtRTTZkMBwrpiw==,iv:CDDLEvgGgKikrJd5vNTi6pYdn6gtR8l0VdPe+M42/Y0=,tag:wCGCE1kqthiC3kwYYO+qyw==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Dto9zZir+l/3xSrLp+Z6TkPFjmcLh1jDBaAIqiLs9/0LOYKcYWrfilZnSJ0=,iv:f/stiyDJ7IvAftik/51Kr0n5Pg/ernYmbWzB+Q15ZfE=,tag:2KqKSDPdtwIGanIvl3naBQ==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXYnRiWjBVeUhpYmFjNnRa
+            T1V1cG80cVRaaisrVGx4WGxpclJRSFZBaUVzCmJrQ3F4WHpKN0xCQ0pDRmFyc0NU
+            enJYM2RJcDB2Nk4xZGpyTm5wbHliK0kKLS0tIHhpNldnVW50bmJTak9yS1NGTjFv
+            Y254M20vdy9BRDdDbWFCVTNOU0FYRzAKGdcGGVGL0KH5kXeaC9JrE1MTpawDRgnt
+            46riqTXDyohEfGp5iIZy+1h2z1FyRjQO7zWRJt2/UU8D+Ihho+Lm3A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-11-28T18:21:13Z"
+    mac: ENC[AES256_GCM,data:4PrRL2VySymLoGhY4iFWiKEBAQJUGHUnrfJLWAMdJ6AWAd3eqv2YCei/AcF2GZRLtHgQNdrmmlh2nyJST8VI/7+Pzty1MixeXk3ZYnARl+aCT94HFh6yxzEZ2Wp4E1gUkUbHzXkg5DFzex4Hc8/+uWHq2VpRu0ZrWfisr+u0voU=,iv:VkMVxRAqt0qOlFYgp5crRQofansYnpRq1Ok2Sn5RluY=,tag:NodGPBeaBLeoTDPPFHooQg==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
