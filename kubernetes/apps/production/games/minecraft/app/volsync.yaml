@@ -28,6 +28,7 @@ spec:
   trigger:
     schedule: "40 7 * * *"
   restic:
+    unlock: "unlock-11-28-2025"
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: minecraft-data-phx-restic-config
@@ -48,6 +49,7 @@ spec:
   trigger:
     schedule: "45 7 * * *"
   restic:
+    unlock: "unlock-11-28-2025"
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: minecraft-data-sj-restic-config
