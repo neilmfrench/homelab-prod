@@ -12,6 +12,7 @@ resources:
   - ./campsearch
   - ./crossplane-system
   - ./games
+  - ./passport
   # - ./argocd
   # - ./networking
   # - ./tekton-operator
