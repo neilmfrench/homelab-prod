@@ -1,0 +1,27 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: oauth2-proxy
+spec:
+  values:
+    config:
+      clientID: "${SECRET_PASSPORT_OAUTH2_CLIENT_ID}"
+      clientSecret: "${SECRET_PASSPORT_OAUTH2_CLIENT_SECRET}"
+      cookieSecret: "${SECRET_PASSPORT_COOKIE_SECRET}"
+      configFile: |-
+        email_domains = [ "*" ]
+        upstreams = [ "http://passport-frontend.passport.svc.cluster.local:3000" ]
+        pass_access_token = true
+        pass_authorization_header = true
+        cookie_secure = false
+        oidc_issuer_url = "https://id.${SECRET_DOMAIN}/application/o/passport/"
+        scope = "openid profile groups email"
+    ingress:  
+      enabled: true
+      className: traefik
+      path: /
+      hosts:
+        - "passport.${SECRET_DOMAIN}"
+    sessionStorage:
+      type: cookie
