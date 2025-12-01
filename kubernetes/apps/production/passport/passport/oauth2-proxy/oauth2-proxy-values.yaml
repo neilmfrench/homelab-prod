@@ -18,7 +18,7 @@ spec:
         pass_access_token = true
         pass_authorization_header = true
         cookie_secure = false
-        oidc_issuer_url = "https://id.${SECRET_DOMAIN}/application/o/passport"
+        oidc_issuer_url = "https://id.${SECRET_DOMAIN}/application/o/passport/"
         scope = "openid profile groups email"
     ingress:  
       enabled: true
