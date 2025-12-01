@@ -334,3 +334,14 @@ patches:
       kind: HelmRepository
       name: minecraft
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: oauth2-proxy
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: oauth2-proxy
+      namespace: flux-system
