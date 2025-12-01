@@ -12,6 +12,7 @@ spec:
       configFile: |-
         email_domains = [ "*" ]
         upstreams = [ "http://passport-frontend.passport.svc.cluster.local:3000" ]
+        oidc_jwt_algorithms = [ "RS256" ]
         provider = "oidc"
         provider_display_name = "OpenID Connect"
         redirect_url = "https://passport.${SECRET_DOMAIN}/oauth2/callback"
