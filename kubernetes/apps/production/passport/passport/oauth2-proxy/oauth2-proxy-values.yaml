@@ -19,7 +19,7 @@ spec:
         pass_authorization_header = true
         cookie_secure = false
         oidc_issuer_url = "https://id.${SECRET_DOMAIN}/application/o/passport/"
-        scope = "openid profile groups email"
+        scope = "openid profile email"
     ingress:  
       enabled: true
       className: traefik
