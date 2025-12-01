@@ -11,7 +11,7 @@ spec:
       cookieSecret: "${SECRET_PASSPORT_COOKIE_SECRET}"
       configFile: |-
         email_domains = [ "*" ]
-        upstreams = [ "http://passport-frontend.passport.svc.cluster.local:3000" ]
+        upstreams = [ "http://passport-portal .passport.svc.cluster.local:3000" ]
         provider = "oidc"
         insecure_oidc_allow_unverified_email = true
         provider_display_name = "OpenID Connect"
