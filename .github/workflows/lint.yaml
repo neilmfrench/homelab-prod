@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: MegaLinter
-        uses: oxsecurity/megalinter@e08c2b05e3dbc40af4c23f41172ef1e068a7d651 # v8.8.0
+        uses: oxsecurity/megalinter@55a59b24a441e0e1943080d4a512d827710d4a9d # v9.2.0
         env:
           PRINT_ALPACA: false
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
