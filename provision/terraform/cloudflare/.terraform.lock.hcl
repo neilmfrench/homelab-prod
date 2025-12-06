@@ -23,26 +23,26 @@ provider "registry.terraform.io/carlpett/sops" {
 }
 
 provider "registry.terraform.io/cloudflare/cloudflare" {
-  version     = "5.3.0"
-  constraints = "5.3.0"
+  version     = "5.14.0"
+  constraints = "5.14.0"
   hashes = [
-    "h1:0+Cd0m7VaJVvrGmrf1ZJwHs/YgdIcks1PVMYadrElXc=",
-    "h1:ASK1oT+wl2MDATPNL3PVr76A1QEEqwJPI6n8TGHHcF4=",
-    "h1:AgT/tF7e/kFzVpsBEdAp1yxR2lMCHARm094RG57TVLg=",
-    "h1:CDIOBCvQ+1uhDGRSG6OM3kB0ZorvRtBw1a4etN+3IPc=",
-    "h1:FAQS7p1dH8ux8oYpXv0/ywLPU01ngB8f6fjz+3eVcOc=",
-    "h1:JInoYqg0b/qM/wgo5fu6eb+jqw9t+tnW3O5WPnOMdsc=",
-    "h1:TEXKKaRkcSnbidtu+HemZWPznJCetYNTpAvZ5vUbIZ0=",
-    "h1:YCX5pUsJIfjUsO2M+P1FGKTJjVEd9gTi7pD3jTXklDs=",
-    "zh:2f7b526dc7bdea594214b7428bf02a80643a0b53258d4981c747dae6dcfe2b57",
-    "zh:b96462bf725e12d7e497f2166948aa7cce864a399b8625a791137eef63eb6b24",
-    "zh:bd77b9b3ab4470e410a1c055cff279db44c8b7764721d9cbb8f1c0297ababa67",
-    "zh:c475fa28557f752333bd025f61acebc9bad36277cdc7ede5f343d07292a0af77",
-    "zh:cce185d33078085babc3d31d6e6d49510f262a1c19700bfd629e41c36a89579a",
-    "zh:d09ac7832c45c47d16400a59359a2063d40fd3ea9d85c04481619d587941d01d",
-    "zh:eabf86f677a54b9a668ea6940d35f3b9a985450857e55ce5082fac34ec4850fa",
+    "h1:3jPvvMTyL3MK9/TNC3P9gneO/49+w+0R6ZC2strHYEQ=",
+    "h1:5rwgZxUA7qCU4HWcE7VUE5hPqrAH1Bk9Rr13qEeR1KY=",
+    "h1:9P4hI5ZCaQg7r6sWI2ym/emBL0PoqwRIH2lkS8M0utI=",
+    "h1:K1BwBdxNZKlDWzcLny+JJ5hJSfVHQQGLhLGDFiwB21s=",
+    "h1:TLkPOFWOYgBr4VruNBCBz6vXfiSL3C4gR2ADHr8o1c0=",
+    "h1:cTGeJfUr/A+9lAVtL2nMeS79YmHhYXTKHm0Hw1QAvDU=",
+    "h1:ntgqo1xnrkfRvYdkIWiaC7Wp3iC6mZCdRXH39FdjfQg=",
+    "h1:vw0FlywCuCQ8AnYA8P36ZIlxpmqSGBVF/q+Hq8Dr6f4=",
+    "zh:0556cb6f38067c95e320f2d5680cf9851991d28448da903dd50b6c4b54de1c0b",
+    "zh:7cdd70418aa6571c27de4102e3cc3228f6edbe4a1eaa7927f772234ee09fb519",
+    "zh:84feef6c19993da06139e05dd6e1fceb7beb086f041cb9bc4edcae6081fe4812",
+    "zh:8b7dfcececcced324a8a8344fcb48b746f218174ffc691e36a54d09f2fb5e797",
+    "zh:99ba55ced06327bd8f16077f26d95593d3d77107e9faf204bf1a2485653eb02e",
+    "zh:9e93df24a28ffe7551458035bae8ea1f4fdab74a9a47ce61f1008bc18025ecd0",
+    "zh:a03e65a78c70578f3ebb3f2d84df516a33e2c3e9b62c0e3a2d2cea4f411c5e83",
+    "zh:e57ab18a3275dee18d69910a1103a52c8071d77e449e50b1a8b9d80779068145",
     "zh:f809ab383cca0a5f83072981c64208cbd7fa67e986a86ee02dd2c82333221e32",
-    "zh:ffcfe68b27a3a54ec8a2052afa18091459a8b67a0388df52957a80c640b0448c",
   ]
 }
 
