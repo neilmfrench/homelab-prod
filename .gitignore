@@ -22,3 +22,4 @@ hack/temp-*
 backups/
 hack/test.yaml
 provision/terraform/oracle-cloud/single-instance-create/**
+.claude
