@@ -4,10 +4,6 @@ kind: HelmRelease
 metadata:
   name: volsync
 spec:
-  chart:
-    spec:
-      chart: volsync
-      version: 0.14.0
   values:
     manageCRDs: true
     metrics:
