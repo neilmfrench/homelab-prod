@@ -182,7 +182,7 @@ spec:
       config-init:
         enabled: true
         type: configMap
-        name: home-assistant-config-init
+        name: home-assistant
         advancedMounts:
           main:
             init-config:
