@@ -13,9 +13,9 @@ resources:
   - ./crossplane-system
   - ./games
   - ./passport
+  - ./home
   # - ./argocd
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines
-  # - ./home
   # - ./magazine
