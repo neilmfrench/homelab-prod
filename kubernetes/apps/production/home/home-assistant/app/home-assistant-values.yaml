@@ -21,6 +21,9 @@ spec:
             image:
               repository: busybox
               tag: latest
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
             command:
               - /bin/sh
               - -c
@@ -92,6 +95,7 @@ spec:
               tag: 4.108.2
             env:
               TZ: "${TIMEZONE}"
+            workingDir: /config
             securityContext:
               runAsUser: 0
               runAsGroup: 0
