@@ -16,6 +16,27 @@ spec:
         fsGroup: 0
     controllers:
       main:
+        initContainers:
+          init-config:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                if [ ! -f /config/configuration.yaml ]; then
+                  echo "Initializing Home Assistant config..."
+                  cp /config-init/configuration.yaml /config/
+                  echo "[]" > /config/automations.yaml
+                  touch /config/scripts.yaml
+                  echo "[]" > /config/scenes.yaml
+                  mkdir -p /config/themes
+                  echo "Config initialized."
+                else
+                  echo "Config already exists, skipping init."
+                fi
         containers:
           main:
             image:
@@ -58,7 +79,7 @@ spec:
                   initialDelaySeconds: 5
                   periodSeconds: 5
                   timeoutSeconds: 1
-                  failureThreshold: 30 
+                  failureThreshold: 30
             resources:
               requests:
                 cpu: 100m
@@ -88,6 +109,36 @@ spec:
                 enabled: false
               startup:
                 enabled: false
+    configMaps:
+      config-init:
+        enabled: true
+        data:
+          configuration.yaml: |
+            # Home Assistant Configuration
+            default_config:
+
+            # HTTP configuration for reverse proxy
+            http:
+              use_x_forwarded_for: true
+              trusted_proxies:
+                - 10.0.0.0/8
+                - 172.16.0.0/12
+                - 192.168.0.0/16
+                - 127.0.0.1
+                - ::1
+
+            # Load frontend themes from the themes folder
+            frontend:
+              themes: !include_dir_merge_named themes
+
+            # Text to speech
+            tts:
+              - platform: google_translate
+
+            # Automations, scripts, scenes
+            automation: !include automations.yaml
+            script: !include scripts.yaml
+            scene: !include scenes.yaml
     service:
       main:
         controller: main
@@ -128,3 +179,11 @@ spec:
         existingClaim: home-assistant-config
         globalMounts:
           - path: /config
+      config-init:
+        enabled: true
+        type: configMap
+        name: home-assistant-config-init
+        advancedMounts:
+          main:
+            init-config:
+              - path: /config-init
