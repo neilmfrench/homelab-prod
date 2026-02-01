@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: home
 resources:
   - ./config-pvc.yaml
-  - ./ingress.yaml
-  - ./ingressroute.yaml
+  # - ./ingress.yaml
+  # - ./ingressroute.yaml
   - ../../../../base/home-assistant
 patches:
   - path: ./home-assistant-values.yaml
