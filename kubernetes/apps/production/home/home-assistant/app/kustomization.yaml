@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: home
 resources:
   - ./config-pvc.yaml
+  - ./oidc-redirect-middleware.yaml
   # - ./ingress.yaml
   # - ./ingressroute.yaml
   - ../../../../base/home-assistant
