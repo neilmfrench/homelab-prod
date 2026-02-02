@@ -12,8 +12,8 @@ spec:
         containers:
           app:
             image:
-              repository: mrlt8/wyze-bridge
-              tag: 2.10.3-qsv
+              repository: idisposablegithub365/wyze-bridge
+              tag: latest
             env:
               TZ: "${TIMEZONE}"
               H264_ENC: h264_qsv
@@ -44,10 +44,6 @@ spec:
                 cpu: 200m
               limits:
                 memory: 1000Mi
-                gpu.intel.com/i915: 1
-        pod:
-          nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: "true"
     service:
       app:
         controller: wyze
