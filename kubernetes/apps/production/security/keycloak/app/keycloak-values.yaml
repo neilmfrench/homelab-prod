@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: quay.io/keycloak/keycloak
-      tag: 26.1.2-1
+      tag: 26.3.2-1
     env:
       TZ: "${TZ}"
 
