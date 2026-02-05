@@ -6,10 +6,10 @@ metadata:
 spec:
   values:
     defaultPodOptions:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
-      nodeSelector:
-        kubernetes.io/hostname: "talos-4"
+      # hostNetwork: true
+      # dnsPolicy: ClusterFirstWithHostNet
+      # nodeSelector:
+      #   kubernetes.io/hostname: "talos-4"
       securityContext:
         runAsUser: 0
         runAsGroup: 0
