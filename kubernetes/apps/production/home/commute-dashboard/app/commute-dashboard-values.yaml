@@ -47,7 +47,7 @@ spec:
 
                 .info-panel {
                   position: absolute;
-                  bottom: 16px;
+                  top: 16px;
                   right: 16px;
                   background: rgb(35, 36, 43);
                   border-radius: 12px;
