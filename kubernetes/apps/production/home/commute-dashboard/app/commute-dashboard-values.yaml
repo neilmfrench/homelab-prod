@@ -133,10 +133,10 @@ spec:
                 const CONFIG = {
                   home: { lat: parseFloat('${SECRET_HOME_LAT}'), lng: parseFloat('${SECRET_HOME_LNG}') },
                   office: { lat: parseFloat('${SECRET_OFFICE_LAT}'), lng: parseFloat('${SECRET_OFFICE_LNG}') },
-                  morningStart: 10,
+                  morningStart: 0,
                   morningEnd: 12,
-                  eveningStart: 19,
-                  eveningEnd: 21,
+                  eveningStart: 12,
+                  eveningEnd: 24,
                   refreshInterval: 5 * 60 * 1000
                 };
 
