@@ -167,9 +167,6 @@ spec:
                     fullscreenControl: false
                   });
 
-                  const trafficLayer = new google.maps.TrafficLayer();
-                  trafficLayer.setMap(map);
-
                   directionsService = new google.maps.DirectionsService();
                   directionsRenderer = new google.maps.DirectionsRenderer({
                     map: map,
@@ -230,7 +227,7 @@ spec:
 
                       document.getElementById('duration').textContent = durationInTraffic.text;
                       document.getElementById('route-info').textContent =
-                        route.distance.text + ' via ' + route.summary;
+                        route.distance.text + ' via ' + response.routes[0].summary;
 
                       const driveTimeEl = document.getElementById('drive-time');
                       driveTimeEl.classList.remove('slow', 'heavy');
