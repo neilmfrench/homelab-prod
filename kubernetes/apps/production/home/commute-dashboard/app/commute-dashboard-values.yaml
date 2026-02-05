@@ -211,10 +211,10 @@ spec:
 
                 function getTrafficColor(speed) {
                   switch (speed) {
-                    case 'NORMAL': return '#76d698';
-                    case 'SLOW': return '#ffdb75';
-                    case 'TRAFFIC_JAM': return '#ea7287';
-                    default: return '#e08a00';
+                    case 'NORMAL': return '#22c55e';
+                    case 'SLOW': return '#facc15';
+                    case 'TRAFFIC_JAM': return '#ef4444';
+                    default: return '#f97316';
                   }
                 }
 
@@ -224,12 +224,24 @@ spec:
                   const path = google.maps.geometry.encoding.decodePath(route.polyline.encodedPolyline);
                   const speedIntervals = route.travelAdvisory?.speedReadingIntervals || [];
 
+                  // Draw outline first (darker, thicker line behind)
+                  const outline = new google.maps.Polyline({
+                    path: path,
+                    strokeColor: '#1e293b',
+                    strokeWeight: 10,
+                    strokeOpacity: 1,
+                    zIndex: 1,
+                    map: map
+                  });
+                  routePolylines.push(outline);
+
                   if (speedIntervals.length === 0) {
                     const polyline = new google.maps.Polyline({
                       path: path,
-                      strokeColor: '#e08a00',
+                      strokeColor: '#f97316',
                       strokeWeight: 6,
                       strokeOpacity: 1,
+                      zIndex: 2,
                       map: map
                     });
                     routePolylines.push(polyline);
@@ -245,6 +257,7 @@ spec:
                         strokeColor: color,
                         strokeWeight: 6,
                         strokeOpacity: 1,
+                        zIndex: 2,
                         map: map
                       });
                       routePolylines.push(polyline);
