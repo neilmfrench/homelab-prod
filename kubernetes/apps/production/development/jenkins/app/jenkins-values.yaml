@@ -6,6 +6,39 @@ metadata:
 spec:
   values:
     controller:
+      installPlugins:
+        - kubernetes:4392.v19cea_fdb_5913
+        - workflow-aggregator:608.v67378e9d3db_1
+        - git:5.8.0
+        - configuration-as-code:2006.v001a_2ca_6b_574
+      additionalPlugins:
+        - job-dsl:1.93
+        - kubernetes-credentials:203.v85b_9836a_f44b_ # gitleaks:allow
+        - kubernetes-credentials-provider:1.299.v610fa_e76761a_
+        - aws-credentials:254.v978a_5e206a_d7 # gitleaks:allow
+        - config-file-provider:1002.v93e06b_792d44
+        - junit:1355.v45e2ea_65863c
+        - lockable-resources:1412.v3f305a_fb_a_117
+        - oic-auth:4.609.v9de140f63d01
+        - matrix-auth:3.2.8
+        - blueocean:1.27.21
+        - sonar:2.18
+        - managed-scripts:1.5.6
+        - templating-engine:2.5.5
+        - http_request:1.20
+        - folder-properties:62.v1636b_4a_84608
+        - anchore-container-scanner:3.3.0
+        - stashNotifier:1.528.v9637674a_673f
+        - prometheus:819.v50953a_c560dd
+        - dependency-check-jenkins-plugin:5.6.1
+        - cloudbees-disk-usage-simple:256.v20ec4eb_884f1
+        - multibranch-scan-webhook-trigger:1.0.11
+        - generic-webhook-trigger:2.4.1
+        - artifact-manager-s3:951.v74e888e4e3f2
+        - envinject:2.926.v69c9b_3896a_96
+        - pipeline-utility-steps:2.19.0
+        - subversion:1292.ve8cf25770ee3
+        - pipeline-stage-view:2.38
       ingress:
         enabled: true
         ingressClassName: traefik
@@ -15,7 +48,6 @@ spec:
               - "jenkins.${SECRET_DOMAIN}"
       resources:
         requests:
-          cpu: "512m"
           memory: "1024Mi"
         limits:
           memory: "4096Mi"
