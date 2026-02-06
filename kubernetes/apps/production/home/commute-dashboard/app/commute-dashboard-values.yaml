@@ -93,30 +93,11 @@ spec:
                   color: rgb(138, 140, 153);
                   margin-top: 6px;
                 }
-
-                .no-commute {
-                  text-align: center;
-                  padding: 10px 0;
-                }
-
-                .no-commute .icon {
-                  font-size: 28px;
-                  margin-bottom: 6px;
-                }
-
-                .no-commute .message {
-                  font-size: 14px;
-                  color: rgb(138, 140, 153);
-                }
               </style>
             </head>
             <body>
               <div id="map"></div>
-              <div class="info-panel" id="info-panel">
-                <div class="no-commute" id="no-commute" style="display: none;">
-                  <div class="icon">🏠</div>
-                  <div class="message">No commute scheduled</div>
-                </div>
+              <div class="info-panel" id="info-panel" style="display: none;">
                 <div id="commute-info">
                   <div class="drive-time" id="drive-time">
                     <span class="dot"></span>
@@ -132,11 +113,12 @@ spec:
                 const CONFIG = {
                   home: { lat: parseFloat('${SECRET_HOME_LAT}'), lng: parseFloat('${SECRET_HOME_LNG}') },
                   office: { lat: parseFloat('${SECRET_OFFICE_LAT}'), lng: parseFloat('${SECRET_OFFICE_LNG}') },
+                  gym: { lat: parseFloat('${SECRET_GYM_LAT}'), lng: parseFloat('${SECRET_GYM_LNG}') },
                   apiKey: '${SECRET_GOOGLE_MAPS_API_KEY}',
-                  morningStart: 0,
-                  morningEnd: 12,
-                  eveningStart: 12,
-                  eveningEnd: 24,
+                  officeStart: 7,
+                  officeEnd: 13,
+                  gymStart: 9,
+                  gymEnd: 19,
                   refreshInterval: 5 * 60 * 1000
                 };
 
@@ -174,11 +156,15 @@ spec:
                 }
 
                 function isCommuteWindow() {
-                  const hour = new Date().getHours();
-                  const day = new Date().getDay();
-                  if (day === 0 || day === 6) return null;
-                  if (hour >= CONFIG.morningStart && hour < CONFIG.morningEnd) return 'morning';
-                  if (hour >= CONFIG.eveningStart && hour < CONFIG.eveningEnd) return 'evening';
+                  const now = new Date();
+                  const day = now.getDay();
+                  const hour = now.getHours();
+                  const isWeekend = day === 0 || day === 6;
+                  if (isWeekend) {
+                    if (hour >= CONFIG.gymStart && hour < CONFIG.gymEnd) return 'gym';
+                    return null;
+                  }
+                  if (hour >= CONFIG.officeStart && hour < CONFIG.officeEnd) return 'office';
                   return null;
                 }
 
@@ -297,30 +283,25 @@ spec:
                 }
 
                 async function updateRoute() {
-                  const commutePeriod = isCommuteWindow();
+                  const routeType = isCommuteWindow();
 
-                  if (!commutePeriod) {
-                    document.getElementById('no-commute').style.display = 'block';
-                    document.getElementById('commute-info').style.display = 'none';
+                  if (!routeType) {
+                    document.getElementById('info-panel').style.display = 'none';
                     clearRoute();
                     return;
                   }
 
-                  document.getElementById('no-commute').style.display = 'none';
-                  document.getElementById('commute-info').style.display = 'block';
-
-                  const origin = commutePeriod === 'morning' ? CONFIG.home : CONFIG.office;
-                  const destination = commutePeriod === 'morning' ? CONFIG.office : CONFIG.home;
-                  const destLabel = commutePeriod === 'morning' ? 'to Office' : 'to Home';
-
+                  const destination = routeType === 'office' ? CONFIG.office : CONFIG.gym;
+                  const destLabel = routeType === 'office' ? 'to Office' : 'to Gym';
                   document.getElementById('destination').textContent = destLabel;
+                  document.getElementById('info-panel').style.display = 'block';
 
                   try {
-                    const data = await fetchRoute(origin, destination);
+                    const data = await fetchRoute(CONFIG.home, destination);
 
                     if (data.routes && data.routes.length > 0) {
                       const route = data.routes[0];
-                      displayRoute(route, origin, destination);
+                      displayRoute(route, CONFIG.home, destination);
 
                       const durationSecs = parseInt(route.duration.replace('s', ''));
                       const durationMins = Math.round(durationSecs / 60);
