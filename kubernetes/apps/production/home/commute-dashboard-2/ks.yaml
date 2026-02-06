@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-commute-dashboard-2
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/production/home/commute-dashboard-2/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: commute-dashboard-2
+      namespace: home
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
