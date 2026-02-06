@@ -45,6 +45,9 @@ spec:
                   height: 100vh;
                 }
 
+                #map .gm-style-cc,
+                #map a[href^="https://maps.google.com"] { display: none !important; }
+
                 .info-panel {
                   position: absolute;
                   top: 16px;
