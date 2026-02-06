@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jenkins
+spec:
+  values:
+    controller:
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hostName: "jenkins.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - "jenkins.${SECRET_DOMAIN}"
+      resources:
+        requests:
+          cpu: "512m"
+          memory: "1024Mi"
+        limits:
+          memory: "4096Mi"
+    persistence:
+      enabled: true
+      existingClaim: jenkins-data
+    agent:
+      resources:
+        requests:
+          cpu: "256m"
+          memory: "256Mi"
+        limits:
+          memory: "1024Mi"

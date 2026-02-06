@@ -54,3 +54,4 @@ resources:
   - ./crossplane.yaml
   - ./minecraft.yaml
   - ./oauth2-proxy.yaml
+  - ./jenkins.yaml

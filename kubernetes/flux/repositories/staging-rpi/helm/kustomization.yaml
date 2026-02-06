@@ -312,3 +312,14 @@ patches:
       kind: HelmRepository
       name: oauth2-proxy
       namespace: flux-system
+  - patch: |-
+      $patch: delete
+      apiVersion: source.toolkit.fluxcd.io/v1
+      kind: HelmRepository
+      metadata:
+        name: jenkins
+        namespace: flux-system
+    target:
+      kind: HelmRepository
+      name: jenkins
+      namespace: flux-system
