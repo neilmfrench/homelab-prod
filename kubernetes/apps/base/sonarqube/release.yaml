@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://SonarSource.github.io/helm-chart-sonarqube
       chart: sonarqube
-      version: 2026.2.0
+      version: 2026.1.0
       sourceRef:
         kind: HelmRepository
         name: sonarqube
