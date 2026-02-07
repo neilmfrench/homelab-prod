@@ -63,3 +63,5 @@ spec:
           memory: "1024Mi"
     rbac:
       readSecrets: true
+    serviceAccountAgent:
+      create: true
