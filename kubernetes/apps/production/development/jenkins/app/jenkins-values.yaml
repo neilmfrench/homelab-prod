@@ -62,6 +62,35 @@ spec:
             security:
               globalJobDslSecurityConfiguration:
                 useScriptSecurity: false
+          approved-script-signatures: |
+            security:
+              scriptApproval:
+                approvedSignatures:
+                - "method groovy.lang.GString getBytes"
+                - "method hudson.model.Item getName"
+                - "method hudson.model.ItemGroup getItems"
+                - "method hudson.util.PersistedList get java.lang.Class"
+                - "method jenkins.model.Jenkins getItemByFullName java.lang.String"
+                - "method org.yaml.snakeyaml.DumperOptions setDefaultFlowStyle org.yaml.snakeyaml.DumperOptions$FlowStyle"
+                - "method org.yaml.snakeyaml.DumperOptions setDereferenceAliases boolean"
+                - "method org.yaml.snakeyaml.DumperOptions setPrettyFlow boolean"
+                - "method org.yaml.snakeyaml.DumperOptions setSplitLines boolean"
+                - "method org.yaml.snakeyaml.Yaml dump java.lang.Object"
+                - "method org.yaml.snakeyaml.Yaml load java.lang.String"
+                - "new org.yaml.snakeyaml.DumperOptions"
+                - "new org.yaml.snakeyaml.Yaml"
+                - "new org.yaml.snakeyaml.Yaml org.yaml.snakeyaml.DumperOptions"
+                - "staticField org.yaml.snakeyaml.DumperOptions$FlowStyle BLOCK"
+                - "staticMethod groovy.json.JsonOutput toJson java.lang.Object"
+                - "staticMethod java.util.Arrays copyOf java.lang.Object[] int"
+                - "staticMethod jenkins.model.Jenkins getInstance"
+                - "staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods dump java.lang.Object"
+                - "staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getAt java.util.Collection java.lang.String"
+                - "staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods withIndex java.lang.Iterable"
+                - "staticMethod groovy.json.JsonOutput toJson java.lang.Object"
+                - "staticMethod jenkins.model.Jenkins getInstance"
+                - "staticMethod org.codehaus.groovy.runtime.EncodingGroovyMethods encodeBase64 byte[]"
+                - "method org.jenkinsci.plugins.workflow.support.actions.EnvironmentAction getEnvironment"
     persistence:
       enabled: true
       existingClaim: jenkins-data
