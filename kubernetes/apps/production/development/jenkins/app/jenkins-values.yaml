@@ -51,6 +51,12 @@ spec:
           memory: "1024Mi"
         limits:
           memory: "4096Mi"
+      JCasC:
+        configScripts:
+          git-host-key: |
+            security:
+              gitHostKeyVerificationConfiguration:
+                sshHostKeyVerificationStrategy: "acceptFirstConnectionStrategy"
     persistence:
       enabled: true
       existingClaim: jenkins-data
