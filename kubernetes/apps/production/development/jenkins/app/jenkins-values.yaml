@@ -39,6 +39,7 @@ spec:
         - pipeline-utility-steps:2.19.0
         - subversion:1292.ve8cf25770ee3
         - pipeline-stage-view:2.38
+      numExecutors: 1
       ingress:
         enabled: true
         ingressClassName: traefik
