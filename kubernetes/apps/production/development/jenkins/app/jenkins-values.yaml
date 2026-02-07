@@ -58,6 +58,10 @@ spec:
             security:
               gitHostKeyVerificationConfiguration:
                 sshHostKeyVerificationStrategy: "acceptFirstConnectionStrategy"
+          disable-script-security: |
+            security:
+              globalJobDslSecurityConfiguration:
+                useScriptSecurity: false
     persistence:
       enabled: true
       existingClaim: jenkins-data
