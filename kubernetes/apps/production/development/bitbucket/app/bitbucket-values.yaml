@@ -96,7 +96,7 @@ spec:
       sshService:
         enabled: true
         port: 22
-        host:
+        host: bitbucket-ssh.${SECRET_DOMAIN}
         type: LoadBalancer
         loadBalancerIP:
         annotations: {}
