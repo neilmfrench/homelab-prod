@@ -58,6 +58,8 @@ spec:
         queue:
           TYPE: redis
           CONN_STR: redis://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
+    service:
+      type: LoadBalancer
     redis-cluster:
       enabled: false
     valkey-cluster:
