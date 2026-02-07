@@ -94,7 +94,7 @@ spec:
         annotations: {}
 
       sshService:
-        enabled: false
+        enabled: true
         port: 22
         host:
         type: LoadBalancer
