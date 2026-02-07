@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sonarqube
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=https://SonarSource.github.io/helm-chart-sonarqube
+      chart: sonarqube
+      version: 2026.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: sonarqube
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false

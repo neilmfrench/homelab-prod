@@ -55,3 +55,4 @@ resources:
   - ./minecraft.yaml
   - ./oauth2-proxy.yaml
   - ./jenkins.yaml
+  - ./sonarqube.yaml

@@ -10,6 +10,7 @@ resources:
   - ./gitea/ks.yaml
   - ./bitbucket/ks.yaml
   - ./jenkins/ks.yaml
+  - ./sonarqube/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml
