@@ -1,0 +1,87 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nexus
+spec:
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: sonatype/nexus3
+              tag: "3.76.1"
+            env:
+              INSTALL4J_ADD_VM_PARAMS: "-Xms1024m -Xmx1536m -XX:MaxDirectMemorySize=2g"
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /service/rest/v1/status
+                    port: 8081
+                  initialDelaySeconds: 120
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 6
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /service/rest/v1/status
+                    port: 8081
+                  initialDelaySeconds: 60
+                  periodSeconds: 15
+                  timeoutSeconds: 5
+                  failureThreshold: 4
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /service/rest/v1/status
+                    port: 8081
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 30
+            resources:
+              requests:
+                cpu: 200m
+                memory: 2048M
+              limits:
+                cpu: "1"
+                memory: 4096M
+            securityContext:
+              runAsUser: 200
+              runAsGroup: 200
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 200
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8081
+    ingress:
+      main:
+        enabled: true
+        className: traefik
+        hosts:
+          - host: "nexus.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+    persistence:
+      data:
+        enabled: true
+        existingClaim: nexus-data
+        globalMounts:
+          - path: /nexus-data

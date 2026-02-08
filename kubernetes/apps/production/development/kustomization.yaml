@@ -11,6 +11,7 @@ resources:
   - ./bitbucket/ks.yaml
   - ./jenkins/ks.yaml
   - ./sonarqube/ks.yaml
+  - ./nexus/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml
