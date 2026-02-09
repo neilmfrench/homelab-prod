@@ -14,7 +14,7 @@ resources:
   - ./games
   - ./passport
   - ./home
-  # - ./argocd
+  - ./argocd
   # - ./networking
   # - ./tekton-operator
   # - ./tekton-pipelines

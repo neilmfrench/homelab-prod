@@ -7,37 +7,47 @@ spec:
   values:
     crds:
       install: true
+    global:
+      domain: "argocd.${SECRET_DOMAIN}"
     configs:
-      secret:
-        createSecret: true
-        extra:
-          dex.authentik.clientSecret: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_SECRET_NON_ENCODED}
-      cm:
-        url: https://argocd.${SECRET_DOMAIN}
-        dex.config: |
-          connectors:
-          - config:
-              issuer: https://id.${SECRET_DOMAIN}/application/o/argocd/
-              clientID: ${SECRET_ARGOCD_AUTHENTIK_CLIENT_ID}
-              clientSecret: $dex.authentik.clientSecret
-              insecureEnableGroups: true
-              scopes:
-                - openid
-                - profile
-                - email
-                - groups
-            name: authentik
-            type: oidc
-            id: authentik
-      rbac:
-        policy.csv: |
-          g, ArgoCD Admins, role:admin
       params:
         server.insecure: true
+    dex:
+      enabled: false
+    notifications:
+      enabled: false
+    applicationSet:
+      enabled: false
+    controller:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 512Mi
     server:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          memory: 256Mi
       ingress:
-        hosts:
-          - "argocd.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - "argocd.${SECRET_DOMAIN}"
+        enabled: true
+        ingressClassName: traefik
+        hostname: "argocd.${SECRET_DOMAIN}"
+        tls: false
+    repoServer:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          memory: 256Mi
+    redis:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          memory: 128Mi
