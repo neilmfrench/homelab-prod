@@ -18,36 +18,9 @@ spec:
       enabled: false
     applicationSet:
       enabled: false
-    controller:
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-        limits:
-          memory: 512Mi
     server:
-      resources:
-        requests:
-          cpu: 50m
-          memory: 64Mi
-        limits:
-          memory: 256Mi
       ingress:
         enabled: true
         ingressClassName: traefik
         hostname: "argocd.${SECRET_DOMAIN}"
         tls: false
-    repoServer:
-      resources:
-        requests:
-          cpu: 50m
-          memory: 64Mi
-        limits:
-          memory: 256Mi
-    redis:
-      resources:
-        requests:
-          cpu: 50m
-          memory: 64Mi
-        limits:
-          memory: 128Mi
