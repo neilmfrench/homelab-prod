@@ -117,9 +117,10 @@ spec:
                   home: { lat: parseFloat('${SECRET_HOME_LAT}'), lng: parseFloat('${SECRET_HOME_LNG}') },
                   office: { lat: parseFloat('${SECRET_OFFICE_2_LAT}'), lng: parseFloat('${SECRET_OFFICE_2_LNG}') },
                   apiKey: '${SECRET_GOOGLE_MAPS_API_KEY}',
-                  commuteStart: 7,
+                  commuteStartHour: 8,
+                  commuteStartMin: 30,
                   commuteEnd: 13,
-                  refreshInterval: 5 * 60 * 1000
+                  refreshInterval: 15 * 60 * 1000
                 };
 
                 let map;
@@ -156,8 +157,11 @@ spec:
                 }
 
                 function isCommuteWindow() {
-                  const hour = new Date().getHours();
-                  return hour >= CONFIG.commuteStart && hour < CONFIG.commuteEnd;
+                  const now = new Date();
+                  const minutes = now.getHours() * 60 + now.getMinutes();
+                  const start = CONFIG.commuteStartHour * 60 + CONFIG.commuteStartMin;
+                  const end = CONFIG.commuteEnd * 60;
+                  return minutes >= start && minutes < end;
                 }
 
                 function clearRoute() {
