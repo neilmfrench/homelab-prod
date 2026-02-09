@@ -144,7 +144,7 @@ spec:
 
                 function initMap() {
                   map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 11,
+                    zoom: 13,
                     center: CONFIG.home,
                     styles: mapStyles,
                     disableDefaultUI: true,
@@ -282,7 +282,7 @@ spec:
 
                   const bounds = new google.maps.LatLngBounds();
                   path.forEach(point => bounds.extend(point));
-                  map.fitBounds(bounds, 60);
+                  map.fitBounds(bounds, 30);
                 }
 
                 async function updateRoute() {
