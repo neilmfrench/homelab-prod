@@ -10,6 +10,12 @@ spec:
     global:
       domain: "argocd.${SECRET_DOMAIN}"
     configs:
+      cm:
+        accounts.jenkins: apiKey, login
+      rbac:
+        policy.csv: |
+          p, jenkins, applications, get, */*, allow
+          p, jenkins, applications, sync, */*, allow
       params:
         server.insecure: true
       ssh:
