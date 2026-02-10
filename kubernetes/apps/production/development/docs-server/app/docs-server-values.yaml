@@ -15,12 +15,12 @@ spec:
             image:
               repository: harbor.neilfren.ch/eee/docs-server
               tag: "1.0.2"
-              pullPolicy: IfNotPresent
+              pullPolicy: Always
           validator:
             image:
               repository: harbor.neilfren.ch/eee/validator
               tag: "1.0.1"
-              pullPolicy: IfNotPresent
+              pullPolicy: Always
     service:
       app:
         controller: docs-server
