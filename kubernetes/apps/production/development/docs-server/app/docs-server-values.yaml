@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: docs-server
+spec:
+  values:
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: harbor-global-ro
+    controllers:
+      docs-server:
+        containers:
+          app:
+            image:
+              repository: harbor.neilfren.ch/eee/docs-server
+              tag: "1.0.0"
+              pullPolicy: IfNotPresent
+    service:
+      app:
+        controller: docs-server
+        ports:
+          http:
+            port: 8080
+    ingress:
+      app:
+        enabled: true
+        className: traefik
+        hosts:
+          - host: &host "jenkins-docs.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
