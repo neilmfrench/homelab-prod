@@ -16,6 +16,7 @@ spec:
         policy.csv: |
           p, jenkins, applications, get, */*, allow
           p, jenkins, applications, sync, */*, allow
+          p, jenkins, projects, get, *, allow
       params:
         server.insecure: true
       ssh:
