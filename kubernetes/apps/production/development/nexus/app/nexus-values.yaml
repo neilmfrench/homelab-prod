@@ -11,7 +11,7 @@ spec:
           main:
             image:
               repository: sonatype/nexus3
-              tag: "3.76.1"
+              tag: "3.89.1"
             env:
               INSTALL4J_ADD_VM_PARAMS: "-Xms1024m -Xmx1536m -XX:MaxDirectMemorySize=2g"
             probes:
