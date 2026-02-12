@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: cloudflare/cloudflared
-      tag: "2025.4.0"
+      tag: "2026.2.0"
     args:
       - access
       - tcp
