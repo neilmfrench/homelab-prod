@@ -19,6 +19,7 @@ spec:
           p, jenkins, projects, get, *, allow
       params:
         server.insecure: true
+        application.namespaces: "argocd, e3-cicd-v3-*"
       ssh:
         extraHosts: |
           bitbucket-ssh.${SECRET_DOMAIN} ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzR4QrmuqM+iMcgfQEdLcPAB5r/aIZw/hjSDo2XG/J4Ge0vC4EvKfpjJvLkzyLWn+zZzvGeb8N/X6XNm4D4Zy7ZGpl/biySHqpR7PyTWsO71wVn6wXAAAwOPYtT7VXvmjtmyHkIiKGQWxRDWmBGg9TlIWG8XKZh+kWORcsh9E6U3jdWR5MSwpXV9XmiOEPTN2uet14TKvEveMERRXl5D2ojnA+TZk1eUMcbEl/g/kABIxYyr/ntMDUPYEZ5a27YGLYoNp+3rrkUoSKva9XXxzxTOiHRk1yqaZc6CcOg7IbFrNCuNjOsGnx5GoclhF3fMqL3rwyV8qE4d/3VOm0kq+H
