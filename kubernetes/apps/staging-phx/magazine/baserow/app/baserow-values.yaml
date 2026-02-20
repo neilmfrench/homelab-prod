@@ -12,7 +12,7 @@ spec:
           main:
             image:
               repository: baserow/baserow
-              tag: "2.0.6"
+              tag: "2.1.0"
               pullPolicy: IfNotPresent
             env:
               BASEROW_PUBLIC_URL: "https://baserow.${SECRET_MAGAZINE_DOMAIN}"
