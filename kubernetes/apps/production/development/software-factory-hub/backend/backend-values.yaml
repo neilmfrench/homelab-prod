@@ -33,6 +33,23 @@ spec:
               SFH_SCHEMA_VALIDATOR_URL: http://docs-server-validator.development.svc.cluster.local:3000
               SFH_ARGOCD_URL: http://argocd-server.argocd.svc.cluster.local:80
               SFH_ARGOCD_TOKEN: ${SECRET_SOFTWARE_FACTORY_HUB_ARGOCD_TOKEN}
+              SFH_TENANTS_FILE: /config/tenants/tenants.yaml
+              SFH_ARGOCD_TENANTS_FILE: /config/argocd-tenants/argocd-tenants.yaml
+    persistence:
+      tenants:
+        enabled: true
+        type: configMap
+        name: sfh-tenants
+        globalMounts:
+          - path: /config/tenants
+            readOnly: true
+      argocd-tenants:
+        enabled: true
+        type: configMap
+        name: sfh-argocd-tenants
+        globalMounts:
+          - path: /config/argocd-tenants
+            readOnly: true
     service:
       app:
         controller: backend
