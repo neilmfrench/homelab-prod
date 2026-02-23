@@ -1,43 +1,43 @@
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-software-factory-hub-backend
-  namespace: flux-system
-spec:
-  path: ./kubernetes/apps/production/development/software-factory-hub/backend
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: software-factory-hub-backend
-      namespace: development
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: cluster-apps-software-factory-hub-frontend
-  namespace: flux-system
-spec:
-  path: ./kubernetes/apps/production/development/software-factory-hub/frontend
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: homelab-source
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: software-factory-hub-frontend
-      namespace: development
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-software-factory-hub-backend
+#   namespace: flux-system
+# spec:
+#   path: ./kubernetes/apps/production/development/software-factory-hub/backend
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   healthChecks:
+#     - apiVersion: helm.toolkit.fluxcd.io/v2
+#       kind: HelmRelease
+#       name: software-factory-hub-backend
+#       namespace: development
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: cluster-apps-software-factory-hub-frontend
+#   namespace: flux-system
+# spec:
+#   path: ./kubernetes/apps/production/development/software-factory-hub/frontend
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: homelab-source
+#   healthChecks:
+#     - apiVersion: helm.toolkit.fluxcd.io/v2
+#       kind: HelmRelease
+#       name: software-factory-hub-frontend
+#       namespace: development
+#   interval: 30m
+#   retryInterval: 1m
+#   timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -45,9 +45,9 @@ metadata:
   name: cluster-apps-software-factory-hub-oauth2-proxy
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-apps-software-factory-hub-backend
-    - name: cluster-apps-software-factory-hub-frontend
+  # dependsOn:
+  #   - name: cluster-apps-software-factory-hub-backend
+  #   - name: cluster-apps-software-factory-hub-frontend
   path: ./kubernetes/apps/production/development/software-factory-hub/oauth2-proxy
   prune: true
   sourceRef:
