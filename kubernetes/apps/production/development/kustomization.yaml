@@ -13,6 +13,7 @@ resources:
   - ./sonarqube/ks.yaml
   - ./nexus/ks.yaml
   - ./docs-server/ks.yaml
+  - ./software-factory-hub/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml

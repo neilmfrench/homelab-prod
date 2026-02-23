@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: software-factory-hub-backend
+spec:
+  values:
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: harbor-global-ro
+    controllers:
+      backend:
+        containers:
+          app:
+            image:
+              repository: "harbor.${SECRET_DOMAIN}/eee/sfh/backend:1.0.0"
+              tag: "1.0.0"
+              pullPolicy: IfNotPresent
+            env:
+              SFH_BITBUCKET_URL: http://bitbucket.development.svc.cluster.local:80
+              SFH_BITBUCKET_TOKEN: ${SECRET_SOFTWARE_FACTORY_HUB_BITBUCKET_TOKEN}
+              SFH_JENKINS_URL: http://jenkins.development.svc.cluster.local:8080
+              SFH_JENKINS_USERNAME: ${SECRET_SOFTWARE_FACTORY_HUB_JENKINS_USER}
+              SFH_JENKINS_TOKEN: ${SECRET_SOFTWARE_FACTORY_HUB_JENKINS_TOKEN}
+              SFH_SONARQUBE_URL: http://sonarqube-sonarqube.development.svc.cluster.local:9000
+              SFH_SONARQUBE_TOKEN: ${SECRET_SOFTWARE_FACTORY_HUB_SONARQUBE_TOKEN}
+              SFH_HARBOR_URL: http://harbor-core.development.svc.cluster.local:80
+              SFH_HARBOR_USERNAME: ${SECRET_SOFTWARE_FACTORY_HUB_HARBOR_USER}
+              SFH_HARBOR_TOKEN: ${SECRET_SOFTWARE_FACTORY_HUB_HARBOR_TOKEN}
+              SFH_NEXUS_URL: http://nexus.development.svc.cluster.local:8081
+              SFH_NEXUS_USERNAME: ${SECRET_SOFTWARE_FACTORY_HUB_NEXUS_USER}
+              SFH_NEXUS_PASSWORD: ${SECRET_SOFTWARE_FACTORY_HUB_NEXUS_PASSWORD}
+              SFH_SCHEMA_VALIDATOR_URL: http://docs-server-validator.development.svc.cluster.local:3000
+              SFH_ARGOCD_URL: http://argocd-server.argocd.svc.cluster.local:80
+              SFH_ARGOCD_TOKEN: ${SECRET_SOFTWARE_FACTORY_HUB_ARGOCD_TOKEN}
+    service:
+      app:
+        controller: backend
+        ports:
+          http:
+            port: 7007
