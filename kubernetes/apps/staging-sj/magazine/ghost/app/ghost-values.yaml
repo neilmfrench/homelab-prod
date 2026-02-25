@@ -27,7 +27,7 @@ spec:
       mail__options__service: "Mailgun"
       mail__options__auth__user: "${SECRET_GHOST_EMAIL_USER}"
       mail__options__auth__pass: "${SECRET_GHOST_EMAIL_PASSWORD}"
-      security__staffDeviceVerification": "false"
+      security__staffDeviceVerification: "false"
       NODE_ENV: production
     service:
       main:
