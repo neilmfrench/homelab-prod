@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-sf-metrics-database
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/production/development/sf-metrics/database
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

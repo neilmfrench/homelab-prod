@@ -1,0 +1,31 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql
+spec:
+  instances: 1
+  enableSuperuserAccess: false
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql
+    major: 16
+  storage:
+    storageClass: ceph-block
+    size: 16Gi
+  managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              name: postgresql-lb
+            spec:
+              type: LoadBalancer
+  bootstrap:
+    initdb:
+      database: sf_metrics
+      owner: sf_metrics
+      secret:
+        name: sf-metrics-postgresql-secret
