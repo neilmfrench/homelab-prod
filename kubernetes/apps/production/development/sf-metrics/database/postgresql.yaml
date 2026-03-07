@@ -20,7 +20,7 @@ spec:
         - selectorType: rw
           serviceTemplate:
             metadata:
-              name: postgresql-lb
+              name: sf-metrics-postgresql-lb
             spec:
               type: LoadBalancer
   bootstrap:
