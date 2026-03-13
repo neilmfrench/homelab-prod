@@ -8,7 +8,7 @@ spec:
   interval: 5m
   url: https://github.com/k8gb-io/k8gb.git
   ref:
-    tag: v0.11.5
+    tag: v0.18.1
   ignore: |-
     # exclude all
     /*
