@@ -15,5 +15,4 @@ spec:
       hostname: k8s-operator-production
       logging: info
     proxyConfig:
-      defaultTags:
-        - tag:k8s-production
+      defaultTags: tag:k8s-production
