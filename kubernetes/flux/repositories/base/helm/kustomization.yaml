@@ -56,3 +56,4 @@ resources:
   - ./oauth2-proxy.yaml
   - ./jenkins.yaml
   - ./sonarqube.yaml
+  - ./tailscale.yaml
