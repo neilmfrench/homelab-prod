@@ -4,5 +4,5 @@ metadata:
     name: firefly-iii-external-home-data-restic-config
 type: Opaque
 stringData:
-    RESTIC_REPOSITORY: rest:http://ts-external-home-tailscale-qktnq.tailscale.svc.cluster.local:8000/hb-backup/firefly-data
+    RESTIC_REPOSITORY: rest:http://external-home-tailscale.tailscale.svc.cluster.local:8000/hb-backup/firefly-data
     RESTIC_PASSWORD: MxcGzv0Q3HVXEscbSdJ8EfJq0mxjPz0NJN/m6N8oJWrsPDMp
