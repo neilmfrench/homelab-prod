@@ -4,5 +4,20 @@ metadata:
     name: firefly-iii-external-home-data-restic-config
 type: Opaque
 stringData:
-    RESTIC_REPOSITORY: rest:http://external-home-tailscale.tailscale.svc.cluster.local:8000/hb-backup/firefly-data
-    RESTIC_PASSWORD: MxcGzv0Q3HVXEscbSdJ8EfJq0mxjPz0NJN/m6N8oJWrsPDMp
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:dFcoVYLT9KXfwrqZmJVBEnMKSqJxvEFvNIkmmo5kFW7pWlSjwqpWqt6ID/iUCE0YrYk4EXoqt0mpaqJl9wmeTGx60Lro/CS7U4uyePtv6QKNtzHEA6NhFV2hXg==,iv:MI9/QQy5AY/DMutaJatfx/4QRk1FdbqS/qAoNO1ed7o=,tag:Ugxu4k1gP12+W4DvhiLTaw==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:tRUqfvjR6x3g0AJxVtxd6HRK7JAaQuwzj1yl/a2a5OhVlKYx4B/uiNKr3JkvHwbe,iv:zXpcOHfMWANc1K17eOt359uDXVXn5yT8INV1nL5slfc=,tag:KAJvD3xIqGMJyjp9/LjXSg==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuZnI4dGdadEc5MThFNFZE
+            bHl5THk3blYwVDBuQkJLZE1XT2w3eUppd1ZVCm1QUnhlYXNWY01CNENWcFpuZm40
+            T0M2NkdWdVNrNmgxUjNjLzVCQUVveFUKLS0tIEpybGo2OStXejJFMlJhMU9WWXBQ
+            UkRocDg5UUJ4d3NQdFE0cWtWTzM1ekEKG0jvyj1lt6tm3I2BcZi8T5GBn7MedLBH
+            SA4GN2k+Nep3vgwkF9UCxaZNmT59NI4P8W75s1k81vQlk6CtAhRUvg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T19:48:24Z"
+    mac: ENC[AES256_GCM,data:r2k8BbGd/+h6Gu7ZXBaBIzN4KZlFWN4YHtZMJc7mQkSVfL+oiSumLH90HLtAIXDbV+ET4PGcyw7LIbnnpwKx2lTXOH1Cy06nq3QRLTpBTxdyFZZWrQZMtxmkbKS0Z2RQnqZjxvlLU86SpQBacPXjrZzhmCih4Ckl8UDwg8Rq/jQ=,iv:E0I0q8pfCVHYhno1QFrphOyREvo4E+CIJTCyhuYkJnA=,tag:xkV4812WmayKs1fzDEvYnw==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
