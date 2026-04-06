@@ -6,6 +6,7 @@ resources:
   - ./restic-config-hb.sops.yaml
   - ./restic-config-phx.sops.yaml
   - ./restic-config-sj.sops.yaml
+  - ./restic-config-external-home.sops.yaml
   - ./volsync.yaml
   - ../../../../base/minecraft
 patches:

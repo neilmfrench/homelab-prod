@@ -60,3 +60,22 @@ spec:
       weekly: 4
       monthly: 12
       yearly: 10
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: minecraft-data-to-external-home
+spec:
+  sourcePVC: minecraft-datadir
+  trigger:
+    schedule: "50 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: minecraft-data-external-home-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      weekly: 2
+      monthly: 3

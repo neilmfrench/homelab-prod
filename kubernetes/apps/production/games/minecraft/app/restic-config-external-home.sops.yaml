@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: minecraft-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:E4mdC6lWrJdAkAlcw7uPMgSruCYWDyFjkOgGxNaXt6Y9iToIeT4bDT1D58BFgqJaDGz0mAI5D9ceYTRxVU1LOt/ucv5i5ekfiKSfd44COC+J/kQseOZXSpNFvUZS,iv:nUR+WaR1X/poOQW/mHE0oxrszhjdddeSv4XgffU0ceE=,tag:IKt1O/nVAPo3eO/QT0bZiA==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:cgxt8Cw0nAhtIsaLUUeJe0VNgUbZA2B2We4wSeAv1BMD8wqOtK0kFgGVdPWllU/3,iv:mVpl6JrsaDSWbQZt7naUPbvHouBX5zsCpeYlrn60J14=,tag:CqHmnJ/SLhPkdr1oVeUwzQ==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3OEFkZGoyaDFQZHBkUWZw
+            Vk92aUt3VlJtcmh6TDRhdDVyMnF4eWFCS1YwCnpaS3hOeE5US0ZxWURQMWM4UitU
+            blE4dkM3RTBOdnkyRnpiK1FNMVgwTzAKLS0tIFRhSCsyM2UzeEZLRkd5ejRwK2JB
+            RG1VY1NkSDlRMFhNZm1DZU1PM3BwRGcKVj7LVynfqiaFK1TuWWIA9OLxcLfGbn4L
+            Y5PfIT85M8LDN60E1fe2e716XE13OEmI8lONmSNr5jNpC1wUsCJqAw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T22:43:08Z"
+    mac: ENC[AES256_GCM,data:2/DIiuJaZ9P2Ox7KiB8uMgk5bksaqqgsr04HwlpXzhfy03QKH+Od12RVkxUj0v03d5pmZu7aHp8XHpQDOK3IIZzHY57BkEPiixsT+bdchW9vn3kvr+uQaN0KsBSSeLpE8DIN/nHQo/JiSw0TZJm8RbXyDC6s5vgERPNN5qt6vvY=,iv:aJjJkcPY25CDlo7NeEL8gvWnLWxviO0eEg0tgKdB45Q=,tag:8dSUmtsKjxh8LWtFD+6xTw==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
