@@ -37,3 +37,22 @@ spec:
       monthly: 1
       yearly: 1
       within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: firefly-iii-external-home-data
+spec:
+  sourcePVC: firefly-data
+  trigger:
+    schedule: "30 7 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: firefly-iii-external-home-data-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      weekly: 2
+      monthly: 3
