@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: games
 resources:
   - ./mariadb-secret.sops.yaml
-  - ./mariadb.yaml 
+  - ./mariadb.yaml
   - ./backup.yaml
+  - ./restic-config-external-home.sops.yaml
+  - ./volsync.yaml
 namePrefix: bluemap-
