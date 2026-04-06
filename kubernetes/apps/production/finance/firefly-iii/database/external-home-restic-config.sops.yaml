@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: firefly-iii-external-home-mariadb-restic-config
+    name: external-home-mariadb-restic-config
 type: Opaque
 stringData:
     RESTIC_REPOSITORY: ENC[AES256_GCM,data:XyyqBeUSQNORPrIUX1eUD+6Jentqy7WChoxC1wr0hk6XQp3kTWJ/2qoQwy6e9aCH0EtsNDQEUK84jhfpe6kIFduUDNzrXfC+TZ7OvX1yLKzv8Kx3UYOvGd8=,iv:jknCOcW6fceaCrjRAYOL+MHvi/HOAFJUVlNiakhuQR8=,tag:j1Au9c5XaZ5nYrYIxtydgQ==,type:str]
@@ -17,7 +17,7 @@ sops:
             S3VrTmdZUGE3YVhBQnJFTDlhVWJ5S2MKQFvZ/Glv213q8NAxYxQTdjXlpU2UDPJ4
             aKI24ur2Q4mWhVH7C2sTLWGEI0trPJ+jztGyNnhkWZAzDy0K3rapQw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-04-06T19:48:02Z"
-    mac: ENC[AES256_GCM,data:SJWUTK455VGjhQ36bpbrwka2a89rx1pSmd+HEH+b7VZNN/5dC4S7M+y4XLuon+4f8xiOYAB3U2qXZIn06azOExdkSfEalxga+/zUa1h71ktfWguWQxrqSTPzgTi8R5GOk4vx9lOZ9OkHQ9NtCZ5n3lqbd08NgxtVeViSqFCaL5s=,iv:FRNWQgl4CAMwrT2UnfAW/uwwm3LDq1NCXi7jPY7SvnU=,tag:AIIqc+MiT8p5vkIq1+IIhQ==,type:str]
+    lastmodified: "2026-04-06T19:51:15Z"
+    mac: ENC[AES256_GCM,data:N+12eanb+fuGrN1qBZ6/iqOP+lXdsaGB7Omv0QvvCAqLD6x+/8QwKORzxcPCiCKAUA43iraJFtVB0nxp+dwCJcZPHAp3Li4wThTuKcPPxQkteGYLWZtShdU9hkpi0EHLhZWmuTV/Fw+XMxYgRYXQAEtuVZ6FdG/fQy7o0qrMxLg=,iv:q7l+pqEUyxduuAC7zGHSWjBpXUN8JWYyOR09WlBIlE8=,tag:8Ifcc4zEfbfCfRRjocMPiA==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.10.2
