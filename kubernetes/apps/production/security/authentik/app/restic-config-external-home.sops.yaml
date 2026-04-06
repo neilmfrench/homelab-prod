@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: authentik-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:hIkikHgKtATcPOS6nVkypLC0Z1DUWQuhSEDsnebxEfI4qWN9W0yye0GS+ESMFglgSvWuZV3NTeKqYJ1LMLNdUr3QuN1yLUbFFgp2n5FCb3dykGySOFRdb6p5EA==,iv:jiMVqMT+GvUh9PyWB96EbPDQXka5tmMMp0Eds92BqZ0=,tag:z7bkfiPMmjhl3bqBdUTxbg==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:D+DGEXaExEQncmkJvQgSi4cE7QeffIY2sYE3CehXN5N0s/S9nfhrgXIvftTTmtmN,iv:zCKpkTDWQCWdfxq9Nfq3XIhYbkZpaOXzQDUAB5EQ8OE=,tag:vjkQN0Js5r8Tv1xnxPV1Jw==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4RW9vbytxcmVTdHZXd09H
+            UE0yMWp2eUo0V0k5a0M1ZFd1OG4xM0hYZlJrCkVhSEVDREl1VkY5TU94NkdJbGNW
+            aHllSVYxRStKV2J5NDhDcS9yS0dYL3MKLS0tIFNQZHQ4MVVLblZMdmNDN3c1QS9l
+            WXJtUWRQVnhSWktCcjJOa0dITkdIN2cKzifwtmIGrPYIZvL4R+ptLYPZKS7h62XL
+            tdxOFDlmCfObMmoncwzFXSVUs7aPUympQnUPZ/gLCSWTVHqJn99AUw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:29:15Z"
+    mac: ENC[AES256_GCM,data:2dKlsl/38wrZ8qA+98pYXTHEx95WPDPLuXL3GYpiGpTP9bXCFEmUkiDZX3Cdq/Y6zCYs6OyXOv59Kr5vXUZu4xkjUUskewFJx4roB4BmHJBLt5A3dXU2YsQMEtSI+7lNYGTc91xcBET56X0G0Ziv1IhC0seQjqOKwahOl0VubUc=,iv:JPaHTj6QlJaJnlDLUAcqJ4dgl/Sm4Hv5No42JfMn1dg=,tag:FzZ7DkZ6kVVUf4PyR+//yQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

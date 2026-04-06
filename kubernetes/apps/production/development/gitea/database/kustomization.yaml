@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: development
 resources:
   # - ./restic-config.sops.yaml
-  # - ./volsync.yaml
+  - ./external-home-restic-config.sops.yaml
+  - ./volsync.yaml
   - ./postgresql-secret.sops.yaml
   - ./postgresql.yaml
 namePrefix: gitea-

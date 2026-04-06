@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: gitea-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:6Oqg5JhP5YqO27pUyMK/ouE/XzlqcFcY8mb8V3IKAXwzzGomf3oL9pYff7mtsv1PUFDgh5Qx+jmj5Uj+o7oDV6jiDeuUoGGVBJU8tY71rv1hdMl7DHF4Lwo=,iv:JFfraTzuM0jOz3mYA99ckw0MrGPZtcx1kkJ4jcPFgCs=,tag:JPI0Cr45yTimSXIjyPuZSw==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:9nB/BW1AYQCj8r+3V2kXbqmohiMl0fD1J7zC2swMbReH9vVtlKaZEW1t0KHGmH8E,iv:TqOscX5MBnGGbUprdlXnoPbcnGvneOHKDJKepV6mB6M=,tag:tAF1WQem8YNzUwL0g7RyQA==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLODdSR214b3VCdmNsRmxS
+            cHNBT0tWQmNmNG4xZGJONXNUUjA3emFoRkFvCldxai9aSU5KYWVkdGpvajR3bkR4
+            Y2VUU0xyTW9WbUgrRFo3SWVlejJjZWcKLS0tIGk4d0YrQ2VqM2ZEeXBrck96WCtN
+            bU5ORzBHQXZIeHdzWU9tZk1KZTdLcVEKLr7wkRLAzoDxMOuHaeahE/M2zR8YPiE0
+            oO0x72g1Lb5uCF29oaXpW2vBLYGmGkvP2rRTZ2vixlU0V7rTGxMbtA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:07:27Z"
+    mac: ENC[AES256_GCM,data:z4xs9erigyzdplaNzFiXRRvELClH555QZ0GMopJS17Wvek2KcPKIpA6zfdsE7lLcscvt1ZFu77eP464rp6/fACEK55g6QgsuScjdUgX2Y9Tfj8LxMCiNPB+9W78NwKQ1/XmipF5t88sNigd0Nqzv2+NGapUV51urnsN8zUzQ13o=,iv:jLXMxZ0y7we2wm5VDpltNTh/JDmYetCDDzeAeGCwl9c=,tag:ztYw1fjl38Ob2pTiCGgHyw==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

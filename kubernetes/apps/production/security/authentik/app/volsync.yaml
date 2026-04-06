@@ -1,18 +1,37 @@
+# ---
+# apiVersion: volsync.backube/v1alpha1
+# kind: ReplicationSource
+# metadata:
+#   name: authentik-postgres
+# spec:
+#   sourcePVC: data-authentik-postgresql-0
+#   trigger:
+#     schedule: "0 7 * * *"
+#   restic:
+#     copyMethod: Snapshot
+#     pruneIntervalDays: 7
+#     repository: authentik-postgres-restic-config
+#     volumeSnapshotClassName: csi-rbdplugin-snapclass
+#     storageClassName: ceph-block
+#     retain:
+#       daily: 7
+#       within: 3d
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: authentik-postgres
+  name: authentik-postgres-to-external-home
 spec:
-  sourcePVC: data-authentik-postgresql-0
+  sourcePVC: authentik-postgresql-1
   trigger:
-    schedule: "0 7 * * *"
+    schedule: "15 8 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 7
-    repository: authentik-postgres-restic-config
+    repository: authentik-external-home-restic-config
     volumeSnapshotClassName: csi-rbdplugin-snapclass
     storageClassName: ceph-block
     retain:
       daily: 7
-      within: 3d
+      weekly: 2
+      monthly: 3

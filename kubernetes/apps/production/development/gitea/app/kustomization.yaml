@@ -5,7 +5,8 @@ namespace: development
 resources:
   - ./data-pvc.yaml
 #   - ./restic-config.sops.yaml
-#   - ./volsync.yaml
+  - ./restic-config-external-home.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/gitea
 patches:
   - path: ./gitea-values.yaml

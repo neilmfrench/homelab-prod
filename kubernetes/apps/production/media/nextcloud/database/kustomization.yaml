@@ -9,4 +9,6 @@ resources:
   # - ./restic-config.sops.yaml
   # - ./oci-phx-restic-config.sops.yaml
   # - ./volsync.yaml
+  - ./external-home-restic-config.sops.yaml
+  - ./volsync.yaml
 namePrefix: nextcloud-

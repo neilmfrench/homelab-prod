@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: external-home-mariadb-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:u1Noz+ngtlBIfUn6R5dzF00/xHRZM7gEh2vbeTsYOxpaPfFDyPCFDErqWd5WbdsD3iNLnenm13IsaUFHjxmiM/q5b747wzFNImA56uw+VHcaSGUipvKjR2KmWg==,iv:KRKrNKduUfuJ82ncO/lLWGgCaaYLD1iwpq14T7D7frg=,tag:57HDqccG94ik+kdkCJ70JA==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:tZ8J/GspAVXsxx4NOTxlwUsT93uP577Cq0Xkxn/q1dO278gn8HgqZUEpWCRC+C8U,iv:RnQkJeXlfMt+ZDQcDWl2NWgsPqbgU8oQMGNQwOMKu9s=,tag:OH/mgSFGrxt8xNQ2GVrGMg==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQOUZjVHg5UnVnT3VkaE5z
+            Mm50ekxKUmlJWWZBVnVxNVJBaisxbGd3cXg0Ck4wZyt0U1dUaEgwZ2o0Yzg5STJ2
+            cFhEZjY1eW1ZMEdCZ0RaZDZPWWVaZWsKLS0tIGpMWkhDVmM2ZlM0a0NFbkpjOHNl
+            Mmx3aVZ6aU9qQzc2WXdZTTBSVmVRbWsKLeZg8HQo+lKMZPlZWOTr24uAHZHnuHv+
+            ZQwLM98nZVExY8c+M+25pyY0V61B2IGrfM0/fEW0e/ZXpIn12NIcOg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:06:29Z"
+    mac: ENC[AES256_GCM,data:pc1mzLBrkyOWHjbMaRfjq0bVwizt79yG6k41KGSNRYM1N6v6H0rJz8JAoOo8TeNyMkOH6+CD17GFYvLhQIrU7sn++XxtJV40plcZTXyVClEjEIKzWppemtfzHAi+ROhSX/gpfUGbpje4Zkbb4OvUgwPisfbESFe+GLqMi88I/3s=,iv:USoDNdjhSMRMJuscCv0FNXrDA8kekUM2nIIG1X83DkE=,tag:wlukytC+jPa7AEKRe3BiXQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

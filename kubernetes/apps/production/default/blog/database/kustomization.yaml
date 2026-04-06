@@ -5,6 +5,8 @@ namespace: default
 resources:
   # - ./restic-config.sops.yaml
   # - ./volsync.yaml
+  - ./external-home-restic-config.sops.yaml
+  - ./volsync.yaml
   # - ./data-pvc.yaml
   # - ../../../../base/mysql
   - ./mysql.yaml

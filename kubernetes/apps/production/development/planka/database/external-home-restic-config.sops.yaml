@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: external-home-postgresql-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:FeDybodpPyzydpNUByQSwAxlX9YfqZbdwAjMOME6X2RFLwBA/ksYukF++rZSxuS9D6kdBxWYv7WBvS3K8QVniKPadLKKXNaBMnW/KRiTBTT6Yi6jXF5zrw==,iv:hE9zPFWhYHXFgLoqtXDuBYu62FBU/1dxzIaSdIqrewA=,tag:Rm0P9U0qLAy5D1jPAFntkA==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:v/OchI1S7WCyaxN9MXeKxKHUljQLpkdPTTq7hhMFv6Vyf+mbuXXjzliPfXzgxg0u,iv:C0G7desWj5RYbdb0IZ7yzcGPqVUaIyiS+bYB6cRSmnw=,tag:Pa1zx0f7tzjGL1tIGEj0Gg==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaSEF3YjRmWVBEY280eFU5
+            SGllUXdoWE8yVWp5SmlnS0wyZTNiemVtRERjCnFkdjdjUU1LLzg2WFBUSW5PV3Jj
+            aytkTnMwa0pjYUpTakQ4RnRlYjVDZ0UKLS0tIG5Vc25zM09zckNvbHl6TVk1NW1U
+            dTFldzRYd0NmekQzcGVYSjZrbTF1QVEKZ/gkNsczqjtyCqKgsuIsA4InhUNrTSEB
+            mUCeG0zmDNo2kbQVDuZ0g/s66Ko5H4ReT9L/tbDiu+LH4npSZmI2Lw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:23:56Z"
+    mac: ENC[AES256_GCM,data:Fa7d58Ym46GFu4ewBBtgT9QfaB8UhyHvjx16MhIEPZxQlEN/5u+dfy2FZGXEghCCXeC63VhEgzu5C/XqrhW3xSpa1JUoAZcq4La2a19DphXEKGgIw6/oSE8KJQVW72dEEoP3pKiN4cjceA/RukgMCcATxmwYhvhs1El0+COIvxU=,iv:ewl8WqLJ5jLZqKrrjckZOo06LOiiCXugCotDgFJCzYY=,tag:esvwQOO06z/oObB5ok563g==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

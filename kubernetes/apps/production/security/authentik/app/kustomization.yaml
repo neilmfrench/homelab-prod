@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: security
 resources:
   # - ./restic-config.sops.yaml
-  # - ./volsync.yaml
+  - ./restic-config-external-home.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/authentik
 patches:
   - path: ./authentik-values.yaml

@@ -4,10 +4,11 @@ kind: Kustomization
 namespace: development
 resources:
   # - ./restic-config.sops.yaml
-  # - ./volsync.yaml
   # - ../../../../base/postgresql
   - ./postgresql-secret.sops.yaml
   - ./postgresql.yaml
+  - ./external-home-restic-config.sops.yaml
+  - ./volsync.yaml
 namePrefix: planka-
 # patches:
 #   - path: ./postgresql-values.yaml

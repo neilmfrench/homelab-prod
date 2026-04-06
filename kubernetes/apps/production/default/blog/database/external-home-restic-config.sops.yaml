@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: external-home-mysql-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:9EV71vWaHkwr8x76MKtdzp4VX7VnaIcHRaWX3KThVaHTYf6V/OvQfNVU7tPtGEsJePGkTWCf1UwpWlLnby8FkTcEAJCAbjlVikHuAK9d4w5M7ml9Dj4=,iv:0Kq3jK43+1GhmGpF78PtZekhPsxVuqRjJeGx2hMRti8=,tag:d9GEYWSrBlcr0H2DFiv1hw==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:dX4SqFIGF8zwqpOpvKR8KI3txRB5XiIwndsDGM0SGTsPDe3uefDZn7yeQAmJIsbx,iv:ReukJlOb2NZQDlb3qHM6leOFhZvhkLnMg1ju/3nBeO0=,tag:iYVRZYAuogzA34xtluaEQg==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxWDhHSFhYNFpPcTRjeFN1
+            cUJxMG5QTlhBZ0hWT1lhQlJ2WFZTaXVoN1FvCktVbUNMeWJnZmMrb1c3Vk9xZnBN
+            akhkMXpER2dHdFVydzRjaHpFZ0hka0EKLS0tIHhac3FuVWtrbGsyaGx1bHJnZWRk
+            VDIzL1lGU1F4akEvbllnRzJTZGxqN1EKIQNdlNPaJojw3pzcr9fYFrpbfHuwXllq
+            RoUFwwTTYwqjwYhlCaMUJ/y29rLXa2WdhLUL4aE81U3JUD98IZzHkw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:05:10Z"
+    mac: ENC[AES256_GCM,data:VZnXwlsQeJkf4LF2XxqgR7fZMh+fpFE8bY62u9B1k2Wjb92s6gRjMxXRNxnMY4L2whIha8O1Jswz+JbfPnnQAd3rccfgF0jWNAn04j6rgfrfNaJLYecgH0+HBAN46iVt4IFQ25YaGLpy92gckIWW8yTlPiQ0dIup3z/ehAiBKP8=,iv:/sqQA0PrH8UuoUam9vNQllLku9+7sAObEYcVoRBzzl8=,tag:hUwgKXA47GIAbUDRCYWd7A==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

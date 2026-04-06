@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: home-assistant-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:E8Rtw291Ls9O8Mz7/Jk7NYNJEgf3h2FdVx8jvyOa5/Ksb7LD40dKmsGo7UYw0DgOaaK9CsRmdmG5a0EUx+ELeYHG2gTYmCe1alIiB4CWgn2NUZkPfZ13FxWuCcsa,iv:hej6rDSKrapNX+IzR7K34Ua/8+TH0qkqOnKz/BhXUik=,tag:/rbwcN1iXiEZDCY9506+Zg==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:FLp/zDgs5/CnYiyyLeufB4Zj9KA0c5o0rfIk6Xoek/0I6br63gA31mr6O5OM2fbZ,iv:/i6iFTm5JUDRRx7wWxlYaBB7pcUmzHB3AxdQWI7+aJc=,tag:lzVFnBxlhxPtLpzy0kxpew==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBocTJPVDBJNkxFdUdMeStN
+            YjFRQkhmWkFtR00vc1ZKdXJ6d01QQys1MDFzCmdTODEvZTEwT29JV1VsaXZyNm1L
+            SWJkWElJSDBJWGpQcG40MmZZemorWkEKLS0tIDAxQzJlZG5YUlNDV2JmZ1Fxa215
+            NC9tUnl4dkVqNjdEZ0h6WVMrcHRTcDAK0uyRXWtYXmivWb2Fv4WXJl5pweVNXrA/
+            U24JQibbPoetC/fPdr5JpKt6G6Ecs2xuyf0OxreAANqjHRUSZ+LI+Q==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:25:43Z"
+    mac: ENC[AES256_GCM,data:XRvBNQWx0IotjvLOw3PTb/iZU+8KMcrHhW+qvZz4cASum+nsh/N5VBODfKmwtG/FL+6h9x+BExQU/pMlvXN7mFTsWeFwPzko3OdAB/gU64SWBq09qKibI97sxUAYo8+fDI6oRbfUSQi1Ru+E/hVjc7MaWcL21SQ/C+lnYu+y+JM=,iv:GyWIuSXOTcxegGnRHl/pP4vKZ0pB9k2Bl1WxwkI2UXs=,tag:TtkXwOWfwAEsz28ztzdgIQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

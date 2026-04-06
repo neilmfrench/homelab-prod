@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: nextcloud-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:BtK6L1jE2Jf91g64xH3NFiOLBkv7VqarR/YgdC6ZUQF6j9s321EH6LHfWex6v2HJqner453SOHBm+SVa1VERsPPIL2n1TOG3zFiMUkHtrBjTkiZVc9qWmq/c3ZGB,iv:Bgpz55fS/WzkLQ+Ua2tsr2PexqP6jSxGX03J5MVmZTM=,tag:YHFVKO9p7mDScIkRBV0x4A==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:zkZFXH0zPW4Vth9vnVAd4863sdb43lIqaGu/m3AyuU8L6ptBPSi9tpsEJbUS4K4X,iv:HovhsyzHbIGSHHAgklbIHL2Do5CJgg5jDMUSumIybD8=,tag:1lKivG3ozpJgmrEe/PA12g==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNc2VIUEtNK1ZnQU5XUmc4
+            R1RhMzFxTWQvUHJzckRQVUQwQVFyc1ZLaEdFClRkeFV4MVZkekpxN0RscU5abXlR
+            eEJSTHkwZmxRN25aekhHUHRhb0VjMlEKLS0tIHRNVlpvdTRiNTAydjk4T1BhUU9M
+            U0hUMWt4dnZXMTZ0N25TYmtjM0RwYk0KfrNNc5qhpaRME5weaoLpn7BWLTr89O/i
+            wMnMxkURutf5xdtRqr6Z8aAz4BzZOnK+Rz7tbtn/qV3y2PbU/4E6kA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:26:32Z"
+    mac: ENC[AES256_GCM,data:pKffMQTC3zFnoYAVbYkO5WXS0bhy2um0Jroz2Z4Ev2SsHdTA0gX12aTGaYGCQipLcmgmcVB6TzXeNeAoUBFF6ocTNKU0CotezP8QC+6G4+NWXbx7yZr/e4EcXk5dWxB40pS76p/dgxH5Ml6+83D/Y2ZiJSITGBN2Go7S/VSo18U=,iv:3KW8eKZg/3mhEiwpt0dO+UfdcoMCYTR0L01W3t4cUMI=,tag:pNXOuNinzRHSFwiXuqq5oA==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

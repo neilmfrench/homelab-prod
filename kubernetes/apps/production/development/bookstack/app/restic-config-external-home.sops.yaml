@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: bookstack-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:xC5BBt2imH/ViRfzJqAfcCEUmtgZ/OTo8vRpYi8D7XMj+fKOcf5oHTd6DSErmRULxz7XIlUOcp8lVz9r7pdDm947oFzFf93pdQJDE1O+BT8xWrnwUVRF6guX4tyh,iv:61grnz2mv/4paCgkyLO56ONKV3WzHa+ReWe5jfWLEwQ=,tag:q7t8xPUnIvVlfwungGgL5Q==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:NFaDDffc9AaLgdhNfY3hMIx9xX0/FSeuWt/HNlYjNIOn9pA/eMhRLIb5KtUtRGEg,iv:R6T/s/k0bhtOz21xxmmIq76oIKPceAB1kdZIsvpU3A4=,tag:OTMWW2+iNCWSZ6S0+kifTQ==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1WU00NlFUY0hzQS9GOXlN
+            YjdCdzkwMHV0WE9pL1RkR2VmNHk2a0FXWDBZCnUycWpSZWQrazBSWDM4T0FTUnFk
+            U0xTaXJRU0NYeXcxelNQL1JVKzB0QjQKLS0tIHlEYkJGSCtyTkNhY1BjK25EaGRV
+            WWppdnY0ZWdBM0JoTkQ2d0hMeHhDVWMKTvLgF3Q1SDqmCDGkbJ8x7Kw4TuwhaaGp
+            MDThYlN1e2oYcJ528L2Mh9fi98YOlPQjPE3+KbAkVFoOCSoEaLLLIA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:05:50Z"
+    mac: ENC[AES256_GCM,data:laub2NuWH7jljZJw97MtGD74HbaGsCXVL3mpVHmH/w0DSz4WGr/ALY52MyJ+9kUlsFZbTFzv2AURLcO6vstAr9a9zP3yf52YbjHVu3V4/mM3bDBTtkKQEOJPU9kRi5aX+QsqXhnPnY/50WIMRyhNxhF1lLPHCIRZKJYUTk7tzqc=,iv:bPz52RXKex8cD+7X40tifSByCjPmr3B4Dpk1Sw2Admk=,tag:+z4SNVi+71R/VS7LtNtV2g==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

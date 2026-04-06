@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: pocketbase-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:19XPlz5dSvVhDNlMPIBzFhuZ8rS8QmwfiG8EsmrSCF6AHu5zasVEdXWgOeHTLuhRP6JOv86hk1HVxoXtEaTDFcxZ8k3KNhscqOE35IdYWh884J6MiZ/5KtshFNfZ0w==,iv:FcMU/jqIe6TJ7b0q4FAax1V0VITZyqmPJKCJKPqu3Bg=,tag:lFY9kuYqeGwlFIUoTSob1w==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:Rw+9ls0tAqLlutvCkMqyHJye23VdzJxZYYP+mzA3r639agbRP6PImDgOtwx+Z2Ac,iv:XujNZ8obnXkNvBsp55e2mLQhpVmlwy+vF4SANPNug2E=,tag:kcU/WEVeLzSIu4DR/LqtrA==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDWjRRbEJoQU4vYitnWEVV
+            MSt4MWJ5STV0RzR6Y1F6ZlRONm9QTlVYR1hFCnRIcjRaQlNScHNVb0Qzd3A3Ky9R
+            YmVEd2Y1STIvWnU2YUl3YTdpekFveFUKLS0tIHZhUk9IQkp3R0xvT3hGT0Y5UGN0
+            V1ZBV1AyNUtKVk05Ly91WHlZRkFsUUkK/drEEKwTLIEkQDWHQjps7emxaHeAwfPt
+            ZlBuFpn/+wGrVQuqHyCjNX7MJZ5cB93f8C/iNiS2FG8RGK6iuDB/Fw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-06T23:25:02Z"
+    mac: ENC[AES256_GCM,data:mxlem+c3i9h8UUe4yEX96Wvs4hx3+RlvAYZIcM7nF41wvwJI6f6+D4mB/6xcS57CfI38PI1gJlbm+ix6uVFXWdozEdvShq3B//IzgkcaWLr03o7/eEzo8xY0Y7AmNrUnGJQGjWZIl5ldkKTTlgf7z7JJdvtTcyXNUXmiZSK1vLg=,iv:VHoaxnoqdb2tQ764rBEIYyOySEKjF0QQAz98fp8LPfY=,tag:51azkncLI28RePkiKuLrrA==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

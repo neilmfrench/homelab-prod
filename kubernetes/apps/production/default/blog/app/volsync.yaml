@@ -58,3 +58,22 @@ spec:
       weekly: 4
       monthly: 12
       yearly: 10
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: blog-data-to-external-home
+spec:
+  sourcePVC: ghost-config
+  trigger:
+    schedule: "30 8 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: blog-data-external-home-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    retain:
+      daily: 7
+      weekly: 2
+      monthly: 3
