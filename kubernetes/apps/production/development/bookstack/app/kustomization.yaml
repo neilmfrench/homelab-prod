@@ -5,7 +5,6 @@ namespace: development
 resources:
   - ./config-pvc.yaml
   #   - ./restic-config.sops.yaml
-  #   - ./volsync.yaml
   - ./restic-config-external-home.sops.yaml
   - ./volsync.yaml
   - ../../../../base/bookstack
