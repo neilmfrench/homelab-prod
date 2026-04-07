@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: tailscale
 resources:
   - ../../../../base/tailscale-operator
+  - ./external-home-tailscale.yaml
 patches:
   - path: ./tailscale-operator-values.yaml
