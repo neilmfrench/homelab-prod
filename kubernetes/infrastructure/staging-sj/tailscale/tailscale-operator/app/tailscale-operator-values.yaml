@@ -15,4 +15,4 @@ spec:
       hostname: k8s-operator-staging-sj
       logging: info
     proxyConfig:
-      defaultTags: tag:k8s-staging-sj
+      defaultTags: tag:k8s-operator-staging-sj
