@@ -21,14 +21,14 @@ kind: ReplicationSource
 metadata:
   name: uptime-kuma-data-to-external-home
 spec:
-  sourcePVC: uptime-kuma-data
+  sourcePVC: uptime-kuma-data-daily-backup 
   trigger:
     schedule: "30 8 * * *"
   restic:
     copyMethod: Direct
     pruneIntervalDays: 7
-    repository: uptime-kuma-data-external-home-restic-config
-    storageClassName: openebs-jiva-csi-default
+    volumeSnapshotClassName: longhorn-snapshot-vsc
+    storageClassName: longhorn-volsync
     retain:
       daily: 7
       weekly: 2
