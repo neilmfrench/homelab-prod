@@ -1,0 +1,18 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tailscale-operator
+spec:
+  values:
+    installCRDs: true
+    oauth:
+      clientId: "${SECRET_TAILSCALE_OAUTH_CLIENT_ID}"
+      clientSecret: "${SECRET_TAILSCALE_OAUTH_CLIENT_SECRET}"
+    operatorConfig:
+      defaultTags:
+        - tag:k8s-operator-staging-sj
+      hostname: k8s-operator-staging-sj
+      logging: info
+    proxyConfig:
+      defaultTags: tag:k8s-staging-sj

@@ -9,3 +9,4 @@ resources:
   - ./cert-manager
   - ./networking
   - ./volsync
+  - ./tailscale
