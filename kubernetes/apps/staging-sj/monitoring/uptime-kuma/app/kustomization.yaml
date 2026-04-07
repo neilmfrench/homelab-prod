@@ -5,7 +5,8 @@ namespace: monitoring
 resources:
   - ./data-pvc-with-backup.yaml
   # - ./restic-config.sops.yaml
-  # - ./volsync.yaml
+  - ./restic-config-external-home.sops.yaml
+  - ./volsync.yaml
   - ../../../../base/uptime-kuma
 patches:
   - path: ./uptime-kuma-values.yaml

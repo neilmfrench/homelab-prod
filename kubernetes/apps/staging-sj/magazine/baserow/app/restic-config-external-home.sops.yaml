@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: baserow-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:HRBWFEN7N+7FZ6ETug/wIVFrU+TFF1mM6E9xLqbA1b9AJaZc6M4svZTBcroMA9Uo9BHKMMIpuH1NbI52KXj/KgDb3gY12F5vbALxl7b1rrAFcl2W71cb7FW03g==,iv:3nFuoXjyWxGvF3f+WBudT1GxM2CCFLb4kOxEGrhT6ZU=,tag:JfiYz36S3Vk4lgqrTxzxhQ==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:Dy57PIU2/YNToWRl3IVebLO6m7+1fTaIFJ/860rXSn6uUPAt2bdm91wAboh1fVnV,iv:qjNR6N/SoXIFlmaJ+J2/Fykz+UvT/DGVpOXxTNMRAtA=,tag:rrGepWVvW0f/s/IORqATSw==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjOEh0WGtTQ0RmOFphaXF5
+            OHNKNzIxb0l5b1I4eVVCRUg1VXU4R29FSEdZClJYaExxVmorWm4rcWw5YS95eDRw
+            RDBvOGd3ZTh0Mi83cDErNW4wc2hkTXMKLS0tIDdjRXVIQmJva3Z6SDFkYi92bWVv
+            R2pnNVZ2WWwrUTBoUVdOM2QzZWkrRTQKjl9DhBDmyVwkK5bEvH3HZ11YzZOgGB6Z
+            7NIVZb6zNA2DLRlFM41YOQgVdsaNWI0yGa/2fOPAXzvuNcbGYZdGTg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-07T18:09:15Z"
+    mac: ENC[AES256_GCM,data:lUaYU6iGmEf2f7fEagWXO9GWzXhf54xWpflH8e8soA5njo3c6brS3cn62/KeRH2oBEkcO2TlmBnHt6TN8+60l5qxYpauXPxHj9+D1bkkepdkzOguC8SEegNq79OWXKBRy0yZCN1qmvyb3ofZ+UFlZEHb475T2miAcsroA7suDU4=,iv:Ix8rhMP/gBZM2UnwLsN2xtApKhrGV+9HasFq+0l2bYQ=,tag:E0gJxSRXzhhr/bE5jImnBw==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

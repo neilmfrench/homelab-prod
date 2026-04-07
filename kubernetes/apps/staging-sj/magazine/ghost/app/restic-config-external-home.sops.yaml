@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: ghost-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:B2H11Ghj8McNLVjGEM0MFZqla+ueS/TJBLgH86ITaxyPZtyqnqVcUKdkMPcSM8S/hT5i1PQ2r7omb11QIQ8E7Hg82Q8GixpH0NH1pgOcKbaqAciO+i7+IsQ=,iv:auoV1txx7p+2eZx3KAaL7GPNP4HeKd2w5CdX9nKDC0k=,tag:l3VIj1gUWtH2RhzCaPiECA==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:666V6+xvxbwfMb/J+JhUfJkCffMpHKrjDTAvAjBEZdYyPJkA1silksXui7XlpWgy,iv:dYV0rkFfaEhimsvzboIGMRJIyDYRnONPP+Mcra9rgCY=,tag:HPQwI4Vp+sgvFIYmsXi83A==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxMFViT3lrSXFybHIvdDBZ
+            QlZHN3c5UkFJRkJjM2FOVGxXTnlSdEM2QlZvCjNmM1BnTkd3MEZXQ2dMeTBDUWdI
+            V2d4ZitFWUxnTGhFWTdnYTVZSkVsQXMKLS0tIG9NUm92eEFDVnFsOHUxTTBEZ254
+            QWVIQmxqVEk5T1I1OURHR2RKaC9IbkEKbuMS4SY+/F+SxlgqmZ8CzMTZUrJKfkBe
+            rPgJOs+7xTHOSMDJzXVB68FZ6xjSkloWimNR+eou6oHNQJtlWBJ5Qg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-07T18:11:32Z"
+    mac: ENC[AES256_GCM,data:S//y4VCx7mCn8f7XFTa8EOzOwJ5KmCyJRM+wGZun+R7LOOJQGjNtxXrsMTLOnuBiG1uKCNn0vi2ZSiPJTItev1nPcOdM8B6ZitJp+c4rC03wPs+Hu0JF03rTZWzCEhPmxKnooyxoyG6cnQBm8WEqv26lFvkuYzCT98LW8AsJrTA=,iv:x6/VEZ6jk3m8jeJ8Lf88tH7RNODtJUwOZXlLPG51fxs=,tag:igB34AkSJYWnhSozzqLK1A==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

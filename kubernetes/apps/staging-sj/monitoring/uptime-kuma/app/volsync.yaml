@@ -1,17 +1,35 @@
+# ---
+# apiVersion: volsync.backube/v1alpha1
+# kind: ReplicationSource
+# metadata:
+#   name: uptime-kuma-data
+# spec:
+#   sourcePVC: uptime-kuma-data
+#   trigger:
+#     schedule: "0 7 * * *"
+#   restic:
+#     copyMethod: Direct
+#     pruneIntervalDays: 7
+#     repository: uptime-kuma-data-restic-config
+#     storageClassName: openebs-jiva-csi-default
+#     retain:
+#       daily: 7
+#       within: 3d
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: uptime-kuma-data
+  name: uptime-kuma-data-to-external-home
 spec:
   sourcePVC: uptime-kuma-data
   trigger:
-    schedule: "0 7 * * *"
+    schedule: "30 8 * * *"
   restic:
     copyMethod: Direct
     pruneIntervalDays: 7
-    repository: uptime-kuma-data-restic-config
+    repository: uptime-kuma-data-external-home-restic-config
     storageClassName: openebs-jiva-csi-default
     retain:
       daily: 7
-      within: 3d
+      weekly: 2
+      monthly: 3

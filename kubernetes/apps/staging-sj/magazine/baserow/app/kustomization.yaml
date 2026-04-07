@@ -5,6 +5,7 @@ namespace: magazine
 resources:
   - ./data-pvc.yaml
   - ./restic-config.sops.yaml
+  - ./restic-config-external-home.sops.yaml
   - ./volsync.yaml
   - ../../../../base/baserow
 patches:

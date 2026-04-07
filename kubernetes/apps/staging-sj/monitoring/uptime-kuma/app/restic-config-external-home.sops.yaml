@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: uptime-kuma-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:TTfWneWp9KeAOGFpVd3fSTwnL9EHVnQNgy269flaR32435/rLyPMhTq8nHVTAJ0Z5KIslMGSstbD7ey2zdeqzD+zHsAM1qaR9tDoLniPWLHTLSoYHC529pgNBDMdN6A=,iv:4J03lVHH5fvuMHI4mB+50Kd3HO/mTYMMyd3H2hWUG7A=,tag:XWZxv6bDia1L3FerU4PmTg==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:vZS0YlE5WdHK6CyJXEm+AzGoXj3arN4hf9CGfaCdRJwP9MzIyP+MMP2JwkMzoWp+,iv:sWitNx/OvIrSN84ywGmlJlscuJ0h1C5arjBNyn1mDwA=,tag:x5AUz5d/GoaDA3dVVjjhEg==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAzaW00cjZBcTEvb3puR0g0
+            cmdBTXZhZjljV1VvdnlTM09EeTJCUEVHaWs0CnYvdm9FdSttclJGZDFRSUhRSU5T
+            RVNGZ2phczhlRE9uOWZ2ZTJoSk5jYk0KLS0tIFdzeTRWRUJCVnZSbHhTdVI4TnBD
+            TERxMnhWOTJCMDdHRDZsbHFqM1VYMkEKZupeYlNNXldSWluy+MZwZWhEnIQEWMUr
+            +jhPM/nbsP478ovGTpQW9GTw/4DxKCBL0uUHTD4dTKhUPAGwi1WnHA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-07T18:13:41Z"
+    mac: ENC[AES256_GCM,data:sn4swjAPok2CkjWWcTagLqHkvbqJ+pAAf/OLmxMb5yT6Xa/PCguYSxLlZZPASBQ8+OK76MK5RHjz2vUaMQWLsJ4CnidTXuwPXcN3fdzkqrKVmQjGGHvvJZSDr9FBZRRVHYrWhyZHGVswf7qYX+h7DAu/JVx933flkkKmidx28nM=,iv:uozGakh3ZImTEoT6CSvItavGVk5S6L0LxCwin3XBeW0=,tag:aMSkxS9dW8KZgPdNEycVzQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

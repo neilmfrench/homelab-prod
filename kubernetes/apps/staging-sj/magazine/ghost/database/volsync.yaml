@@ -17,3 +17,22 @@ spec:
     retain:
       daily: 7
       within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: mysql-to-external-home
+spec:
+  sourcePVC: ghost-mysql-data
+  trigger:
+    schedule: "25 8 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: ghost-external-home-mysql-restic-config
+    volumeSnapshotClassName: longhorn-snapshot-vsc
+    storageClassName: longhorn-volsync
+    retain:
+      daily: 7
+      weekly: 2
+      monthly: 3

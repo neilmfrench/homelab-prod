@@ -16,3 +16,22 @@ spec:
     retain:
       daily: 7
       within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: ghost-data-to-external-home
+spec:
+  sourcePVC: ghost-config
+  trigger:
+    schedule: "20 8 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: ghost-data-external-home-restic-config
+    volumeSnapshotClassName: longhorn-snapshot-vsc
+    storageClassName: longhorn-volsync
+    retain:
+      daily: 7
+      weekly: 2
+      monthly: 3
