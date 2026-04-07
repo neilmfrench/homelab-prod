@@ -25,8 +25,9 @@ spec:
   trigger:
     schedule: "30 8 * * *"
   restic:
-    copyMethod: Direct
+    copyMethod: Snapshot
     pruneIntervalDays: 7
+    repository: uptime-kuma-data-external-home-restic-config
     volumeSnapshotClassName: longhorn-snapshot-vsc
     storageClassName: longhorn-volsync
     retain:
