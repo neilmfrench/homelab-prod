@@ -33,3 +33,22 @@ spec:
 #     retain:
 #       daily: 7
 #       within: 3d
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: vaultwarden-data-to-external-home
+spec:
+  sourcePVC: vaultwarden
+  trigger:
+    schedule: "10 8 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: vaultwarden-data-external-home-restic-config
+    volumeSnapshotClassName: longhorn-snapshot-vsc
+    storageClassName: longhorn-volsync
+    retain:
+      daily: 7
+      weekly: 2
+      monthly: 3

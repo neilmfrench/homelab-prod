@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: vaultwarden-data-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:yscrH7iJyd/HsEe+kQui8znKTsOR/z4IsM+uxrbIQMWubnL1ii+cUoh5DO1AMVRa8/TvYs7UFwVynukIDKCucooZFFQ1BUxdAS/VIWJfTJpDlPBWvTHCWZXAhs+z33Al,iv:UcX6e7+/11Uc6y6FbxCJgmCTsTMH/aL0UcdqaI3kN8s=,tag:Pj8NoKFBf3kreoR5qNmn4A==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:gO2p/dAk37xQVqgRCjH+a83HMKvLwWOhU7G3u+me9muEHD9nSBpYoFbBeSEb6+ly,iv:qAZI1wH6ZD9kwYYXWKIerhe1DwHl7EfSEk4gCx6GrUU=,tag:+Nl5x5F4rN8EwiWX+nKRjg==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAveHZhZ3YxN2FGRUdhLzZT
+            b2puZ2FBQ3ZnTjN0bFcvU2ZNNlNoWHR2OWgwCnRnK1Ayc21OdGNHdHZ3ZXlWOUNI
+            QWRNVndlSEYwcGg5OUNvTTN2dWxTcWcKLS0tIGlBZWo5eXZaSVdCVGNNOGJiK0pQ
+            TjZwTmZUK1FrS1BQZ01ReEx0WHFxaWcKiFJPCarTYLPC514oAFjeJf8fHzyfwSjC
+            8Qe8VsXz7lNXYYEOGjxpPK4VFrkunhQWsZBH5F0qla0dVNyfXr80HQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-07T18:44:24Z"
+    mac: ENC[AES256_GCM,data:wiUCK8r7o3KC7wZjed9IcwGeuCC/Fk0R6zByvb2ptLkGXq7+RrivTI9HQV5aXLyS1CepX1qVnld6h2pN/b4MxERg1D6g6/DDMs/j2Meqobl04QYrEd9CyUQoMTsjwGRpzxqKPf3lY0rr/dzrjF+44ATagNfpBPlq2K/QnKLG1Ao=,iv:18cVHGNRpzgyHHXtC2TG+P6wYe02IRqEuY0FwtRYtnA=,tag:vRX9D1pD9MAwiQpCqbZXFg==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
