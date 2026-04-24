@@ -12,7 +12,7 @@ spec:
     major: 15
   storage:
     storageClass: ceph-block
-    size: 8Gi
+    size: 64Gi
   bootstrap:
     initdb:
       database: authentik
