@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dependency-track
+spec:
+  values:
+    apiServer:
+      persistentVolume:
+        enabled: true
+        className: ceph-block
+        size: 8Gi
+      resources:
+        requests:
+          cpu: 500m
+          memory: 2Gi
+        limits:
+          memory: 5Gi
+      extraEnv:
+        - name: ALPINE_DATABASE_MODE
+          value: external
+        - name: ALPINE_DATABASE_URL
+          value: jdbc:postgresql://dependency-track-postgresql-rw:5432/dependencytrack
+        - name: ALPINE_DATABASE_DRIVER
+          value: org.postgresql.Driver
+        - name: ALPINE_DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: dependency-track-postgresql-secret
+              key: username
+        - name: ALPINE_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dependency-track-postgresql-secret
+              key: password
+    frontend:
+      apiBaseUrl: https://dtrack.${SECRET_DOMAIN}
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      hostname: dtrack.${SECRET_DOMAIN}

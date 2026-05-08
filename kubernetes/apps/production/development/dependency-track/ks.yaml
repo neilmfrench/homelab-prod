@@ -1,0 +1,37 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-dependency-track-database
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/production/development/dependency-track/database
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-dependency-track
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-dependency-track-database
+  path: ./kubernetes/apps/production/development/dependency-track/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: dependency-track
+      namespace: development
+  interval: 30m
+  retryInterval: 1m
+  timeout: 10m
