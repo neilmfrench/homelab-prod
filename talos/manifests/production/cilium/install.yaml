@@ -723,7 +723,7 @@ spec:
               value: 172.16.20.20
             - name: KUBERNETES_SERVICE_PORT
               value: "6443"
-          image: quay.io/cilium/operator-generic:v1.13.4@sha256:09ab77d324ef4d31f7d341f97ec5a2a4860910076046d57a2d61494d426c6301
+          image: quay.io/cilium/operator-generic:v1.19.4@sha256:1aa2b62735e7d8ab49ee840ae59c346932024c88901579121395c1271b435f71
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
