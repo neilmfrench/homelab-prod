@@ -226,9 +226,9 @@ spec:
         secrets:
           - etcd-certs
         thanos:
-          image: quay.io/thanos/thanos:v0.40.1
+          image: quay.io/thanos/thanos:v0.41.0
           # renovate: datasource=docker depName=quay.io/thanos/thanos
-          version: "v0.40.1"
+          version: "v0.41.0"
           objectStorageConfig:
             secret:
               type: S3
@@ -274,7 +274,7 @@ spec:
           # renovate: datasource=docker depName=quay.io/thanos/thanos
           registry: quay.io
           repository: thanos/thanos
-          tag: v0.40.1
+          tag: v0.41.0
         ruleNamespaceSelector:
           any: true
         alertmanagersConfig:
