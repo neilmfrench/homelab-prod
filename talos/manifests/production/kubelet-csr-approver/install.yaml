@@ -139,7 +139,7 @@ spec:
               value: ^talos-\d
             - name: ALLOWED_DNS_NAMES
               value: "1"
-          image: ghcr.io/postfinance/kubelet-csr-approver:v1.0.1
+          image: ghcr.io/postfinance/kubelet-csr-approver:v1.2.14
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
