@@ -48,6 +48,7 @@ spec:
         AUTHENTICATION_GUARD_EMAIL: "HTTP_X_AUTHENTIK_EMAIL"
         CUSTOM_LOGOUT_URL: "https://firefly.${SECRET_DOMAIN}/outpost.goauthentik.io/sign_out"
         DISABLE_CSP_HEADER: true # for cloudflare
+        PHP_MEMORY_LIMIT: "1024M"
         # APP_DEBUG: true
         # APP_LOG_LEVEL: "debug"
     ingress:
