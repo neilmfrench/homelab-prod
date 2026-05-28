@@ -1,0 +1,52 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dependency-track-v5
+spec:
+  values:
+    common:
+      database:
+        jdbcUrl: jdbc:postgresql://dependency-track-v5-postgresql-rw:5432/dtrack
+        username: ""
+        password: ""
+      serviceAccount:
+        create: true
+        automount: true
+    initializer:
+      enabled: true
+      extraEnv:
+        - name: DT_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: dependency-track-v5-postgresql-secret
+              key: username
+        - name: DT_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dependency-track-v5-postgresql-secret
+              key: password
+    apiServer:
+      resources:
+        requests:
+          cpu: 500m
+          memory: 2Gi
+        limits:
+          memory: 5Gi
+      extraEnv:
+        - name: DT_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: dependency-track-v5-postgresql-secret
+              key: username
+        - name: DT_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dependency-track-v5-postgresql-secret
+              key: password
+    frontend:
+      apiBaseUrl: https://dtrack-v5.${SECRET_DOMAIN}
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      hostname: dtrack-v5.${SECRET_DOMAIN}
