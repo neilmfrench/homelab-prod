@@ -1,0 +1,26 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sbom-operator
+spec:
+  values:
+    args:
+      targets: dtrack
+      format: cyclonedx
+      dtrack-base-url: http://dependency-track-v5-hyades-api-server.development.svc.cluster.local:8080
+      kubernetes-cluster-id: homelab-prod
+      namespace-label-selector: kubernetes.io/metadata.name=development
+      verbosity: info
+    envVars:
+      - name: SBOM_DTRACK_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: sbom-operator
+            key: dtrack-api-key
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 1Gi

@@ -7,5 +7,6 @@ resources:
   # - ./vaultwarden/ks.yaml
   - ./crowdsec/ks.yaml
   - ./authentik/ks.yaml
+  - ./sbom-operator/ks.yaml
   # - ./keycloak/ks.yaml
   # - ./trivy-operator/ks.yaml

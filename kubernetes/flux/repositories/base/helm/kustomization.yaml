@@ -58,3 +58,4 @@ resources:
   - ./sonarqube.yaml
   - ./tailscale.yaml
   - ./dependency-track.yaml
+  - ./ckotzbauer.yaml
