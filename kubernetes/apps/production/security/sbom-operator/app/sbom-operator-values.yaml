@@ -11,6 +11,7 @@ spec:
       dtrack-base-url: http://dependency-track-v5-hyades-api-server.development.svc.cluster.local:8080
       kubernetes-cluster-id: homelab-prod
       namespace-label-selector: kubernetes.io/metadata.name=development
+      fallback-pull-secret: harbor-global-ro
       verbosity: info
     envVars:
       - name: SBOM_DTRACK_API_KEY
