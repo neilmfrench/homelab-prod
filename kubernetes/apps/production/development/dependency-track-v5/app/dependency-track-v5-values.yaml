@@ -15,6 +15,7 @@ spec:
         automount: true
     initializer:
       enabled: true
+      noHelmHook: true
       extraEnv:
         - name: DT_DATASOURCE_USERNAME
           valueFrom:
