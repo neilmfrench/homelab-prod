@@ -8,7 +8,7 @@ spec:
     # ref: https://hub.docker.com/r/itzg/minecraft-server/
     image:
       repository: itzg/minecraft-server
-      tag: java21
+      tag: java25
       pullPolicy: Always
       pullSecret: ""
 
