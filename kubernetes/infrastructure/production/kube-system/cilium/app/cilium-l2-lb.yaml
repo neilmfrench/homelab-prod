@@ -8,6 +8,7 @@ spec:
   loadBalancerIPs: true
   interfaces:
     - enp2s0
+    - eno1
   nodeSelector:
     matchLabels:
       kubernetes.io/os: linux

@@ -37,7 +37,7 @@ spec:
     routingMode: tunnel
     tunnelProtocol: vxlan
     autoDirectNodeRoutes: false
-    devices: [enp2s0]
+    devices: [enp2s0, eno1]
 
     healthChecking: true
 
@@ -147,9 +147,9 @@ spec:
           - name: dev-phx
             address: cluster-phx.mesh.${SECRET_DOMAIN}
             port: 2379
-          - name: staging-rpi
-            address: cluster-rpi.mesh.${SECRET_DOMAIN}
-            port: 2379
+          # - name: staging-rpi
+          #   address: cluster-rpi.mesh.${SECRET_DOMAIN}
+          #   port: 2379
       apiserver:
         replicas: 2
         kvstoremesh:
