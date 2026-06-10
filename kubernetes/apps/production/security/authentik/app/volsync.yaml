@@ -26,6 +26,7 @@ spec:
   trigger:
     schedule: "15 8 * * *"
   restic:
+    unlock: "unlock-06-09-2026"
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: authentik-external-home-restic-config
