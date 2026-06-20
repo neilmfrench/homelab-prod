@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./bucketclaim.yaml
+  - ./prometheusrule.yaml
   - ../../../../base/thanos
 patches:
   - path: ./thanos-values.yaml

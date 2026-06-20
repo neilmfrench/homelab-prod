@@ -1,0 +1,45 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: thanos-compact-rules
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: thanos-compact
+      rules:
+        - alert: ThanosCompactHalted
+          annotations:
+            summary: Thanos compactor is halted (no compaction, downsampling, or retention).
+            description: >-
+              thanos-compactor has thanos_compact_halted=1, usually due to overlapping
+              blocks it cannot merge. While halted it ALSO stops downsampling and retention,
+              so the object store grows unbounded. Check
+              `kubectl logs -n monitoring deploy/thanos-compactor` and the overlapping blocks.
+          expr: thanos_compact_halted == 1
+          for: 30m
+          labels:
+            severity: critical
+        - alert: ThanosCompactNotProgressing
+          annotations:
+            summary: Thanos compactor has not completed a successful iteration in 6h.
+            description: >-
+              thanos_compact_iterations_total has not increased for 6h, so the compactor is
+              not completing its compact/downsample/retention loop (halted, wedged, or
+              erroring). Expect raw data to accumulate and retention to be skipped.
+          expr: increase(thanos_compact_iterations_total[6h]) == 0
+          for: 1h
+          labels:
+            severity: warning
+        - alert: ThanosCompactRetentionBacklog
+          annotations:
+            summary: Thanos compactor has a large backlog of blocks past their retention period.
+            description: >-
+              {{ $value }} blocks have crossed their retention period but have not been
+              deleted (thanos_compact_todo_deletion_blocks). Retention is not being applied —
+              the object store will keep growing until the compactor catches up.
+          expr: thanos_compact_todo_deletion_blocks > 100
+          for: 6h
+          labels:
+            severity: warning

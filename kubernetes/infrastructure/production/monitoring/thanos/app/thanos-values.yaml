@@ -42,10 +42,16 @@ spec:
       replicaCount: 3
     compactor:
       enabled: true
-      resourcesPreset: "none"
+      resources:
+        requests:
+          cpu: 250m
+          memory: 1Gi
+        limits:
+          memory: 6Gi
       concurrency: 4
       extraFlags:
         - --delete-delay=30m
+        - --compact.enable-vertical-compaction
       retentionResolutionRaw: 30d
       retentionResolution5m: 60d
       retentionResolution1h: 90d
