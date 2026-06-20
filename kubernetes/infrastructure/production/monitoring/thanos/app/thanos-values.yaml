@@ -42,6 +42,8 @@ spec:
       replicaCount: 3
     compactor:
       enabled: true
+      nodeSelector:
+        kubernetes.io/hostname: talos-5
       resources:
         requests:
           cpu: 250m
@@ -56,9 +58,7 @@ spec:
       retentionResolution5m: 60d
       retentionResolution1h: 90d
       persistence:
-        enabled: true
-        storageClass: ceph-block
-        size: 50Gi
+        enabled: false
     storegateway:
       enabled: true
       resourcesPreset: "none"
@@ -94,3 +94,21 @@ spec:
       kind: Secret
       name: thanos-bucket
       valuesKey: AWS_SECRET_ACCESS_KEY
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: thanos-compactor
+            patch: |
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: thanos-compactor
+              spec:
+                template:
+                  spec:
+                    volumes:
+                      - name: data
+                        emptyDir:
+                          sizeLimit: 400Gi
