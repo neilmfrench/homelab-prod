@@ -23,6 +23,8 @@ spec:
     synchronous:
       method: any
       number: 1
+    parameters:
+      max_slot_wal_keep_size: "10GB"
   affinity:
     topologyKey: kubernetes.io/hostname
   backup:
