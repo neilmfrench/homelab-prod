@@ -49,11 +49,12 @@ spec:
           cpu: 250m
           memory: 1Gi
         limits:
-          memory: 6Gi
+          memory: 12Gi
       concurrency: 4
       extraFlags:
         - --delete-delay=30m
         - --compact.enable-vertical-compaction
+        - --downsample.concurrency=4
       retentionResolutionRaw: 30d
       retentionResolution5m: 60d
       retentionResolution1h: 90d
