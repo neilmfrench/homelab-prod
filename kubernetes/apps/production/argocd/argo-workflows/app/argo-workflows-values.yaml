@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: argo-workflows
+spec:
+  values:
+    crds:
+      install: true
+      keep: true
+    singleNamespace: false
+    controller:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 512Mi
+    server:
+      authModes:
+        - server
+      resources:
+        requests:
+          cpu: 25m
+          memory: 64Mi
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - argo-workflows.${SECRET_DOMAIN}
+    artifactRepository:
+      archiveLogs: true
+      s3:
+        endpoint: minio.media.svc.cluster.local:9000
+        bucket: argo-workflows
+        insecure: true
+        accessKeySecret:
+          name: hb-objstore-global-rw
+          key: AWS_ACCESS_KEY_ID
+        secretKeySecret:
+          name: hb-objstore-global-rw
+          key: AWS_SECRET_ACCESS_KEY
