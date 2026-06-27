@@ -10,3 +10,4 @@ resources:
   - ./kyverno
   - ./volsync
   - ./tailscale
+  - ./kueue-system
