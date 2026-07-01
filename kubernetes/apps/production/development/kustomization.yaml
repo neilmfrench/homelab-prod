@@ -17,6 +17,7 @@ resources:
   - ./sf-metrics/ks.yaml
   - ./dependency-track/ks.yaml
   - ./dependency-track-v5/ks.yaml
+  - ./educates/ks.yaml
   # - ./fake-metrics-generator/ks.yaml
   # - ./cluster-status-api/ks.yaml
   # - ./rsyslog-server/ks.yaml

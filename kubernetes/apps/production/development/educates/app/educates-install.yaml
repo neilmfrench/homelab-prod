@@ -1,0 +1,4747 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+    kapp.k14s.io/num-versions: "5"
+    kapp.k14s.io/versioned: ""
+  name: educates-config
+  namespace: educates
+stringData:
+  educates-operator-config.yaml: |
+    ---
+    clusterIngress:
+      caCertificate:
+        ca.crt: ""
+      caCertificateRef:
+        name: ""
+        namespace: ""
+      caNodeInjector:
+        enabled: false
+      class: traefik
+      domain: workshops.neilfren.ch
+      protocol: https
+      tlsCertificate:
+        tls.crt: ""
+        tls.key: ""
+      tlsCertificateRef:
+        name: workshops-neilfren-ch-tls
+        namespace: networking
+    clusterNetwork:
+      blockCIDRs:
+      - 169.254.169.254/32
+      - fd00:ec2::254/128
+    clusterRuntime:
+      class: ""
+    clusterSecrets:
+      pullSecretRefs: []
+    clusterSecurity:
+      policyEngine: none
+    clusterStorage:
+      class: ""
+      group: 1
+      user: null
+    dockerDaemon:
+      networkMTU: 1400
+      proxyCache:
+        password: ""
+        remoteURL: ""
+        username: ""
+    imagePuller:
+      enabled: true
+      prePullImages:
+      - base-environment
+    imageRegistry: null
+    imageVersions:
+    - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
+      name: debian-base-image
+    - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
+      name: docker-in-docker
+    - image: ghcr.io/loft-sh/kubernetes@sha256:68bcce6ac12a75d54402a08c1c9770397f8858cb3f240378b5c1cc2b985e2451
+      name: loftsh-kubernetes-v1.31
+    - image: ghcr.io/loft-sh/kubernetes@sha256:210591bca43462aa5cbe340dba124d36458d6b269d041a2e3add4b0ddd6e16d5
+      name: loftsh-kubernetes-v1.32
+    - image: ghcr.io/loft-sh/kubernetes@sha256:47a6cc7a605e29018e504ef268829ac002364f685d2bdb4a38336b15cd54dabc
+      name: loftsh-kubernetes-v1.33
+    - image: ghcr.io/loft-sh/kubernetes@sha256:2c5c4154208cc566085df4c16744eeec8b4e155b71168566e7be654c80dcf959
+      name: loftsh-kubernetes-v1.34
+    - image: ghcr.io/loft-sh/vcluster-oss@sha256:85904d0387426d0804da993162c89d9da8c3a7db51b2cb46d313ebfe65591636
+      name: loftsh-vcluster
+    - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
+      name: session-manager
+    - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
+      name: training-portal
+    - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
+      name: docker-registry
+    - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
+      name: pause-container
+    - image: ghcr.io/educates/educates-base-environment@sha256:b7e55570e5b6a98251cc010e96b1615173c788d50f4833f0b9d3e821bb5fcd5a
+      name: base-environment
+    - image: ghcr.io/educates/educates-jdk8-environment@sha256:77cd042cacd53cd19f06eba4d6dbd3bf7f78988462a77a490d2843e8b8945896
+      name: jdk8-environment
+    - image: ghcr.io/educates/educates-jdk11-environment@sha256:6e9d25819e38527f78d2fae0941e15aa8c2ff5f07bfe7a5811345b89472d6e6e
+      name: jdk11-environment
+    - image: ghcr.io/educates/educates-jdk17-environment@sha256:d7e31a0064db06173ef6faf17934f43d74676e3964b6b400ffd15626b9e98e0d
+      name: jdk17-environment
+    - image: ghcr.io/educates/educates-jdk21-environment@sha256:ff3848c4e76de6a92d7bcf7061a1690b7a2d91ddcda1d90e8bbb13486d51fe99
+      name: jdk21-environment
+    - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
+      name: conda-environment
+    - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
+      name: secrets-manager
+    - image: ghcr.io/educates/educates-tunnel-manager@sha256:caffa84c5afc1aeb376a90f412e0aa379f2421a134fade9b6d6dd63d40b3feb3
+      name: tunnel-manager
+    - image: ghcr.io/educates/educates-image-cache@sha256:927019ddf51f91163779ac2cfc4a7d90a25607b04cd1878b04d3f053afb5ce72
+      name: image-cache
+    - image: ghcr.io/educates/educates-assets-server@sha256:5cc355166a0aa9978e19b4b4c283340a1ff92b0b38c4b8ed9db25596dedb9a6d
+      name: assets-server
+    - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
+      name: lookup-service
+    - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
+      name: node-ca-injector
+    - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
+      name: debian-base-image
+    - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
+      name: docker-in-docker
+    - image: ghcr.io/loft-sh/kubernetes@sha256:68bcce6ac12a75d54402a08c1c9770397f8858cb3f240378b5c1cc2b985e2451
+      name: loftsh-kubernetes-v1.31
+    - image: ghcr.io/loft-sh/kubernetes@sha256:210591bca43462aa5cbe340dba124d36458d6b269d041a2e3add4b0ddd6e16d5
+      name: loftsh-kubernetes-v1.32
+    - image: ghcr.io/loft-sh/kubernetes@sha256:47a6cc7a605e29018e504ef268829ac002364f685d2bdb4a38336b15cd54dabc
+      name: loftsh-kubernetes-v1.33
+    - image: ghcr.io/loft-sh/kubernetes@sha256:2c5c4154208cc566085df4c16744eeec8b4e155b71168566e7be654c80dcf959
+      name: loftsh-kubernetes-v1.34
+    - image: ghcr.io/loft-sh/vcluster-oss@sha256:85904d0387426d0804da993162c89d9da8c3a7db51b2cb46d313ebfe65591636
+      name: loftsh-vcluster
+    lookupService:
+      enabled: false
+      ingressPrefix: educates-api
+    operator:
+      namespace: educates
+    sessionCookies:
+      domain: ""
+    sessionManager:
+      clusterAdmin: true
+    trainingPortal:
+      clients:
+        robot:
+          id: null
+          secret: null
+      credentials:
+        admin:
+          password: null
+          username: educates
+        robot:
+          password: null
+          username: robot@educates
+    version: latest
+    websiteStyling:
+      defaultTheme: ""
+      frameAncestors: []
+      themeDataRefs: []
+      trainingPortal:
+        html: ""
+        script: ""
+        style: ""
+      workshopDashboard:
+        html: ""
+        script: ""
+        style: ""
+      workshopFinished:
+        html: ""
+      workshopInstructions:
+        html: ""
+        script: ""
+        style: ""
+      workshopStarted:
+        html: ""
+    workshopAnalytics:
+      amplitude:
+        trackingId: ""
+      clarity:
+        trackingId: ""
+      google:
+        trackingId: ""
+      webhook:
+        url: ""
+    workshopSecurity:
+      rulesEngine: none
+  kyverno-policies.yaml: |
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: require-ingress-session-name
+    spec:
+      validationFailureAction: enforce
+      background: true
+      rules:
+      - name: require-ingress-session-name
+        match:
+          resources:
+            kinds:
+            - Ingress
+        context:
+        - name: session_namespace
+          apiCall:
+            urlPath: /api/v1/namespaces/{{request.namespace}}
+            jmesPath: metadata.labels."training.educates.dev/session.name" || '@'
+        preconditions:
+          all:
+          - key: '{{ request.operation }}'
+            operator: AnyIn
+            value:
+            - CREATE
+            - UPDATE
+        validate:
+          message: Ingress host name must embed the workshop session name.
+          foreach:
+          - list: request.object.spec.rules
+            deny:
+              conditions:
+                any:
+                - key: '{{ contains(element.host, session_namespace) }}'
+                  operator: NotEquals
+                  value: true
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: disallow-container-sock-mounts
+      annotations:
+        policies.kyverno.io/title: Disallow CRI socket mounts in CEL expressions
+        policies.kyverno.io/category: Best Practices, EKS Best Practices in CEL
+        policies.kyverno.io/severity: medium
+        policies.kyverno.io/subject: Pod
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/description: Container daemon socket bind mounts allows access to the container engine on the node. This access can be used for privilege escalation and to manage containers outside of Kubernetes, and hence should not be allowed. This policy validates that the sockets used for CRI engines Docker, Containerd, and CRI-O are not used. In addition to or replacement of this policy, preventing users from mounting the parent directories (/var/run and /var) may be necessary to completely prevent socket bind mounts.
+    spec:
+      validationFailureAction: Audit
+      background: true
+      rules:
+      - name: validate-socket-mounts
+        match:
+          any:
+          - resources:
+              kinds:
+              - Pod
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            variables:
+            - name: hasVolumes
+              expression: '!has(object.spec.volumes)'
+            - name: volumes
+              expression: object.spec.volumes
+            - name: volumesWithHostPath
+              expression: variables.volumes.filter(volume, has(volume.hostPath))
+            expressions:
+            - expression: variables.hasVolumes ||  variables.volumesWithHostPath.all(volume, !volume.hostPath.path.matches('/var/run/docker.sock'))
+              message: Use of the Docker Unix socket is not allowed.
+            - expression: variables.hasVolumes ||  variables.volumesWithHostPath.all(volume, !volume.hostPath.path.matches('/var/run/containerd/containerd.sock'))
+              message: Use of the Containerd Unix socket is not allowed.
+            - expression: variables.hasVolumes ||  variables.volumesWithHostPath.all(volume, !volume.hostPath.path.matches('/var/run/crio/crio.sock'))
+              message: Use of the CRI-O Unix socket is not allowed.
+            - expression: variables.hasVolumes ||  variables.volumesWithHostPath.all(volume, !volume.hostPath.path.matches('/var/run/cri-dockerd.sock'))
+              message: Use of the Docker CRI socket is not allowed.
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: disallow-empty-ingress-host
+      annotations:
+        policies.kyverno.io/title: Disallow empty Ingress host in CEL expressions
+        policies.kyverno.io/category: Best Practices in CEL
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/severity: medium
+        policies.kyverno.io/subject: Ingress
+        policies.kyverno.io/description: An ingress resource needs to define an actual host name in order to be valid. This policy ensures that there is a hostname for each rule defined.
+    spec:
+      validationFailureAction: Audit
+      background: false
+      rules:
+      - name: disallow-empty-ingress-host
+        match:
+          any:
+          - resources:
+              kinds:
+              - Ingress
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: object.spec.?rules.orValue([]).all(rule, has(rule.host) && has(rule.http))
+              message: The Ingress host name must be defined, not empty.
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: restrict-nodeport
+      annotations:
+        policies.kyverno.io/title: Disallow NodePort in CEL expressions
+        policies.kyverno.io/category: Best Practices in CEL
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/severity: medium
+        policies.kyverno.io/subject: Service
+        policies.kyverno.io/description: A Kubernetes Service of type NodePort uses a host port to receive traffic from any source. A NetworkPolicy cannot be used to control traffic to host ports. Although NodePort Services can be useful, their use must be limited to Services with additional upstream security checks. This policy validates that any new Services do not use the `NodePort` type.
+    spec:
+      validationFailureAction: Audit
+      background: true
+      rules:
+      - name: validate-nodeport
+        match:
+          any:
+          - resources:
+              kinds:
+              - Service
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: 'has(object.spec.type) ? (object.spec.type != ''NodePort'') : true'
+              message: Services of type NodePort are not allowed.
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: restrict-external-ips
+      annotations:
+        policies.kyverno.io/title: Restrict External IPs in CEL expressions
+        policies.kyverno.io/category: Best Practices in CEL
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/severity: medium
+        policies.kyverno.io/subject: Service
+        policies.kyverno.io/description: 'Service externalIPs can be used for a MITM attack (CVE-2020-8554). Restrict externalIPs or limit to a known set of addresses. See: https://github.com/kyverno/kyverno/issues/1367. This policy validates that the `externalIPs` field is not set on a Service.'
+    spec:
+      validationFailureAction: Audit
+      background: true
+      rules:
+      - name: check-ips
+        match:
+          any:
+          - resources:
+              kinds:
+              - Service
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: '!has(object.spec.externalIPs)'
+              message: externalIPs are not allowed.
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: disallow-ingress-nginx-custom-snippets
+      annotations:
+        policies.kyverno.io/title: Disallow Custom Snippets in CEL expressions
+        policies.kyverno.io/category: Security, NGINX Ingress in CEL
+        policies.kyverno.io/subject: ConfigMap, Ingress
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kyverno-version: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/description: 'Users that can create or update ingress objects can use the custom snippets  feature to obtain all secrets in the cluster (CVE-2021-25742). This policy  disables allow-snippet-annotations in the ingress-nginx configuration and  blocks *-snippet annotations on an Ingress. See: https://github.com/kubernetes/ingress-nginx/issues/7837'
+    spec:
+      validationFailureAction: Enforce
+      rules:
+      - name: check-config-map
+        match:
+          any:
+          - resources:
+              kinds:
+              - ConfigMap
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: object.?data[?'allow-snippet-annotations'].orValue('false') == 'false'
+              message: ingress-nginx allow-snippet-annotations must be set to false
+      - name: check-ingress-annotations
+        match:
+          any:
+          - resources:
+              kinds:
+              - networking.k8s.io/v1/Ingress
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: '!object.metadata.?annotations.orValue([]).exists(annotation, annotation.endsWith(''-snippet''))'
+              message: ingress-nginx custom snippets are not allowed
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: restrict-annotations
+      annotations:
+        policies.kyverno.io/title: Restrict NGINX Ingress annotation values in CEL expressions
+        policies.kyverno.io/category: Security, NGINX Ingress in CEL
+        policies.kyverno.io/severity: high
+        policies.kyverno.io/subject: Ingress
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kyverno-version: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/description: 'This policy mitigates CVE-2021-25746 by restricting `metadata.annotations` to safe values. See: https://github.com/kubernetes/ingress-nginx/blame/main/internal/ingress/inspector/rules.go. This issue has been fixed in NGINX Ingress v1.2.0. For NGINX Ingress version 1.0.5+ the  "annotation-value-word-blocklist" configuration setting is also recommended.  Please refer to the CVE for details. '
+    spec:
+      validationFailureAction: Enforce
+      rules:
+      - name: check-ingress
+        match:
+          any:
+          - resources:
+              kinds:
+              - networking.k8s.io/v1/Ingress
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: |-
+                !has(object.metadata.annotations) || (
+                  !object.metadata.annotations.exists(annotation, object.metadata.annotations[annotation].matches('\\s*alias\\s*.*;')) &&
+                  !object.metadata.annotations.exists(annotation, object.metadata.annotations[annotation].matches('\\s*root\\s*.*;')) &&
+                  !object.metadata.annotations.exists(annotation, object.metadata.annotations[annotation].matches('/etc/(passwd|shadow|group|nginx|ingress-controller)')) &&
+                  !object.metadata.annotations.exists(annotation, object.metadata.annotations[annotation].matches('/var/run/secrets')) &&
+                  !object.metadata.annotations.exists(annotation, object.metadata.annotations[annotation].matches('.*_by_lua.*'))
+                )
+              message: spec.rules[].http.paths[].path value is not allowed
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: restrict-ingress-paths
+      annotations:
+        policies.kyverno.io/title: Restrict NGINX Ingress path values in CEL expressions
+        policies.kyverno.io/category: Security, NGINX Ingress in CEL
+        policies.kyverno.io/severity: high
+        policies.kyverno.io/subject: Ingress
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kyverno-version: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/description: This policy mitigates CVE-2021-25745 by restricting `spec.rules[].http.paths[].path` to safe values. Additional paths can be added as required. This issue has been fixed in NGINX Ingress v1.2.0.  Please refer to the CVE for details.
+    spec:
+      validationFailureAction: Enforce
+      rules:
+      - name: check-paths
+        match:
+          any:
+          - resources:
+              kinds:
+              - networking.k8s.io/v1/Ingress
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: object.spec.?rules.orValue([]).all(rule,  rule.?http.?paths.orValue([]).all(p,  !p.path.contains('/etc') && !p.path.contains('/var/run/secrets') && !p.path.contains('/root') && !p.path.contains('/var/run/kubernetes/serviceaccount') && !p.path.contains('/etc/kubernetes/admin.conf')))
+              message: spec.rules[].http.paths[].path value is not allowed
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: no-localhost-service
+      annotations:
+        policies.kyverno.io/title: Disallow Localhost ExternalName Services in CEL expressions
+        policies.kyverno.io/category: Sample in CEL
+        policies.kyverno.io/severity: medium
+        policies.kyverno.io/subject: Service
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/description: A Service of type ExternalName which points back to localhost can potentially be used to exploit vulnerabilities in some Ingress controllers. This policy audits Services of type ExternalName if the externalName field refers to localhost.
+    spec:
+      validationFailureAction: Audit
+      background: true
+      rules:
+      - name: no-localhost-service
+        match:
+          any:
+          - resources:
+              kinds:
+              - Service
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: object.spec.type != 'ExternalName' || object.spec.externalName != 'localhost'
+              message: Service of type ExternalName cannot point to localhost.
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: prevent-cr8escape
+      annotations:
+        policies.kyverno.io/title: Prevent cr8escape (CVE-2022-0811) in CEL expressions
+        policies.kyverno.io/category: Other in CEL
+        policies.kyverno.io/severity: high
+        kyverno.io/kyverno-version: 1.11.0
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/subject: Pod
+        policies.kyverno.io/description: A vulnerability "cr8escape" (CVE-2022-0811) in CRI-O the container runtime engine underpinning Kubernetes allows attackers to escape from a Kubernetes container and gain root access to the host. The recommended remediation is to disallow sysctl settings with + or = in their value.
+    spec:
+      validationFailureAction: Enforce
+      background: true
+      rules:
+      - name: restrict-sysctls-cr8escape
+        match:
+          any:
+          - resources:
+              kinds:
+              - Pod
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: 'object.spec.?securityContext.?sysctls.orValue([]).all(sysctl,  !has(sysctl.value) || (!sysctl.value.contains(''+'') && !sysctl.value.contains(''=''))) '
+              message: characters '+' or '=' are not allowed in sysctls values
+    ---
+    apiVersion: kyverno.io/v1
+    kind: ClusterPolicy
+    metadata:
+      name: no-loadbalancer-service
+      annotations:
+        policies.kyverno.io/title: Disallow Service Type LoadBalancer in CEL expressions
+        policies.kyverno.io/category: Sample in CEL
+        policies.kyverno.io/severity: medium
+        policies.kyverno.io/subject: Service
+        policies.kyverno.io/minversion: 1.11.0
+        kyverno.io/kubernetes-version: 1.26-1.27
+        policies.kyverno.io/description: Especially in cloud provider environments, a Service having type LoadBalancer will cause the provider to respond by creating a load balancer somewhere in the customer account. This adds cost and complexity to a deployment. Without restricting this ability, users may easily overrun established budgets and security practices set by the organization. This policy restricts use of the Service type LoadBalancer.
+    spec:
+      validationFailureAction: Audit
+      background: true
+      rules:
+      - name: no-LoadBalancer
+        match:
+          any:
+          - resources:
+              kinds:
+              - Service
+              operations:
+              - CREATE
+              - UPDATE
+        validate:
+          cel:
+            expressions:
+            - expression: object.spec.type != 'LoadBalancer'
+              message: Service of type LoadBalancer is not allowed.
+---
+apiVersion: v1
+data:
+  training-portal.css: ""
+  training-portal.html: ""
+  training-portal.js: ""
+  workshop-dashboard.css: ""
+  workshop-dashboard.html: ""
+  workshop-dashboard.js: ""
+  workshop-finished.html: ""
+  workshop-instructions.css: ""
+  workshop-instructions.html: ""
+  workshop-instructions.js: ""
+  workshop-started.html: ""
+kind: Secret
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: default-website-theme
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-remote-access
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: educates-remote-access
+subjects:
+- kind: ServiceAccount
+  name: remote-access
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-remote-access
+rules:
+- apiGroups:
+  - training.educates.dev
+  resources:
+  - trainingportals
+  - workshopenvironments
+  - workshopsessions
+  - workshopallocations
+  - workshops
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/change-rule: upsert after upserting educates/sa-with-separate-token-secret
+    kapp.k14s.io/disable-original: ""
+    kubernetes.io/service-account.name: remote-access
+  name: remote-access-token
+  namespace: educates
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group: educates/sa-with-separate-token-secret
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: remote-access
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-secrets-manager
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - update
+- apiGroups:
+  - secrets.educates.dev
+  resources:
+  - secretcopiers
+  - secretexporters
+  - secretimporters
+  - secretinjectors
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - update
+- apiGroups:
+  - secrets.educates.dev
+  resources:
+  - secretcopiers/finalizers
+  - secretimporters/finalizers
+  verbs:
+  - update
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: secretcopiers.secrets.educates.dev
+spec:
+  group: secrets.educates.dev
+  names:
+    categories:
+    - educates-secrets
+    kind: SecretCopier
+    plural: secretcopiers
+    singular: secretcopier
+  scope: Cluster
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              rules:
+                items:
+                  properties:
+                    copyAuthorization:
+                      properties:
+                        sharedSecret:
+                          type: string
+                      type: object
+                    reclaimPolicy:
+                      default: Delete
+                      enum:
+                      - Delete
+                      - Retain
+                      type: string
+                    sourceSecret:
+                      properties:
+                        name:
+                          type: string
+                        namespace:
+                          type: string
+                      required:
+                      - name
+                      - namespace
+                      type: object
+                    targetNamespaces:
+                      properties:
+                        labelSelector:
+                          properties:
+                            matchExpressions:
+                              items:
+                                properties:
+                                  key:
+                                    type: string
+                                  operator:
+                                    enum:
+                                    - In
+                                    - NotIn
+                                    - Exists
+                                    - DoesNotExist
+                                    type: string
+                                  values:
+                                    items:
+                                      type: string
+                                    type: array
+                                required:
+                                - key
+                                - operator
+                                type: object
+                              type: array
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                          type: object
+                        nameSelector:
+                          properties:
+                            matchNames:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchNames
+                          type: object
+                        ownerSelector:
+                          properties:
+                            matchOwners:
+                              items:
+                                properties:
+                                  apiVersion:
+                                    type: string
+                                  kind:
+                                    type: string
+                                  name:
+                                    type: string
+                                  uid:
+                                    type: string
+                                required:
+                                - apiVersion
+                                - kind
+                                - name
+                                - uid
+                                type: object
+                              type: array
+                          required:
+                          - matchOwners
+                          type: object
+                        uidSelector:
+                          properties:
+                            matchUIDs:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchUIDs
+                          type: object
+                      type: object
+                    targetSecret:
+                      properties:
+                        labels:
+                          additionalProperties:
+                            type: string
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        name:
+                          type: string
+                      type: object
+                  required:
+                  - sourceSecret
+                  type: object
+                type: array
+            type: object
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: secretexporters.secrets.educates.dev
+spec:
+  group: secrets.educates.dev
+  names:
+    categories:
+    - educates-secrets
+    kind: SecretExporter
+    plural: secretexporters
+    singular: secretexporter
+  scope: Namespaced
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              rules:
+                items:
+                  properties:
+                    copyAuthorization:
+                      properties:
+                        sharedSecret:
+                          type: string
+                      required:
+                      - sharedSecret
+                      type: object
+                    targetNamespaces:
+                      anyOf:
+                      - required:
+                        - nameSelector
+                      - required:
+                        - uidSelector
+                      - required:
+                        - labelSelector
+                      properties:
+                        labelSelector:
+                          properties:
+                            matchExpressions:
+                              items:
+                                properties:
+                                  key:
+                                    type: string
+                                  operator:
+                                    enum:
+                                    - In
+                                    - NotIn
+                                    - Exists
+                                    - DoesNotExist
+                                    type: string
+                                  values:
+                                    items:
+                                      type: string
+                                    type: array
+                                required:
+                                - key
+                                - operator
+                                type: object
+                              type: array
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                          type: object
+                        nameSelector:
+                          properties:
+                            matchNames:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchNames
+                          type: object
+                        ownerSelector:
+                          properties:
+                            matchOwners:
+                              items:
+                                properties:
+                                  apiVersion:
+                                    type: string
+                                  kind:
+                                    type: string
+                                  name:
+                                    type: string
+                                  uid:
+                                    type: string
+                                required:
+                                - apiVersion
+                                - kind
+                                - name
+                                - uid
+                                type: object
+                              type: array
+                          required:
+                          - matchOwners
+                          type: object
+                        uidSelector:
+                          properties:
+                            matchUIDs:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchUIDs
+                          type: object
+                      type: object
+                    targetSecret:
+                      properties:
+                        labels:
+                          additionalProperties:
+                            type: string
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        name:
+                          type: string
+                      type: object
+                  required:
+                  - targetNamespaces
+                  type: object
+                type: array
+            type: object
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: secretimporters.secrets.educates.dev
+spec:
+  group: secrets.educates.dev
+  names:
+    categories:
+    - educates-secrets
+    kind: SecretImporter
+    plural: secretimporters
+    singular: secretimporter
+  scope: Namespaced
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              copyAuthorization:
+                properties:
+                  sharedSecret:
+                    type: string
+                required:
+                - sharedSecret
+                type: object
+              sourceNamespaces:
+                properties:
+                  nameSelector:
+                    properties:
+                      matchNames:
+                        items:
+                          type: string
+                        type: array
+                    required:
+                    - matchNames
+                    type: object
+                type: object
+              sourceSecret:
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+                type: object
+            type: object
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: secretinjectors.secrets.educates.dev
+spec:
+  group: secrets.educates.dev
+  names:
+    categories:
+    - educates-secrets
+    kind: SecretInjector
+    plural: secretinjectors
+    singular: secretinjector
+  scope: Cluster
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              rules:
+                items:
+                  properties:
+                    serviceAccounts:
+                      properties:
+                        labelSelector:
+                          properties:
+                            matchExpressions:
+                              items:
+                                properties:
+                                  key:
+                                    type: string
+                                  operator:
+                                    enum:
+                                    - In
+                                    - NotIn
+                                    - Exists
+                                    - DoesNotExist
+                                    type: string
+                                  values:
+                                    items:
+                                      type: string
+                                    type: array
+                                required:
+                                - key
+                                - operator
+                                type: object
+                              type: array
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                          type: object
+                        nameSelector:
+                          properties:
+                            matchNames:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchNames
+                          type: object
+                      type: object
+                    sourceSecrets:
+                      anyOf:
+                      - required:
+                        - nameSelector
+                      - required:
+                        - labelSelector
+                      properties:
+                        labelSelector:
+                          properties:
+                            matchExpressions:
+                              items:
+                                properties:
+                                  key:
+                                    type: string
+                                  operator:
+                                    enum:
+                                    - In
+                                    - NotIn
+                                    - Exists
+                                    - DoesNotExist
+                                    type: string
+                                  values:
+                                    items:
+                                      type: string
+                                    type: array
+                                required:
+                                - key
+                                - operator
+                                type: object
+                              type: array
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                          type: object
+                        nameSelector:
+                          properties:
+                            matchNames:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchNames
+                          type: object
+                      type: object
+                    targetNamespaces:
+                      properties:
+                        labelSelector:
+                          properties:
+                            matchExpressions:
+                              items:
+                                properties:
+                                  key:
+                                    type: string
+                                  operator:
+                                    enum:
+                                    - In
+                                    - NotIn
+                                    - Exists
+                                    - DoesNotExist
+                                    type: string
+                                  values:
+                                    items:
+                                      type: string
+                                    type: array
+                                required:
+                                - key
+                                - operator
+                                type: object
+                              type: array
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                          type: object
+                        nameSelector:
+                          properties:
+                            matchNames:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchNames
+                          type: object
+                        uidSelector:
+                          properties:
+                            matchUIDs:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - matchUIDs
+                          type: object
+                      type: object
+                  required:
+                  - sourceSecrets
+                  type: object
+                type: array
+            type: object
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group: secrets.educates.dev/service-accounts
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: secrets-manager
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-secrets-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: educates-secrets-manager
+subjects:
+- kind: ServiceAccount
+  name: secrets-manager
+  namespace: educates
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/change-rule: upsert after upserting secrets.educates.dev/service-accounts
+    kapp.k14s.io/disable-original: ""
+    kubernetes.io/service-account.name: secrets-manager
+  name: secrets-manager-token
+  namespace: educates
+type: kubernetes.io/service-account-token
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: secrets-manager
+  namespace: educates
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: secrets-manager
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        deployment: secrets-manager
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz?probe=liveness
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: operator
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        startupProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /healthz?probe=startup
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - mountPath: /opt/app-root/config/
+          name: config
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: token
+          readOnly: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      serviceAccountName: secrets-manager
+      volumes:
+      - name: config
+        secret:
+          secretName: educates-config
+      - name: token
+        secret:
+          secretName: secrets-manager-token
+---
+aggregationRule:
+  clusterRoleSelectors:
+  - matchLabels:
+      rbac.educates.dev/extends-workshop-permissions: "true"
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-session-manager
+rules: []
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  labels:
+    rbac.educates.dev/extends-workshop-permissions: "true"
+  name: educates-session-manager:core
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - '*'
+- apiGroups:
+  - ""
+  resources:
+  - limitranges
+  - resourcequotas
+  verbs:
+  - '*'
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterroles
+  - clusterrolebindings
+  verbs:
+  - '*'
+- apiGroups:
+  - training.educates.dev
+  resources:
+  - workshops
+  - workshopsessions
+  - trainingportals
+  - workshopenvironments
+  - workshopallocations
+  - workshoprequests
+  verbs:
+  - '*'
+- apiGroups:
+  - secrets.educates.dev
+  resources:
+  - secretcopiers
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-view-session-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - endpoints
+  - persistentvolumeclaims
+  - persistentvolumeclaims/status
+  - pods
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - serviceaccounts
+  - services
+  - services/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - bindings
+  - events
+  - limitranges
+  - namespaces/status
+  - pods/log
+  - pods/status
+  - replicationcontrollers/status
+  - resourcequotas
+  - resourcequotas/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - controllerrevisions
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - statefulsets
+  - statefulsets/scale
+  - statefulsets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  - horizontalpodautoscalers/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - cronjobs/status
+  - jobs
+  - jobs/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  resources:
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - ingresses
+  - ingresses/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - replicationcontrollers/scale
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  - poddisruptionbudgets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  - ingresses/status
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-edit-session-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods/attach
+  - pods/exec
+  - pods/portforward
+  - pods/proxy
+  - secrets
+  - services/proxy
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - impersonate
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - pods/attach
+  - pods/exec
+  - pods/portforward
+  - pods/proxy
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - endpoints
+  - persistentvolumeclaims
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - secrets
+  - serviceaccounts
+  - services
+  - services/proxy
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  - deployments
+  - deployments/rollback
+  - deployments/scale
+  - replicasets
+  - replicasets/scale
+  - statefulsets
+  - statefulsets/scale
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - jobs
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - extensions
+  resources:
+  - daemonsets
+  - deployments
+  - deployments/rollback
+  - deployments/scale
+  - ingresses
+  - replicasets
+  - replicasets/scale
+  - replicationcontrollers/scale
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - endpoints
+  - persistentvolumeclaims
+  - persistentvolumeclaims/status
+  - pods
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - serviceaccounts
+  - services
+  - services/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - bindings
+  - events
+  - limitranges
+  - namespaces/status
+  - pods/log
+  - pods/status
+  - replicationcontrollers/status
+  - resourcequotas
+  - resourcequotas/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - controllerrevisions
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - statefulsets
+  - statefulsets/scale
+  - statefulsets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  - horizontalpodautoscalers/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - cronjobs/status
+  - jobs
+  - jobs/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  resources:
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - ingresses
+  - ingresses/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - replicationcontrollers/scale
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  - poddisruptionbudgets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  - ingresses/status
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-admin-session-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods/attach
+  - pods/exec
+  - pods/portforward
+  - pods/proxy
+  - secrets
+  - services/proxy
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - impersonate
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - pods/attach
+  - pods/exec
+  - pods/portforward
+  - pods/proxy
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - endpoints
+  - persistentvolumeclaims
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - secrets
+  - serviceaccounts
+  - services
+  - services/proxy
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  - deployments
+  - deployments/rollback
+  - deployments/scale
+  - replicasets
+  - replicasets/scale
+  - statefulsets
+  - statefulsets/scale
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - jobs
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - extensions
+  resources:
+  - daemonsets
+  - deployments
+  - deployments/rollback
+  - deployments/scale
+  - ingresses
+  - replicasets
+  - replicasets/scale
+  - replicationcontrollers/scale
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - endpoints
+  - persistentvolumeclaims
+  - persistentvolumeclaims/status
+  - pods
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - serviceaccounts
+  - services
+  - services/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - bindings
+  - events
+  - limitranges
+  - namespaces/status
+  - pods/log
+  - pods/status
+  - replicationcontrollers/status
+  - resourcequotas
+  - resourcequotas/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - controllerrevisions
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - statefulsets
+  - statefulsets/scale
+  - statefulsets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  - horizontalpodautoscalers/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - cronjobs/status
+  - jobs
+  - jobs/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  resources:
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - ingresses
+  - ingresses/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - replicationcontrollers/scale
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  - poddisruptionbudgets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  - ingresses/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - localsubjectaccessreviews
+  verbs:
+  - create
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - rolebindings
+  - roles
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-training-portal
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - default
+  resources:
+  - namespaces
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+- apiGroups:
+  - training.educates.dev
+  resources:
+  - workshops
+  - workshopenvironments
+  - workshopsessions
+  - workshopallocations
+  - trainingportals
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - training.educates.dev
+  resources:
+  - trainingportals/finalizers
+  - workshopenvironments/finalizers
+  - workshopsessions/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - training.educates.dev
+  resources:
+  - workshopenvironments
+  - workshopsessions
+  - workshopallocations
+  verbs:
+  - create
+  - patch
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-tunnel-manager
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - get
+  - list
+  - watch
+  - patch
+  - update
+- apiGroups:
+  - training.educates.dev
+  resources:
+  - workshopsessions
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: trainingportals.training.educates.dev
+spec:
+  group: training.educates.dev
+  names:
+    categories:
+    - educates
+    - educates-training
+    kind: TrainingPortal
+    plural: trainingportals
+    singular: trainingportal
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - description: The URL for accessing the portal.
+      jsonPath: .status.educates.url
+      name: URL
+      priority: 0
+      type: string
+    - description: Password for accessing the training portal.
+      jsonPath: .spec.portal.password
+      name: PortalPassword
+      priority: 0
+      type: string
+    - description: The username for accessing admin pages.
+      jsonPath: .status.educates.credentials.admin.username
+      name: AdminUsername
+      priority: 0
+      type: string
+    - description: The password for accessing admin pages.
+      jsonPath: .status.educates.credentials.admin.password
+      name: AdminPassword
+      priority: 0
+      type: string
+    - description: Status of training portal deployment.
+      jsonPath: .status.educates.phase
+      name: Status
+      priority: 0
+      type: string
+    - description: Status message.
+      jsonPath: .status.educates.message
+      name: Message
+      priority: 0
+      type: string
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              analytics:
+                properties:
+                  amplitude:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                  clarity:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                  google:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                  webhook:
+                    properties:
+                      url:
+                        type: string
+                    required:
+                    - url
+                    type: object
+                type: object
+              portal:
+                properties:
+                  capacity:
+                    type: integer
+                  catalog:
+                    properties:
+                      visibility:
+                        pattern: ^(public|private)$
+                        type: string
+                    type: object
+                  clients:
+                    properties:
+                      robot:
+                        properties:
+                          id:
+                            type: string
+                          secret:
+                            type: string
+                        type: object
+                    type: object
+                  cookies:
+                    properties:
+                      domain:
+                        type: string
+                    type: object
+                  credentials:
+                    properties:
+                      admin:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        type: object
+                      robot:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        type: object
+                    type: object
+                  expires:
+                    pattern: ^\d+(s|m|h)$
+                    type: string
+                  index:
+                    type: string
+                  ingress:
+                    properties:
+                      hostname:
+                        type: string
+                      tlsCertificateRef:
+                        properties:
+                          name:
+                            type: string
+                          namespace:
+                            type: string
+                        required:
+                        - name
+                        type: object
+                    type: object
+                  initial:
+                    type: integer
+                  labels:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  logo:
+                    type: string
+                  orphaned:
+                    pattern: ^\d+(s|m|h)$
+                    type: string
+                  password:
+                    type: string
+                  registration:
+                    properties:
+                      enabled:
+                        type: boolean
+                      type:
+                        pattern: ^(one-step|anonymous)$
+                        type: string
+                    type: object
+                  reserved:
+                    type: integer
+                  sessions:
+                    properties:
+                      anonymous:
+                        type: integer
+                      maximum:
+                        type: integer
+                      registered:
+                        type: integer
+                    type: object
+                  theme:
+                    properties:
+                      frame:
+                        properties:
+                          ancestors:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      name:
+                        type: string
+                    type: object
+                  title:
+                    type: string
+                  updates:
+                    properties:
+                      workshop:
+                        default: false
+                        type: boolean
+                    type: object
+                  workshop:
+                    properties:
+                      defaults:
+                        properties:
+                          capacity:
+                            type: integer
+                          deadline:
+                            pattern: ^\d+(s|m|h)$
+                            type: string
+                          env:
+                            items:
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                              required:
+                              - name
+                              type: object
+                            type: array
+                          expires:
+                            pattern: ^\d+(s|m|h)$
+                            type: string
+                          initial:
+                            type: integer
+                          labels:
+                            items:
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                              required:
+                              - name
+                              type: object
+                            type: array
+                          orphaned:
+                            pattern: ^\d+(s|m|h)$
+                            type: string
+                          overdue:
+                            pattern: ^\d+(s|m|h)$
+                            type: string
+                          overtime:
+                            pattern: ^\d+(s|m|h)$
+                            type: string
+                          refresh:
+                            pattern: ^\d+(s|m|h)$
+                            type: string
+                          registry:
+                            properties:
+                              host:
+                                type: string
+                              namespace:
+                                type: string
+                            required:
+                            - host
+                            type: object
+                          reserved:
+                            type: integer
+                        type: object
+                    type: object
+                type: object
+              workshops:
+                items:
+                  properties:
+                    alias:
+                      type: string
+                    capacity:
+                      type: integer
+                    deadline:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    env:
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        type: object
+                      type: array
+                    expires:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    initial:
+                      type: integer
+                    labels:
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        type: object
+                      type: array
+                    name:
+                      minLength: 1
+                      type: string
+                    orphaned:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    overdue:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    overtime:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    refresh:
+                      pattern: ^\d+(s|m|h)$
+                      type: string
+                    registry:
+                      properties:
+                        host:
+                          type: string
+                        namespace:
+                          type: string
+                      required:
+                      - host
+                      type: object
+                    reserved:
+                      type: integer
+                  required:
+                  - name
+                  type: object
+                type: array
+            type: object
+          status:
+            properties:
+              educates:
+                properties:
+                  clients:
+                    properties:
+                      robot:
+                        properties:
+                          id:
+                            type: string
+                          secret:
+                            type: string
+                        required:
+                        - id
+                        - secret
+                        type: object
+                    required:
+                    - robot
+                    type: object
+                  credentials:
+                    properties:
+                      admin:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        required:
+                        - username
+                        - password
+                        type: object
+                      robot:
+                        properties:
+                          password:
+                            type: string
+                          username:
+                            type: string
+                        required:
+                        - username
+                        - password
+                        type: object
+                    required:
+                    - admin
+                    - robot
+                    type: object
+                  message:
+                    type: string
+                  namespace:
+                    type: string
+                  phase:
+                    type: string
+                  secrets:
+                    properties:
+                      ingress:
+                        items:
+                          type: string
+                        type: array
+                      registry:
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  url:
+                    type: string
+                required:
+                - phase
+                type: object
+              kopf:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+            type: object
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: workshops.training.educates.dev
+spec:
+  group: training.educates.dev
+  names:
+    categories:
+    - educates
+    - educates-training
+    kind: Workshop
+    plural: workshops
+    singular: workshop
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - description: URL for further information on the workshop.
+      jsonPath: .spec.url
+      name: URL
+      priority: 0
+      type: string
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              authors:
+                items:
+                  type: string
+                type: array
+              content:
+                properties:
+                  files:
+                    type: string
+                  image:
+                    type: string
+                type: object
+              description:
+                type: string
+              difficulty:
+                pattern: ^(beginner|intermediate|advanced|extreme)$
+                type: string
+              duration:
+                pattern: ^\d+(s|m|h)$
+                type: string
+              environment:
+                properties:
+                  assets:
+                    properties:
+                      files:
+                        items:
+                          oneOf:
+                          - required:
+                            - git
+                          - required:
+                            - hg
+                          - required:
+                            - http
+                          - required:
+                            - image
+                          - required:
+                            - imgpkgBundle
+                          - required:
+                            - githubRelease
+                          - required:
+                            - helmChart
+                          - required:
+                            - inline
+                          - required:
+                            - directory
+                          properties:
+                            directory:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            excludePaths:
+                              items:
+                                type: string
+                              type: array
+                            git:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            githubRelease:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            helmChart:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            hg:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            http:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            image:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            imgpkgBundle:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            includePaths:
+                              items:
+                                type: string
+                              type: array
+                            inline:
+                              properties:
+                                paths:
+                                  additionalProperties:
+                                    type: string
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                pathsFrom:
+                                  items:
+                                    properties:
+                                      secretRef:
+                                        properties:
+                                          directoryPath:
+                                            type: string
+                                          name:
+                                            type: string
+                                        required:
+                                        - name
+                                        type: object
+                                    required:
+                                    - secretRef
+                                    type: object
+                                  type: array
+                              type: object
+                            legalPaths:
+                              items:
+                                type: string
+                              type: array
+                            newRootPath:
+                              type: string
+                            path:
+                              default: .
+                              type: string
+                          type: object
+                        type: array
+                      ingress:
+                        properties:
+                          enabled:
+                            default: false
+                            type: boolean
+                        type: object
+                      memory:
+                        type: string
+                      storage:
+                        type: string
+                    required:
+                    - files
+                    type: object
+                  images:
+                    properties:
+                      ingress:
+                        properties:
+                          enabled:
+                            default: false
+                            type: boolean
+                        type: object
+                      memory:
+                        type: string
+                      registries:
+                        items:
+                          properties:
+                            content:
+                              items:
+                                properties:
+                                  destination:
+                                    type: string
+                                  prefix:
+                                    type: string
+                                  stripPrefix:
+                                    type: boolean
+                                  tags:
+                                    properties:
+                                      regex:
+                                        type: string
+                                      semver:
+                                        type: boolean
+                                    required:
+                                    - regex
+                                    type: object
+                                type: object
+                              type: array
+                            maxRetries:
+                              type: integer
+                            onDemand:
+                              type: boolean
+                            onlySigned:
+                              type: boolean
+                            pollInterval:
+                              type: string
+                            retryDelay:
+                              type: string
+                            tlsVerify:
+                              type: boolean
+                            urls:
+                              items:
+                                type: string
+                              type: array
+                          required:
+                          - urls
+                          type: object
+                        type: array
+                      storage:
+                        type: string
+                    type: object
+                  objects:
+                    items:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    type: array
+                  secrets:
+                    items:
+                      properties:
+                        labels:
+                          additionalProperties:
+                            type: string
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        name:
+                          type: string
+                        namespace:
+                          type: string
+                      required:
+                      - namespace
+                      - name
+                      type: object
+                    type: array
+                type: object
+              images:
+                items:
+                  properties:
+                    image:
+                      type: string
+                    name:
+                      type: string
+                  required:
+                  - name
+                  - image
+                  type: object
+                type: array
+              labels:
+                items:
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+                  required:
+                  - name
+                  type: object
+                type: array
+              logo:
+                type: string
+              publish:
+                properties:
+                  files:
+                    items:
+                      oneOf:
+                      - required:
+                        - git
+                      - required:
+                        - hg
+                      - required:
+                        - http
+                      - required:
+                        - image
+                      - required:
+                        - imgpkgBundle
+                      - required:
+                        - githubRelease
+                      - required:
+                        - helmChart
+                      - required:
+                        - directory
+                      properties:
+                        directory:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        excludePaths:
+                          items:
+                            type: string
+                          type: array
+                        git:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        githubRelease:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        helmChart:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        hg:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        http:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        image:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        imgpkgBundle:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        includePaths:
+                          items:
+                            type: string
+                          type: array
+                        legalPaths:
+                          items:
+                            type: string
+                          type: array
+                        newRootPath:
+                          type: string
+                        path:
+                          default: .
+                          type: string
+                      type: object
+                    type: array
+                  image:
+                    type: string
+                type: object
+              request:
+                properties:
+                  objects:
+                    items:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    type: array
+                  parameters:
+                    items:
+                      properties:
+                        from:
+                          type: string
+                        generate:
+                          type: string
+                        name:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                type: object
+              session:
+                properties:
+                  applications:
+                    properties:
+                      console:
+                        properties:
+                          enabled:
+                            type: boolean
+                          octant:
+                            properties:
+                              version:
+                                type: string
+                            type: object
+                          vendor:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      docker:
+                        properties:
+                          compose:
+                            properties:
+                              services:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              volumes:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            required:
+                            - services
+                            type: object
+                          enabled:
+                            type: boolean
+                          memory:
+                            type: string
+                          socket:
+                            properties:
+                              enabled:
+                                type: boolean
+                            type: object
+                          storage:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      editor:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      examiner:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      files:
+                        properties:
+                          directory:
+                            type: string
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      git:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      registry:
+                        properties:
+                          enabled:
+                            type: boolean
+                          memory:
+                            type: string
+                          storage:
+                            type: string
+                          volume:
+                            properties:
+                              name:
+                                type: string
+                              subPath:
+                                type: string
+                            required:
+                            - name
+                            type: object
+                        required:
+                        - enabled
+                        type: object
+                      slides:
+                        properties:
+                          enabled:
+                            type: boolean
+                          impress.js:
+                            properties:
+                              version:
+                                type: string
+                            required:
+                            - version
+                            type: object
+                          reveal.js:
+                            properties:
+                              version:
+                                type: string
+                            required:
+                            - version
+                            type: object
+                        required:
+                        - enabled
+                        type: object
+                      sshd:
+                        properties:
+                          enabled:
+                            type: boolean
+                          tunnel:
+                            properties:
+                              enabled:
+                                default: false
+                                type: boolean
+                              memory:
+                                type: string
+                            required:
+                            - enabled
+                            type: object
+                        required:
+                        - enabled
+                        type: object
+                      terminal:
+                        properties:
+                          enabled:
+                            type: boolean
+                          layout:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      uploads:
+                        properties:
+                          directory:
+                            default: uploads
+                            type: string
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      vcluster:
+                        properties:
+                          enabled:
+                            type: boolean
+                          ingress:
+                            properties:
+                              enabled:
+                                default: false
+                                type: boolean
+                              subdomains:
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - enabled
+                            type: object
+                          objects:
+                            items:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            type: array
+                          resources:
+                            properties:
+                              syncer:
+                                properties:
+                                  memory:
+                                    type: string
+                                  storage:
+                                    type: string
+                                type: object
+                            type: object
+                          services:
+                            properties:
+                              fromHost:
+                                items:
+                                  properties:
+                                    from:
+                                      type: string
+                                    to:
+                                      type: string
+                                  required:
+                                  - from
+                                  - to
+                                  type: object
+                                type: array
+                              fromVirtual:
+                                items:
+                                  properties:
+                                    from:
+                                      type: string
+                                    to:
+                                      type: string
+                                  required:
+                                  - from
+                                  - to
+                                  type: object
+                                type: array
+                            type: object
+                          version:
+                            type: string
+                        required:
+                        - enabled
+                        type: object
+                      webdav:
+                        properties:
+                          enabled:
+                            type: boolean
+                        required:
+                        - enabled
+                        type: object
+                      workshop:
+                        properties:
+                          enabled:
+                            type: boolean
+                          layout:
+                            type: string
+                          path:
+                            type: string
+                          proxy:
+                            properties:
+                              changeOrigin:
+                                type: boolean
+                              headers:
+                                items:
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
+                                  required:
+                                  - name
+                                  type: object
+                                type: array
+                              host:
+                                type: string
+                              pathRewrite:
+                                items:
+                                  properties:
+                                    pattern:
+                                      type: string
+                                    replacement:
+                                      type: string
+                                  required:
+                                  - pattern
+                                  - replacement
+                                  type: object
+                                type: array
+                              port:
+                                type: integer
+                              protocol:
+                                type: string
+                            required:
+                            - host
+                            type: object
+                          renderer:
+                            enum:
+                            - local
+                            - remote
+                            - static
+                            - proxy
+                            type: string
+                          url:
+                            type: string
+                        type: object
+                    type: object
+                  dashboards:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        url:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  env:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                        valueFrom:
+                          properties:
+                            configMapKeyRef:
+                              properties:
+                                key:
+                                  type: string
+                                name:
+                                  type: string
+                                optional:
+                                  type: boolean
+                              type: object
+                            fieldRef:
+                              properties:
+                                apiVersion:
+                                  type: string
+                                fieldPath:
+                                  type: string
+                              type: object
+                            resourceFieldRef:
+                              properties:
+                                containerName:
+                                  type: string
+                                divisor:
+                                  type: string
+                                resource:
+                                  type: string
+                              type: object
+                            secretKeyRef:
+                              properties:
+                                key:
+                                  type: string
+                                name:
+                                  type: string
+                                optional:
+                                  type: boolean
+                              type: object
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  envFrom:
+                    items:
+                      properties:
+                        configMapRef:
+                          properties:
+                            name:
+                              type: string
+                            optional:
+                              type: boolean
+                          type: object
+                        prefix:
+                          type: string
+                        secretRef:
+                          properties:
+                            name:
+                              type: string
+                            optional:
+                              type: boolean
+                          type: object
+                      type: object
+                    type: array
+                  ingresses:
+                    items:
+                      properties:
+                        authentication:
+                          properties:
+                            type:
+                              default: session
+                              pattern: ^(none|session)$
+                              type: string
+                          type: object
+                        changeOrigin:
+                          type: boolean
+                        headers:
+                          items:
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        host:
+                          type: string
+                        name:
+                          type: string
+                        path:
+                          type: string
+                        port:
+                          type: integer
+                        protocol:
+                          type: string
+                        secure:
+                          type: boolean
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  initContainers:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    type: array
+                  namespaces:
+                    properties:
+                      budget:
+                        type: string
+                      limits:
+                        properties:
+                          default:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                          defaultRequest:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                          max:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                          min:
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                            type: object
+                        type: object
+                      role:
+                        type: string
+                      secondary:
+                        items:
+                          properties:
+                            budget:
+                              type: string
+                            limits:
+                              properties:
+                                default:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                                defaultRequest:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                                max:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                                min:
+                                  properties:
+                                    cpu:
+                                      type: string
+                                    memory:
+                                      type: string
+                                  type: object
+                              type: object
+                            name:
+                              type: string
+                            role:
+                              type: string
+                            security:
+                              properties:
+                                policy:
+                                  enum:
+                                  - restricted
+                                  - baseline
+                                  - privileged
+                                  - nonroot
+                                  - anyuid
+                                  - custom
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        type: array
+                      security:
+                        properties:
+                          policy:
+                            enum:
+                            - restricted
+                            - baseline
+                            - privileged
+                            - nonroot
+                            - anyuid
+                            - custom
+                            type: string
+                          rules:
+                            properties:
+                              action:
+                                default: enforce
+                                enum:
+                                - enforce
+                                - audit
+                                type: string
+                              exclude:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          token:
+                            properties:
+                              enabled:
+                                default: true
+                                type: boolean
+                            type: object
+                        type: object
+                    type: object
+                  objects:
+                    items:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    type: array
+                  patches:
+                    type: object
+                    x-kubernetes-preserve-unknown-fields: true
+                  resources:
+                    properties:
+                      memory:
+                        type: string
+                      storage:
+                        type: string
+                      volume:
+                        properties:
+                          name:
+                            type: string
+                          subPath:
+                            type: string
+                        required:
+                        - name
+                        type: object
+                    type: object
+                  volumeMounts:
+                    items:
+                      properties:
+                        mountPath:
+                          type: string
+                        mountPropagation:
+                          type: string
+                        name:
+                          type: string
+                        readOnly:
+                          type: boolean
+                        subPath:
+                          type: string
+                        subPathExpr:
+                          type: string
+                      required:
+                      - name
+                      - mountPath
+                      type: object
+                    type: array
+                  volumes:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    type: array
+                type: object
+              tags:
+                items:
+                  type: string
+                type: array
+              title:
+                type: string
+              url:
+                type: string
+              vendor:
+                type: string
+              version:
+                type: string
+              workshop:
+                properties:
+                  files:
+                    items:
+                      oneOf:
+                      - required:
+                        - git
+                      - required:
+                        - hg
+                      - required:
+                        - http
+                      - required:
+                        - image
+                      - required:
+                        - imgpkgBundle
+                      - required:
+                        - githubRelease
+                      - required:
+                        - helmChart
+                      - required:
+                        - inline
+                      - required:
+                        - directory
+                      properties:
+                        directory:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        excludePaths:
+                          items:
+                            type: string
+                          type: array
+                        git:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        githubRelease:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        helmChart:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        hg:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        http:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        image:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        imgpkgBundle:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                        includePaths:
+                          items:
+                            type: string
+                          type: array
+                        inline:
+                          properties:
+                            paths:
+                              additionalProperties:
+                                type: string
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            pathsFrom:
+                              items:
+                                properties:
+                                  secretRef:
+                                    properties:
+                                      directoryPath:
+                                        type: string
+                                      name:
+                                        type: string
+                                    required:
+                                    - name
+                                    type: object
+                                required:
+                                - secretRef
+                                type: object
+                              type: array
+                          type: object
+                        legalPaths:
+                          items:
+                            type: string
+                          type: array
+                        newRootPath:
+                          type: string
+                        path:
+                          default: .
+                          type: string
+                      type: object
+                    type: array
+                  image:
+                    type: string
+                  packages:
+                    items:
+                      properties:
+                        files:
+                          items:
+                            oneOf:
+                            - required:
+                              - git
+                            - required:
+                              - hg
+                            - required:
+                              - http
+                            - required:
+                              - image
+                            - required:
+                              - imgpkgBundle
+                            - required:
+                              - githubRelease
+                            - required:
+                              - helmChart
+                            - required:
+                              - inline
+                            - required:
+                              - directory
+                            properties:
+                              directory:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              excludePaths:
+                                items:
+                                  type: string
+                                type: array
+                              git:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              githubRelease:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              helmChart:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              hg:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              http:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              image:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              imgpkgBundle:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              includePaths:
+                                items:
+                                  type: string
+                                type: array
+                              inline:
+                                properties:
+                                  paths:
+                                    additionalProperties:
+                                      type: string
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  pathsFrom:
+                                    items:
+                                      properties:
+                                        secretRef:
+                                          properties:
+                                            directoryPath:
+                                              type: string
+                                            name:
+                                              type: string
+                                          required:
+                                          - name
+                                          type: object
+                                      required:
+                                      - secretRef
+                                      type: object
+                                    type: array
+                                type: object
+                              legalPaths:
+                                items:
+                                  type: string
+                                type: array
+                              newRootPath:
+                                type: string
+                              path:
+                                default: .
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - files
+                      type: object
+                    type: array
+                type: object
+            required:
+            - title
+            - description
+            type: object
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: workshopallocations.training.educates.dev
+spec:
+  group: training.educates.dev
+  names:
+    categories:
+    - educates
+    - educates-training
+    kind: WorkshopAllocation
+    plural: workshopallocations
+    singular: workshopallocation
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - description: The name of the workshop environment.
+      jsonPath: .spec.environment.name
+      name: Environment
+      priority: 0
+      type: string
+    - description: The name of the workshop session.
+      jsonPath: .spec.session.name
+      name: Session
+      priority: 0
+      type: string
+    - description: Status of workshop allocation.
+      jsonPath: .status.educates.phase
+      name: Status
+      priority: 0
+      type: string
+    - description: Status message.
+      jsonPath: .status.educates.message
+      name: Message
+      priority: 0
+      type: string
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              environment:
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+                type: object
+              session:
+                properties:
+                  name:
+                    type: string
+                  user:
+                    type: string
+                required:
+                - name
+                - user
+                type: object
+            required:
+            - environment
+            - session
+            type: object
+          status:
+            properties:
+              educates:
+                properties:
+                  message:
+                    type: string
+                  phase:
+                    type: string
+                type: object
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: workshopenvironments.training.educates.dev
+spec:
+  group: training.educates.dev
+  names:
+    categories:
+    - educates
+    - educates-training
+    kind: WorkshopEnvironment
+    plural: workshopenvironments
+    singular: workshopenvironment
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - description: The name of the workshop definition.
+      jsonPath: .spec.workshop.name
+      name: Workshop
+      priority: 0
+      type: string
+    - description: URL for further information on the workshop.
+      jsonPath: .status.educates.workshop.spec.url
+      name: URL
+      priority: 0
+      type: string
+    - description: Status of workshop environment deployment.
+      jsonPath: .status.educates.phase
+      name: Status
+      priority: 0
+      type: string
+    - description: Status message.
+      jsonPath: .status.educates.message
+      name: Message
+      priority: 0
+      type: string
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              analytics:
+                properties:
+                  amplitude:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                  clarity:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                  google:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                type: object
+              cookies:
+                properties:
+                  domain:
+                    type: string
+                type: object
+              environment:
+                properties:
+                  objects:
+                    items:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                    type: array
+                  secrets:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        namespace:
+                          type: string
+                      required:
+                      - namespace
+                      - name
+                      type: object
+                    type: array
+                type: object
+              registry:
+                properties:
+                  host:
+                    type: string
+                  namespace:
+                    type: string
+                required:
+                - host
+                type: object
+              request:
+                properties:
+                  enabled:
+                    type: boolean
+                  namespaces:
+                    items:
+                      type: string
+                    type: array
+                  token:
+                    type: string
+                required:
+                - enabled
+                type: object
+              session:
+                properties:
+                  env:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  ingress:
+                    properties:
+                      class:
+                        type: string
+                      domain:
+                        type: string
+                      protocol:
+                        type: string
+                      secret:
+                        type: string
+                    type: object
+                  password:
+                    type: string
+                  username:
+                    type: string
+                type: object
+              theme:
+                properties:
+                  name:
+                    type: string
+                type: object
+              workshop:
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - workshop
+            type: object
+          status:
+            properties:
+              educates:
+                properties:
+                  capacity:
+                    type: integer
+                  initial:
+                    type: integer
+                  message:
+                    type: string
+                  namespace:
+                    type: string
+                  phase:
+                    type: string
+                  reserved:
+                    type: integer
+                  secrets:
+                    properties:
+                      ingress:
+                        items:
+                          type: string
+                        type: array
+                      registry:
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  workshop:
+                    properties:
+                      generation:
+                        type: integer
+                      name:
+                        type: string
+                      spec:
+                        type: object
+                        x-kubernetes-preserve-unknown-fields: true
+                      uid:
+                        type: string
+                    required:
+                    - name
+                    - uid
+                    - generation
+                    - spec
+                    type: object
+                type: object
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: workshoprequests.training.educates.dev
+spec:
+  group: training.educates.dev
+  names:
+    categories:
+    - educates
+    - educates-training
+    kind: WorkshopRequest
+    plural: workshoprequests
+    singular: workshoprequest
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - description: The URL to access the workshop.
+      jsonPath: .status.educates.url
+      name: URL
+      priority: 0
+      type: string
+    - description: The username to access the workshop.
+      jsonPath: .status.educates.username
+      name: Username
+      priority: 0
+      type: string
+    - description: The password to access the workshop.
+      jsonPath: .status.educates.password
+      name: Password
+      priority: 0
+      type: string
+    - description: Status of workshop request.
+      jsonPath: .status.educates.phase
+      name: Status
+      priority: 0
+      type: string
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              environment:
+                properties:
+                  name:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - environment
+            type: object
+          status:
+            properties:
+              educates:
+                properties:
+                  password:
+                    type: string
+                  phase:
+                    type: string
+                  session:
+                    properties:
+                      apiVersion:
+                        type: string
+                      kind:
+                        type: string
+                      name:
+                        type: string
+                      uid:
+                        type: string
+                    type: object
+                  url:
+                    type: string
+                  username:
+                    type: string
+                type: object
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: workshopsessions.training.educates.dev
+spec:
+  group: training.educates.dev
+  names:
+    categories:
+    - educates
+    - educates-training
+    kind: WorkshopSession
+    plural: workshopsessions
+    singular: workshopsession
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - description: The URL to access the workshop.
+      jsonPath: .status.educates.url
+      name: URL
+      priority: 0
+      type: string
+    - description: The username to access the workshop.
+      jsonPath: .spec.session.username
+      name: Username
+      priority: 0
+      type: string
+    - description: The password to access the workshop.
+      jsonPath: .spec.session.password
+      name: Password
+      priority: 0
+      type: string
+    - description: The status of the workshop session.
+      jsonPath: .status.educates.phase
+      name: Status
+      priority: 0
+      type: string
+    - description: Status message.
+      jsonPath: .status.educates.message
+      name: Message
+      priority: 0
+      type: string
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              analytics:
+                properties:
+                  amplitude:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                  clarity:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                  google:
+                    properties:
+                      trackingId:
+                        type: string
+                    required:
+                    - trackingId
+                    type: object
+                type: object
+              environment:
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+                type: object
+              portal:
+                properties:
+                  name:
+                    type: string
+                  url:
+                    type: string
+                required:
+                - name
+                - url
+                type: object
+              request:
+                properties:
+                  apiVersion:
+                    type: string
+                  kind:
+                    type: string
+                  name:
+                    type: string
+                  namespace:
+                    type: string
+                  uid:
+                    type: string
+                type: object
+              session:
+                properties:
+                  config:
+                    properties:
+                      password:
+                        type: string
+                    type: object
+                  env:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  id:
+                    type: string
+                  ingress:
+                    properties:
+                      class:
+                        type: string
+                      domain:
+                        type: string
+                      secret:
+                        type: string
+                    type: object
+                  password:
+                    type: string
+                  username:
+                    type: string
+                required:
+                - id
+                type: object
+              workshop:
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - environment
+            type: object
+          status:
+            properties:
+              educates:
+                properties:
+                  message:
+                    type: string
+                  phase:
+                    type: string
+                  sshd:
+                    properties:
+                      enabled:
+                        type: boolean
+                      tunnel:
+                        properties:
+                          enabled:
+                            type: boolean
+                        type: object
+                    required:
+                    - enabled
+                    type: object
+                  url:
+                    type: string
+                  user:
+                    type: string
+                type: object
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group: training.educates.dev/service-accounts
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: session-manager
+  namespace: educates
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: image-puller
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-session-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: educates-session-manager
+subjects:
+- kind: ServiceAccount
+  name: session-manager
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-session-manager:admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- kind: ServiceAccount
+  name: session-manager
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-session-manager:kyverno-policies
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kyverno:rbac:admin:policies
+subjects:
+- kind: ServiceAccount
+  name: session-manager
+  namespace: educates
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-session-manager:cluster-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: session-manager
+  namespace: educates
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/change-rule: upsert after upserting training.educates.dev/service-accounts
+    kapp.k14s.io/disable-original: ""
+    kubernetes.io/service-account.name: session-manager
+  name: session-manager-token
+  namespace: educates
+type: kubernetes.io/service-account-token
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: image-puller
+  namespace: educates
+spec:
+  selector:
+    matchLabels:
+      app: image-puller
+  template:
+    metadata:
+      labels:
+        app: image-puller
+    spec:
+      containers:
+      - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
+        imagePullPolicy: IfNotPresent
+        name: pause
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      initContainers:
+      - command:
+        - /bin/true
+        image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
+        imagePullPolicy: IfNotPresent
+        name: training-portal
+      - command:
+        - /bin/true
+        image: ghcr.io/educates/educates-base-environment@sha256:b7e55570e5b6a98251cc010e96b1615173c788d50f4833f0b9d3e821bb5fcd5a
+        imagePullPolicy: IfNotPresent
+        name: base-environment
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      serviceAccountName: image-puller
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: session-manager
+  namespace: educates
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: session-manager
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        deployment: session-manager
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz?probe=liveness
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: operator
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        startupProbe:
+          failureThreshold: 4
+          httpGet:
+            path: /healthz?probe=startup
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /opt/app-root/config/
+          name: config
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: token
+          readOnly: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      serviceAccountName: session-manager
+      volumes:
+      - name: config
+        secret:
+          secretName: educates-config
+      - name: token
+        secret:
+          secretName: session-manager-token
+---
+apiVersion: secrets.educates.dev/v1beta1
+kind: SecretCopier
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-ingress-secrets
+spec:
+  rules:
+  - sourceSecret:
+      name: workshops-neilfren-ch-tls
+      namespace: networking
+    targetNamespaces:
+      nameSelector:
+        matchNames:
+        - educates
+---
+apiVersion: secrets.educates.dev/v1beta1
+kind: SecretInjector
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-registry-credentials
+spec:
+  rules:
+  - serviceAccounts:
+      nameSelector:
+        matchNames:
+        - default
+    sourceSecrets:
+      nameSelector:
+        matchNames:
+        - educates-registry-credentials
+    targetNamespaces:
+      labelSelector:
+        matchLabels:
+          training.educates.dev/component: session
+---
+apiVersion: v1
+data:
+  educates-original-config.yaml: |
+    clusterInfrastructure:
+      provider: generic
+    imageVersions:
+    - name: session-manager
+      image: ghcr.io/educates/educates-session-manager:3.7.2
+    - name: training-portal
+      image: ghcr.io/educates/educates-training-portal:3.7.2
+    - name: docker-registry
+      image: ghcr.io/educates/educates-docker-registry:3.7.2
+    - name: pause-container
+      image: ghcr.io/educates/educates-pause-container:3.7.2
+    - name: base-environment
+      image: ghcr.io/educates/educates-base-environment:3.7.2
+    - name: jdk8-environment
+      image: ghcr.io/educates/educates-jdk8-environment:3.7.2
+    - name: jdk11-environment
+      image: ghcr.io/educates/educates-jdk11-environment:3.7.2
+    - name: jdk17-environment
+      image: ghcr.io/educates/educates-jdk17-environment:3.7.2
+    - name: jdk21-environment
+      image: ghcr.io/educates/educates-jdk21-environment:3.7.2
+    - name: conda-environment
+      image: ghcr.io/educates/educates-conda-environment:3.7.2
+    - name: secrets-manager
+      image: ghcr.io/educates/educates-secrets-manager:3.7.2
+    - name: tunnel-manager
+      image: ghcr.io/educates/educates-tunnel-manager:3.7.2
+    - name: image-cache
+      image: ghcr.io/educates/educates-image-cache:3.7.2
+    - name: assets-server
+      image: ghcr.io/educates/educates-assets-server:3.7.2
+    - name: lookup-service
+      image: ghcr.io/educates/educates-lookup-service:3.7.2
+    - name: node-ca-injector
+      image: ghcr.io/educates/educates-node-ca-injector:3.7.2
+    - name: debian-base-image
+      image: debian:sid-20230502-slim
+    - name: docker-in-docker
+      image: docker:27.5.1-dind
+    - name: loftsh-kubernetes-v1.31
+      image: ghcr.io/loft-sh/kubernetes:v1.31.1
+    - name: loftsh-kubernetes-v1.32
+      image: ghcr.io/loft-sh/kubernetes:v1.32.1
+    - name: loftsh-kubernetes-v1.33
+      image: ghcr.io/loft-sh/kubernetes:v1.33.4
+    - name: loftsh-kubernetes-v1.34
+      image: ghcr.io/loft-sh/kubernetes:v1.34.0
+    - name: loftsh-vcluster
+      image: ghcr.io/loft-sh/vcluster-oss:0.30.2
+    clusterIngress:
+      domain: workshops.neilfren.ch
+      class: traefik
+      protocol: https
+      tlsCertificateRef:
+        namespace: networking
+        name: workshops-neilfren-ch-tls
+    clusterSecurity:
+      policyEngine: none
+    workshopSecurity:
+      rulesEngine: none
+  educates-processed-values.yaml: |
+    ---
+    clusterPackages:
+      cert-manager:
+        enabled: false
+        settings: {}
+      certs:
+        enabled: false
+        settings: {}
+      contour:
+        enabled: false
+        settings: {}
+      educates:
+        enabled: true
+        settings:
+          clusterIngress:
+            class: traefik
+            domain: workshops.neilfren.ch
+            protocol: https
+            tlsCertificateRef:
+              name: workshops-neilfren-ch-tls
+              namespace: networking
+          clusterSecurity:
+            policyEngine: none
+          imageVersions:
+          - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
+            name: session-manager
+          - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
+            name: training-portal
+          - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
+            name: docker-registry
+          - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
+            name: pause-container
+          - image: ghcr.io/educates/educates-base-environment@sha256:b7e55570e5b6a98251cc010e96b1615173c788d50f4833f0b9d3e821bb5fcd5a
+            name: base-environment
+          - image: ghcr.io/educates/educates-jdk8-environment@sha256:77cd042cacd53cd19f06eba4d6dbd3bf7f78988462a77a490d2843e8b8945896
+            name: jdk8-environment
+          - image: ghcr.io/educates/educates-jdk11-environment@sha256:6e9d25819e38527f78d2fae0941e15aa8c2ff5f07bfe7a5811345b89472d6e6e
+            name: jdk11-environment
+          - image: ghcr.io/educates/educates-jdk17-environment@sha256:d7e31a0064db06173ef6faf17934f43d74676e3964b6b400ffd15626b9e98e0d
+            name: jdk17-environment
+          - image: ghcr.io/educates/educates-jdk21-environment@sha256:ff3848c4e76de6a92d7bcf7061a1690b7a2d91ddcda1d90e8bbb13486d51fe99
+            name: jdk21-environment
+          - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
+            name: conda-environment
+          - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
+            name: secrets-manager
+          - image: ghcr.io/educates/educates-tunnel-manager@sha256:caffa84c5afc1aeb376a90f412e0aa379f2421a134fade9b6d6dd63d40b3feb3
+            name: tunnel-manager
+          - image: ghcr.io/educates/educates-image-cache@sha256:927019ddf51f91163779ac2cfc4a7d90a25607b04cd1878b04d3f053afb5ce72
+            name: image-cache
+          - image: ghcr.io/educates/educates-assets-server@sha256:5cc355166a0aa9978e19b4b4c283340a1ff92b0b38c4b8ed9db25596dedb9a6d
+            name: assets-server
+          - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
+            name: lookup-service
+          - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
+            name: node-ca-injector
+          - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
+            name: debian-base-image
+          - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
+            name: docker-in-docker
+          - image: ghcr.io/loft-sh/kubernetes@sha256:68bcce6ac12a75d54402a08c1c9770397f8858cb3f240378b5c1cc2b985e2451
+            name: loftsh-kubernetes-v1.31
+          - image: ghcr.io/loft-sh/kubernetes@sha256:210591bca43462aa5cbe340dba124d36458d6b269d041a2e3add4b0ddd6e16d5
+            name: loftsh-kubernetes-v1.32
+          - image: ghcr.io/loft-sh/kubernetes@sha256:47a6cc7a605e29018e504ef268829ac002364f685d2bdb4a38336b15cd54dabc
+            name: loftsh-kubernetes-v1.33
+          - image: ghcr.io/loft-sh/kubernetes@sha256:2c5c4154208cc566085df4c16744eeec8b4e155b71168566e7be654c80dcf959
+            name: loftsh-kubernetes-v1.34
+          - image: ghcr.io/loft-sh/vcluster-oss@sha256:85904d0387426d0804da993162c89d9da8c3a7db51b2cb46d313ebfe65591636
+            name: loftsh-vcluster
+          workshopSecurity:
+            rulesEngine: none
+      external-dns:
+        enabled: false
+        settings: {}
+      kapp-controller:
+        enabled: false
+        settings: {}
+      kyverno:
+        enabled: false
+        settings: {}
+kind: ConfigMap
+metadata:
+  annotations:
+    educates.dev/infra-provider: generic
+    kapp.k14s.io/change-group.global: educates-installer
+    kapp.k14s.io/change-group.package: educates-installer/educates
+    kapp.k14s.io/disable-original: ""
+  name: educates-config
+  namespace: educates

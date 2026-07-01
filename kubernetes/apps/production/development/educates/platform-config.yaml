@@ -1,0 +1,16 @@
+clusterInfrastructure:
+  provider: generic
+clusterPackages:
+  kyverno:
+    enabled: false
+clusterSecurity:
+  policyEngine: none
+workshopSecurity:
+  rulesEngine: none
+clusterIngress:
+  domain: workshops.neilfren.ch
+  class: traefik
+  protocol: https
+  tlsCertificateRef:
+    namespace: networking
+    name: workshops-neilfren-ch-tls

@@ -25,3 +25,4 @@ provision/terraform/oracle-cloud/single-instance-create/**
 .claude
 # Documentation
 docs/
+kubernetes/apps/production/development/educates/README.md

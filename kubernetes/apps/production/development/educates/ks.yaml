@@ -1,0 +1,27 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-educates
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/disabled: "true"
+spec:
+  path: ./kubernetes/apps/production/development/educates/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-source
+  wait: false
+  interval: 30m
+  retryInterval: 2m
+  timeout: 10m
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: session-manager
+      namespace: educates
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: secrets-manager
+      namespace: educates
