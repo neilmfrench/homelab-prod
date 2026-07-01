@@ -79,7 +79,7 @@ stringData:
       name: loftsh-kubernetes-v1.33
     - image: ghcr.io/loft-sh/kubernetes@sha256:2c5c4154208cc566085df4c16744eeec8b4e155b71168566e7be654c80dcf959
       name: loftsh-kubernetes-v1.34
-    - image: ghcr.io/loft-sh/vcluster-oss@sha256:85904d0387426d0804da993162c89d9da8c3a7db51b2cb46d313ebfe65591636
+    - image: ghcr.io/loft-sh/vcluster-oss@sha256:35faf06fbfce4a3802ca7e459998dc191aad06a3544bde1a46118a4edcdaef62
       name: loftsh-vcluster
     - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
       name: session-manager
@@ -125,7 +125,7 @@ stringData:
       name: loftsh-kubernetes-v1.33
     - image: ghcr.io/loft-sh/kubernetes@sha256:2c5c4154208cc566085df4c16744eeec8b4e155b71168566e7be654c80dcf959
       name: loftsh-kubernetes-v1.34
-    - image: ghcr.io/loft-sh/vcluster-oss@sha256:85904d0387426d0804da993162c89d9da8c3a7db51b2cb46d313ebfe65591636
+    - image: ghcr.io/loft-sh/vcluster-oss@sha256:35faf06fbfce4a3802ca7e459998dc191aad06a3544bde1a46118a4edcdaef62
       name: loftsh-vcluster
     lookupService:
       enabled: false
@@ -4723,7 +4723,7 @@ data:
             name: loftsh-kubernetes-v1.33
           - image: ghcr.io/loft-sh/kubernetes@sha256:2c5c4154208cc566085df4c16744eeec8b4e155b71168566e7be654c80dcf959
             name: loftsh-kubernetes-v1.34
-          - image: ghcr.io/loft-sh/vcluster-oss@sha256:85904d0387426d0804da993162c89d9da8c3a7db51b2cb46d313ebfe65591636
+          - image: ghcr.io/loft-sh/vcluster-oss@sha256:35faf06fbfce4a3802ca7e459998dc191aad06a3544bde1a46118a4edcdaef62
             name: loftsh-vcluster
           workshopSecurity:
             rulesEngine: none
