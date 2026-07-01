@@ -4642,7 +4642,7 @@ data:
     - name: loftsh-kubernetes-v1.34
       image: ghcr.io/loft-sh/kubernetes:v1.34.0
     - name: loftsh-vcluster
-      image: ghcr.io/loft-sh/vcluster-oss:0.30.2
+      image: ghcr.io/loft-sh/vcluster-oss:0.35.1
     clusterIngress:
       domain: workshops.neilfren.ch
       class: traefik
