@@ -4634,13 +4634,13 @@ data:
     - name: docker-in-docker
       image: docker:27.5.1-dind
     - name: loftsh-kubernetes-v1.31
-      image: ghcr.io/loft-sh/kubernetes:v1.31.1
+      image: ghcr.io/loft-sh/kubernetes:v1.36.2
     - name: loftsh-kubernetes-v1.32
-      image: ghcr.io/loft-sh/kubernetes:v1.32.1
+      image: ghcr.io/loft-sh/kubernetes:v1.36.2
     - name: loftsh-kubernetes-v1.33
-      image: ghcr.io/loft-sh/kubernetes:v1.33.4
+      image: ghcr.io/loft-sh/kubernetes:v1.36.2
     - name: loftsh-kubernetes-v1.34
-      image: ghcr.io/loft-sh/kubernetes:v1.34.0
+      image: ghcr.io/loft-sh/kubernetes:v1.36.2
     - name: loftsh-vcluster
       image: ghcr.io/loft-sh/vcluster-oss:0.30.2
     clusterIngress:
