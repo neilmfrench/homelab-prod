@@ -67,7 +67,7 @@ stringData:
       - base-environment
     imageRegistry: null
     imageVersions:
-    - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
+    - image: index.docker.io/library/debian@sha256:d07d1b51c39f51188e60be9b64e6bf769fa94e187f092bc32b91305cfa34ba5a
       name: debian-base-image
     - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
       name: docker-in-docker
@@ -113,7 +113,7 @@ stringData:
       name: lookup-service
     - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
       name: node-ca-injector
-    - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
+    - image: index.docker.io/library/debian@sha256:d07d1b51c39f51188e60be9b64e6bf769fa94e187f092bc32b91305cfa34ba5a
       name: debian-base-image
     - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
       name: docker-in-docker
@@ -4711,7 +4711,7 @@ data:
             name: lookup-service
           - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
             name: node-ca-injector
-          - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
+          - image: index.docker.io/library/debian@sha256:d07d1b51c39f51188e60be9b64e6bf769fa94e187f092bc32b91305cfa34ba5a
             name: debian-base-image
           - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
             name: docker-in-docker
