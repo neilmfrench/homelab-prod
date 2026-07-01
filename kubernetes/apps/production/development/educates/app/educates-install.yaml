@@ -69,7 +69,7 @@ stringData:
     imageVersions:
     - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
       name: debian-base-image
-    - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
+    - image: index.docker.io/library/docker@sha256:66d292e5c26bd33a6f6f61cacb880de2186339a524ecba1ce098dbbaceed6515
       name: docker-in-docker
     - image: ghcr.io/loft-sh/kubernetes@sha256:68bcce6ac12a75d54402a08c1c9770397f8858cb3f240378b5c1cc2b985e2451
       name: loftsh-kubernetes-v1.31
@@ -115,7 +115,7 @@ stringData:
       name: node-ca-injector
     - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
       name: debian-base-image
-    - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
+    - image: index.docker.io/library/docker@sha256:66d292e5c26bd33a6f6f61cacb880de2186339a524ecba1ce098dbbaceed6515
       name: docker-in-docker
     - image: ghcr.io/loft-sh/kubernetes@sha256:68bcce6ac12a75d54402a08c1c9770397f8858cb3f240378b5c1cc2b985e2451
       name: loftsh-kubernetes-v1.31
@@ -4713,7 +4713,7 @@ data:
             name: node-ca-injector
           - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
             name: debian-base-image
-          - image: index.docker.io/library/docker@sha256:aa3df78ecf320f5fafdce71c659f1629e96e9de0968305fe1de670e0ca9176ce
+          - image: index.docker.io/library/docker@sha256:66d292e5c26bd33a6f6f61cacb880de2186339a524ecba1ce098dbbaceed6515
             name: docker-in-docker
           - image: ghcr.io/loft-sh/kubernetes@sha256:68bcce6ac12a75d54402a08c1c9770397f8858cb3f240378b5c1cc2b985e2451
             name: loftsh-kubernetes-v1.31
