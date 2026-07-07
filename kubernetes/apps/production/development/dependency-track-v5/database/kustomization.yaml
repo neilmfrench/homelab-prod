@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: development
 resources:
   - ./postgresql-secret.sops.yaml
+  - ./kek-secret.sops.yaml
   - ./postgresql.yaml
 namePrefix: dependency-track-v5-

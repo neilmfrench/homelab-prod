@@ -5,48 +5,30 @@ metadata:
   name: dependency-track-v5
 spec:
   values:
-    common:
+    database:
+      jdbcUrl: jdbc:postgresql://dependency-track-v5-postgresql-rw:5432/dtrack?reWriteBatchedInserts=true
+      existingSecret:
+        name: dependency-track-v5-postgresql-secret
+    secretManagement:
+      provider: database
       database:
-        jdbcUrl: jdbc:postgresql://dependency-track-v5-postgresql-rw:5432/dtrack
-        username: ""
-        password: ""
-      serviceAccount:
-        create: true
-        automount: true
-    initializer:
-      enabled: true
-      noHelmHook: true
-      extraEnv:
-        - name: DT_DATASOURCE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: dependency-track-v5-postgresql-secret
-              key: username
-        - name: DT_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: dependency-track-v5-postgresql-secret
-              key: password
+        kek:
+          mode: config
+          existingSecret:
+            name: dependency-track-v5-kek
+    fileStorage:
+      provider: local
+      local:
+        storageClassName: ceph-block
+        size: 10Gi
     apiServer:
-      resources:
-        requests:
-          cpu: 500m
-          memory: 2Gi
-        limits:
-          memory: 5Gi
-      extraEnv:
-        - name: DT_DATASOURCE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: dependency-track-v5-postgresql-secret
-              key: username
-        - name: DT_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: dependency-track-v5-postgresql-secret
-              key: password
-    frontend:
-      apiBaseUrl: https://dtrack-v5.${SECRET_DOMAIN}
+      web:
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2Gi
+          limits:
+            memory: 5Gi
     ingress:
       enabled: true
       ingressClassName: traefik
