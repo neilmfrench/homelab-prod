@@ -85,7 +85,7 @@ stringData:
       name: session-manager
     - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
       name: training-portal
-    - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
+    - image: ghcr.io/educates/educates-docker-registry@sha256:7ae6dc34d35a420c755f828bdd8a70736e7d6aba265d296a5bb9aa5725f01ed0
       name: docker-registry
     - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
       name: pause-container
@@ -4683,7 +4683,7 @@ data:
             name: session-manager
           - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
             name: training-portal
-          - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
+          - image: ghcr.io/educates/educates-docker-registry@sha256:7ae6dc34d35a420c755f828bdd8a70736e7d6aba265d296a5bb9aa5725f01ed0
             name: docker-registry
           - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
             name: pause-container
