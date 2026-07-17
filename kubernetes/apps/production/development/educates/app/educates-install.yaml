@@ -4600,7 +4600,7 @@ data:
     - name: session-manager
       image: ghcr.io/educates/educates-session-manager:3.7.2
     - name: training-portal
-      image: ghcr.io/educates/educates-training-portal:3.7.2
+      image: ghcr.io/educates/educates-training-portal:3.7.3
     - name: docker-registry
       image: ghcr.io/educates/educates-docker-registry:3.7.2
     - name: pause-container
