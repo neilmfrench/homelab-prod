@@ -91,7 +91,7 @@ stringData:
       name: pause-container
     - image: ghcr.io/educates/educates-base-environment@sha256:b7e55570e5b6a98251cc010e96b1615173c788d50f4833f0b9d3e821bb5fcd5a
       name: base-environment
-    - image: ghcr.io/educates/educates-jdk8-environment@sha256:77cd042cacd53cd19f06eba4d6dbd3bf7f78988462a77a490d2843e8b8945896
+    - image: ghcr.io/educates/educates-jdk8-environment@sha256:b6494ccf223adc865d613d1ac0f7fdedb33c1a024586e7f20312dfa76031209e
       name: jdk8-environment
     - image: ghcr.io/educates/educates-jdk11-environment@sha256:6e9d25819e38527f78d2fae0941e15aa8c2ff5f07bfe7a5811345b89472d6e6e
       name: jdk11-environment
@@ -4689,7 +4689,7 @@ data:
             name: pause-container
           - image: ghcr.io/educates/educates-base-environment@sha256:b7e55570e5b6a98251cc010e96b1615173c788d50f4833f0b9d3e821bb5fcd5a
             name: base-environment
-          - image: ghcr.io/educates/educates-jdk8-environment@sha256:77cd042cacd53cd19f06eba4d6dbd3bf7f78988462a77a490d2843e8b8945896
+          - image: ghcr.io/educates/educates-jdk8-environment@sha256:b6494ccf223adc865d613d1ac0f7fdedb33c1a024586e7f20312dfa76031209e
             name: jdk8-environment
           - image: ghcr.io/educates/educates-jdk11-environment@sha256:6e9d25819e38527f78d2fae0941e15aa8c2ff5f07bfe7a5811345b89472d6e6e
             name: jdk11-environment
