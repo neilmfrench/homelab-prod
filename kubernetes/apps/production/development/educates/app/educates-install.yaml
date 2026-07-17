@@ -4602,7 +4602,7 @@ data:
     - name: training-portal
       image: ghcr.io/educates/educates-training-portal:3.7.2
     - name: docker-registry
-      image: ghcr.io/educates/educates-docker-registry:3.7.2
+      image: ghcr.io/educates/educates-docker-registry:3.7.3
     - name: pause-container
       image: ghcr.io/educates/educates-pause-container:3.7.2
     - name: base-environment
