@@ -4628,7 +4628,7 @@ data:
     - name: lookup-service
       image: ghcr.io/educates/educates-lookup-service:3.7.2
     - name: node-ca-injector
-      image: ghcr.io/educates/educates-node-ca-injector:3.7.2
+      image: ghcr.io/educates/educates-node-ca-injector:3.7.3
     - name: debian-base-image
       image: debian:sid-20230502-slim
     - name: docker-in-docker
