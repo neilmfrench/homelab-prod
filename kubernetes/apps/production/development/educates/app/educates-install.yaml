@@ -111,7 +111,7 @@ stringData:
       name: assets-server
     - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
       name: lookup-service
-    - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
+    - image: ghcr.io/educates/educates-node-ca-injector@sha256:9a08fb0d570041c7f0a874997400c789380d67d8f6e5dc576fa4acb372b3b6da
       name: node-ca-injector
     - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
       name: debian-base-image
@@ -4709,7 +4709,7 @@ data:
             name: assets-server
           - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
             name: lookup-service
-          - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
+          - image: ghcr.io/educates/educates-node-ca-injector@sha256:9a08fb0d570041c7f0a874997400c789380d67d8f6e5dc576fa4acb372b3b6da
             name: node-ca-injector
           - image: index.docker.io/library/debian@sha256:25095ed790e32ed43236eb0c793a9959deda9d623bd527aa44a11d51c371397f
             name: debian-base-image
