@@ -4614,7 +4614,7 @@ data:
     - name: jdk17-environment
       image: ghcr.io/educates/educates-jdk17-environment:3.7.2
     - name: jdk21-environment
-      image: ghcr.io/educates/educates-jdk21-environment:3.7.2
+      image: ghcr.io/educates/educates-jdk21-environment:3.7.3
     - name: conda-environment
       image: ghcr.io/educates/educates-conda-environment:3.7.2
     - name: secrets-manager
