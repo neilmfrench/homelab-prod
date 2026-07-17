@@ -4604,7 +4604,7 @@ data:
     - name: docker-registry
       image: ghcr.io/educates/educates-docker-registry:3.7.2
     - name: pause-container
-      image: ghcr.io/educates/educates-pause-container:3.7.2
+      image: ghcr.io/educates/educates-pause-container:3.7.3
     - name: base-environment
       image: ghcr.io/educates/educates-base-environment:3.7.2
     - name: jdk8-environment
