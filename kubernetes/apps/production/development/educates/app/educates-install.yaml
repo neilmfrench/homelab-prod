@@ -103,7 +103,7 @@ stringData:
       name: conda-environment
     - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
       name: secrets-manager
-    - image: ghcr.io/educates/educates-tunnel-manager@sha256:caffa84c5afc1aeb376a90f412e0aa379f2421a134fade9b6d6dd63d40b3feb3
+    - image: ghcr.io/educates/educates-tunnel-manager@sha256:a4e5fbe2bc2e75ef4403ba298e19329f99617fe6c0d7e234952e977f6783d3c4
       name: tunnel-manager
     - image: ghcr.io/educates/educates-image-cache@sha256:927019ddf51f91163779ac2cfc4a7d90a25607b04cd1878b04d3f053afb5ce72
       name: image-cache
@@ -4701,7 +4701,7 @@ data:
             name: conda-environment
           - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
             name: secrets-manager
-          - image: ghcr.io/educates/educates-tunnel-manager@sha256:caffa84c5afc1aeb376a90f412e0aa379f2421a134fade9b6d6dd63d40b3feb3
+          - image: ghcr.io/educates/educates-tunnel-manager@sha256:a4e5fbe2bc2e75ef4403ba298e19329f99617fe6c0d7e234952e977f6783d3c4
             name: tunnel-manager
           - image: ghcr.io/educates/educates-image-cache@sha256:927019ddf51f91163779ac2cfc4a7d90a25607b04cd1878b04d3f053afb5ce72
             name: image-cache
