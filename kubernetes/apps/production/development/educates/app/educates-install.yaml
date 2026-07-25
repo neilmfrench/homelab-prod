@@ -99,7 +99,7 @@ stringData:
       name: jdk17-environment
     - image: ghcr.io/educates/educates-jdk21-environment@sha256:ff3848c4e76de6a92d7bcf7061a1690b7a2d91ddcda1d90e8bbb13486d51fe99
       name: jdk21-environment
-    - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
+    - image: ghcr.io/educates/educates-conda-environment@sha256:19b91c34eb46a925158e4fac34f2b223d5de7b1a0fe727994b5e58e9142d395a
       name: conda-environment
     - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
       name: secrets-manager
@@ -4697,7 +4697,7 @@ data:
             name: jdk17-environment
           - image: ghcr.io/educates/educates-jdk21-environment@sha256:ff3848c4e76de6a92d7bcf7061a1690b7a2d91ddcda1d90e8bbb13486d51fe99
             name: jdk21-environment
-          - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
+          - image: ghcr.io/educates/educates-conda-environment@sha256:19b91c34eb46a925158e4fac34f2b223d5de7b1a0fe727994b5e58e9142d395a
             name: conda-environment
           - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
             name: secrets-manager
