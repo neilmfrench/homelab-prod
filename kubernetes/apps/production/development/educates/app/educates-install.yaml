@@ -4612,7 +4612,7 @@ data:
     - name: jdk11-environment
       image: ghcr.io/educates/educates-jdk11-environment:3.7.2
     - name: jdk17-environment
-      image: ghcr.io/educates/educates-jdk17-environment:3.7.2
+      image: ghcr.io/educates/educates-jdk17-environment:3.7.3
     - name: jdk21-environment
       image: ghcr.io/educates/educates-jdk21-environment:3.7.2
     - name: conda-environment
