@@ -109,7 +109,7 @@ stringData:
       name: image-cache
     - image: ghcr.io/educates/educates-assets-server@sha256:5cc355166a0aa9978e19b4b4c283340a1ff92b0b38c4b8ed9db25596dedb9a6d
       name: assets-server
-    - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
+    - image: ghcr.io/educates/educates-lookup-service@sha256:19228ef016ed0baf92cd337622dba7d9d7cdf84838c6d2b17b55d11d1e54c341
       name: lookup-service
     - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
       name: node-ca-injector
@@ -4707,7 +4707,7 @@ data:
             name: image-cache
           - image: ghcr.io/educates/educates-assets-server@sha256:5cc355166a0aa9978e19b4b4c283340a1ff92b0b38c4b8ed9db25596dedb9a6d
             name: assets-server
-          - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
+          - image: ghcr.io/educates/educates-lookup-service@sha256:19228ef016ed0baf92cd337622dba7d9d7cdf84838c6d2b17b55d11d1e54c341
             name: lookup-service
           - image: ghcr.io/educates/educates-node-ca-injector@sha256:73f0f043a78fc2bdd53b484db4917a4239c434fbf9edb7107df479316627140c
             name: node-ca-injector
