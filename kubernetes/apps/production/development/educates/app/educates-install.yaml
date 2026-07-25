@@ -107,7 +107,7 @@ stringData:
       name: tunnel-manager
     - image: ghcr.io/educates/educates-image-cache@sha256:927019ddf51f91163779ac2cfc4a7d90a25607b04cd1878b04d3f053afb5ce72
       name: image-cache
-    - image: ghcr.io/educates/educates-assets-server@sha256:5cc355166a0aa9978e19b4b4c283340a1ff92b0b38c4b8ed9db25596dedb9a6d
+    - image: ghcr.io/educates/educates-assets-server@sha256:d0cdab6376b75a6d8c2458d3b2dd6b14084da5cc3636e3fe8196d0b1a935f496
       name: assets-server
     - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
       name: lookup-service
@@ -4705,7 +4705,7 @@ data:
             name: tunnel-manager
           - image: ghcr.io/educates/educates-image-cache@sha256:927019ddf51f91163779ac2cfc4a7d90a25607b04cd1878b04d3f053afb5ce72
             name: image-cache
-          - image: ghcr.io/educates/educates-assets-server@sha256:5cc355166a0aa9978e19b4b4c283340a1ff92b0b38c4b8ed9db25596dedb9a6d
+          - image: ghcr.io/educates/educates-assets-server@sha256:d0cdab6376b75a6d8c2458d3b2dd6b14084da5cc3636e3fe8196d0b1a935f496
             name: assets-server
           - image: ghcr.io/educates/educates-lookup-service@sha256:c85ccc1f5489625ec228448414f9e4095023aa39d92b1401368ad71a2eea0b61
             name: lookup-service
