@@ -4620,7 +4620,7 @@ data:
     - name: secrets-manager
       image: ghcr.io/educates/educates-secrets-manager:3.7.2
     - name: tunnel-manager
-      image: ghcr.io/educates/educates-tunnel-manager:3.7.2
+      image: ghcr.io/educates/educates-tunnel-manager:3.7.3
     - name: image-cache
       image: ghcr.io/educates/educates-image-cache:3.7.2
     - name: assets-server
