@@ -4626,7 +4626,7 @@ data:
     - name: assets-server
       image: ghcr.io/educates/educates-assets-server:3.7.2
     - name: lookup-service
-      image: ghcr.io/educates/educates-lookup-service:3.7.2
+      image: ghcr.io/educates/educates-lookup-service:3.7.3
     - name: node-ca-injector
       image: ghcr.io/educates/educates-node-ca-injector:3.7.2
     - name: debian-base-image
