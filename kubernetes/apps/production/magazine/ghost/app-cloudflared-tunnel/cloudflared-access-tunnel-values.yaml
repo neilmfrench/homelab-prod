@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: cloudflare/cloudflared
-      tag: "2025.4.0"
+      tag: "2025.11.1"
     args:
       - access
       - ssh
