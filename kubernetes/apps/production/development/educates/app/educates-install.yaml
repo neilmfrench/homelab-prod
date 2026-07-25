@@ -83,7 +83,7 @@ stringData:
       name: loftsh-vcluster
     - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
       name: session-manager
-    - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
+    - image: ghcr.io/educates/educates-training-portal@sha256:86a689a3dbee08c56a746cd8af30804269aa94804f9c8e6adf53e54c1894afd1
       name: training-portal
     - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
       name: docker-registry
@@ -4467,7 +4467,7 @@ spec:
       initContainers:
       - command:
         - /bin/true
-        image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
+        image: ghcr.io/educates/educates-training-portal@sha256:86a689a3dbee08c56a746cd8af30804269aa94804f9c8e6adf53e54c1894afd1
         imagePullPolicy: IfNotPresent
         name: training-portal
       - command:
@@ -4681,7 +4681,7 @@ data:
           imageVersions:
           - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
             name: session-manager
-          - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
+          - image: ghcr.io/educates/educates-training-portal@sha256:86a689a3dbee08c56a746cd8af30804269aa94804f9c8e6adf53e54c1894afd1
             name: training-portal
           - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
             name: docker-registry
