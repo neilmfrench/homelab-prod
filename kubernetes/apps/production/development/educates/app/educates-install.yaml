@@ -4624,7 +4624,7 @@ data:
     - name: image-cache
       image: ghcr.io/educates/educates-image-cache:3.7.2
     - name: assets-server
-      image: ghcr.io/educates/educates-assets-server:3.7.2
+      image: ghcr.io/educates/educates-assets-server:3.7.3
     - name: lookup-service
       image: ghcr.io/educates/educates-lookup-service:3.7.2
     - name: node-ca-injector
