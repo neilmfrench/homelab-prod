@@ -5,6 +5,10 @@ metadata:
   name: gitea
 spec:
   values:
+    # gitea-data is RWO (ceph-block): RollingUpdate deadlocks on Multi-Attach —
+    # the replacement pod can never mount the volume while the old pod runs.
+    strategy:
+      type: Recreate
     gitea:
       admin:
         email: ${SECRET_GITEA_ADMIN_EMAIL}
