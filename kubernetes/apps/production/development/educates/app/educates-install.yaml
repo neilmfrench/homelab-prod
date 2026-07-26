@@ -101,7 +101,7 @@ stringData:
       name: jdk21-environment
     - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
       name: conda-environment
-    - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
+    - image: ghcr.io/educates/educates-secrets-manager@sha256:5091c9978aa30ab0bc626c45f879f8dc309eaaf1d6abaf072e461812384cbd9e
       name: secrets-manager
     - image: ghcr.io/educates/educates-tunnel-manager@sha256:caffa84c5afc1aeb376a90f412e0aa379f2421a134fade9b6d6dd63d40b3feb3
       name: tunnel-manager
@@ -1316,7 +1316,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
+      - image: ghcr.io/educates/educates-secrets-manager@sha256:5091c9978aa30ab0bc626c45f879f8dc309eaaf1d6abaf072e461812384cbd9e
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -4699,7 +4699,7 @@ data:
             name: jdk21-environment
           - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
             name: conda-environment
-          - image: ghcr.io/educates/educates-secrets-manager@sha256:1b83c95b4d9e0ed7299b1752f2cb97413f09fd091bf3ea2a61ec6cc3b670b963
+          - image: ghcr.io/educates/educates-secrets-manager@sha256:5091c9978aa30ab0bc626c45f879f8dc309eaaf1d6abaf072e461812384cbd9e
             name: secrets-manager
           - image: ghcr.io/educates/educates-tunnel-manager@sha256:caffa84c5afc1aeb376a90f412e0aa379f2421a134fade9b6d6dd63d40b3feb3
             name: tunnel-manager
