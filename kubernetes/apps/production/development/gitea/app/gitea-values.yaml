@@ -33,6 +33,9 @@ spec:
           # services. Gitea's default ("external") silently drops deliveries
           # to private addresses.
           ALLOWED_HOST_LIST: "private"
+          # Jenkins' multibranch-webhook-trigger scans jobs synchronously
+          # before responding; the 5s default times out when Jenkins is busy.
+          DELIVER_TIMEOUT: 30
         database:
           DB_TYPE: postgres
           HOST: gitea-postgresql-rw:5432
