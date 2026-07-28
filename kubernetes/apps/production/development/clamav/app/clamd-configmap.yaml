@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clamd-config
+data:
+  # Fail-closed scanning config for pipeline artifact gating.
+  # ClamAV's defaults silently treat over-limit files as CLEAN (exit 0);
+  # AlertExceedsMax + raised limits are what make this usable as a gate.
+  # Container layer tarballs and fat jars routinely exceed the stock 100M limits.
+  clamd.conf: |
+    Foreground yes
+    LogTime yes
+    DatabaseDirectory /var/lib/clamav
+    LocalSocket /run/clamav/clamd.sock
+    TCPSocket 3310
+    TCPAddr 0.0.0.0
+    User clamav
+    SelfCheck 600
+    ConcurrentDatabaseReload yes
+    ExitOnOOM yes
+    MaxThreads 8
+    MaxQueue 100
+    StreamMaxLength 2000M
+    MaxFileSize 2000M
+    MaxScanSize 4000M
+    MaxRecursion 24
+    MaxFiles 100000
+    MaxScanTime 900000
+    AlertExceedsMax yes
+    ScanArchive yes
+    DetectPUA no
+  # Signatures come only from the platform mirror (Nexus raw hosted repo,
+  # populated by the clamav-mirror CronJob with cvdupdate). Never point
+  # freshclam at database.clamav.net from here: the upstream CDN blocks
+  # scripted clients, and the mirror is the prod-shaped (air-gap) pattern.
+  freshclam.conf: |
+    DatabaseDirectory /var/lib/clamav
+    DatabaseOwner clamav
+    PrivateMirror http://nexus.development.svc.cluster.local:8081/repository/clamav-signatures
+    ScriptedUpdates no
+    DNSDatabaseInfo no
+    Checks 24
+    ConnectTimeout 60
+    ReceiveTimeout 300
+    TestDatabases yes
+    NotifyClamd /etc/clamav/clamd.conf

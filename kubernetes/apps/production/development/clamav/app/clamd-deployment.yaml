@@ -1,0 +1,80 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clamd
+  labels:
+    app.kubernetes.io/name: clamd
+    app.kubernetes.io/part-of: clamav
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: clamd
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: clamd
+        app.kubernetes.io/part-of: clamav
+    spec:
+      containers:
+        - name: clamd
+          # _base = no bundled signature DB; the entrypoint runs freshclam
+          # once against the internal mirror before clamd starts.
+          image: clamav/clamav:1.5.3_base
+          ports:
+            - name: clamd
+              containerPort: 3310
+              protocol: TCP
+          # Steady-state RSS is ~1 GiB; the daily concurrent signature
+          # reload briefly doubles it. A limit under ~2.5Gi OOMKills the
+          # pod once a day.
+          resources:
+            requests:
+              cpu: 250m
+              memory: 1200Mi
+            limits:
+              memory: 3Gi
+          startupProbe:
+            tcpSocket:
+              port: 3310
+            periodSeconds: 5
+            failureThreshold: 90
+          readinessProbe:
+            tcpSocket:
+              port: 3310
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 3310
+            periodSeconds: 60
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: config
+              mountPath: /etc/clamav/clamd.conf
+              subPath: clamd.conf
+            - name: config
+              mountPath: /etc/clamav/freshclam.conf
+              subPath: freshclam.conf
+            - name: db
+              mountPath: /var/lib/clamav
+            - name: run
+              mountPath: /run/clamav
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: config
+          configMap:
+            name: clamd-config
+        - name: db
+          emptyDir:
+            sizeLimit: 2Gi
+        - name: run
+          emptyDir: {}
+        # clamd extracts archives here while scanning; large artifacts need
+        # real headroom.
+        - name: tmp
+          emptyDir:
+            sizeLimit: 8Gi
