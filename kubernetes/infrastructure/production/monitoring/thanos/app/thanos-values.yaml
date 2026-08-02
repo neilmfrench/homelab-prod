@@ -19,7 +19,7 @@ spec:
     queryFrontend:
       enabled: true
       resourcesPreset: "none"
-      replicaCount: 3
+      replicaCount: 1
       ingress:
         enabled: true
         ingressClassName: traefik
@@ -31,7 +31,7 @@ spec:
     query:
       enabled: true
       resourcesPreset: "none"
-      replicaCount: 3
+      replicaCount: 2
       replicaLabel: ["__replica__"]
       dnsDiscovery:
         sidecarsService: kube-prometheus-stack-thanos-discovery
@@ -39,7 +39,7 @@ spec:
     bucketweb:
       enabled: true
       resourcesPreset: "none"
-      replicaCount: 3
+      replicaCount: 1
     compactor:
       enabled: true
       nodeSelector:
@@ -63,7 +63,7 @@ spec:
     storegateway:
       enabled: true
       resourcesPreset: "none"
-      replicaCount: 3
+      replicaCount: 1
       persistence:
         enabled: true
         storageClass: ceph-block

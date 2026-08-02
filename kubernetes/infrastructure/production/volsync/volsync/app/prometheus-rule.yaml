@@ -4,6 +4,8 @@ kind: PrometheusRule
 metadata:
   name: volsync-rules
   namespace: volsync
+  labels:
+    release: kube-prometheus-stack
 spec:
   groups:
     - name: volsync.rules
