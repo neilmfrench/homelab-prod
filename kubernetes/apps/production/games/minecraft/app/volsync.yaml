@@ -49,7 +49,7 @@ spec:
   trigger:
     schedule: "45 7 * * *"
   restic:
-    unlock: "unlock-11-28-2025"
+    unlock: "unlock-08-01-2026"
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: minecraft-data-sj-restic-config
