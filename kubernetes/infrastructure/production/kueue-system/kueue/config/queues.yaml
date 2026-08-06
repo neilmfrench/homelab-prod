@@ -19,9 +19,6 @@ spec:
               nominalQuota: "8"
             - name: memory
               nominalQuota: 16Gi
-            # Jenkins agent pods (dynamic_agent) request ephemeral-storage on
-            # every container; a ClusterQueue that doesn't cover the resource
-            # can never admit them ("resource ephemeral-storage unavailable").
             - name: ephemeral-storage
               nominalQuota: 500Gi
 ---
