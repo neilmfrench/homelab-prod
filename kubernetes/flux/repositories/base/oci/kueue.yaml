@@ -8,4 +8,4 @@ spec:
   interval: 30m
   url: oci://registry.k8s.io/kueue/charts/kueue
   ref:
-    tag: "0.18.2"
+    tag: "0.19.0"
