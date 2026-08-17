@@ -26,6 +26,7 @@ spec:
   trigger:
     schedule: "20 8 * * *"
   restic:
+    unlock: "unlock-08-16-2026"  
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: ghost-data-external-home-restic-config

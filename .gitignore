@@ -26,3 +26,4 @@ provision/terraform/oracle-cloud/single-instance-create/**
 # Documentation
 docs/
 kubernetes/apps/production/development/educates/README.md
+hack/renovate
