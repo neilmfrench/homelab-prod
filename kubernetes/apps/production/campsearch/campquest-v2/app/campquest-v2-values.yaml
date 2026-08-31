@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: harbor.${SECRET_DOMAIN}/campsearch/campquest-v2
-              tag: "1.2.0"
+              tag: "1.2.1"
               pullPolicy: IfNotPresent
             args:
               - "serve"
