@@ -12,7 +12,7 @@ resources:
   - ./jenkins/ks.yaml
   - ./sonarqube/ks.yaml
   - ./nexus/ks.yaml
-  - ./docs-server/ks.yaml
+  # - ./docs-server/ks.yaml
   - ./software-factory-hub/ks.yaml
   - ./sf-metrics/ks.yaml
   - ./dependency-track/ks.yaml
