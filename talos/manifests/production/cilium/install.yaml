@@ -800,7 +800,7 @@ spec:
             - serve
           command:
             - hubble-relay
-          image: quay.io/cilium/hubble-relay:v1.13.4@sha256:bac057a5130cf75adf5bc363292b1f2642c0c460ac9ff018fcae3daf64873871
+          image: quay.io/cilium/hubble-relay:v1.20.2@sha256:d309c977870e9dbede7122a10eee09a4c9d66685e8d52af62d9c3c113f815b0f
           imagePullPolicy: IfNotPresent
           livenessProbe:
             tcpSocket:
