@@ -97,7 +97,7 @@ stringData:
       name: jdk11-environment
     - image: ghcr.io/educates/educates-jdk17-environment@sha256:d7e31a0064db06173ef6faf17934f43d74676e3964b6b400ffd15626b9e98e0d
       name: jdk17-environment
-    - image: ghcr.io/educates/educates-jdk21-environment@sha256:ff3848c4e76de6a92d7bcf7061a1690b7a2d91ddcda1d90e8bbb13486d51fe99
+    - image: ghcr.io/educates/educates-jdk21-environment@sha256:7ed6ed446108b610749742e281df08406207220484fe450e25acac57ebf09765
       name: jdk21-environment
     - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
       name: conda-environment
@@ -4695,7 +4695,7 @@ data:
             name: jdk11-environment
           - image: ghcr.io/educates/educates-jdk17-environment@sha256:d7e31a0064db06173ef6faf17934f43d74676e3964b6b400ffd15626b9e98e0d
             name: jdk17-environment
-          - image: ghcr.io/educates/educates-jdk21-environment@sha256:ff3848c4e76de6a92d7bcf7061a1690b7a2d91ddcda1d90e8bbb13486d51fe99
+          - image: ghcr.io/educates/educates-jdk21-environment@sha256:7ed6ed446108b610749742e281df08406207220484fe450e25acac57ebf09765
             name: jdk21-environment
           - image: ghcr.io/educates/educates-conda-environment@sha256:c569a5295a636bf9b8205da0feb5d5d674c054d9c57257636eae8c44e0ec5133
             name: conda-environment
