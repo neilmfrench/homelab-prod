@@ -4610,7 +4610,7 @@ data:
     - name: jdk8-environment
       image: ghcr.io/educates/educates-jdk8-environment:3.7.2
     - name: jdk11-environment
-      image: ghcr.io/educates/educates-jdk11-environment:3.7.2
+      image: ghcr.io/educates/educates-jdk11-environment:3.8.0
     - name: jdk17-environment
       image: ghcr.io/educates/educates-jdk17-environment:3.7.2
     - name: jdk21-environment
