@@ -4622,7 +4622,7 @@ data:
     - name: tunnel-manager
       image: ghcr.io/educates/educates-tunnel-manager:3.7.2
     - name: image-cache
-      image: ghcr.io/educates/educates-image-cache:3.7.2
+      image: ghcr.io/educates/educates-image-cache:3.8.0
     - name: assets-server
       image: ghcr.io/educates/educates-assets-server:3.7.2
     - name: lookup-service
