@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./argocd/ks.yaml
-  - ./argo-workflows/ks.yaml
+  # - ./argo-workflows/ks.yaml
