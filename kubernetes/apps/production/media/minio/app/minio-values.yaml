@@ -52,7 +52,7 @@ spec:
       tls:
         - hosts:
             - *host-console
-    users: null
+    users: []
     environment:
       TZ: "${TIMEZONE}"
       MINIO_UPDATE: "off"

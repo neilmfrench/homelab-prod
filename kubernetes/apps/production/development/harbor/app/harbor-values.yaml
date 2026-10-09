@@ -20,6 +20,8 @@ spec:
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure,websecure-int
     externalURL: https://harbor.${SECRET_DOMAIN}
+    updateStrategy:
+      type: Recreate
     persistence:
       enabled: true
       resourcePolicy: "keep"
