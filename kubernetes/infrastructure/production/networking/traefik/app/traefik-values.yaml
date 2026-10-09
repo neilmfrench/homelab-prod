@@ -6,8 +6,7 @@ metadata:
 spec:
   values:
     deployment:
-      kind: Deployment
-      replicas: 1
+      kind: DaemonSet
     service:
       enabled: true
       type: LoadBalancer
@@ -136,6 +135,6 @@ spec:
     resources:
       requests:
         memory: 100Mi
-        cpu: 500m
+        cpu: 100m
       limits:
         memory: 1000Mi
