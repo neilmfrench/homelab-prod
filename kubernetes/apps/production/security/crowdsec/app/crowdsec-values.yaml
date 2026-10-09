@@ -25,6 +25,16 @@ spec:
     config:
       parsers:
         s02-enrich:
+          00-traefik-cf-connecting-ip.yaml: |
+            name: homelab/traefik-cf-connecting-ip
+            description: "Behind Cloudflare, attribute Traefik access-log events to Cf-Connecting-Ip"
+            filter: "evt.Meta.log_type == 'http_access-log' && evt.Unmarshaled.traefik != nil && evt.Unmarshaled.traefik.entryPointName == 'websecure' && evt.Unmarshaled.traefik['request_Cf-Connecting-Ip'] not in ['', nil]"
+            onsuccess: next_stage
+            statics:
+              - parsed: remote_addr
+                expression: "evt.Unmarshaled.traefik['request_Cf-Connecting-Ip']"
+              - meta: source_ip
+                expression: "evt.Unmarshaled.traefik['request_Cf-Connecting-Ip']"
           whitelist-external-ip.yaml: |
             name: crowdsecurity/whitelists
             description: "Whitelist my external ip"

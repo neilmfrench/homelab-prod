@@ -40,6 +40,12 @@ spec:
     logs:
       access:
         enabled: true
+        format: json
+        fields:
+          headers:
+            defaultmode: drop # never log cookies / authorization headers
+            names:
+              Cf-Connecting-Ip: keep
       # general:
       #   format: json
       #   level: DEBUG
