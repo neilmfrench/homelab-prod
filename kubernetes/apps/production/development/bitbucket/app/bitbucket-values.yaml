@@ -379,7 +379,8 @@ spec:
       # -- Specifies a list of additional arguments that can be passed to the Bitbucket JVM, e.g.
       # system properties.
       #
-      additionalJvmArgs: []
+      additionalJvmArgs:
+        - -javaagent:/var/atlassian/application-data/bitbucket/atlassian-agent.jar
 
       # -- Specifies a list of additional Java libraries that should be added to the
       # Bitbucket container. Each item in the list should specify the name of the volume
