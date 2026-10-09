@@ -70,7 +70,7 @@ spec:
   trigger:
     schedule: "5 8 * * *"
   restic:
-    unlock: "unlock-08-23-2026"
+    unlock: "unlock-10-09-2026"
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: nextcloud-data-external-home-restic-config
