@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: TLSOption
+metadata:
+  name: cloudflare-mtls
+  namespace: networking
+spec:
+  minVersion: VersionTLS12
+  maxVersion: VersionTLS13
+  sniStrict: true
+  clientAuth:
+    secretNames:
+      - cloudflare-origin-pull-ca
+    clientAuthType: RequireAndVerifyClientCert
