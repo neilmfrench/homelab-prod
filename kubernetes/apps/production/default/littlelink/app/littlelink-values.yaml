@@ -48,6 +48,7 @@ spec:
         className: traefik
         annotations:
           external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure,websecure-int
           external-dns/is-public: "true"
         hosts:
           - host: &host "link.${SECRET_DOMAIN}"

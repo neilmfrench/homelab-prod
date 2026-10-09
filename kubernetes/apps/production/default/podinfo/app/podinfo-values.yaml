@@ -6,11 +6,8 @@ spec:
   values:
     ingress:
       enabled: true
-      annotations:
-        external-dns/is-public: "true"
-        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-        # cert-manager.io/cluster-issuer: letsencrypt-production
-        # traefik.ingress.kubernetes.io/router.middlewares: networking-crowdsec-traefik-bouncer@kubernetescrd
+      # LAN-only demo app: no external-dns annotations, so it never gets a public DNS record
+      # and never opts into the websecure entrypoint.
       hosts:
         - host: &host "podinfo-hb.${SECRET_DOMAIN}"
           paths:
