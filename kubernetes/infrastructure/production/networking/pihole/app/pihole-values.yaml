@@ -24,7 +24,6 @@ spec:
         - address=/prometheus.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/pihole-hue-bridge.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/hass-config.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
-        - address=/crowdsec-dash.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/tekton.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/alert-manager.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}
         - address=/pocketbase.${SECRET_DOMAIN}/${SECRET_METALLB_LOADBALANCER_IP}

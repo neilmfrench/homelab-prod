@@ -1,5 +1,8 @@
 crowdsec_lapi_url: https://crowdsec-service.security:8080/
 crowdsec_update_frequency: 1m
+only_include_decisions_from:
+  - crowdsec
+  - cscli
 ca_cert_path: /etc/ssl/certs/ca-certificates.crt
 cert_path: /etc/ssl/certs/tls.crt
 key_path: /etc/ssl/certs/tls.key
@@ -9,12 +12,12 @@ cloudflare_config:
       zones:
         - zone_id: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_ZONE_ID}
           actions:
-            - challenge
+            - managed_challenge
       token: ${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_API_TOKEN}
       ip_list_prefix: crowdsec
-      default_action: challenge
+      default_action: managed_challenge
       total_ip_list_capacity: 10000 # only this many latest IP decisions would be kept
-  update_frequency: 10s
+  update_frequency: 30s
 daemon: false
 log_mode: stdout
 log_dir: /var/log/

@@ -6,8 +6,6 @@ metadata:
 spec:
   values:
     container_runtime: containerd
-    # image:
-    #   tag: "v1.4.6"
     tls:
       enabled: true
       caBundle: true
@@ -18,7 +16,7 @@ spec:
           name: cluster-selfsigned-issuer
           kind: ClusterIssuer
         duration: 43800h
-        renewBefore: 43700h
+        renewBefore: 4380h
     # secrets:
     #   username: "${SECRET_CROWDSEC_AGENT_USERNAME}"
     #   password: "${SECRET_CROWDSEC_AGENT_PASSWORD}"
@@ -29,14 +27,13 @@ spec:
             name: homelab/traefik-cf-connecting-ip
             description: "Behind Cloudflare, attribute Traefik access-log events to Cf-Connecting-Ip"
             filter: "evt.Meta.log_type == 'http_access-log' && evt.Unmarshaled.traefik != nil && evt.Unmarshaled.traefik.entryPointName == 'websecure' && evt.Unmarshaled.traefik['request_Cf-Connecting-Ip'] not in ['', nil]"
-            onsuccess: next_stage
             statics:
               - parsed: remote_addr
                 expression: "evt.Unmarshaled.traefik['request_Cf-Connecting-Ip']"
               - meta: source_ip
                 expression: "evt.Unmarshaled.traefik['request_Cf-Connecting-Ip']"
           whitelist-external-ip.yaml: |
-            name: crowdsecurity/whitelists
+            name: homelab/whitelist-external-ip
             description: "Whitelist my external ip"
             whitelist:
               reason: "My external ip"
@@ -53,9 +50,7 @@ spec:
           value: "k8s linux homelab"
         - name: BOUNCER_KEY_traefik
           value: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
-        - name: BOUNCER_KEY_cloudflare
-          value: "${SECRET_CROWDSEC_CLOUDFLARE_BOUNCER_KEY}"
-        - name: LEVEL_DEBUG
+        - name: USE_WAL
           value: "true"
       resources:
         limits:
@@ -63,19 +58,9 @@ spec:
         requests:
           cpu: 150m
           memory: 256Mi
-      dashboard:
-        enabled: true
-        assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
-        ingress:
-          enabled: true
-          ingressClassName: "traefik"
-          host: &host "crowdsec-dash.${SECRET_DOMAIN}"
-          tls:
-            - hosts:
-                - *host
       persistentVolume:
         data:
-          enabled: false
+          enabled: true
           storageClassName: ceph-block
           size: 1Gi
         config:
@@ -115,6 +100,7 @@ spec:
         - namespace: networking
           podName: traefik-*
           program: traefik
+          poll_without_inotify: true
       metrics:
         enabled: true
         serviceMonitor:

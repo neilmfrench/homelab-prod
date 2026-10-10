@@ -14,7 +14,7 @@ spec:
       crowdsecLapiHost: crowdsec-service.security.svc.cluster.local:8080
       crowdsecLapiKey: "${SECRET_CROWDSEC_TRAEFIK_BOUNCER_KEY}"
       crowdsecLapiTlsInsecureVerify: true
-      updateIntervalSeconds: 60
+      updateIntervalSeconds: 15
       updateMaxFailure: -1
       defaultDecisionSeconds: 60
       forwardedHeadersTrustedIPs:

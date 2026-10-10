@@ -97,7 +97,7 @@ spec:
         http:
           redirections:
             entryPoint:
-              to: websecure
+              to: websecure-int
               scheme: https
               permanent: true
       websecure:
