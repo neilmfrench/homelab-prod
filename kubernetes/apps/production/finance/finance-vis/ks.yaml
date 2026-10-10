@@ -2,10 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-crowdsec
+  name: cluster-apps-finance-vis
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/production/security/crowdsec/app
+  dependsOn:
+    - name: cluster-apps-firefly-iii
+  path: ./kubernetes/apps/production/finance/finance-vis/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -13,8 +15,8 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
-      name: crowdsec
-      namespace: security
+      name: finance-vis
+      namespace: finance
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 5m
