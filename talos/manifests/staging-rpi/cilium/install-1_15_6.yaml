@@ -1317,7 +1317,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.uid
-        image: quay.io/cilium/clustermesh-apiserver:v1.15.6@sha256:6365c2fe8a038fc7adcdeb7ffb8d7a8a2cd3ee524687f35fff9df76fafeeb029
+        image: quay.io/cilium/clustermesh-apiserver:v1.20.3@sha256:5c8dca0d0b77bb593df157be39f6c9c868dc08922bbd0540ac0a56815341b227
         imagePullPolicy: IfNotPresent
         name: etcd
         ports:
@@ -1371,7 +1371,7 @@ spec:
               key: enable-k8s-endpoint-slice
               name: cilium-config
               optional: true
-        image: quay.io/cilium/clustermesh-apiserver:v1.15.6@sha256:6365c2fe8a038fc7adcdeb7ffb8d7a8a2cd3ee524687f35fff9df76fafeeb029
+        image: quay.io/cilium/clustermesh-apiserver:v1.20.3@sha256:5c8dca0d0b77bb593df157be39f6c9c868dc08922bbd0540ac0a56815341b227
         imagePullPolicy: IfNotPresent
         name: apiserver
         ports:
@@ -1404,7 +1404,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.uid
-        image: quay.io/cilium/clustermesh-apiserver:v1.15.6@sha256:6365c2fe8a038fc7adcdeb7ffb8d7a8a2cd3ee524687f35fff9df76fafeeb029
+        image: quay.io/cilium/clustermesh-apiserver:v1.20.3@sha256:5c8dca0d0b77bb593df157be39f6c9c868dc08922bbd0540ac0a56815341b227
         imagePullPolicy: IfNotPresent
         name: etcd-init
         terminationMessagePolicy: FallbackToLogsOnError
