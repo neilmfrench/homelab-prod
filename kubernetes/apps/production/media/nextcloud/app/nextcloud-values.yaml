@@ -39,6 +39,10 @@ spec:
           value: nextcloud-redis-master
         - name: REDIS_HOST_PORT
           value: "6379"
+      phpConfigs:
+        zz-php2shell.ini: |-
+          session.upload_progress.enabled = 0
+          memory_limit = -1
       configs:
         email.config.php: |-
           <?php
