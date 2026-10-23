@@ -7,7 +7,7 @@ spec:
   values:
     image:
       repository: vaultwarden/server
-      tag: 1.36.0
+      tag: 1.37.4
     env:
       TZ: "${TIMEZONE}"
       DATA_FOLDER: "config"
@@ -21,7 +21,7 @@ spec:
       SMTP_HOST: "${SECRET_VAULTWARDEN_EMAIL_HOST}"
       SMTP_FROM: "${SECRET_VAULTWARDEN_EMAIL_ADDR}"
       SMTP_FROM_NAME: "${SECRET_VAULTWARDEN_EMAIL_FROM}"
-      SMTP_SSL: true
+      SMTP_SECURITY: starttls
       SMTP_PORT: 587
       SMTP_USERNAME: "${SECRET_VAULTWARDEN_EMAIL_USER}"
       SMTP_PASSWORD: "${SECRET_VAULTWARDEN_EMAIL_KEY}"
