@@ -6,6 +6,15 @@ resources:
   - ./data-volume.yaml
   - ./data-pvc.yaml
   - ./selfsigned-cert.yaml
+  - ./minio-users.sops.yaml
   - ../../../../base/minio
 patches:
   - path: ./minio-values.yaml
+configMapGenerator:
+  - name: minio-lifecycle
+    files:
+      - ./lifecycle/noncurrent-30d.json
+      - ./lifecycle/expire-30d.json
+      - ./lifecycle/locked-expire-30d.json
+generatorOptions:
+  disableNameSuffixHash: true

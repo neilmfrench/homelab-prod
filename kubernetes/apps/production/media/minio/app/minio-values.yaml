@@ -4,10 +4,18 @@ kind: HelmRelease
 metadata:
   name: minio
 spec:
+  upgrade:
+    remediation:
+      retries: 0
   values:
     image:
-      repository: quay.io/minio/minio
-      tag: RELEASE.2025-03-12T18-04-18Z
+      repository: docker.io/pgsty/silo
+      tag: RELEASE.2026-10-18T00-00-00Z
+    mcImage:
+      repository: docker.io/pgsty/mc
+      tag: RELEASE.2026-10-18T00-00-00Z
+    deploymentUpdate:
+      type: Recreate
     mode: standalone
     ignoreChartChecksums: true
     rootUser: admin
@@ -46,7 +54,107 @@ spec:
       tls:
         - hosts:
             - *host-console
-    users: []
+    policies:
+      - name: home-backup
+        statements:
+          - resources:
+              - "arn:aws:s3:::ceph-backup"
+              - "arn:aws:s3:::hb-backup"
+              - "arn:aws:s3:::moco-backup"
+            actions: &bucket-actions
+              - "s3:GetBucketLocation"
+              - "s3:ListBucket"
+              - "s3:ListBucketMultipartUploads"
+          - resources:
+              - "arn:aws:s3:::ceph-backup/*"
+              - "arn:aws:s3:::hb-backup/*"
+              - "arn:aws:s3:::moco-backup/*"
+            actions: &object-actions
+              - "s3:GetObject"
+              - "s3:PutObject"
+              - "s3:DeleteObject"
+              - "s3:AbortMultipartUpload"
+              - "s3:ListMultipartUploadParts"
+      - name: phx-backup
+        statements:
+          - resources: ["arn:aws:s3:::longhorn-phx-backup"]
+            actions: *bucket-actions
+          - resources: ["arn:aws:s3:::longhorn-phx-backup/*"]
+            actions: *object-actions
+      - name: sj-backup
+        statements:
+          - resources: ["arn:aws:s3:::longhorn-sj-backup", "arn:aws:s3:::sj-backup"]
+            actions: *bucket-actions
+          - resources: ["arn:aws:s3:::longhorn-sj-backup/*", "arn:aws:s3:::sj-backup/*"]
+            actions: *object-actions
+      - name: omni
+        statements:
+          - resources: ["arn:aws:s3:::omni-locked"]
+            actions: *bucket-actions
+          - resources: ["arn:aws:s3:::omni-locked/*"]
+            actions: *object-actions
+      - name: proxmox
+        statements:
+          - resources: ["arn:aws:s3:::proxmox-locked"]
+            actions: *bucket-actions
+          - resources: ["arn:aws:s3:::proxmox-locked/*"]
+            actions: *object-actions
+    users:
+      - accessKey: home-backup
+        existingSecret: minio-users
+        existingSecretKey: home-backup
+        policy: home-backup
+      - accessKey: phx-backup
+        existingSecret: minio-users
+        existingSecretKey: phx-backup
+        policy: phx-backup
+      - accessKey: sj-backup
+        existingSecret: minio-users
+        existingSecretKey: sj-backup
+        policy: sj-backup
+      - accessKey: omni
+        existingSecret: minio-users
+        existingSecretKey: omni
+        policy: omni
+      - accessKey: proxmox
+        existingSecret: minio-users
+        existingSecretKey: proxmox
+        policy: proxmox
+    buckets:
+      - {name: ceph-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: hb-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: moco-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: longhorn-phx-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: longhorn-sj-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: sj-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: computer-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: proxmox-backup, policy: none, versioning: true, objectlocking: false}
+      - {name: omni-locked, policy: none, objectlocking: true}
+      - {name: proxmox-locked, policy: none, objectlocking: true}
+    customCommands:
+      - command: "mb --ignore-existing --with-lock myminio/omni-locked"
+      - command: "mb --ignore-existing --with-lock myminio/proxmox-locked"
+      - command: "retention set --default compliance 14d myminio/omni-locked"
+      - command: "retention set --default compliance 14d myminio/proxmox-locked"
+      - command: "ilm import myminio/ceph-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/hb-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/moco-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/longhorn-phx-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/longhorn-sj-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/sj-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/computer-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/proxmox-backup < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/proxmox-locked < /mnt/lifecycle/noncurrent-30d.json"
+      - command: "ilm import myminio/omni < /mnt/lifecycle/expire-30d.json"
+      - command: "ilm import myminio/omni-locked < /mnt/lifecycle/locked-expire-30d.json"
+    customCommandJob:
+      extraVolumes:
+        - name: lifecycle
+          configMap:
+            name: minio-lifecycle
+      extraVolumeMounts:
+        - name: lifecycle
+          mountPath: /mnt/lifecycle
     environment:
       TZ: "${TIMEZONE}"
       MINIO_UPDATE: "off"

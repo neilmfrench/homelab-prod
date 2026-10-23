@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: minio-users
+    namespace: media
+type: Opaque
+stringData:
+    home-backup: ENC[AES256_GCM,data:kxS+HXx6botuDh5IGbfr2XZ4HOehwq96+xg7qI8xRts4OMu7WiRqIQ==,iv:G0F0DWf2tKD6gtPFLafOumIlCUolM6P6P+thgFIMUw8=,tag:mHdA2L5IxFFjNuo8rZ3PcA==,type:str]
+    phx-backup: ENC[AES256_GCM,data:4eYi8q9QiMnGAgcMpMHsGs+X3C2GHIjJ0SviDnIHfJtW06cmfZO+Lg==,iv:ql4SFRfSurR34rz5evcHHCOkiyDK0hsNOuvx8Np8z5A=,tag:GUF91jRNNEGVx2uox8429g==,type:str]
+    sj-backup: ENC[AES256_GCM,data:zCGuFQuSoUdjAkykPI/Qj08BGZ0oSVAy5QaMR3POrZCupw7g8tAs9A==,iv:VsrOkKKqozCAwJilPt+Dx7LguUkipXnsRbumVToXyNI=,tag:cKyzUqoYdBFrvv9ev55oyw==,type:str]
+    omni: ENC[AES256_GCM,data:6QgvNtMcNV0nsfBBGYGaKFza+xBRqBkWUm3Hi3yyxBF12Sw4GMOx2Q==,iv:CAhhJ2LkquYqQDb8zSIGpNie4vjOFGuXwGjYBXnofBY=,tag:5rCtUx5YfaVdHrLiXzBzcw==,type:str]
+    proxmox: ENC[AES256_GCM,data:c6Feqf2Ebr4/gMkmpiknBFxB5ElaF71o6KYdArWnsMvJ3SVemn5uRA==,iv:rtMJyyswq/pVoOWs4qejW1NPTCxi0ZhOavwGrSihsJM=,tag:TpLXdVNIrGqGT2sbeg4o7w==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0ZnU2QlFGdGUvUFZMU2ZS
+            SkpadjU2K09WeG5IUzVTSGU2Q3BHaHBxZW1RCklLQ1Y4ZU5zSitVQ1lkeTlTTUNI
+            alY5OWl4OC9ncERZRjByT1RXVzBqWkUKLS0tIG9MRmhQR3dlK0lJcU9XZjJmT3Fn
+            NXVTYUJnUkhidHEzMGlzSTVhQlp6SzgKYMhOy6l4MnOcuOmA3QsZ7nw+VmiU27J8
+            YxE9PihHL6/Wuq12NQftS/WNfVrN1rTnTnFaf5Y6G7OpMHbFcagQNQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-10-23T19:54:18Z"
+    mac: ENC[AES256_GCM,data:vO9gXwzVzLJhZ7A7J4UCppZaoITku5lo6PM4KjbFV89CYVyf36ntK3LOuB5pI3K2pzhhZTcFTuqvQMA4fwZcD0lzmo2LveAdWnvIWHaydkMtdaY5ZeUmFlaE3jKh/Y8hR4pzskPzwPqQ+yxVWVwtQJgmXmKtBpEgh3YuLLT4skM=,iv:mgvlwnvOvrAv9MebEiSS3SxCl8k6g0fA44+tPKB9KWU=,tag:K+nJ3dICDXEMmvcXI/N8Ww==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2
