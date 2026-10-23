@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN" "dtds/urlrewrite4.0.dtd">
+
+<urlrewrite decode-using="utf8">
+    <!--
+      CVE-2026-21589 mitigation (Atlassian advisory, "urlrewrite.xml" option): must be the first rule.
+      Returns 404 for ".." next to "/", "\", "::" or their %-encoded forms.
+      The rest of this file is the stock WEB-INF/urlrewrite.xml from atlassian/bitbucket:8.19.18.
+      Regenerate from the new image if the tag changes; drop the rule once on 9.4.26 / 10.2.8 / 10.5.1+.
+    -->
+    <rule>
+        <from>(?is).*(?:/|\\|::|%(?:25)*(?:2f|5c)|(?::|%(?:25)*3a){2})(?:\.|%(?:25)*2e){2}(?:/|\\|::|%(?:25)*(?:2f|5c)|(?::|%(?:25)*3a){2}|;|%(?:25)*3b|$).*</from>
+        <set type="status">404</set>
+        <to>/mvc/error404</to>
+    </rule>
+    <!-- Johnson Error Pages -->
+    <rule>
+        <from>^/unavailable$</from>
+        <to last="true">/unavailable</to>
+    </rule>
+    <!-- System endpoints. These are not generally expected to be seen directly by end users -->
+    <rule>
+        <!-- Make /system/maintenance a synonym for /mvc/maintenance -->
+        <!-- TODO: Remove /mvc/maintenance in Stash 4.0 -->
+        <from>^/system/maintenance(.*)$</from>
+        <to last="true">/mvc/maintenance$1</to>
+    </rule>
+    <rule>
+        <from>^/system/startup$</from>
+        <to last="true">/system/startup</to>
+    </rule>
+    <!-- Accept /users/slug/repos URLs and transform them to /projects/~slug/repos. Also similarly accept REST urls. -->
+    <rule>
+        <from>^(/|/mvc/|/rest/api/[^/]+/)users/([^/]+)/repos(.*)$</from>
+        <to>$1projects/~${replace:$2: :%20}/repos$3</to>
+    </rule>
+    <rule>
+        <from>^(/|/mvc/)projects/([^/]+)/repos/([^/]+)/commits/([^?]*)$</from>
+        <set type="parameter" name="commitHash">$4</set>
+    </rule>
+    <rule>
+        <!--
+         To avoid issues with encoded characters, space or '/' symbols in the attachment name, strip it off the
+         URL and add it instead as a query string parameter, for the AttachmentController.
+         -->
+        <from>^(/|/mvc/)projects/([^/]+)/repos/([^/]+)/attachments/([^/]+)/([^?]*)$</from>
+        <set type="parameter" name="attachmentName">$5</set>
+        <to>$1projects/$2/repos/$3/attachments/$4</to>
+    </rule>
+    <rule>
+        <!-- Rewrite home page -->
+        <from>^/(?:index\.html)?($|;.*)</from>
+        <to last="true">/mvc/home$1</to>
+    </rule>
+    <rule>
+        <!-- By default, because this endpoint returns JSON from a SpringMVC controller, it would be rewritten to hit
+             a REST endpoint. This rewrite rule prevents that from happening and explicitly rewrites through mvc. -->
+        <from>^/admin/backups$</from>
+        <to last="true">/mvc/admin/backups</to>
+    </rule>
+    <rule>
+        <!-- By default, because this endpoint returns JSON from a SpringMVC controller, it would be rewritten to hit
+             a REST endpoint. This rewrite rule prevents that from happening and explicitly rewrites through mvc. -->
+        <from>^/admin/integrity-check/([^/]+)$</from>
+        <to last="true">/mvc/admin/integrity-check/$1</to>
+    </rule>
+    <rule>
+        <!-- By default, because this endpoint returns JSON from a SpringMVC controller, it would be rewritten to hit
+             a REST endpoint. This rewrite rule prevents that from happening and explicitly rewrites through mvc. -->
+        <from>^/projects/([^/]+)/repos/([^/]+)/sizes</from>
+        <to last="true">/mvc/projects/$1/repos/$2/sizes</to>
+    </rule>
+    <rule>
+        <from>^/s/(.*)/_/download/(.*)$</from>
+        <set name="_statichash">$1</set>
+        <run class="com.atlassian.plugin.servlet.ResourceDownloadUtils" method="addPublicCachingHeaders"/>
+        <to last="true">/download/$2</to>
+    </rule>
+    <rule>
+        <!-- rewrite /git/* to /scm/* for backwards compatibility with clones made against Stash 1.0 -->
+        <from>^/git/(.*)$</from>
+        <to last="true">/scm/$1</to>
+    </rule>
+    <rule>
+        <!-- Rewrite things that would normally go to /mvc to /rest/api/latest if they are looking for json. -->
+        <condition type="header" name="Accept" next="or">application/json</condition>
+        <condition type="header" name="Accept" next="or">application/x-json</condition>
+        <condition type="header" name="Accept" next="or">text/json</condition>
+        <condition type="header" name="Accept">text/x-json</condition>
+        <from>^/((?!s/|mvc|rest|plugins|download|status|test|git).+)$</from>
+        <to last="true">/rest/api/1.0/$1</to>
+    </rule>
+    <rule>
+        <!--
+         To avoid issues with encoded characters or '/' symbols in the file path, strip it off the URL and
+         add it instead as a query string parameter, for the RepositoryController.
+
+         Note that we do *not* do this for the /rest resources (which can already handle file paths with
+         encoded characters and '/' symbols, and are not expecting the file path as a query string parameter).
+
+         Also note that this rule comes _after_ the Accept json rule, as it should never match and should never be
+         applied if the json one is already applied (the REST endpoints do _not_ support the path parameter).
+         -->
+        <from>^(/|/mvc/)projects/([^/]+)/repos/([^/]+)/(browse|history|diff|raw)/([^?]*)$</from>
+        <set type="parameter" name="path">$5</set>
+        <to>$1projects/$2/repos/$3/$4</to>
+    </rule>
+    <rule>
+        <!-- If none of our other handlers match, rewrite this to /mvc
+             Note: trailing slashes are stripped to ensure that spring-security restrictions cannot be bypassed
+                   by adding a trailing /. Spring MVC will happily map /projects/ to a /projects mapping. -->
+        <from>^/((?!s/|mvc|rest|plugins|download|test|scm|status|j_atl_security|admin/uploadplugin\.action|qunit).*?)/*$</from>
+        <to last="true">/mvc/$1</to>
+    </rule>
+</urlrewrite>

@@ -12,3 +12,11 @@ resources:
   - ../../../../base/bitbucket
 patches:
   - path: ./bitbucket-values.yaml
+configMapGenerator:
+  - name: bitbucket-urlrewrite
+    files:
+      - ./urlrewrite.xml
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

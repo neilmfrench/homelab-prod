@@ -714,7 +714,11 @@ spec:
     # VolumeMount and Volumes are added with this name and index position, for example;
     # custom-config-0, keystore-2
     #
-    additionalFiles: []
+    additionalFiles:
+      - name: bitbucket-urlrewrite
+        type: configMap
+        key: urlrewrite.xml
+        mountPath: /opt/atlassian/bitbucket/app/WEB-INF
     # Examples:
     #  - name: custom-config
     #    type: configMap

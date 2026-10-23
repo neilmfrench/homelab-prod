@@ -5,6 +5,8 @@ metadata:
   name: nextcloud
 spec:
   values:
+    image:
+      tag: 32.0.15-apache
     persistence:
       enabled: true
       existingClaim: nextcloud-data
