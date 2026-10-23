@@ -4,14 +4,23 @@ kind: HelmRelease
 metadata:
   name: gitea
 spec:
+  timeout: 15m
+  upgrade:
+    remediation:
+      retries: 0
   values:
     strategy:
       type: Recreate
+    image:
+      registry: docker.gitea.com
+      repository: gitea
+      # chart 12.7.0 still defaults to 1.27.0; rootless: true appends -rootless
+      tag: "28.2.0"
     gitea:
       admin:
-        email: ${SECRET_GITEA_ADMIN_EMAIL}
-        username: git-admin
-        password: ${SECRET_GITEA_ADMIN_PASSWORD}
+        existingSecret: ""
+        username: ""
+        password: ""
       oauth:
         - name: authentik
           provider: openidConnect
@@ -25,8 +34,10 @@ spec:
           useCustomUrls: false
       config:
         APP_NAME: "Homelab Gitea"
-        webhook:
+        security:
+          TWO_FACTOR_AUTH: enforced
           ALLOWED_HOST_LIST: "private"
+        webhook:
           DELIVER_TIMEOUT: 30
         database:
           DB_TYPE: postgres
@@ -46,11 +57,13 @@ spec:
           FROM: ${SECRET_GITEA_MAIL_FROM}
           USER: ${SECRET_GITEA_MAIL_USER}
           PASSWD: ${SECRET_GITEA_MAIL_PASSWORD}
-        respository:
-          DEFAULT_PRIVATE: true
+        repository:
+          DEFAULT_PRIVATE: private
         service:
           DISABLE_REGISTRATION: true
           REQUIRE_SIGNIN_VIEW: true
+          ENABLE_PASSWORD_SIGNIN_FORM: false
+          ENABLE_BASIC_AUTHENTICATION: false
         session:
           PROVIDER: redis
           PROVIDER_CONFIG: redis://:gitea@gitea-redis-headless:6379/0?pool_size=100&idle_timeout=180s&
