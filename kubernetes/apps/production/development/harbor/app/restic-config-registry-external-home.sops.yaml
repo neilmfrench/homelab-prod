@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: harbor-registry-external-home-restic-config
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ENC[AES256_GCM,data:ilvaq3CnNO5UsixkJgNgG9TqUVr2VVrVF3Uj7/u2E+M38nxmrop3sPeDF0HthgjnI97fuOUcbums3FdVSq+Dz/ZEole9tXQXadk5Kyj+W1GmIj7hMfajabvtj43tog==,iv:Af5C6TiamLijSX/ffGM/6EoJsBT1ceHDUhRHkktPXxs=,tag:ivGw+AJemXLFiBEwspnSaQ==,type:str]
+    RESTIC_PASSWORD: ENC[AES256_GCM,data:lziQ2ViI233+2mqbyZmGSExB8rVZzg16z/foM5+WfhwkeReNCJr5H5rh2VyAA4oI,iv:CBdQo7DjDFm5CAAwM81CawDgjLDM0IAFejJ8lR/8hac=,tag:MD9PKpkql+gpqGkHulnntg==,type:str]
+sops:
+    age:
+        - recipient: age1fl92uj8fwujcphes4cxm82qlztxf4kh6j0d2a9at7alpml266p3sedrvx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRdDkrOHhndnUzMlhDazB6
+            YlVQVmhUQ0g4d0UyL2VMcWFiZmcxUUwyS1UwCmpoMUdEK0NQQ21xcUt6M0lkeUJa
+            enBEdjNvRmRVMmFib1M3VTJpc3kwOEUKLS0tIGt6RjZ1SE16MkhFVm15YVZjeWZI
+            T0l6dENSKy9KcjA5MGJaUTY2OHhLZEUK1uRZbwTusaBbwzckt2B4FzO7QzvZL24X
+            No/AJ8jSKVh4kCrIAmOIbhMolNq9vY4LTTrtMVVwuq9ehBjyoFFVrg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-10-24T00:23:14Z"
+    mac: ENC[AES256_GCM,data:5xMsPoHqp8d3O3dusGgcLfk6CzpJgs6JiWAzaAvrmJwThov3EgDoOQTRoTurog3SPHQSk+wHSanTkyfQ4tCVAxOHxgMU6YNvct1joetZBdUIKdMmWwU/OkzaYWVKHmueC4xPNGkTwMFm1JAutjl+3eAnKmvb8ZsjFF81DEbRBWY=,iv:Uwt+I2tlLqGGwai9k2zO7qRUe4PKeanstw1rxEouJxs=,tag:dWpI/UoVKmH7EDa8ZGzz4g==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

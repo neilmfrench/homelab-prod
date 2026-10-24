@@ -1,0 +1,23 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: postgresql-to-external-home
+spec:
+  sourcePVC: harbor-postgresql-1
+  trigger:
+    schedule: "5 9 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: harbor-external-home-postgresql-restic-config
+    volumeSnapshotClassName: csi-rbdplugin-snapclass
+    storageClassName: ceph-block
+    moverResources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+    retain:
+      daily: 7
+      weekly: 2
+      monthly: 3
