@@ -81,7 +81,7 @@ stringData:
       name: loftsh-kubernetes-v1.34
     - image: ghcr.io/loft-sh/vcluster-oss@sha256:85904d0387426d0804da993162c89d9da8c3a7db51b2cb46d313ebfe65591636
       name: loftsh-vcluster
-    - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
+    - image: ghcr.io/educates/educates-session-manager@sha256:45eb384df61ab0354fa1195e7d90cbcaf99be4653fb03a57e207600322007cd2
       name: session-manager
     - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
       name: training-portal
@@ -4504,7 +4504,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
+      - image: ghcr.io/educates/educates-session-manager@sha256:45eb384df61ab0354fa1195e7d90cbcaf99be4653fb03a57e207600322007cd2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -4679,7 +4679,7 @@ data:
           clusterSecurity:
             policyEngine: none
           imageVersions:
-          - image: ghcr.io/educates/educates-session-manager@sha256:3aa79b926897494a4fbabb4c9e29509a52d562a8a0c6966d612a5d650b6c0d60
+          - image: ghcr.io/educates/educates-session-manager@sha256:45eb384df61ab0354fa1195e7d90cbcaf99be4653fb03a57e207600322007cd2
             name: session-manager
           - image: ghcr.io/educates/educates-training-portal@sha256:bcfc9b2ca4740189ba30bad8addba125f8786d3aedc4cc81a676f2328d8e2580
             name: training-portal
