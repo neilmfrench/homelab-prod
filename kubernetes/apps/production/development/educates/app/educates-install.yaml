@@ -4616,7 +4616,7 @@ data:
     - name: jdk21-environment
       image: ghcr.io/educates/educates-jdk21-environment:3.7.2
     - name: conda-environment
-      image: ghcr.io/educates/educates-conda-environment:3.7.2
+      image: ghcr.io/educates/educates-conda-environment:3.8.0
     - name: secrets-manager
       image: ghcr.io/educates/educates-secrets-manager:3.7.2
     - name: tunnel-manager
