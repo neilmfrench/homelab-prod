@@ -10,7 +10,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghost
-      tag: 6.72.0-alpine
+      tag: 6.73.0-alpine
     # resources:
     #   limits:
     #     cpu: 2
