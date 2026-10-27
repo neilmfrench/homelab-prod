@@ -6,6 +6,8 @@ resources:
   - ./secret.sops.yaml
   - ./ingress.yaml
   - ./ingressroute.yaml
+  - ./mcp-ingress.yaml
+  - ./mcp-ingressroute.yaml
   - ../../../../base/finance-vis
 patches:
   - path: ./finance-vis-values.yaml

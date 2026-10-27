@@ -1,0 +1,30 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: anthropic-only
+spec:
+  ipAllowList:
+    sourceRange:
+      - 160.79.104.0/21
+    ipStrategy:
+      depth: 1
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: finance-mcp
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`finance-mcp.${SECRET_DOMAIN}`) && (Path(`/mcp`) || PathPrefix(`/.well-known/oauth-`))
+      middlewares:
+        - name: anthropic-only
+          namespace: finance
+      services:
+        - kind: Service
+          name: finance-vis
+          namespace: finance
+          port: 3001

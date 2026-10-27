@@ -1,0 +1,16 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns/is-public: "true"
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+  name: finance-mcp
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: &host "finance-mcp.${SECRET_DOMAIN}"
+  tls:
+    - hosts:
+        - *host
