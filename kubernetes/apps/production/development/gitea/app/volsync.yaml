@@ -26,7 +26,7 @@ spec:
   trigger:
     schedule: "20 8 * * *"
   restic:
-    unlock: "unlock-07-28-2026"
+    unlock: "unlock-11-08-2026"
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: gitea-data-external-home-restic-config
