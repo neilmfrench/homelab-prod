@@ -93,7 +93,7 @@ stringData:
       name: base-environment
     - image: ghcr.io/educates/educates-jdk8-environment@sha256:77cd042cacd53cd19f06eba4d6dbd3bf7f78988462a77a490d2843e8b8945896
       name: jdk8-environment
-    - image: ghcr.io/educates/educates-jdk11-environment@sha256:6e9d25819e38527f78d2fae0941e15aa8c2ff5f07bfe7a5811345b89472d6e6e
+    - image: ghcr.io/educates/educates-jdk11-environment@sha256:74dd6fca15f30d30a53d6b4aefaad9ba3264c1f2321cdad7e9fa9c8bc21a0204
       name: jdk11-environment
     - image: ghcr.io/educates/educates-jdk17-environment@sha256:d7e31a0064db06173ef6faf17934f43d74676e3964b6b400ffd15626b9e98e0d
       name: jdk17-environment
@@ -4691,7 +4691,7 @@ data:
             name: base-environment
           - image: ghcr.io/educates/educates-jdk8-environment@sha256:77cd042cacd53cd19f06eba4d6dbd3bf7f78988462a77a490d2843e8b8945896
             name: jdk8-environment
-          - image: ghcr.io/educates/educates-jdk11-environment@sha256:6e9d25819e38527f78d2fae0941e15aa8c2ff5f07bfe7a5811345b89472d6e6e
+          - image: ghcr.io/educates/educates-jdk11-environment@sha256:74dd6fca15f30d30a53d6b4aefaad9ba3264c1f2321cdad7e9fa9c8bc21a0204
             name: jdk11-environment
           - image: ghcr.io/educates/educates-jdk17-environment@sha256:d7e31a0064db06173ef6faf17934f43d74676e3964b6b400ffd15626b9e98e0d
             name: jdk17-environment
