@@ -4598,7 +4598,7 @@ data:
       provider: generic
     imageVersions:
     - name: session-manager
-      image: ghcr.io/educates/educates-session-manager:3.7.2
+      image: ghcr.io/educates/educates-session-manager:3.8.0
     - name: training-portal
       image: ghcr.io/educates/educates-training-portal:3.7.2
     - name: docker-registry
