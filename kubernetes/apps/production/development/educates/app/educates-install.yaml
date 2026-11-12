@@ -87,7 +87,7 @@ stringData:
       name: training-portal
     - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
       name: docker-registry
-    - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
+    - image: ghcr.io/educates/educates-pause-container@sha256:7eda1a1b47230b0256fb4c9ef8b28bc513dec4ce904709ab4e4ea051326ef92c
       name: pause-container
     - image: ghcr.io/educates/educates-base-environment@sha256:b7e55570e5b6a98251cc010e96b1615173c788d50f4833f0b9d3e821bb5fcd5a
       name: base-environment
@@ -4456,7 +4456,7 @@ spec:
         app: image-puller
     spec:
       containers:
-      - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
+      - image: ghcr.io/educates/educates-pause-container@sha256:7eda1a1b47230b0256fb4c9ef8b28bc513dec4ce904709ab4e4ea051326ef92c
         imagePullPolicy: IfNotPresent
         name: pause
         securityContext:
@@ -4685,7 +4685,7 @@ data:
             name: training-portal
           - image: ghcr.io/educates/educates-docker-registry@sha256:48fdf9dfd996a3c59b39898c1db2b391d7bfb3c04cc07a78bb22f8da2b5789ea
             name: docker-registry
-          - image: ghcr.io/educates/educates-pause-container@sha256:88f42ee52f315e3dcc79b718f52b1ad6fd28f8d7839a1b61778c8459e9ed99e3
+          - image: ghcr.io/educates/educates-pause-container@sha256:7eda1a1b47230b0256fb4c9ef8b28bc513dec4ce904709ab4e4ea051326ef92c
             name: pause-container
           - image: ghcr.io/educates/educates-base-environment@sha256:b7e55570e5b6a98251cc010e96b1615173c788d50f4833f0b9d3e821bb5fcd5a
             name: base-environment
