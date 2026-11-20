@@ -10,6 +10,7 @@ spec:
       # dnsPolicy: ClusterFirstWithHostNet
       # nodeSelector:
       #   kubernetes.io/hostname: "talos-4"
+      automountServiceAccountToken: false
       securityContext:
         runAsUser: 0
         runAsGroup: 0
@@ -20,7 +21,7 @@ spec:
           init-config:
             image:
               repository: busybox
-              tag: latest
+              tag: "1.37.0"
             securityContext:
               runAsUser: 0
               runAsGroup: 0
@@ -47,8 +48,6 @@ spec:
               tag: "2026.2.0"
             env:
               TZ: "${TIMEZONE}"
-            securityContext:
-              privileged: true
             probes:
               liveness:
                 enabled: true
@@ -92,20 +91,31 @@ spec:
           codeserver:
             image:
               repository: docker.io/codercom/code-server
-              tag: 4.108.2
+              tag: 4.145.2
             env:
               TZ: "${TIMEZONE}"
             workingDir: /config
             securityContext:
               runAsUser: 0
               runAsGroup: 0
+              allowPrivilegeEscalation: false
             args:
+              - --bind-addr
+              - "127.0.0.1:8080"
               - --auth
               - "none"
+              - --disable-proxy
+              - --disable-telemetry
               - --user-data-dir
               - "/config/.vscode"
               - --extensions-dir
               - "/config/.vscode"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 1Gi
             probes:
               liveness:
                 enabled: false
@@ -146,14 +156,10 @@ spec:
     service:
       main:
         controller: main
+        forceRename: home-assistant-main
         ports:
           http:
             port: 8123
-      codeserver:
-        controller: main
-        ports:
-          http:
-            port: 8080
     ingress:
       main:
         enabled: true
@@ -165,17 +171,6 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
-                  port: http
-      codeserver:
-        enabled: true
-        className: "traefik"
-        hosts:
-          - host: &host-config "hass-config.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: codeserver
                   port: http
       oidc-login:
         enabled: true

@@ -1,0 +1,36 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: home-assistant
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: home-assistant
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: networking
+            app.kubernetes.io/name: traefik
+      toPorts:
+        - ports:
+            - port: "8123"
+              protocol: TCP
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "8123"
+              protocol: TCP
+    - fromCIDR:
+        - 172.16.0.0/12
+      toPorts:
+        - ports:
+            - port: "8555"
+              protocol: UDP
+            - port: "8555"
+              protocol: TCP
+            - port: "18555"
+              protocol: UDP
+            - port: "18555"
+              protocol: TCP
