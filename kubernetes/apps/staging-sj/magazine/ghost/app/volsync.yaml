@@ -8,11 +8,16 @@ spec:
   trigger:
     schedule: "0 7 * * *"
   restic:
+    unlock: "unlock-11-23-2026"
     copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: ghost-data-restic-config
     volumeSnapshotClassName: longhorn-snapshot-vsc
     storageClassName: longhorn-volsync
+    moverResources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
     retain:
       daily: 7
       within: 3d
@@ -32,6 +37,10 @@ spec:
     repository: ghost-data-external-home-restic-config
     volumeSnapshotClassName: longhorn-snapshot-vsc
     storageClassName: longhorn-volsync
+    moverResources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
     retain:
       daily: 7
       weekly: 2

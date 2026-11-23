@@ -5,6 +5,17 @@ metadata:
   name: baserow
 spec:
   values:
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - talos-dev-sj-controlplane-3
     controllers:
       main:
         enabled: true
@@ -22,6 +33,9 @@ spec:
               DATABASE_PASSWORD: ${SECRET_BASEROW_POSTGRESQL_PASSWORD}
               DATABASE_PORT: "5432"
               NO_COLOR: "true"
+              BASEROW_AMOUNT_OF_GUNICORN_WORKERS: "1"
+              BASEROW_AMOUNT_OF_WORKERS: "1"
+              BASEROW_RUN_MINIMAL: "yes"
             probes:
               liveness:
                 enabled: false
@@ -42,9 +56,9 @@ spec:
             resources:
               requests:
                 cpu: 25m
-                memory: 128Mi
-              # limits:
-              #   memory: 1024Mi
+                memory: 1024Mi
+              limits:
+                memory: 2048Mi
     service:
       main:
         enabled: true

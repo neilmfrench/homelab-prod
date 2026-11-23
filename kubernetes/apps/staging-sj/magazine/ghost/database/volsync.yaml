@@ -14,6 +14,10 @@ spec:
     repository: ghost-mysql-restic-config
     volumeSnapshotClassName: longhorn-snapshot-vsc
     storageClassName: longhorn-volsync
+    moverResources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
     retain:
       daily: 7
       within: 3d
@@ -32,6 +36,10 @@ spec:
     repository: ghost-external-home-mysql-restic-config
     volumeSnapshotClassName: longhorn-snapshot-vsc
     storageClassName: longhorn-volsync
+    moverResources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
     retain:
       daily: 7
       weekly: 2
