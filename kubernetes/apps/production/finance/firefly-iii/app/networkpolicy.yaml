@@ -1,0 +1,31 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: firefly-iii
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: firefly-iii
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            io.cilium.k8s.policy.cluster: production
+            k8s:io.kubernetes.pod.namespace: networking
+            app.kubernetes.io/name: traefik
+        - matchLabels:
+            io.cilium.k8s.policy.cluster: production
+            app.kubernetes.io/name: finance-vis
+        - matchLabels:
+            io.cilium.k8s.policy.cluster: production
+            app.kubernetes.io/name: firefly-iii
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP

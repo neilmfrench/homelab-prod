@@ -10,6 +10,7 @@ resources:
   - ./volsync.yaml
   - ./ingress.yaml
   - ./ingressroute.yaml
+  - ./networkpolicy.yaml
   - ../../../../base/firefly-iii
 patches:
   - path: ./firefly-iii-values.yaml

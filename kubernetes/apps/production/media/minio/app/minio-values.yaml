@@ -10,10 +10,10 @@ spec:
   values:
     image:
       repository: docker.io/pgsty/silo
-      tag: RELEASE.2026-10-18T00-00-00Z
+      tag: RELEASE.2026-11-12T00-00-00Z
     mcImage:
       repository: docker.io/pgsty/mc
-      tag: RELEASE.2026-10-18T00-00-00Z
+      tag: RELEASE.2026-11-12T00-00-00Z
     deploymentUpdate:
       type: Recreate
     mode: standalone
