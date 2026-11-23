@@ -8,6 +8,9 @@ spec:
     image:
       repository: louislam/uptime-kuma
       tag: "2.0.2"
+    resources:
+      requests:
+        memory: 256Mi
     service:
       main:
         ports:

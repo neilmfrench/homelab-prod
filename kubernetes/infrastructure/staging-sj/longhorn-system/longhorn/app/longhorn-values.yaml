@@ -13,6 +13,13 @@ spec:
       defaultClass: true
       reclaimPolicy: Retain
       backupTargetName: default
+    csi:
+      attacherReplicaCount: 1
+      provisionerReplicaCount: 1
+      resizerReplicaCount: 1
+      snapshotterReplicaCount: 1
+    longhornUI:
+      replicas: 1
     defaultSettings:
       storageMinimalAvailablePercentage: "10"
       storageOverProvisioningPercentage: "200"

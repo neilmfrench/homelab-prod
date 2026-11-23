@@ -8,6 +8,14 @@ spec:
     architecture: standalone
     primary:
       resourcesPreset: none
+      resources:
+        requests:
+          memory: 768Mi
+      nodeAffinityPreset:
+        type: soft
+        key: kubernetes.io/hostname
+        values:
+          - talos-dev-sj-controlplane-1
       persistence:
         existingClaim: ghost-mysql-data
     auth:
