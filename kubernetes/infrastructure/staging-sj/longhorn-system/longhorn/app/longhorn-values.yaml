@@ -15,6 +15,7 @@ spec:
       backupTargetName: default
     defaultSettings:
       storageMinimalAvailablePercentage: "10"
+      storageOverProvisioningPercentage: "200"
       nodeDrainPolicy: "block-for-eviction-if-contains-last-replica"
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       defaultDataLocality: best-effort
