@@ -8,7 +8,7 @@ spec:
   trigger:
     schedule: "0 7 * * *"
   restic:
-    copyMethod: Direct
+    copyMethod: Snapshot
     pruneIntervalDays: 7
     repository: vaultwarden-data-restic-config
     volumeSnapshotClassName: longhorn-snapshot-vsc
