@@ -7,7 +7,13 @@ spec:
   values:
     architecture: standalone
     auth:
-      enabled: false
+      enabled: true
+      # the kustomization's namePrefix turns redis-auth into nextcloud-redis-auth
+      existingSecret: nextcloud-redis-auth
+      existingSecretPasswordKey: redis-password
+    networkPolicy:
+      # only pods labelled nextcloud-redis-client: "true" may connect
+      allowExternal: false
     master:
       replicaCount: 1
       persistence:

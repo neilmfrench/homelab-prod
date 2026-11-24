@@ -5,6 +5,8 @@ metadata:
   name: nextcloud
 spec:
   values:
+    podLabels:
+      nextcloud-redis-client: "true"
     image:
       tag: 32.0.15-apache
     persistence:
@@ -41,6 +43,11 @@ spec:
           value: nextcloud-redis-master
         - name: REDIS_HOST_PORT
           value: "6379"
+        - name: REDIS_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-redis-auth
+              key: redis-password
       phpConfigs:
         zz-php2shell.ini: |-
           session.upload_progress.enabled = 0
