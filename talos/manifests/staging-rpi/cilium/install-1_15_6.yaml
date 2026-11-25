@@ -1597,7 +1597,7 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-      - image: quay.io/cilium/hubble-ui:v0.13.0@sha256:7d663dc16538dd6e29061abd1047013a645e6e69c115e008bee9ea9fef9a6666
+      - image: quay.io/cilium/hubble-ui:v0.13.7@sha256:1773bca237e3fc3d922b50f6d0e40ef17f8eca3fe5cd1abc6620eef88a640346
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
